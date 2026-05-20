@@ -1,0 +1,114 @@
+---
+import { SITE } from '../data/site'
+
+interface Props {
+  type: 'home' | 'webpage' | 'service' | 'blogpost' | 'breadcrumb'
+  title?: string
+  description?: string
+  canonicalUrl?: string
+  // service
+  serviceName?: string
+  // blogpost
+  pubDate?: Date
+  updatedDate?: Date
+  ogImage?: string
+  // breadcrumb — tablica {name, url}
+  breadcrumbs?: { name: string; url: string }[]
+}
+
+const {
+  type,
+  title,
+  description,
+  canonicalUrl,
+  serviceName,
+  pubDate,
+  updatedDate,
+  ogImage,
+  breadcrumbs,
+} = Astro.props
+
+const pageUrl = canonicalUrl ?? new URL(Astro.url.pathname, SITE.url).href
+
+const organization = {
+  '@type': 'LocalBusiness',
+  name: SITE.name,
+  url: SITE.url,
+  telephone: SITE.phone,
+  email: SITE.email,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: SITE.address.street,
+    addressLocality: SITE.address.city,
+    postalCode: SITE.address.postalCode,
+    addressCountry: SITE.address.country,
+  },
+  sameAs: [SITE.social.linkedin, SITE.social.facebook],
+}
+
+const schemas: object[] = []
+
+// LocalBusiness zawsze na stronie głównej
+if (type === 'home') {
+  schemas.push({ '@context': 'https://schema.org', ...organization })
+}
+
+// WebPage na każdej podstronie
+if (type === 'webpage' || type === 'service' || type === 'blogpost') {
+  schemas.push({
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: title,
+    description,
+    url: pageUrl,
+    isPartOf: { '@type': 'WebSite', name: SITE.name, url: SITE.url },
+  })
+}
+
+// Service
+if (type === 'service') {
+  schemas.push({
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: serviceName ?? title,
+    provider: { '@type': 'LocalBusiness', name: SITE.name },
+    description,
+    areaServed: 'PL',
+    url: pageUrl,
+  })
+}
+
+// BlogPosting
+if (type === 'blogpost') {
+  schemas.push({
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: title,
+    description,
+    author: { '@type': 'Person', name: SITE.author },
+    publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url },
+    datePublished: pubDate?.toISOString(),
+    dateModified: (updatedDate ?? pubDate)?.toISOString(),
+    image: ogImage ? new URL(ogImage, SITE.url).href : undefined,
+    url: pageUrl,
+  })
+}
+
+// BreadcrumbList
+if (type === 'breadcrumb' && breadcrumbs?.length) {
+  schemas.push({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbs.map((item, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: item.name,
+      item: item.url.startsWith('http') ? item.url : new URL(item.url, SITE.url).href,
+    })),
+  })
+}
+---
+
+{schemas.map(schema => (
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+))}

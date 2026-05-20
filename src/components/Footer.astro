@@ -1,0 +1,98 @@
+---
+import { SITE } from '../data/site'
+
+const currentYear = new Date().getFullYear()
+
+const links = [
+  { href: '/uslugi',          label: 'Usługi'       },
+  { href: '/blog',            label: 'Blog'          },
+  { href: '/o-mnie',          label: 'O mnie'        },
+  { href: '/polityka-prywatnosci', label: 'Prywatność' },
+]
+---
+
+<footer class="bg-[#050A07] border-t border-neon/10 mt-xl">
+  <div class="max-w-7xl mx-auto px-6 md:px-12 py-16">
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+
+      <!-- Brand -->
+      <div class="flex flex-col gap-4">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-neon text-xl">terminal</span>
+          <span class="text-xl font-black tracking-tighter text-neon">{SITE.name}</span>
+        </div>
+        <p class="text-body-md text-on-surface-variant max-w-xs">
+          {SITE.tagline}
+        </p>
+        <div class="flex gap-4 mt-2">
+          <a href={SITE.social.linkedin} target="_blank" rel="noopener noreferrer"
+             class="text-on-surface-variant hover:text-neon transition-colors"
+             aria-label="LinkedIn">
+            <span class="material-symbols-outlined">link</span>
+          </a>
+          <a href={SITE.social.facebook} target="_blank" rel="noopener noreferrer"
+             class="text-on-surface-variant hover:text-neon transition-colors"
+             aria-label="Facebook">
+            <span class="material-symbols-outlined">group</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Links -->
+      <div>
+        <h3 class="text-label-md uppercase tracking-widest text-neon mb-6">Nawigacja</h3>
+        <ul class="flex flex-col gap-3">
+          {links.map(l => (
+            <li>
+              <a href={l.href}
+                 class="text-body-md text-on-surface-variant hover:text-neon transition-colors">
+                {l.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h3 class="text-label-md uppercase tracking-widest text-neon mb-6">Kontakt</h3>
+        <ul class="flex flex-col gap-3">
+          <li class="flex items-center gap-2 text-on-surface-variant">
+            <span class="material-symbols-outlined text-neon text-base">mail</span>
+            <a href={`mailto:${SITE.email}`}
+               class="text-body-md hover:text-neon transition-colors">
+              {SITE.email}
+            </a>
+          </li>
+          <li class="flex items-center gap-2 text-on-surface-variant">
+            <span class="material-symbols-outlined text-neon text-base">phone</span>
+            <a href={`tel:${SITE.phone.replace(/\s/g, '')}`}
+               class="text-body-md hover:text-neon transition-colors">
+              {SITE.phone}
+            </a>
+          </li>
+          <li class="flex items-start gap-2 text-on-surface-variant">
+            <span class="material-symbols-outlined text-neon text-base mt-0.5">location_on</span>
+            <span class="text-body-md">
+              {SITE.address.city}, {SITE.address.country}
+            </span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="border-t border-neon/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+      <p class="text-label-sm text-on-surface-variant uppercase tracking-widest">
+        © {currentYear} {SITE.name}. Wszelkie prawa zastrzeżone.
+      </p>
+      <div class="flex items-center gap-2 text-label-sm text-on-surface-variant/50 uppercase tracking-widest">
+        <span class="w-1.5 h-1.5 rounded-full bg-neon animate-pulse"></span>
+        System Online
+      </div>
+    </div>
+
+  </div>
+</footer>

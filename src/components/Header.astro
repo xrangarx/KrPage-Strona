@@ -1,0 +1,120 @@
+---
+import { SITE } from '../data/site'
+
+const navLinks = [
+  { href: '/',          label: 'Home'       },
+  { href: '/o-mnie',    label: 'O mnie'     },
+  { href: '/uslugi',    label: 'Usługi'     },
+  { href: '/blog',      label: 'Blog'       },
+  { href: '/kontakt',   label: 'Kontakt'    },
+]
+
+const pathname = new URL(Astro.request.url).pathname
+---
+
+<header
+  id="site-header"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300
+         bg-[#050A07]/90 backdrop-blur-md
+         border-b border-neon/5
+         shadow-[0_0_30px_rgba(45,255,95,0.05)]"
+>
+  <div class="max-w-7xl mx-auto h-20 flex items-center justify-between px-6 md:px-12">
+
+    <!-- Logo -->
+    <a href="/" class="flex items-center gap-2 group" aria-label={SITE.name}>
+      <span class="material-symbols-outlined text-neon text-xl leading-none">terminal</span>
+      <span class="text-xl font-black tracking-tighter text-neon font-sans">
+        KrPage
+      </span>
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="hidden md:flex items-center gap-8" aria-label="Nawigacja główna">
+      {navLinks.map(link => {
+        const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href))
+        return (
+          <a
+            href={link.href}
+            class:list={[
+              'text-label-md uppercase tracking-widest transition-colors duration-200',
+              isActive
+                ? 'text-neon border-b-2 border-neon pb-0.5'
+                : 'text-on-surface-variant hover:text-neon',
+            ]}
+          >
+            {link.label}
+          </a>
+        )
+      })}
+    </nav>
+
+    <!-- CTA -->
+    <div class="flex items-center gap-4">
+      <a
+        href="/kontakt"
+        class="hidden md:inline-flex items-center gap-2
+               bg-neon text-on-primary font-bold text-label-md uppercase tracking-widest
+               px-6 py-2.5
+               hover:brightness-110 active:scale-95 transition-all duration-200
+               shadow-neon-sm"
+      >
+        <span class="material-symbols-outlined text-sm leading-none">troubleshoot</span>
+        Bezpłatny audyt
+      </a>
+
+      <!-- Mobile hamburger -->
+      <button
+        id="menu-toggle"
+        class="md:hidden text-neon"
+        aria-label="Otwórz menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <span class="material-symbols-outlined text-2xl">menu</span>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Mobile menu -->
+  <nav
+    id="mobile-menu"
+    class="md:hidden hidden flex-col gap-1 px-6 pb-6 bg-[#050A07]"
+    aria-label="Nawigacja mobilna"
+  >
+    {navLinks.map(link => {
+      const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href))
+      return (
+        <a
+          href={link.href}
+          class:list={[
+            'block py-3 text-label-md uppercase tracking-widest border-b border-neon/5 transition-colors',
+            isActive ? 'text-neon' : 'text-on-surface-variant hover:text-neon',
+          ]}
+        >
+          {link.label}
+        </a>
+      )
+    })}
+    <a
+      href="/kontakt"
+      class="mt-4 flex items-center justify-center gap-2
+             bg-neon text-on-primary font-bold text-label-md uppercase tracking-widest
+             px-6 py-3 shadow-neon-sm"
+    >
+      Bezpłatny audyt
+    </a>
+  </nav>
+</header>
+
+<script>
+  const toggle = document.getElementById('menu-toggle')
+  const menu   = document.getElementById('mobile-menu')
+  toggle?.addEventListener('click', () => {
+    const open = menu?.classList.toggle('hidden') === false
+    toggle.setAttribute('aria-expanded', String(open))
+    const icon = toggle.querySelector('.material-symbols-outlined')
+    if (icon) icon.textContent = open ? 'close' : 'menu'
+  })
+</script>
