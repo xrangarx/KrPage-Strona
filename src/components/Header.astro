@@ -1,15 +1,23 @@
 ---
 import { SITE } from '../data/site'
 
+const pathname = new URL(Astro.request.url).pathname
+
 const navLinks = [
-  { href: '/',          label: 'Home'       },
-  { href: '/o-mnie',    label: 'O mnie'     },
-  { href: '/uslugi',    label: 'Usługi'     },
-  { href: '/blog',      label: 'Blog'       },
-  { href: '/kontakt',   label: 'Kontakt'    },
+  { href: '/',       label: 'Home'    },
+  { href: '/o-mnie', label: 'O mnie'  },
+  { href: '/blog',   label: 'Blog'    },
+  { href: '/kontakt', label: 'Kontakt' },
 ]
 
-const pathname = new URL(Astro.request.url).pathname
+const uslugiLinks = [
+  { href: '/uslugi',                   label: 'Wszystkie usługi', icon: 'grid_view'     },
+  { href: '/uslugi/audyt-seo',         label: 'Audyt SEO',        icon: 'troubleshoot'  },
+  { href: '/uslugi/pozycjonowanie',    label: 'Pozycjonowanie',   icon: 'trending_up'   },
+  { href: '/uslugi/content-marketing', label: 'Content Marketing',icon: 'article'       },
+]
+
+const isUslugiActive = pathname === '/uslugi' || pathname.startsWith('/uslugi/')
 ---
 
 <header
@@ -31,7 +39,9 @@ const pathname = new URL(Astro.request.url).pathname
 
     <!-- Desktop nav -->
     <nav class="hidden md:flex items-center gap-8" aria-label="Nawigacja główna">
-      {navLinks.map(link => {
+
+      <!-- Home, O mnie -->
+      {[navLinks[0], navLinks[1]].map(link => {
         const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href))
         return (
           <a
@@ -47,6 +57,82 @@ const pathname = new URL(Astro.request.url).pathname
           </a>
         )
       })}
+
+      <!-- Usługi dropdown -->
+      <div class="relative group/uslugi">
+        <button
+          class:list={[
+            'flex items-center gap-1 text-label-md uppercase tracking-widest transition-colors duration-200 cursor-pointer',
+            isUslugiActive
+              ? 'text-neon border-b-2 border-neon pb-0.5'
+              : 'text-on-surface-variant hover:text-neon',
+          ]}
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="uslugi-dropdown"
+        >
+          Usługi
+          <span class="material-symbols-outlined text-base leading-none transition-transform duration-200 group-hover/uslugi:rotate-180">
+            expand_more
+          </span>
+        </button>
+
+        <!-- Dropdown panel -->
+        <div
+          id="uslugi-dropdown"
+          class="absolute top-full left-1/2 -translate-x-1/2 mt-3
+                 min-w-[220px] bg-[#050A07] border border-neon/20
+                 shadow-[0_8px_32px_rgba(45,255,95,0.1)]
+                 opacity-0 invisible translate-y-2
+                 group-hover/uslugi:opacity-100 group-hover/uslugi:visible group-hover/uslugi:translate-y-0
+                 transition-all duration-200 ease-out"
+        >
+          <!-- Top accent line -->
+          <div class="h-px bg-gradient-to-r from-transparent via-neon to-transparent"></div>
+
+          <ul class="py-2">
+            {uslugiLinks.map((link, i) => {
+              const isActive = pathname === link.href
+              return (
+                <li>
+                  <a
+                    href={link.href}
+                    class:list={[
+                      'flex items-center gap-3 px-4 py-2.5 text-label-sm uppercase tracking-wider transition-colors duration-150',
+                      i === 0 ? 'border-b border-neon/10 mb-1' : '',
+                      isActive
+                        ? 'text-neon bg-neon/5'
+                        : 'text-on-surface-variant hover:text-neon hover:bg-neon/5',
+                    ]}
+                  >
+                    <span class="material-symbols-outlined text-sm text-neon/60">{link.icon}</span>
+                    {link.label}
+                  </a>
+                </li>
+              )
+            })}
+          </ul>
+        </div>
+      </div>
+
+      <!-- Blog, Kontakt -->
+      {[navLinks[2], navLinks[3]].map(link => {
+        const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href))
+        return (
+          <a
+            href={link.href}
+            class:list={[
+              'text-label-md uppercase tracking-widest transition-colors duration-200',
+              isActive
+                ? 'text-neon border-b-2 border-neon pb-0.5'
+                : 'text-on-surface-variant hover:text-neon',
+            ]}
+          >
+            {link.label}
+          </a>
+        )
+      })}
+
     </nav>
 
     <!-- CTA -->
@@ -80,10 +166,11 @@ const pathname = new URL(Astro.request.url).pathname
   <!-- Mobile menu -->
   <nav
     id="mobile-menu"
-    class="md:hidden hidden flex-col gap-1 px-6 pb-6 bg-[#050A07]"
+    class="md:hidden hidden flex-col gap-0 px-6 pb-6 bg-[#050A07]"
     aria-label="Nawigacja mobilna"
   >
-    {navLinks.map(link => {
+
+    {[navLinks[0], navLinks[1]].map(link => {
       const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href))
       return (
         <a
@@ -97,6 +184,70 @@ const pathname = new URL(Astro.request.url).pathname
         </a>
       )
     })}
+
+    <!-- Usługi accordion -->
+    <div>
+      <button
+        id="uslugi-toggle"
+        class:list={[
+          'flex items-center justify-between w-full py-3 text-label-md uppercase tracking-widest border-b border-neon/5 transition-colors',
+          isUslugiActive ? 'text-neon' : 'text-on-surface-variant',
+        ]}
+        aria-expanded={String(isUslugiActive)}
+        aria-controls="uslugi-mobile"
+      >
+        Usługi
+        <span id="uslugi-chevron" class:list={[
+          'material-symbols-outlined text-base transition-transform duration-200',
+          isUslugiActive ? 'rotate-180' : '',
+        ]}>
+          expand_more
+        </span>
+      </button>
+
+      <div
+        id="uslugi-mobile"
+        class:list={[
+          'overflow-hidden transition-all duration-300',
+          isUslugiActive ? '' : 'hidden',
+        ]}
+      >
+        {uslugiLinks.map((link, i) => {
+          const isActive = pathname === link.href
+          return (
+            <a
+              href={link.href}
+              class:list={[
+                'flex items-center gap-3 pl-4 py-2.5 text-label-sm uppercase tracking-wider border-b border-neon/5 transition-colors',
+                i === 0 ? 'border-t border-neon/10 mt-1' : '',
+                isActive
+                  ? 'text-neon'
+                  : 'text-on-surface-variant hover:text-neon',
+              ]}
+            >
+              <span class="material-symbols-outlined text-sm text-neon/50">{link.icon}</span>
+              {link.label}
+            </a>
+          )
+        })}
+      </div>
+    </div>
+
+    {[navLinks[2], navLinks[3]].map(link => {
+      const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href))
+      return (
+        <a
+          href={link.href}
+          class:list={[
+            'block py-3 text-label-md uppercase tracking-widest border-b border-neon/5 transition-colors',
+            isActive ? 'text-neon' : 'text-on-surface-variant hover:text-neon',
+          ]}
+        >
+          {link.label}
+        </a>
+      )
+    })}
+
     <a
       href="/kontakt"
       class="mt-4 flex items-center justify-center gap-2
@@ -109,6 +260,7 @@ const pathname = new URL(Astro.request.url).pathname
 </header>
 
 <script>
+  // Hamburger toggle
   const toggle = document.getElementById('menu-toggle')
   const menu   = document.getElementById('mobile-menu')
   toggle?.addEventListener('click', () => {
@@ -116,5 +268,15 @@ const pathname = new URL(Astro.request.url).pathname
     toggle.setAttribute('aria-expanded', String(open))
     const icon = toggle.querySelector('.material-symbols-outlined')
     if (icon) icon.textContent = open ? 'close' : 'menu'
+  })
+
+  // Mobile Usługi accordion
+  const uslugiToggle  = document.getElementById('uslugi-toggle')
+  const uslugiMobile  = document.getElementById('uslugi-mobile')
+  const uslugiChevron = document.getElementById('uslugi-chevron')
+  uslugiToggle?.addEventListener('click', () => {
+    const open = uslugiMobile?.classList.toggle('hidden') === false
+    uslugiToggle.setAttribute('aria-expanded', String(open))
+    uslugiChevron?.classList.toggle('rotate-180', open)
   })
 </script>
