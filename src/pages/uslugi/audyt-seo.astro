@@ -1,0 +1,205 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+---
+
+<BaseLayout
+  title="Audyt SEO — Kompleksowa Analiza Techniczna Strony"
+  description="Profesjonalny audyt SEO: analiza techniczna, Core Web Vitals, indeksowanie, profil linkowy i keyword research. Raport z konkretnymi priorytetami napraw."
+  schemaType="service"
+  schemaProps={{ serviceName: 'Audyt Techniczny SEO' }}
+>
+
+  <!-- HERO -->
+  <section class="relative min-h-[70vh] flex items-center overflow-hidden border-b border-white/5">
+    <div class="absolute inset-0 bg-gradient-to-b from-surface/80 via-transparent to-surface/80 z-0"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-12 py-24 grid lg:grid-cols-2 gap-12 items-center w-full">
+      <div class="space-y-6">
+        <div class="section-label">Digital Command Center</div>
+        <h1 class="text-headline-xl text-on-surface">
+          Audyt SEO —<br />
+          <span class="text-neon">Diagnoza twojej domeny</span>
+        </h1>
+        <p class="text-body-lg text-on-surface-variant max-w-xl">
+          Kompleksowa analiza techniczna i strategiczna Twojego ekosystemu cyfrowego. Inżynieria wzrostu oparta na twardych danych i precyzji wykonania.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="/kontakt"
+             class="inline-flex items-center gap-2 bg-neon text-on-primary font-bold text-label-md uppercase tracking-widest px-lg py-md hover:brightness-110 active:scale-95 transition-all shadow-neon-sm">
+            Zamawiam audyt
+          </a>
+          <a href="#zakres"
+             class="inline-flex items-center gap-2 border border-neon/30 text-neon font-bold text-label-md uppercase tracking-widest px-lg py-md hover:bg-neon/5 transition-all">
+            Zobacz zakres
+            <span class="material-symbols-outlined text-sm">arrow_downward</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Live scan widget -->
+      <div class="hidden lg:block">
+        <div class="bento-card p-lg relative">
+          <div class="flex justify-between items-center mb-lg">
+            <span class="text-label-md text-neon uppercase tracking-widest">Live Signal: Scan in Progress</span>
+            <span class="material-symbols-outlined text-neon animate-spin text-sm">refresh</span>
+          </div>
+          <div class="h-1.5 bg-surface-container-highest overflow-hidden mb-lg">
+            <div class="h-full bg-neon w-3/4 shadow-neon-sm"></div>
+          </div>
+          <div class="grid grid-cols-3 gap-4 mb-lg">
+            {[
+              { val: '98',   label: 'Core Web' },
+              { val: '12k',  label: 'Keywords' },
+              { val: '0',    label: 'Errors'   },
+            ].map(m => (
+              <div class="bg-surface-container p-4 text-center border border-outline-variant">
+                <p class="text-headline-md text-neon">{m.val}</p>
+                <p class="text-label-sm text-on-surface-variant uppercase">{m.label}</p>
+              </div>
+            ))}
+          </div>
+          <div class="font-mono text-xs text-on-surface-variant/50 space-y-1">
+            <div>[SYSTEM] FETCHING /API/CORE_VITALS</div>
+            <div class="text-neon">[SUCCESS] LCP 0.4s — EXCELLENT</div>
+            <div>[SYSTEM] SCANNING DOM STRUCTURE...</div>
+            <div class="text-neon">[STATUS] SEO-FRIENDLY <span class="animate-pulse">█</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ZAKRES AUDYTU -->
+  <section id="zakres" class="max-w-7xl mx-auto px-6 md:px-12 py-xl">
+    <div class="mb-lg">
+      <div class="section-label mb-sm">Metodologia</div>
+      <h2 class="text-headline-lg text-on-surface">
+        Deep Dive Audit<br /><span class="text-neon">Architecture</span>
+      </h2>
+      <p class="text-body-md text-on-surface-variant max-w-2xl mt-sm">
+        Trójwarstwowa metodologia analizy, która identyfikuje wąskie gardła i odblokowuje potencjał rankingowy.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+      <!-- Big card -->
+      <div class="md:col-span-8 bento-card p-lg relative overflow-hidden">
+        <div class="relative z-10 flex flex-col md:flex-row gap-lg">
+          <div class="md:w-1/2">
+            <span class="material-symbols-outlined text-neon text-4xl mb-md">settings_ethernet</span>
+            <h3 class="text-headline-md text-on-surface mb-sm">Technical Analysis</h3>
+            <p class="text-body-md text-on-surface-variant mb-md">
+              Dogłębna weryfikacja kodu, architektury serwera i parametrów Core Web Vitals. Eliminujemy błędy indeksowania, których nie widzi Twoja konkurencja.
+            </p>
+            <ul class="space-y-2 text-label-sm text-on-surface uppercase tracking-wider">
+              {['JS Rendering Check', 'Server Response Latency', 'XML Sitemap Integrity', 'Robots.txt Audit'].map(i => (
+                <li class="flex items-center gap-2">
+                  <span class="w-1.5 h-1.5 bg-neon flex-shrink-0"></span>{i}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="md:w-1/2 bg-surface-container-highest/50 p-md border border-outline-variant font-mono text-xs text-on-surface-variant/50 space-y-2">
+            <div class="text-neon text-label-sm mb-2">Crawling Logs</div>
+            <div>[SYSTEM] FETCHING /API/CORE_VITALS</div>
+            <div class="text-neon">[SUCCESS] LCP 0.4s — EXCELLENT</div>
+            <div>[SYSTEM] SCANNING DOM STRUCTURE...</div>
+            <div>[INFO] 4,203 NODES ANALYZED</div>
+            <div class="text-neon">[STATUS] SEO-FRIENDLY</div>
+            <div>[LINK] 847 INTERNAL LINKS MAPPED</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="md:col-span-4 bento-card p-lg flex flex-col justify-between group hover:border-neon/40 transition-all">
+        <div>
+          <span class="material-symbols-outlined text-neon text-4xl mb-md">key</span>
+          <h3 class="text-headline-md text-on-surface mb-sm">Keyword Research</h3>
+        </div>
+        <p class="text-body-md text-on-surface-variant">
+          Mapowanie intencji użytkowników na precyzyjne zapytania. Wykraczamy poza volumen, szukając nisz o najwyższej konwersji.
+        </p>
+      </div>
+
+      <div class="md:col-span-5 bento-card p-lg flex flex-col justify-between group hover:border-neon/40 transition-all">
+        <div>
+          <span class="material-symbols-outlined text-neon text-4xl mb-md">psychology_alt</span>
+          <h3 class="text-headline-md text-on-surface mb-sm">UX / SEO Hybrid</h3>
+        </div>
+        <p class="text-body-md text-on-surface-variant">
+          Google ocenia satysfakcję użytkownika. Optymalizujemy ścieżkę dotarcia, by roboty widziały zaangażowanie, a ludzie wartość.
+        </p>
+      </div>
+
+      <div class="md:col-span-7 bento-card p-lg relative overflow-hidden">
+        <div class="absolute right-0 bottom-0 text-neon/5">
+          <span class="material-symbols-outlined" style="font-size:180px">monitoring</span>
+        </div>
+        <div class="relative z-10">
+          <h3 class="text-headline-md text-on-surface mb-sm">Competitive Intel</h3>
+          <p class="text-body-md text-on-surface-variant mb-md max-w-md">
+            Reverse-engineering strategii liderów rynku. Sprawdzamy co działa u nich i dlaczego Tobie uciekają punkty rankingowe.
+          </p>
+          <div class="flex flex-wrap gap-2">
+            {['Backlink Profile', 'Gap Analysis', 'Authority Score', 'Content Gaps'].map(tag => (
+              <span class="px-3 py-1 bg-surface-container text-label-sm text-on-surface-variant uppercase border border-outline-variant">{tag}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEMY KRYTYCZNE -->
+  <section class="bg-surface-container-low border-y border-white/5 py-xl">
+    <div class="max-w-7xl mx-auto px-6 md:px-12 grid lg:grid-cols-2 gap-lg items-center">
+      <div>
+        <div class="section-label mb-sm">Rozwiązywanie</div>
+        <h2 class="text-headline-lg text-on-surface mb-md">
+          Problemów <span class="text-neon">krytycznych</span>
+        </h2>
+        <p class="text-body-lg text-on-surface-variant mb-lg">
+          Audyt KrPage to skalpel w rękach chirurga danych — precyzyjnie diagnozujemy i naprawiamy.
+        </p>
+        <div class="space-y-md">
+          {[
+            { icon: 'trending_down', title: 'Spadki Ruchu', desc: 'Identyfikacja przyczyn (kary algorytmiczne, kanibalizacja, zmiany Core Update) i plan naprawczy w 48h.' },
+            { icon: 'search_off',    title: 'Problemy z Indeksacją', desc: 'Analiza Crawl Budget i usuwanie blokad technicznych w robots.txt, .htaccess i sitemapie.' },
+            { icon: 'link_off',      title: 'Toksyczny profil linkowy', desc: 'Identyfikacja szkodliwych backlinków i przygotowanie disavow file dla Google.' },
+          ].map(p => (
+            <div class="flex gap-md p-md bg-surface border-l-4 border-neon">
+              <span class="material-symbols-outlined text-neon">{p.icon}</span>
+              <div>
+                <h4 class="text-on-surface text-headline-md mb-1">{p.title}</h4>
+                <p class="text-on-surface-variant text-body-md">{p.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Contact form teaser -->
+      <div class="bento-card p-lg relative">
+        <div class="absolute -top-3 -right-3 bg-neon text-on-primary px-3 py-1 text-label-sm font-bold">BEZPŁATNY</div>
+        <h3 class="text-headline-md text-on-surface mb-lg">Zdiagnozuj swoją domenę</h3>
+        <div class="space-y-md">
+          <div>
+            <label class="block text-label-sm text-on-surface-variant uppercase mb-2">URL Strony</label>
+            <div class="w-full bg-surface-container border border-outline-variant p-md text-on-surface-variant text-body-md">
+              https://twojadomena.pl
+            </div>
+          </div>
+          <p class="text-body-md text-on-surface-variant">
+            Wypełnij formularz kontaktowy — odezwę się w ciągu 24h z wstępną analizą Twojej domeny.
+          </p>
+          <a href="/kontakt"
+             class="flex items-center justify-center gap-2 w-full bg-neon text-on-primary font-bold text-label-md uppercase tracking-widest py-md hover:brightness-110 transition-all active:scale-95 shadow-neon-sm">
+            <span class="material-symbols-outlined text-sm">troubleshoot</span>
+            Rozpocznij analizę
+          </a>
+          <p class="text-label-sm text-center text-on-surface-variant/50 uppercase">Pierwsza analiza jest bezpłatna</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

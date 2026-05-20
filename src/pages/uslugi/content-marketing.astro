@@ -1,0 +1,117 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+---
+
+<BaseLayout
+  title="Content Marketing SEO — Treści które Pozycjonują"
+  description="SEO content marketing: strategia treści oparta o topical authority, silosy tematyczne i optymalizację NLP. Tworzymy treści, które rankują i konwertują."
+  schemaType="service"
+  schemaProps={{ serviceName: 'Content Marketing SEO' }}
+>
+
+  <!-- HERO -->
+  <section class="max-w-7xl mx-auto px-6 md:px-12 pt-16 pb-xl relative overflow-hidden">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-64 bg-neon/4 blur-[120px] pointer-events-none"></div>
+    <div class="text-center relative z-10 mb-xl">
+      <div class="section-label mx-auto mb-md">Inżynieria treści</div>
+      <h1 class="text-headline-xl text-on-surface mb-md">
+        Treści które<br /><span class="text-neon">rankują i konwertują</span>
+      </h1>
+      <p class="text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+        Nie piszemy artykułów dla samego pisania. Każdy tekst to precyzyjnie zaprojektowany asset SEO — z mapą fraz, strukturą NLP i celem konwersyjnym.
+      </p>
+    </div>
+
+    <!-- Content types grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+      {[
+        { icon: 'article',       title: 'Artykuły Blogowe',  desc: 'Długie formy zoptymalizowane pod frazy informacyjne i topical authority.' },
+        { icon: 'web',           title: 'Teksty na Strony',  desc: 'Landing pages i strony usługowe pisane pod konwersję i intencję transakcyjną.' },
+        { icon: 'description',   title: 'Opisy Produktów',   desc: 'Unikalne opisy e-commerce z semantyką i słowami kluczowymi long-tail.' },
+        { icon: 'edit_document', title: 'Treści Pillar',     desc: 'Strony filarowe budujące topical authority dla całych silosów tematycznych.' },
+      ].map(type => (
+        <div class="bento-card p-lg group hover:border-neon/40 transition-all">
+          <span class="material-symbols-outlined text-neon text-3xl mb-md">{type.icon}</span>
+          <h3 class="text-headline-md text-on-surface mb-sm">{type.title}</h3>
+          <p class="text-body-md text-on-surface-variant">{type.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- METODOLOGIA -->
+  <section class="bg-surface-container-low border-y border-white/5 py-xl">
+    <div class="max-w-7xl mx-auto px-6 md:px-12">
+      <div class="grid lg:grid-cols-2 gap-xl items-center">
+        <div>
+          <div class="section-label mb-sm">Proces tworzenia</div>
+          <h2 class="text-headline-lg text-on-surface mb-lg">
+            Content oparty<br /><span class="text-neon">o dane, nie intuicję</span>
+          </h2>
+          <div class="space-y-md">
+            {[
+              { n: '01', title: 'Keyword Research',      desc: 'Mapowanie intencji użytkowników i identyfikacja fraz o najwyższym potencjale konwersji.' },
+              { n: '02', title: 'Topical Map',            desc: 'Projektowanie silosów tematycznych — które tematy, w jakiej kolejności, z jakimi linkami.' },
+              { n: '03', title: 'Brief + NLP Outline',   desc: 'Szczegółowy brief z frazami LSI, pytaniami użytkowników i wymaganą strukturą semantyczną.' },
+              { n: '04', title: 'Tworzenie i wdrożenie', desc: 'Pisanie, optymalizacja on-page, CTA i interlinking zgodnie z architekturą silosów.' },
+              { n: '05', title: 'Monitoring wyników',    desc: 'Śledzenie pozycji, ruchu i czasu na stronie — iterujemy na podstawie danych.' },
+            ].map((step, i) => (
+              <div class:list={['flex gap-md p-md border-l-2', i === 0 ? 'border-neon bg-neon/5' : 'border-outline-variant']}>
+                <span class:list={['text-headline-md font-black opacity-40 shrink-0', i === 0 ? 'text-neon' : 'text-on-surface-variant']}>{step.n}</span>
+                <div>
+                  <p class="text-label-md uppercase tracking-wider text-on-surface font-bold mb-1">{step.title}</p>
+                  <p class="text-body-md text-on-surface-variant">{step.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-2 gap-sm">
+          {[
+            { value: '3x',    label: 'Więcej ruchu organicznego vs. treści bez strategii' },
+            { value: '68%',   label: 'Artykułów rankuje w TOP10 w ciągu 6 miesięcy' },
+            { value: '2.4x',  label: 'Wyższy czas na stronie po optymalizacji NLP' },
+            { value: '0%',    label: 'Duplicate content w dostarczanych materiałach' },
+          ].map(s => (
+            <div class="bento-card p-lg flex flex-col justify-between">
+              <p class="text-headline-lg text-neon font-black">{s.value}</p>
+              <p class="text-label-sm text-on-surface-variant uppercase leading-relaxed mt-sm">{s.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="max-w-7xl mx-auto px-6 md:px-12 py-xl">
+    <div class="bento-card p-xl text-center relative overflow-hidden">
+      <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div class="w-[500px] h-48 bg-neon/5 blur-[100px] rounded-full"></div>
+      </div>
+      <div class="relative z-10">
+        <div class="section-label mx-auto mb-md">Zacznij tworzyć</div>
+        <h2 class="text-headline-lg text-on-surface mb-md">
+          Chcesz treści które<br /><span class="text-neon">naprawdę rankują?</span>
+        </h2>
+        <p class="text-body-lg text-on-surface-variant max-w-xl mx-auto mb-lg">
+          Omówmy strategię contentową dla Twojej domeny. Pokażę Ci jak budować autorytet tematyczny krok po kroku.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-md justify-center">
+          <a href="/kontakt"
+             class="inline-flex items-center justify-center gap-2 bg-neon text-on-primary font-bold text-label-md uppercase tracking-widest px-xl py-md hover:brightness-110 active:scale-95 transition-all shadow-neon">
+            <span class="material-symbols-outlined text-sm">calendar_month</span>
+            Umów konsultację
+          </a>
+          <a href="/uslugi/audyt-seo"
+             class="inline-flex items-center justify-center gap-2 border border-neon/30 text-neon font-bold text-label-md uppercase tracking-widest px-xl py-md hover:bg-neon/5 transition-all">
+            Zacznij od audytu
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

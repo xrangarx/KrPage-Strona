@@ -27,7 +27,7 @@ const fullTitle = `${title} | ${SITE.name}`
 <title>{fullTitle}</title>
 <meta name="description" content={description} />
 <link rel="canonical" href={canonical} />
-<meta name="robots" content={noIndex ? 'noindex,nofollow' : 'index,follow'} />
+<meta name="robots" content={(!SITE.indexable || noIndex) ? 'noindex,follow' : 'index,follow'} />
 
 <!-- Open Graph -->
 <meta property="og:title" content={fullTitle} />

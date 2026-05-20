@@ -1,0 +1,134 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+
+const services = [
+  {
+    module: 'MODULE_01',
+    icon: 'troubleshoot',
+    title: 'Audyt Techniczny SEO',
+    desc: 'Pełna analiza kodu, architektury i Core Web Vitals. Dostajesz raport z priorytetami napraw i konkretnym planem działania.',
+    tags: ['Core Web Vitals', 'Crawl Analysis', 'Indeksowanie', 'Schemat danych'],
+    href: '/uslugi/audyt-seo',
+    highlight: true,
+  },
+  {
+    module: 'MODULE_02',
+    icon: 'hub',
+    title: 'Pozycjonowanie Stron',
+    desc: 'Długofalowa strategia wzrostu widoczności oparta o analizę luk konkurencji, mapowanie fraz i budowę autorytetu domeny.',
+    tags: ['Keyword Mapping', 'Link Building', 'Topical Authority'],
+    href: '/uslugi/pozycjonowanie',
+    highlight: false,
+  },
+  {
+    module: 'MODULE_03',
+    icon: 'article',
+    title: 'Content Marketing SEO',
+    desc: 'Tworzenie treści optymalizowanych pod NLP i silosy tematyczne, które budują autorytet i konwertują ruch organiczny.',
+    tags: ['NLP', 'Silo Topics', 'SEO Copywriting', 'Topical Maps'],
+    href: '/uslugi/content-marketing',
+    highlight: false,
+  },
+]
+---
+
+<BaseLayout
+  title="Usługi SEO — Audyt, Pozycjonowanie, Content Marketing"
+  description="Kompleksowe usługi SEO: audyty techniczne, strategia pozycjonowania i content marketing. Sprawdź pakiety i zamów bezpłatną konsultację."
+  schemaType="webpage"
+>
+
+  <!-- HERO -->
+  <section class="max-w-7xl mx-auto px-6 md:px-12 pt-16 pb-xl relative">
+    <div class="absolute -top-20 left-1/2 -translate-x-1/2 w-[600px] h-64 bg-neon/5 blur-[100px] rounded-full pointer-events-none"></div>
+    <div class="text-center relative z-10 mb-xl">
+      <div class="section-label mx-auto mb-md">Protokoły operacyjne</div>
+      <h1 class="text-headline-xl text-on-surface mb-md">
+        Usługi <span class="text-neon">SEO</span>
+      </h1>
+      <p class="text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+        Precyzyjne metodologie zaprojektowane, żeby dominować w konkurencyjnych wynikach wyszukiwania — bez skrótów, z mierzalnymi rezultatami.
+      </p>
+    </div>
+
+    <!-- Services grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+      {services.map(s => (
+        <div class:list={['bento-card p-lg flex flex-col relative overflow-hidden group', s.highlight && 'border-neon/30']}>
+          {s.highlight && (
+            <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-neon to-transparent"></div>
+          )}
+          <div class="absolute top-0 right-0 p-4 text-neon/10 group-hover:text-neon/20 transition-colors">
+            <span class="material-symbols-outlined text-6xl">{s.icon}</span>
+          </div>
+          <div class="relative z-10 flex flex-col flex-1">
+            <span class="text-label-sm font-mono text-neon/50 mb-xs">{s.module}</span>
+            <h2 class="text-headline-md text-on-surface mb-sm">{s.title}</h2>
+            <p class="text-body-md text-on-surface-variant mb-md flex-1">{s.desc}</p>
+            <div class="flex flex-wrap gap-2 mb-md">
+              {s.tags.map(tag => (
+                <span class="px-2 py-0.5 bg-surface-container-highest border border-outline-variant text-label-sm text-on-surface-variant uppercase">{tag}</span>
+              ))}
+            </div>
+            <a href={s.href}
+               class="inline-flex items-center gap-2 text-neon text-label-md uppercase tracking-widest group-hover:gap-4 transition-all self-start">
+              Szczegóły
+              <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- PROCES -->
+  <section class="bg-surface-container-low border-y border-white/5 py-xl">
+    <div class="max-w-7xl mx-auto px-6 md:px-12">
+      <div class="section-label mb-sm">Jak pracuję</div>
+      <h2 class="text-headline-lg text-on-surface mb-lg">Protokół realizacji</h2>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-gutter">
+        {[
+          { n: '01', icon: 'search', title: 'Diagnoza',        desc: 'Audyt wstępny domeny, analiza konkurencji i identyfikacja priorytetów.' },
+          { n: '02', icon: 'architecture', title: 'Strategia', desc: 'Budowa planu działania z KPI, harmonogramem i oczekiwanymi wynikami.' },
+          { n: '03', icon: 'build', title: 'Implementacja',    desc: 'Wdrożenie poprawek technicznych, treści i linkowania wewnętrznego.' },
+          { n: '04', icon: 'analytics', title: 'Monitoring',   desc: 'Miesięczne raporty, śledzenie pozycji i ciągła optymalizacja.' },
+        ].map((step, i) => (
+          <div class="relative">
+            <div class:list={['bento-card p-lg border-t-2', i === 0 ? 'border-neon' : 'border-outline-variant']}>
+              <div class="flex items-start justify-between mb-md">
+                <span class="text-headline-lg font-black text-neon/30">{step.n}</span>
+                <span class="material-symbols-outlined text-neon">{step.icon}</span>
+              </div>
+              <h3 class="text-headline-md text-on-surface mb-sm">{step.title}</h3>
+              <p class="text-body-md text-on-surface-variant">{step.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="max-w-7xl mx-auto px-6 md:px-12 py-xl">
+    <div class="bento-card p-xl text-center relative overflow-hidden">
+      <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div class="w-96 h-48 bg-neon/5 blur-[80px] rounded-full"></div>
+      </div>
+      <div class="relative z-10">
+        <h2 class="text-headline-lg text-on-surface mb-md">
+          Nie wiesz od czego zacząć?<br />
+          <span class="text-neon">Zacznij od bezpłatnego audytu.</span>
+        </h2>
+        <p class="text-body-lg text-on-surface-variant max-w-xl mx-auto mb-lg">
+          Pierwsza analiza domeny jest bezpłatna. Pokażę Ci konkretnie, gdzie tracisz ruch i jak to naprawić.
+        </p>
+        <a href="/kontakt"
+           class="inline-flex items-center gap-2 bg-neon text-on-primary font-bold text-label-md uppercase tracking-widest px-xl py-md hover:brightness-110 active:scale-95 transition-all shadow-neon">
+          <span class="material-symbols-outlined text-sm">troubleshoot</span>
+          Zamów bezpłatny audyt
+        </a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
