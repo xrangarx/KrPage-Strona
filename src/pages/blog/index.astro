@@ -1,58 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
-
-const posts = [
-  {
-    slug: 'audyt-seo-krok-po-kroku',
-    category: 'Tech SEO',
-    title: 'Audyt SEO krok po kroku — kompletny przewodnik 2025',
-    desc: 'Dowiedz się jak przeprowadzić pełny audyt techniczny strony. Omawiamy Core Web Vitals, crawlowanie, indeksowanie i profil linkowy.',
-    date: '2026-01-15',
-    readTime: '12 min',
-  },
-  {
-    slug: 'topical-authority-budowanie',
-    category: 'Strategia',
-    title: 'Topical Authority — jak zbudować autorytet tematyczny domeny',
-    desc: 'Topical authority to jeden z kluczowych czynników rankingowych Google w 2025. Wyjaśniamy jak projektować silosy i mapę tematyczną.',
-    date: '2026-02-03',
-    readTime: '9 min',
-  },
-  {
-    slug: 'core-web-vitals-optymalizacja',
-    category: 'Tech SEO',
-    title: 'Core Web Vitals 2025 — jak osiągnąć zielone wyniki',
-    desc: 'LCP, CLS, INP — kompleksowy przewodnik po optymalizacji Core Web Vitals dla WordPressa, Astro i niestandardowych stron.',
-    date: '2026-02-20',
-    readTime: '11 min',
-  },
-  {
-    slug: 'link-building-strategie',
-    category: 'Link Building',
-    title: 'Link Building w 2025 — strategie które działają',
-    desc: 'Guest posting, digital PR, broken link building i linkowanie wewnętrzne. Które strategie przynoszą najlepszy ROI w polskim SEO.',
-    date: '2026-03-05',
-    readTime: '14 min',
-  },
-  {
-    slug: 'nlp-seo-optymalizacja-tresci',
-    category: 'Content',
-    title: 'NLP w SEO — jak pisać treści pod algorytmy Google',
-    desc: 'Google rozumie kontekst i semantykę. Pokazujemy jak używać NLP, LSI i encji do tworzenia treści rankujących w TOP3.',
-    date: '2026-03-18',
-    readTime: '8 min',
-  },
-  {
-    slug: 'local-seo-gmb-optymalizacja',
-    category: 'Local SEO',
-    title: 'Local SEO i Google Moja Firma — kompletny poradnik',
-    desc: 'Jak zoptymalizować profil GMB, zdobyć recenzje i dominować w lokalnych wynikach Google Maps dla swojego biznesu.',
-    date: '2026-04-01',
-    readTime: '10 min',
-  },
-]
-
-const categories = ['Wszystkie', 'Tech SEO', 'Strategia', 'Content', 'Link Building', 'Local SEO']
+import { posts, categories } from '../../data/blog-posts'
 ---
 
 <BaseLayout
@@ -74,47 +22,84 @@ const categories = ['Wszystkie', 'Tech SEO', 'Strategia', 'Content', 'Link Build
       </p>
     </div>
 
-    <!-- Category filters (static, visual only) -->
-    <div class="flex flex-wrap gap-2 mb-xl">
+    <!-- Category filters -->
+    <div class="flex flex-wrap gap-2 mb-xl" id="filters">
       {categories.map((cat, i) => (
-        <span class:list={[
-          'px-4 py-1.5 text-label-sm uppercase tracking-widest border cursor-pointer transition-all',
-          i === 0
-            ? 'bg-neon text-on-primary border-neon'
-            : 'border-outline-variant text-on-surface-variant hover:border-neon/30 hover:text-neon',
-        ]}>
+        <button
+          data-filter={cat}
+          class:list={[
+            'filter-btn px-4 py-1.5 text-label-sm uppercase tracking-widest border transition-all',
+            i === 0
+              ? 'bg-neon text-on-primary border-neon'
+              : 'border-outline-variant text-on-surface-variant hover:border-neon/40 hover:text-neon',
+          ]}
+        >
           {cat}
-        </span>
+        </button>
       ))}
     </div>
 
-    <!-- Posts grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
-      {posts.map((post, i) => (
-        <article class:list={['bento-card flex flex-col group', i === 0 && 'md:col-span-2 lg:col-span-1']}>
-          <!-- Color bar -->
-          <div class="h-px bg-gradient-to-r from-neon to-transparent"></div>
-          <div class="p-lg flex flex-col flex-1">
-            <div class="flex items-center justify-between mb-sm">
-              <span class="text-label-sm text-neon uppercase tracking-widest border border-neon/20 px-2 py-0.5">{post.category}</span>
-              <span class="text-label-sm text-on-surface-variant">{post.readTime}</span>
+    <!-- Posts list -->
+    <div class="space-y-6" id="posts-list">
+      {posts.map(post => (
+        <article
+          data-category={post.category}
+          class="post-card bento-card overflow-hidden group hover:border-neon/40 transition-all duration-300"
+        >
+          <div class="flex flex-col sm:flex-row">
+
+            <!-- Thumbnail -->
+            <a href={`/blog/${post.slug}`} class="sm:w-72 lg:w-80 shrink-0 overflow-hidden block">
+              <img
+                src={post.image}
+                alt={post.title}
+                class="w-full h-52 sm:h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+            </a>
+
+            <!-- Content -->
+            <div class="flex flex-col justify-between p-lg flex-1">
+              <div>
+                <div class="flex items-center gap-3 mb-sm">
+                  <span class="text-label-sm text-neon uppercase tracking-widest border border-neon/20 px-2 py-0.5">
+                    {post.category}
+                  </span>
+                  <span class="text-label-sm text-on-surface-variant">{post.date}</span>
+                  <span class="text-label-sm text-on-surface-variant">·</span>
+                  <span class="text-label-sm text-on-surface-variant">{post.readTime} czytania</span>
+                </div>
+
+                <h2 class="text-headline-md text-on-surface mb-sm group-hover:text-neon transition-colors">
+                  <a href={`/blog/${post.slug}`}>{post.title}</a>
+                </h2>
+
+                <p class="text-body-md text-on-surface-variant line-clamp-3">{post.desc}</p>
+              </div>
+
+              <div class="mt-md pt-md border-t border-outline-variant/30">
+                <a
+                  href={`/blog/${post.slug}`}
+                  class="inline-flex items-center gap-2 text-neon text-label-sm uppercase tracking-widest
+                         border-b border-neon/30 pb-0.5 hover:border-neon hover:gap-4 transition-all"
+                >
+                  Czytaj artykuł
+                  <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                </a>
+              </div>
             </div>
-            <h2 class="text-headline-md text-on-surface mb-sm group-hover:text-neon transition-colors flex-1">
-              <a href={`/blog/${post.slug}`}>{post.title}</a>
-            </h2>
-            <p class="text-body-md text-on-surface-variant mb-md">{post.desc}</p>
-            <div class="flex items-center justify-between mt-auto pt-md border-t border-outline-variant/30">
-              <span class="text-label-sm text-on-surface-variant">{post.date}</span>
-              <a href={`/blog/${post.slug}`}
-                 class="inline-flex items-center gap-1 text-neon text-label-sm uppercase tracking-widest group-hover:gap-3 transition-all">
-                Czytaj
-                <span class="material-symbols-outlined text-sm">arrow_forward</span>
-              </a>
-            </div>
+
           </div>
         </article>
       ))}
     </div>
+
+    <!-- Empty state -->
+    <div id="empty-state" class="hidden text-center py-xl">
+      <span class="material-symbols-outlined text-neon/30 text-5xl mb-md block">search_off</span>
+      <p class="text-body-lg text-on-surface-variant">Brak wpisów w tej kategorii.</p>
+    </div>
+
   </section>
 
   <!-- Newsletter CTA -->
@@ -133,9 +118,9 @@ const categories = ['Wszystkie', 'Tech SEO', 'Strategia', 'Content', 'Link Build
         </div>
         <div class="flex flex-col sm:flex-row gap-md">
           <a href="/kontakt"
-             class="flex-1 flex items-center justify-center gap-2 bg-neon text-on-primary font-bold text-label-md uppercase tracking-widest py-md hover:brightness-110 active:scale-95 transition-all shadow-neon-sm">
+             class="flex-1 flex items-center justify-center gap-2 bg-neon text-on-primary font-bold text-label-md uppercase tracking-widest py-md hover:brightness-125 hover:shadow-neon active:scale-95 transition-all shadow-neon-sm">
             <span class="material-symbols-outlined text-sm">mail</span>
-            Zapisz się
+            Zapisz się na newsletter
           </a>
         </div>
       </div>
@@ -143,3 +128,33 @@ const categories = ['Wszystkie', 'Tech SEO', 'Strategia', 'Content', 'Link Build
   </section>
 
 </BaseLayout>
+
+<script>
+  const filterBtns = document.querySelectorAll<HTMLButtonElement>('.filter-btn')
+  const cards      = document.querySelectorAll<HTMLElement>('.post-card')
+  const emptyState = document.getElementById('empty-state')
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const selected = btn.dataset.filter ?? 'Wszystkie'
+
+      filterBtns.forEach(b => {
+        const active = b === btn
+        b.classList.toggle('bg-neon',                 active)
+        b.classList.toggle('text-on-primary',         active)
+        b.classList.toggle('border-neon',             active)
+        b.classList.toggle('border-outline-variant',  !active)
+        b.classList.toggle('text-on-surface-variant', !active)
+      })
+
+      let visible = 0
+      cards.forEach(card => {
+        const match = selected === 'Wszystkie' || card.dataset.category === selected
+        card.style.display = match ? '' : 'none'
+        if (match) visible++
+      })
+
+      emptyState?.classList.toggle('hidden', visible > 0)
+    })
+  })
+</script>

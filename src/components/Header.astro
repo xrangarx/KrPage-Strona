@@ -60,22 +60,22 @@ const isUslugiActive = pathname === '/uslugi' || pathname.startsWith('/uslugi/')
 
       <!-- Usługi dropdown -->
       <div class="relative group/uslugi">
-        <button
-          class:list={[
-            'flex items-center gap-1 text-label-md uppercase tracking-widest transition-colors duration-200 cursor-pointer',
-            isUslugiActive
-              ? 'text-neon border-b-2 border-neon pb-0.5'
-              : 'text-on-surface-variant hover:text-neon',
-          ]}
-          aria-haspopup="true"
-          aria-expanded="false"
-          aria-controls="uslugi-dropdown"
-        >
-          Usługi
-          <span class="material-symbols-outlined text-base leading-none transition-transform duration-200 group-hover/uslugi:rotate-180">
+        <div class="flex items-center gap-0.5">
+          <a
+            href="/uslugi"
+            class:list={[
+              'text-label-md uppercase tracking-widest transition-colors duration-200',
+              isUslugiActive
+                ? 'text-neon border-b-2 border-neon pb-0.5'
+                : 'text-on-surface-variant hover:text-neon',
+            ]}
+          >
+            Usługi
+          </a>
+          <span class="material-symbols-outlined text-base leading-none transition-transform duration-200 group-hover/uslugi:rotate-180 text-on-surface-variant cursor-default select-none ml-0.5">
             expand_more
           </span>
-        </button>
+        </div>
 
         <!-- Dropdown panel -->
         <div
@@ -187,23 +187,34 @@ const isUslugiActive = pathname === '/uslugi' || pathname.startsWith('/uslugi/')
 
     <!-- Usługi accordion -->
     <div>
-      <button
-        id="uslugi-toggle"
-        class:list={[
-          'flex items-center justify-between w-full py-3 text-label-md uppercase tracking-widest border-b border-neon/5 transition-colors',
-          isUslugiActive ? 'text-neon' : 'text-on-surface-variant',
-        ]}
-        aria-expanded={String(isUslugiActive)}
-        aria-controls="uslugi-mobile"
-      >
-        Usługi
-        <span id="uslugi-chevron" class:list={[
-          'material-symbols-outlined text-base transition-transform duration-200',
-          isUslugiActive ? 'rotate-180' : '',
-        ]}>
-          expand_more
-        </span>
-      </button>
+      <div class:list={[
+        'flex items-center justify-between border-b border-neon/5',
+        isUslugiActive ? 'text-neon' : 'text-on-surface-variant',
+      ]}>
+        <a
+          href="/uslugi"
+          class:list={[
+            'flex-1 py-3 text-label-md uppercase tracking-widest transition-colors',
+            isUslugiActive ? 'text-neon' : 'text-on-surface-variant hover:text-neon',
+          ]}
+        >
+          Usługi
+        </a>
+        <button
+          id="uslugi-toggle"
+          class="py-3 px-1 text-on-surface-variant"
+          aria-expanded={String(isUslugiActive)}
+          aria-controls="uslugi-mobile"
+          aria-label="Rozwiń podmenu Usługi"
+        >
+          <span id="uslugi-chevron" class:list={[
+            'material-symbols-outlined text-base transition-transform duration-200',
+            isUslugiActive ? 'rotate-180' : '',
+          ]}>
+            expand_more
+          </span>
+        </button>
+      </div>
 
       <div
         id="uslugi-mobile"

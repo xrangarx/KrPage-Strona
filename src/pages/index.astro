@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
+import { posts } from '../data/blog-posts'
+
+const latestPosts = posts.slice(0, 4)
 ---
 
 <BaseLayout
@@ -284,6 +287,67 @@ import BaseLayout from '../layouts/BaseLayout.astro'
           <p class="text-body-md text-on-surface-variant flex-1">{cs.desc}</p>
         </div>
       ))}
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       BLOG PREVIEW
+  ═══════════════════════════════════════════ -->
+  <section class="max-w-7xl mx-auto px-6 md:px-12 mb-xl">
+    <div class="flex items-end justify-between mb-lg">
+      <div>
+        <div class="section-label mb-sm">Baza wiedzy</div>
+        <h2 class="text-headline-lg text-on-surface">
+          Ostatnie wpisy <span class="text-neon">na blogu</span>
+        </h2>
+      </div>
+      <a href="/blog"
+         class="hidden sm:inline-flex items-center gap-2 border border-neon/30 text-neon text-label-sm uppercase tracking-widest px-md py-sm hover:bg-neon/10 hover:border-neon/60 transition-all">
+        Wszystkie wpisy
+        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-gutter">
+      {latestPosts.map(post => (
+        <article class="bento-card overflow-hidden group hover:border-neon/40 hover:shadow-[0_0_24px_rgba(45,255,95,0.08)] transition-all duration-300 flex flex-col">
+          <!-- Image -->
+          <a href={`/blog/${post.slug}`} class="block overflow-hidden h-48">
+            <img
+              src={post.image}
+              alt={post.title}
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+            />
+          </a>
+          <!-- Content -->
+          <div class="p-lg flex flex-col flex-1">
+            <div class="flex items-center gap-2 mb-sm">
+              <span class="text-label-sm text-neon uppercase tracking-widest border border-neon/20 px-2 py-0.5">{post.category}</span>
+              <span class="text-label-sm text-on-surface-variant ml-auto">{post.readTime}</span>
+            </div>
+            <h3 class="text-headline-md text-on-surface mb-sm group-hover:text-neon transition-colors flex-1">
+              <a href={`/blog/${post.slug}`}>{post.title}</a>
+            </h3>
+            <div class="flex items-center justify-between mt-auto pt-md border-t border-outline-variant/30">
+              <span class="text-label-sm text-on-surface-variant">{post.date}</span>
+              <a href={`/blog/${post.slug}`}
+                 class="inline-flex items-center gap-1 text-neon text-label-sm uppercase tracking-widest hover:gap-3 transition-all">
+                Czytaj
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </a>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="sm:hidden mt-md text-center">
+      <a href="/blog"
+         class="inline-flex items-center gap-2 border border-neon/30 text-neon text-label-sm uppercase tracking-widest px-md py-sm hover:bg-neon/10 transition-all">
+        Wszystkie wpisy
+        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+      </a>
     </div>
   </section>
 
