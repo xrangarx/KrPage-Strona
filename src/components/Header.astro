@@ -11,13 +11,13 @@ const navLinks = [
 ]
 
 const uslugiLinks = [
-  { href: '/uslugi',                   label: 'Wszystkie usługi', icon: 'grid_view'     },
   { href: '/uslugi/audyt-seo',         label: 'Audyt SEO',        icon: 'troubleshoot'  },
   { href: '/uslugi/pozycjonowanie',    label: 'Pozycjonowanie',   icon: 'trending_up'   },
   { href: '/uslugi/content-marketing', label: 'Content Marketing',icon: 'article'       },
+  { href: '/jak-dzialm',              label: 'Jak działam',      icon: 'cases'         },
 ]
 
-const isUslugiActive = pathname === '/uslugi' || pathname.startsWith('/uslugi/')
+const isUslugiActive = pathname === '/uslugi' || pathname.startsWith('/uslugi/') || pathname === '/jak-dzialm'
 ---
 
 <header
@@ -99,7 +99,6 @@ const isUslugiActive = pathname === '/uslugi' || pathname.startsWith('/uslugi/')
                     href={link.href}
                     class:list={[
                       'flex items-center gap-3 px-4 py-2.5 text-label-sm uppercase tracking-wider transition-colors duration-150',
-                      i === 0 ? 'border-b border-neon/10 mb-1' : '',
                       isActive
                         ? 'text-neon bg-neon/5'
                         : 'text-on-surface-variant hover:text-neon hover:bg-neon/5',
