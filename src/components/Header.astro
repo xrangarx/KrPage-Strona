@@ -4,20 +4,20 @@ import { SITE } from '../data/site'
 const pathname = new URL(Astro.request.url).pathname
 
 const navLinks = [
-  { href: '/',       label: 'Home'    },
-  { href: '/o-mnie', label: 'O mnie'  },
-  { href: '/blog',   label: 'Blog'    },
-  { href: '/kontakt', label: 'Kontakt' },
+  { href: '/',            label: 'Home'         },
+  { href: '/o-mnie',      label: 'O mnie'       },
+  { href: '/jak-dzialm',  label: 'Jak działam'  },
+  { href: '/blog',        label: 'Blog'         },
+  { href: '/kontakt',     label: 'Kontakt'      },
 ]
 
 const uslugiLinks = [
-  { href: '/uslugi/audyt-seo',         label: 'Audyt SEO',        icon: 'troubleshoot'  },
-  { href: '/uslugi/pozycjonowanie',    label: 'Pozycjonowanie',   icon: 'trending_up'   },
-  { href: '/uslugi/content-marketing', label: 'Content Marketing',icon: 'article'       },
-  { href: '/jak-dzialm',              label: 'Jak działam',      icon: 'cases'         },
+  { href: '/uslugi/audyt-seo',         label: 'Audyt SEO',        icon: 'troubleshoot' },
+  { href: '/uslugi/pozycjonowanie',    label: 'Pozycjonowanie',   icon: 'trending_up'  },
+  { href: '/uslugi/content-marketing', label: 'Content Marketing',icon: 'article'      },
 ]
 
-const isUslugiActive = pathname === '/uslugi' || pathname.startsWith('/uslugi/') || pathname === '/jak-dzialm'
+const isUslugiActive = pathname === '/uslugi' || pathname.startsWith('/uslugi/')
 ---
 
 <header
@@ -44,15 +44,10 @@ const isUslugiActive = pathname === '/uslugi' || pathname.startsWith('/uslugi/')
       {[navLinks[0], navLinks[1]].map(link => {
         const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href))
         return (
-          <a
-            href={link.href}
-            class:list={[
-              'text-label-md uppercase tracking-widest transition-colors duration-200',
-              isActive
-                ? 'text-neon border-b-2 border-neon pb-0.5'
-                : 'text-on-surface-variant hover:text-neon',
-            ]}
-          >
+          <a href={link.href} class:list={[
+            'text-label-md uppercase tracking-widest transition-colors duration-200',
+            isActive ? 'text-neon border-b-2 border-neon pb-0.5' : 'text-on-surface-variant hover:text-neon',
+          ]}>
             {link.label}
           </a>
         )
@@ -114,19 +109,14 @@ const isUslugiActive = pathname === '/uslugi' || pathname.startsWith('/uslugi/')
         </div>
       </div>
 
-      <!-- Blog, Kontakt -->
-      {[navLinks[2], navLinks[3]].map(link => {
+      <!-- Jak działam, Blog, Kontakt -->
+      {[navLinks[2], navLinks[3], navLinks[4]].map(link => {
         const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href))
         return (
-          <a
-            href={link.href}
-            class:list={[
-              'text-label-md uppercase tracking-widest transition-colors duration-200',
-              isActive
-                ? 'text-neon border-b-2 border-neon pb-0.5'
-                : 'text-on-surface-variant hover:text-neon',
-            ]}
-          >
+          <a href={link.href} class:list={[
+            'text-label-md uppercase tracking-widest transition-colors duration-200',
+            isActive ? 'text-neon border-b-2 border-neon pb-0.5' : 'text-on-surface-variant hover:text-neon',
+          ]}>
             {link.label}
           </a>
         )
@@ -243,7 +233,7 @@ const isUslugiActive = pathname === '/uslugi' || pathname.startsWith('/uslugi/')
       </div>
     </div>
 
-    {[navLinks[2], navLinks[3]].map(link => {
+    {[navLinks[2], navLinks[3], navLinks[4]].map(link => {
       const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href))
       return (
         <a
