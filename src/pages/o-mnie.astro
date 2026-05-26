@@ -1,64 +1,133 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
+
+const timeline = [
+  {
+    period: '09.2019 – 10.2020',
+    year: '2019',
+    company: 'WENET',
+    role: 'Web Developer Joomla',
+    desc: 'Tworzenie stron na podstawie szablonów graficznych, implementacja treści i funkcjonalności, walidacja kodu źródłowego.',
+    tags: ['Joomla', 'HTML/CSS', 'RWD'],
+  },
+  {
+    period: '11.2020 – 05.2022',
+    year: '2020',
+    company: 'WENET',
+    role: 'Specjalista ds. Kontroli Jakości WEB',
+    desc: 'Testy manualne stron i sklepów, audyty On-Site, dbanie o UX/UI i RWD, tworzenie dokumentacji technicznej dla deweloperów.',
+    tags: ['QA', 'UX/UI', 'On-Site SEO'],
+  },
+  {
+    period: '06.2022 – 03.2024',
+    year: '2022',
+    company: 'WENET',
+    role: 'Specjalista ds. SEO',
+    desc: 'Strategia SEO, audyty, link building, analiza słów kluczowych, monitoring efektów dla portfela klientów, współpraca z programistami i copywriterami.',
+    tags: ['SEO', 'Link Building', 'Keyword Research'],
+  },
+  {
+    period: '04.2024 – 06.2024',
+    year: '2024',
+    company: 'Dynamic Solutions',
+    role: 'Digital Marketing Specialist',
+    desc: 'Strategia i audyt SEO dla StreamX.dev, optymalizacja on-page, analiza UX/UI, tworzenie dokumentacji technicznej i guide-ów contentowych.',
+    tags: ['SEO Strategy', 'UX Audit', 'Tech Docs'],
+  },
+  {
+    period: '07.2024 – obecnie',
+    year: '2024+',
+    company: 'Ćwierkają.pl',
+    role: 'Senior SEO & MarTech Specialist',
+    desc: 'Freelancer B2B: audyty, strategia, content, link building, automatyzacje n8n, vibecoding narzędzi SEO (Claude Code + Antigravity), budowa zapleczy blogowych.',
+    tags: ['SEO', 'n8n', 'MarTech', 'Vibe Coding'],
+    current: true,
+  },
+]
+
+const tools = [
+  { icon: 'query_stats',  name: 'Google Analytics 4',  desc: 'Głęboka analiza behawioralna i atrybucja konwersji w czasie rzeczywistym.' },
+  { icon: 'search_check', name: 'Search Console',       desc: 'Monitoring zdrowia domeny i precyzyjna diagnostyka widoczności organicznej.' },
+  { icon: 'monitoring',   name: 'Ahrefs',               desc: 'Agresywna analiza konkurencji i inżynieria profilu linkowego.' },
+  { icon: 'bug_report',   name: 'Screaming Frog',       desc: 'Techniczne audyty crawlerem w celu eliminacji błędów strukturalnych.' },
+  { icon: 'bar_chart',    name: 'Senuto / Semstorm',    desc: 'Analiza widoczności, fraz kluczowych i pozycji w polskim ekosystemie.' },
+  { icon: 'code',         name: 'LibreCrawl',           desc: 'Autorski crawler do zaawansowanej analizy struktury i linkowania wewnętrznego.' },
+  { icon: 'table_chart',  name: 'Google Data Studio',   desc: 'Przejrzyste dashboardy i raporty dopasowane do potrzeb klienta.' },
+  { icon: 'psychology',   name: 'SurferSEO / Neuron',   desc: 'NLP-driven optymalizacja treści pod topical authority i semantykę.' },
+]
 ---
 
 <BaseLayout
-  title="O mnie — Specjalista SEO Krzysztof"
+  title="O mnie — Specjalista SEO Krzysztof Parfieniuk"
   description="Poznaj KrPage — specjalistę SEO z wieloletnim doświadczeniem w audytach technicznych, strategii pozycjonowania i content marketingu dla firm i e-commerce."
   schemaType="webpage"
 >
 
-  <!-- HERO -->
+  <!-- ═══════ HERO ═══════ -->
   <section class="max-w-7xl mx-auto px-6 md:px-12 py-xl grid md:grid-cols-12 gap-lg items-center relative overflow-hidden">
     <div class="absolute -top-20 -left-20 w-[500px] h-[500px] bg-neon/5 blur-[120px] rounded-full pointer-events-none"></div>
 
+    <!-- Left: copy + stats -->
     <div class="md:col-span-7 z-10">
-      <div class="section-label mb-md">System Identification: Specialist SEO</div>
+      <div class="section-label mb-md">Senior SEO & MarTech Specialist</div>
       <h1 class="text-headline-xl text-on-surface mb-md">
-        Architekt Cyfrowego<br />
-        <span class="text-neon">Wzrostu.</span>
+        Krzysztof<br />
+        <span class="text-neon">Parfieniuk</span>
       </h1>
       <p class="text-body-lg text-on-surface-variant mb-lg max-w-2xl">
-        Nazywam się Krzysztof, w świecie danych znany jako KrPage. Moja praca to fuzja analitycznej precyzji z wizjonerskim podejściem do SEO. Nie zgaduję — analizuję. Nie czekam na wyniki — optymalizuję pod konkretne KPI.
+        Specjalista SEO i MarTech z ponad 6-letnim doświadczeniem w agencjach i freelance B2B. Łączę precyzję danych z automatyzacją procesów — audyty, strategie, link building i własne narzędzia SEO budowane w n8n i Claude Code.
       </p>
 
-      <!-- Stats mini bento -->
-      <div class="grid grid-cols-2 gap-sm">
+      <!-- Animated stats -->
+      <div id="stats-grid" class="grid grid-cols-2 gap-sm">
         {[
-          { icon: 'show_chart', value: '8+',   label: 'Lat doświadczenia',       bar: 85 },
-          { icon: 'groups',     value: '150+',  label: 'Zadowolonych klientów',   bar: 92 },
-          { icon: 'trending_up',value: '320+',  label: 'Projektów SEO',           bar: 78 },
-          { icon: 'emoji_events',value: 'TOP 3', label: 'Średnia pozycja klientów',bar: 95 },
-        ].map(s => (
-          <div class="bento-card p-md relative overflow-hidden group">
-            <div class="absolute top-2 right-2 text-neon/20">
-              <span class="material-symbols-outlined">{s.icon}</span>
+          { icon: 'show_chart',   target: 6,   suffix: '+',  label: 'Lat doświadczenia',       bar: 85 },
+          { icon: 'groups',       target: 50,  suffix: '+',  label: 'Obsłużonych klientów',    bar: 72 },
+          { icon: 'trending_up',  target: 120, suffix: '+',  label: 'Projektów SEO',           bar: 78 },
+          { icon: 'rocket_launch',target: 99,  suffix: '%',  label: 'PageSpeed po optymalizacji', bar: 99 },
+        ].map((s, i) => (
+          <div class="bento-card p-md relative overflow-hidden hover:border-neon/40 transition-all">
+            <div class="absolute top-2 right-2 text-neon/15">
+              <span class="material-symbols-outlined text-3xl">{s.icon}</span>
             </div>
-            <p class="text-headline-lg text-neon mb-0">{s.value}</p>
+            <p class="text-headline-lg text-neon mb-0">
+              <span class="stat-counter" data-target={s.target} data-suffix={s.suffix}>0</span>{s.suffix}
+            </p>
             <p class="text-label-sm text-on-surface-variant uppercase mb-sm">{s.label}</p>
             <div class="h-px w-full bg-surface-container-high mt-sm">
-              <div class="h-full bg-neon" style={`width:${s.bar}%`}></div>
+              <div class="h-full bg-neon transition-all duration-1000" style={`width:0%`} data-bar={s.bar}></div>
             </div>
           </div>
         ))}
       </div>
     </div>
 
-    <div class="md:col-span-5 relative">
-      <div class="bento-card aspect-[3/4] overflow-hidden relative">
-        <div class="absolute inset-0 bg-gradient-to-t from-[#050A07] via-transparent to-transparent z-10"></div>
-        <div class="w-full h-full bg-surface-container-high flex items-center justify-center">
-          <span class="material-symbols-outlined text-neon/20" style="font-size:120px">person</span>
-        </div>
-        <div class="absolute bottom-4 left-4 right-4 p-md bg-[#050A07]/80 backdrop-blur-md border border-neon/10 z-20">
-          <p class="text-label-sm text-neon mb-1 uppercase tracking-widest">Current Status</p>
-          <p class="text-body-md font-bold">Optimizing Global Reach</p>
+    <!-- Right: photo -->
+    <div class="md:col-span-5 relative flex justify-center md:justify-end">
+      <div class="relative">
+        <div class="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-neon z-20 pointer-events-none"></div>
+        <div class="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-neon z-20 pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-neon z-20 pointer-events-none"></div>
+        <div class="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-neon z-20 pointer-events-none"></div>
+        <div class="absolute -inset-px border border-neon/20 z-10 pointer-events-none"></div>
+        <div class="absolute -inset-4 bg-neon/5 blur-2xl rounded-full pointer-events-none"></div>
+        <img
+          src="/images/krzysztof-9925.jpg"
+          alt="Krzysztof Parfieniuk — Senior SEO & MarTech Specialist"
+          class="relative z-10 w-full max-w-xs lg:max-w-sm object-cover object-top"
+          style="filter: brightness(0.95) contrast(1.05);"
+        />
+        <div class="absolute -bottom-3 left-1/2 -translate-x-1/2 z-20
+                    bg-[#050A07] border border-neon/30 px-4 py-1.5
+                    flex items-center gap-2 whitespace-nowrap shadow-neon-sm">
+          <span class="w-2 h-2 rounded-full bg-neon animate-pulse"></span>
+          <span class="text-label-sm text-neon uppercase tracking-widest">Dostępny dla nowych projektów</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- NARZĘDZIA -->
+  <!-- ═══════ NARZĘDZIA z auto-cycle ═══════ -->
   <section class="bg-surface-container-low py-xl border-y border-white/5 relative overflow-hidden">
     <div class="absolute right-0 top-0 w-1/3 h-full bg-neon/3 blur-[100px] pointer-events-none"></div>
     <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
@@ -73,19 +142,19 @@ import BaseLayout from '../layouts/BaseLayout.astro'
         <span class="text-label-sm border border-neon/20 px-3 py-1 text-neon uppercase tracking-widest whitespace-nowrap">v2.4 Enterprise</span>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-sm">
-        {[
-          { icon: 'query_stats',  name: 'Google Analytics 4',  desc: 'Głęboka analiza behawioralna i atrybucja konwersji w czasie rzeczywistym.' },
-          { icon: 'search_check', name: 'Search Console',       desc: 'Monitoring zdrowia domeny i precyzyjna diagnostyka widoczności organicznej.' },
-          { icon: 'monitoring',   name: 'Ahrefs',               desc: 'Agresywna analiza konkurencji i inżynieria profilu linkowego.' },
-          { icon: 'bug_report',   name: 'Screaming Frog',       desc: 'Techniczne audyty crawlerem w celu eliminacji błędów strukturalnych.' },
-          { icon: 'bar_chart',    name: 'Senuto / Semstorm',    desc: 'Analiza widoczności, fraz kluczowych i pozycji w polskim ekosystemie.' },
-          { icon: 'code',         name: 'LibreCrawl',           desc: 'Autorski crawler do zaawansowanej analizy struktury i linkowania wewnętrznego.' },
-          { icon: 'table_chart',  name: 'Google Data Studio',   desc: 'Przejrzyste dashboardy i raporty dopasowane do potrzeb klienta.' },
-          { icon: 'psychology',   name: 'SurferSEO',            desc: 'NLP-driven optymalizacja treści pod topical authority i semantykę.' },
-        ].map(tool => (
-          <div class="bento-card p-lg group hover:border-neon/40 transition-all">
-            <div class="w-12 h-12 mb-md flex items-center justify-center bg-surface-container-highest border border-white/5 group-hover:border-neon/30 transition-all">
+      <div id="tools-grid" class="grid grid-cols-1 md:grid-cols-4 gap-sm">
+        {tools.map((tool, i) => (
+          <div
+            data-tool={i}
+            class:list={[
+              'tool-card bento-card p-lg transition-all duration-500',
+              i === 0 ? 'border-neon/40 shadow-[0_0_20px_rgba(45,255,95,0.08)]' : 'opacity-70',
+            ]}
+          >
+            <div class:list={[
+              'w-12 h-12 mb-md flex items-center justify-center border transition-all',
+              i === 0 ? 'bg-neon/10 border-neon/40' : 'bg-surface-container-highest border-white/5',
+            ]}>
               <span class="material-symbols-outlined text-neon">{tool.icon}</span>
             </div>
             <h3 class="text-headline-md text-on-surface mb-sm">{tool.name}</h3>
@@ -96,8 +165,128 @@ import BaseLayout from '../layouts/BaseLayout.astro'
     </div>
   </section>
 
-  <!-- MISJA -->
+  <!-- ═══════ TIMELINE ═══════ -->
   <section class="max-w-7xl mx-auto px-6 md:px-12 py-xl">
+    <div class="section-label mb-sm">Ścieżka kariery</div>
+    <h2 class="text-headline-lg text-on-surface mb-xl">
+      Doświadczenie <span class="text-neon">zawodowe</span>
+    </h2>
+
+    <!-- ─── WERSJA POZIOMA (desktop lg+) ─── -->
+    <div class="hidden lg:block mb-xl">
+      <div class="relative">
+        <!-- Linia -->
+        <div class="absolute top-5 left-0 right-0 h-px bg-neon/20"></div>
+        <!-- Gradient najeżdżający z prawej -->
+        <div class="absolute top-5 left-0 h-px bg-gradient-to-r from-neon/60 via-neon/20 to-transparent" style="width:100%"></div>
+
+        <div class="grid grid-cols-5 gap-4 relative">
+          {timeline.map((item, i) => (
+            <div class="flex flex-col items-center text-center group">
+              <!-- Dot -->
+              <div class:list={[
+                'w-10 h-10 rounded-full border-2 flex items-center justify-center mb-4 z-10 transition-all duration-300',
+                item.current
+                  ? 'bg-neon border-neon shadow-neon-sm'
+                  : 'bg-[#050A07] border-neon/40 group-hover:border-neon',
+              ]}>
+                <span class:list={[
+                  'material-symbols-outlined text-sm',
+                  item.current ? 'text-on-primary' : 'text-neon/60 group-hover:text-neon',
+                ]}>
+                  {item.current ? 'star' : 'circle'}
+                </span>
+              </div>
+              <!-- Period -->
+              <span class="text-label-sm text-neon uppercase tracking-wider mb-2 leading-tight">{item.period}</span>
+              <!-- Company -->
+              <p class="text-label-md font-bold text-on-surface mb-1">{item.company}</p>
+              <!-- Role -->
+              <p class="text-label-sm text-on-surface-variant leading-snug">{item.role}</p>
+              <!-- Tags -->
+              <div class="flex flex-wrap justify-center gap-1 mt-2">
+                {item.tags.map(tag => (
+                  <span class="px-1.5 py-0.5 bg-surface-container border border-outline-variant text-[10px] text-on-surface-variant uppercase">{tag}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── WERSJA PIONOWA (wszystkie ekrany, ukryta na lg gdzie jest pozioma) ─── -->
+    <div class="lg:hidden space-y-0">
+      {timeline.map((item, i) => (
+        <div class="flex gap-4 relative">
+          <!-- Linia pionowa -->
+          <div class="flex flex-col items-center">
+            <div class:list={[
+              'w-10 h-10 rounded-full border-2 flex items-center justify-center shrink-0 z-10',
+              item.current ? 'bg-neon border-neon shadow-neon-sm' : 'bg-[#050A07] border-neon/40',
+            ]}>
+              <span class:list={['material-symbols-outlined text-sm', item.current ? 'text-on-primary' : 'text-neon/60']}>
+                {item.current ? 'star' : 'circle'}
+              </span>
+            </div>
+            {i < timeline.length - 1 && (
+              <div class="w-px flex-1 bg-neon/20 my-1"></div>
+            )}
+          </div>
+          <!-- Content -->
+          <div class:list={['pb-8 flex-1', i === timeline.length - 1 ? 'pb-0' : '']}>
+            <span class="text-label-sm text-neon uppercase tracking-widest">{item.period}</span>
+            <h3 class="text-headline-md text-on-surface mt-1">{item.company}</h3>
+            <p class:list={['text-label-md uppercase tracking-wider mb-2', item.current ? 'text-neon' : 'text-on-surface-variant']}>{item.role}</p>
+            <p class="text-body-md text-on-surface-variant mb-2">{item.desc}</p>
+            <div class="flex flex-wrap gap-1">
+              {item.tags.map(tag => (
+                <span class="px-2 py-0.5 bg-surface-container border border-outline-variant text-label-sm text-on-surface-variant uppercase">{tag}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- ─── WERSJA PIONOWA PEŁNA (lg+, pod poziomą) — do wyboru ─── -->
+    <div class="hidden lg:block mt-xl pt-xl border-t border-outline-variant/30">
+      <p class="text-label-sm text-on-surface-variant/40 uppercase tracking-widest mb-lg text-center">↑ Wersja pozioma powyżej · Wersja pionowa poniżej ↓</p>
+      <div class="space-y-0 max-w-3xl mx-auto">
+        {timeline.map((item, i) => (
+          <div class="flex gap-6 relative">
+            <div class="flex flex-col items-center">
+              <div class:list={[
+                'w-10 h-10 rounded-full border-2 flex items-center justify-center shrink-0 z-10',
+                item.current ? 'bg-neon border-neon shadow-neon-sm' : 'bg-[#050A07] border-neon/40',
+              ]}>
+                <span class:list={['material-symbols-outlined text-sm', item.current ? 'text-on-primary' : 'text-neon/60']}>
+                  {item.current ? 'star' : 'circle'}
+                </span>
+              </div>
+              {i < timeline.length - 1 && (
+                <div class="w-px flex-1 bg-neon/20 my-1"></div>
+              )}
+            </div>
+            <div class:list={['pb-8 flex-1', i === timeline.length - 1 ? 'pb-0' : '']}>
+              <span class="text-label-sm text-neon uppercase tracking-widest">{item.period}</span>
+              <h3 class="text-headline-md text-on-surface mt-1">{item.company}</h3>
+              <p class:list={['text-label-md uppercase tracking-wider mb-2', item.current ? 'text-neon' : 'text-on-surface-variant']}>{item.role}</p>
+              <p class="text-body-md text-on-surface-variant mb-2">{item.desc}</p>
+              <div class="flex flex-wrap gap-1">
+                {item.tags.map(tag => (
+                  <span class="px-2 py-0.5 bg-surface-container border border-outline-variant text-label-sm text-on-surface-variant uppercase">{tag}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ MISJA ═══════ -->
+  <section class="max-w-7xl mx-auto px-6 md:px-12 pb-xl">
     <div class="grid md:grid-cols-2 gap-lg items-center">
       <div class="order-2 md:order-1">
         <div class="bento-card p-xl border-l-4 border-neon">
@@ -125,12 +314,12 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 
       <div class="order-1 md:order-2 grid grid-cols-2 gap-sm">
         {[
-          { value: '100%', label: 'Accuracy',  big: false },
-          { icon: 'rocket_launch', label: 'Scale Fast', big: true },
-          { icon: 'database', label: 'Big Data', big: true },
-          { value: '24/7', label: 'Monitoring', big: false },
+          { value: '100%', label: 'White-Hat',    h: 'h-32' },
+          { icon: 'rocket_launch', label: 'Scale Fast', h: 'h-48' },
+          { icon: 'settings_suggest', label: 'MarTech', h: 'h-48' },
+          { value: '24/7', label: 'Monitoring',   h: 'h-32' },
         ].map(item => (
-          <div class:list={['bento-card flex flex-col items-center justify-center', item.big ? 'h-48' : 'h-32']}>
+          <div class:list={['bento-card flex flex-col items-center justify-center hover:border-neon/40 transition-all', item.h]}>
             {item.value
               ? <p class="text-headline-lg text-neon">{item.value}</p>
               : <span class="material-symbols-outlined text-neon text-4xl mb-2">{item.icon}</span>
@@ -142,7 +331,7 @@ import BaseLayout from '../layouts/BaseLayout.astro'
     </div>
   </section>
 
-  <!-- CTA -->
+  <!-- ═══════ CTA ═══════ -->
   <section class="max-w-7xl mx-auto px-6 md:px-12 pb-xl">
     <div class="bento-card p-xl flex flex-col items-center text-center relative overflow-hidden">
       <div class="absolute inset-0 opacity-5 pointer-events-none"
@@ -156,12 +345,12 @@ import BaseLayout from '../layouts/BaseLayout.astro'
         </p>
         <div class="flex flex-col sm:flex-row gap-md justify-center">
           <a href="/kontakt"
-             class="inline-flex items-center justify-center gap-2 bg-neon text-on-primary font-bold text-label-md uppercase tracking-widest px-xl py-md hover:brightness-110 active:scale-95 transition-all shadow-neon">
+             class="inline-flex items-center justify-center gap-2 bg-neon text-on-primary font-bold text-label-md uppercase tracking-widest px-xl py-md hover:brightness-125 hover:shadow-neon active:scale-95 transition-all shadow-neon-sm">
             <span class="material-symbols-outlined text-sm">calendar_month</span>
             Zacznij projekt
           </a>
           <a href="/uslugi"
-             class="inline-flex items-center justify-center gap-2 border border-neon/30 text-neon font-bold text-label-md uppercase tracking-widest px-xl py-md hover:bg-neon/5 transition-all">
+             class="inline-flex items-center justify-center gap-2 border border-neon/30 text-neon font-bold text-label-md uppercase tracking-widest px-xl py-md hover:bg-neon/10 hover:border-neon/60 transition-all">
             Zobacz usługi
           </a>
         </div>
@@ -170,3 +359,75 @@ import BaseLayout from '../layouts/BaseLayout.astro'
   </section>
 
 </BaseLayout>
+
+<script>
+  /* ── Stat Counters (IntersectionObserver) ── */
+  const counters = document.querySelectorAll<HTMLElement>('.stat-counter')
+  const bars     = document.querySelectorAll<HTMLElement>('[data-bar]')
+  let triggered  = false
+
+  function runStats() {
+    if (triggered) return
+    triggered = true
+
+    counters.forEach(el => {
+      const target   = parseInt(el.dataset.target ?? '0', 10)
+      const duration = 1600
+      const start    = performance.now()
+
+      const tick = (now: number) => {
+        const progress = Math.min((now - start) / duration, 1)
+        const eased    = 1 - Math.pow(1 - progress, 3)
+        el.textContent = String(Math.floor(eased * target))
+        if (progress < 1) requestAnimationFrame(tick)
+        else el.textContent = String(target)
+      }
+      requestAnimationFrame(tick)
+    })
+
+    bars.forEach(bar => {
+      const w = bar.dataset.bar ?? '0'
+      requestAnimationFrame(() => {
+        bar.style.width = w + '%'
+      })
+    })
+  }
+
+  const statsGrid = document.getElementById('stats-grid')
+  if (statsGrid) {
+    new IntersectionObserver(
+      entries => { if (entries[0].isIntersecting) runStats() },
+      { threshold: 0.3 }
+    ).observe(statsGrid)
+  }
+
+  /* ── Tools Auto-Cycle ── */
+  const toolCards = document.querySelectorAll<HTMLElement>('.tool-card')
+  let toolIdx = 0
+
+  function activateTool(idx: number) {
+    toolCards.forEach((card, i) => {
+      const iconBox = card.querySelector<HTMLElement>('.w-12')
+      if (i === idx) {
+        card.classList.remove('opacity-70')
+        card.classList.add('border-neon/40', 'shadow-[0_0_20px_rgba(45,255,95,0.08)]')
+        if (iconBox) {
+          iconBox.classList.replace('bg-surface-container-highest', 'bg-neon/10')
+          iconBox.classList.replace('border-white/5', 'border-neon/40')
+        }
+      } else {
+        card.classList.add('opacity-70')
+        card.classList.remove('border-neon/40', 'shadow-[0_0_20px_rgba(45,255,95,0.08)]')
+        if (iconBox) {
+          iconBox.classList.replace('bg-neon/10', 'bg-surface-container-highest')
+          iconBox.classList.replace('border-neon/40', 'border-white/5')
+        }
+      }
+    })
+  }
+
+  setInterval(() => {
+    toolIdx = (toolIdx + 1) % toolCards.length
+    activateTool(toolIdx)
+  }, 2000)
+</script>
