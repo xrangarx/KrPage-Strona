@@ -1,94 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
+import { getCollection } from 'astro:content'
 
-interface UseCase {
-  slug: string
-  type: 'SEO' | 'Strona'
-  industry: string
-  title: string
-  desc: string
-  result: string
-  resultLabel: string
-  period: string
-  tags: string[]
-  image: string
-}
-
-const cases: UseCase[] = [
-  {
-    slug: 'ecommerce-elektronika-seo',
-    type: 'SEO',
-    industry: 'E-commerce',
-    title: 'Sklep z elektroniką — +318% ruchu organicznego w 6 miesięcy',
-    desc: 'Klient zgłosił się z problemem stagnacji ruchu organicznego mimo dużego budżetu na reklamy. Przeprowadziliśmy pełny audyt techniczny, przebudowaliśmy architekturę kategorii i wdrożyliśmy strategię link buildingu opartą o digital PR.',
-    result: '+318%',
-    resultLabel: 'ruchu organicznego',
-    period: '6 miesięcy',
-    tags: ['Audyt Tech', 'Architektura URL', 'Link Building', 'Core Web Vitals'],
-    image: 'https://picsum.photos/seed/ecomm-seo/800/450',
-  },
-  {
-    slug: 'b2b-consulting-topical',
-    type: 'SEO',
-    industry: 'Usługi B2B',
-    title: 'Firma consultingowa — TOP 3 na 47 fraz w wąskiej niszy B2B',
-    desc: 'Niszowy rynek finansowy z silną konkurencją ze strony dużych portali. Zbudowaliśmy topical authority przez systematyczne pokrywanie tematów silosami treści i precyzyjne linkowanie wewnętrzne. Po 4 miesiącach klient dominuje w TOP 3.',
-    result: 'TOP 3',
-    resultLabel: 'na 47 fraz',
-    period: '4 miesiące',
-    tags: ['Topical Authority', 'Content Silos', 'Keyword Mapping', 'Interlinking'],
-    image: 'https://picsum.photos/seed/b2b-consult/800/450',
-  },
-  {
-    slug: 'local-seo-gabinety',
-    type: 'SEO',
-    industry: 'Local SEO',
-    title: 'Sieć gabinetów medycznych — +520% widoczności w Google Maps',
-    desc: 'Klient posiadał 5 lokalizacji, żadna nie pojawiała się w top 3 w Google Maps. Zoptymalizowaliśmy profile GMB, zbudowaliśmy lokalne silosy contentowe i pozyskaliśmy recenzje przez systemy automatycznych przypomnień.',
-    result: '+520%',
-    resultLabel: 'widoczność Maps',
-    period: '3 miesiące',
-    tags: ['Google Moja Firma', 'Local Citations', 'Recenzje', 'Local Content'],
-    image: 'https://picsum.photos/seed/local-med/800/450',
-  },
-  {
-    slug: 'strona-kancelaria-prawna',
-    type: 'Strona',
-    industry: 'Prawo',
-    title: 'Kancelaria prawna — strona z wizytówką i generowaniem leadów',
-    desc: 'Projekt od zera: architektura informacji, SEO on-page od startu, formularz kontaktowy z kwalifikacją leadów. Strona zbudowana w Astro z wynikiem 99/100 w PageSpeed i pełną optymalizacją schema.org dla usług prawnych.',
-    result: '99/100',
-    resultLabel: 'PageSpeed',
-    period: '3 tygodnie',
-    tags: ['Astro', 'Schema.org', 'Lead Gen', 'PageSpeed 99'],
-    image: 'https://picsum.photos/seed/law-site/800/450',
-  },
-  {
-    slug: 'strona-restauracja-lokalna',
-    type: 'Strona',
-    industry: 'Gastronomia',
-    title: 'Restauracja lokalna — strona + Local SEO w pakiecie',
-    desc: 'Właściciel restauracji potrzebował jednocześnie nowej strony i widoczności w Google Maps. Zaprojektowaliśmy stronę z menu, rezerwacjami online i pełną optymalizacją lokalną. Pierwsze zamówienia z Google organica w ciągu 3 tygodni od startu.',
-    result: '3 tyg.',
-    resultLabel: 'pierwsze leady',
-    period: '6 tygodni',
-    tags: ['Web Design', 'Local SEO', 'Rezerwacje', 'GMB'],
-    image: 'https://picsum.photos/seed/resto-local/800/450',
-  },
-  {
-    slug: 'strona-coach-personal-brand',
-    type: 'Strona',
-    industry: 'Personal Brand',
-    title: 'Coach biznesowy — personal brand z blogiem i kursami online',
-    desc: 'Rozbudowany projekt: strona osobista z systemem blogowym, landing page kursów, integracja z platformą płatności i autoresponderem. SEO pod frazy osobiste i branżowe. Wzrost zapytań o współpracę o 240% w ciągu 2 miesięcy.',
-    result: '+240%',
-    resultLabel: 'zapytań o współpracę',
-    period: '2 miesiące',
-    tags: ['Personal Brand', 'Blog', 'Kursy Online', 'SEO Contentowy'],
-    image: 'https://picsum.photos/seed/coach-brand/800/450',
-  },
-]
-
+const allCases = await getCollection('realizacje')
+const cases    = allCases.sort((a, b) => a.data.title.localeCompare(b.data.title))
 const typeFilters = ['Wszystkie', 'SEO', 'Strona']
 ---
 
@@ -98,7 +13,6 @@ const typeFilters = ['Wszystkie', 'SEO', 'Strona']
   schemaType="webpage"
 >
 
-  <!-- HERO -->
   <section class="max-w-7xl mx-auto px-6 md:px-12 pt-16 pb-lg relative">
     <div class="absolute -top-20 right-0 w-96 h-96 bg-neon/5 blur-[100px] rounded-full pointer-events-none"></div>
     <div class="relative z-10 mb-xl">
@@ -132,86 +46,66 @@ const typeFilters = ['Wszystkie', 'SEO', 'Strona']
     <div class="space-y-6" id="cases-list">
       {cases.map(c => (
         <article
-          data-type={c.type}
+          data-type={c.data.type}
           class="case-card bento-card overflow-hidden group hover:border-neon/40 transition-all duration-300"
         >
           <div class="flex flex-col sm:flex-row">
-
-            <!-- Thumbnail -->
             <div class="sm:w-72 lg:w-80 shrink-0 overflow-hidden relative">
               <img
-                src={c.image}
-                alt={c.title}
+                src={c.data.image}
+                alt={c.data.title}
                 class="w-full h-52 sm:h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 loading="lazy"
               />
-              <!-- Result badge overlay -->
               <div class="absolute top-3 left-3 bg-[#050A07]/90 border border-neon/30 px-3 py-1.5 backdrop-blur-sm">
-                <p class="text-neon font-black text-headline-md leading-none">{c.result}</p>
-                <p class="text-label-sm text-on-surface-variant uppercase leading-tight">{c.resultLabel}</p>
+                <p class="text-neon font-black text-headline-md leading-none">{c.data.result}</p>
+                <p class="text-label-sm text-on-surface-variant uppercase leading-tight">{c.data.resultLabel}</p>
               </div>
             </div>
-
-            <!-- Content -->
             <div class="flex flex-col justify-between p-lg flex-1">
               <div>
-                <!-- Meta row -->
                 <div class="flex items-center flex-wrap gap-2 mb-sm">
                   <span class:list={[
                     'text-label-sm uppercase tracking-widest border px-2 py-0.5 font-bold',
-                    c.type === 'SEO'
+                    c.data.type === 'SEO'
                       ? 'text-neon border-neon/30 bg-neon/5'
                       : 'text-[#5DADE2] border-[#5DADE2]/30 bg-[#5DADE2]/5',
                   ]}>
-                    {c.type === 'SEO' ? 'Pozycjonowanie' : 'Strona www'}
+                    {c.data.type === 'SEO' ? 'Pozycjonowanie' : 'Strona www'}
                   </span>
                   <span class="text-label-sm text-on-surface-variant border border-outline-variant px-2 py-0.5 uppercase">
-                    {c.industry}
+                    {c.data.industry}
                   </span>
-                  <span class="text-label-sm text-on-surface-variant ml-auto">
-                    Czas: {c.period}
-                  </span>
+                  <span class="text-label-sm text-on-surface-variant ml-auto">Czas: {c.data.period}</span>
                 </div>
-
-                <!-- Title -->
                 <h2 class="text-headline-md text-on-surface mb-sm group-hover:text-neon transition-colors">
-                  {c.title}
+                  {c.data.title}
                 </h2>
-
-                <!-- Description -->
-                <p class="text-body-md text-on-surface-variant line-clamp-3">{c.desc}</p>
               </div>
-
-              <!-- Tags + CTA -->
               <div class="mt-md pt-md border-t border-outline-variant/30 flex flex-wrap items-center gap-2">
-                {c.tags.map(tag => (
+                {c.data.tags.map((tag: string) => (
                   <span class="px-2 py-0.5 bg-surface-container-highest border border-outline-variant text-label-sm text-on-surface-variant uppercase">
                     {tag}
                   </span>
                 ))}
-                <a
-                  href="/kontakt"
-                  class="ml-auto inline-flex items-center gap-2 text-neon text-label-sm uppercase tracking-widest border-b border-neon/30 pb-0.5 hover:border-neon hover:gap-4 transition-all shrink-0"
-                >
+                <a href="/kontakt"
+                   class="ml-auto inline-flex items-center gap-2 text-neon text-label-sm uppercase tracking-widest border-b border-neon/30 pb-0.5 hover:border-neon hover:gap-4 transition-all shrink-0">
                   Podobny projekt
                   <span class="material-symbols-outlined text-sm">arrow_forward</span>
                 </a>
               </div>
             </div>
-
           </div>
         </article>
       ))}
     </div>
 
-    <!-- Empty state -->
     <div id="empty-state" class="hidden text-center py-xl">
       <span class="material-symbols-outlined text-neon/30 text-5xl mb-md block">search_off</span>
       <p class="text-body-lg text-on-surface-variant">Brak realizacji w tej kategorii.</p>
     </div>
   </section>
 
-  <!-- CTA -->
   <section class="max-w-7xl mx-auto px-6 md:px-12 py-xl">
     <div class="bento-card p-xl text-center relative overflow-hidden">
       <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -223,25 +117,14 @@ const typeFilters = ['Wszystkie', 'SEO', 'Strona']
           Chcesz podobnych wyników?<br />
           <span class="text-neon">Zacznij od bezpłatnej analizy.</span>
         </h2>
-        <p class="text-body-lg text-on-surface-variant max-w-xl mx-auto mb-lg">
-          Powiedz mi o swoim projekcie — SEO, nowa strona czy jedno i drugie. Pierwsza konsultacja jest bezpłatna.
-        </p>
         <div class="flex flex-col sm:flex-row justify-center gap-md">
-          <a
-            href="/kontakt"
-            class="inline-flex items-center justify-center gap-2
-                   bg-neon text-on-primary font-bold text-label-md uppercase tracking-widest
-                   px-xl py-md hover:brightness-125 hover:shadow-neon active:scale-95 transition-all shadow-neon-sm"
-          >
+          <a href="/kontakt"
+             class="inline-flex items-center justify-center gap-2 bg-neon text-on-primary font-bold text-label-md uppercase tracking-widest px-xl py-md hover:brightness-125 hover:shadow-neon active:scale-95 transition-all shadow-neon-sm">
             <span class="material-symbols-outlined text-sm">calendar_month</span>
             Umów konsultację
           </a>
-          <a
-            href="/uslugi"
-            class="inline-flex items-center justify-center gap-2
-                   border border-neon/30 text-neon font-bold text-label-md uppercase tracking-widest
-                   px-xl py-md hover:bg-neon/10 hover:border-neon/60 transition-all"
-          >
+          <a href="/uslugi"
+             class="inline-flex items-center justify-center gap-2 border border-neon/30 text-neon font-bold text-label-md uppercase tracking-widest px-xl py-md hover:bg-neon/10 hover:border-neon/60 transition-all">
             Zobacz usługi
           </a>
         </div>
@@ -259,7 +142,6 @@ const typeFilters = ['Wszystkie', 'SEO', 'Strona']
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const selected = btn.dataset.filter ?? 'Wszystkie'
-
       filterBtns.forEach(b => {
         const active = b === btn
         b.classList.toggle('bg-neon',                 active)
@@ -268,14 +150,12 @@ const typeFilters = ['Wszystkie', 'SEO', 'Strona']
         b.classList.toggle('border-outline-variant',  !active)
         b.classList.toggle('text-on-surface-variant', !active)
       })
-
       let visible = 0
       cards.forEach(card => {
         const match = selected === 'Wszystkie' || card.dataset.type === selected
         card.style.display = match ? '' : 'none'
         if (match) visible++
       })
-
       emptyState?.classList.toggle('hidden', visible > 0)
     })
   })

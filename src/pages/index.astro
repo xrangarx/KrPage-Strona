@@ -1,8 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
-import { posts } from '../data/blog-posts'
+import { getCollection } from 'astro:content'
 
-const latestPosts = posts.slice(0, 4)
+const allPosts   = await getCollection('blog')
+const latestPosts = allPosts
+  .sort((a, b) => b.data.date.localeCompare(a.data.date))
+  .slice(0, 4)
 ---
 
 <BaseLayout
@@ -311,27 +314,25 @@ const latestPosts = posts.slice(0, 4)
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-gutter">
       {latestPosts.map(post => (
         <article class="bento-card overflow-hidden group hover:border-neon/40 hover:shadow-[0_0_24px_rgba(45,255,95,0.08)] transition-all duration-300 flex flex-col">
-          <!-- Image -->
-          <a href={`/blog/${post.slug}`} class="block overflow-hidden h-48">
+          <a href={`/blog/${post.id}`} class="block overflow-hidden h-48">
             <img
-              src={post.image}
-              alt={post.title}
+              src={post.data.image}
+              alt={post.data.title}
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               loading="lazy"
             />
           </a>
-          <!-- Content -->
           <div class="p-lg flex flex-col flex-1">
             <div class="flex items-center gap-2 mb-sm">
-              <span class="text-label-sm text-neon uppercase tracking-widest border border-neon/20 px-2 py-0.5">{post.category}</span>
-              <span class="text-label-sm text-on-surface-variant ml-auto">{post.readTime}</span>
+              <span class="text-label-sm text-neon uppercase tracking-widest border border-neon/20 px-2 py-0.5">{post.data.category}</span>
+              <span class="text-label-sm text-on-surface-variant ml-auto">{post.data.readTime}</span>
             </div>
             <h3 class="text-headline-md text-on-surface mb-sm group-hover:text-neon transition-colors flex-1">
-              <a href={`/blog/${post.slug}`}>{post.title}</a>
+              <a href={`/blog/${post.id}`}>{post.data.title}</a>
             </h3>
             <div class="flex items-center justify-between mt-auto pt-md border-t border-outline-variant/30">
-              <span class="text-label-sm text-on-surface-variant">{post.date}</span>
-              <a href={`/blog/${post.slug}`}
+              <span class="text-label-sm text-on-surface-variant">{post.data.date}</span>
+              <a href={`/blog/${post.id}`}
                  class="inline-flex items-center gap-1 text-neon text-label-sm uppercase tracking-widest hover:gap-3 transition-all">
                 Czytaj
                 <span class="material-symbols-outlined text-sm">arrow_forward</span>
