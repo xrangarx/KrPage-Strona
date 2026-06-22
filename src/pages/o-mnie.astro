@@ -117,11 +117,11 @@ const tools = [
           class="relative z-10 w-full max-w-xs lg:max-w-sm object-cover object-top"
           style="filter: brightness(0.95) contrast(1.05);"
         />
-        <div class="absolute -bottom-3 left-1/2 -translate-x-1/2 z-20
-                    bg-[#050A07] border border-neon/30 px-4 py-1.5
-                    flex items-center gap-2 whitespace-nowrap shadow-neon-sm">
-          <span class="w-2 h-2 rounded-full bg-neon animate-pulse"></span>
-          <span class="text-label-sm text-neon uppercase tracking-widest">Dostępny dla nowych projektów</span>
+        <div class="absolute -bottom-3 left-1/2 -translate-x-1/2 z-20 w-max max-w-[90%]
+                    bg-[#050A07] border border-neon/30 px-3 py-1.5
+                    flex items-center gap-2 shadow-neon-sm">
+          <span class="w-2 h-2 rounded-full bg-neon animate-pulse shrink-0"></span>
+          <span class="text-label-sm text-neon uppercase tracking-widest leading-snug">Dostępny dla nowych projektów</span>
         </div>
       </div>
     </div>
@@ -142,7 +142,7 @@ const tools = [
         <span class="text-label-sm border border-neon/20 px-3 py-1 text-neon uppercase tracking-widest whitespace-nowrap">v2.4 Enterprise</span>
       </div>
 
-      <div id="tools-grid" class="grid grid-cols-1 md:grid-cols-4 gap-sm">
+      <div id="tools-grid" class="grid grid-cols-2 lg:grid-cols-4 gap-sm">
         {tools.map((tool, i) => (
           <div
             data-tool={i}
@@ -209,9 +209,9 @@ const tools = [
                   <span class="px-1.5 py-0.5 bg-surface-container border border-outline-variant text-[10px] text-on-surface-variant uppercase">{tag}</span>
                 ))}
               </div>
-              <!-- Detail button -->
+              <!-- Detail button — mt-auto pushes to bottom of equal-height grid cell -->
               <button
-                class="job-detail-btn mt-3 inline-flex items-center gap-1
+                class="job-detail-btn mt-auto pt-3 inline-flex items-center gap-1
                        border border-neon/30 text-neon text-[10px] uppercase tracking-widest
                        px-2 py-1 hover:bg-neon/10 hover:border-neon transition-all"
                 data-job={i}

@@ -66,3 +66,11 @@
            px-3 py-1 bg-secondary-container/20;
   }
 }
+
+/* ── Responsive font scaling (mobile-first overrides) ── */
+@media (max-width: 767px) {
+  .text-headline-xl { font-size: clamp(28px, 8vw, 40px); line-height: 1.15; }
+  .text-headline-lg { font-size: clamp(22px, 6vw, 28px); line-height: 1.2;  }
+  .text-display     { font-size: clamp(36px, 9vw, 48px); line-height: 1.1;  }
+  .text-body-lg     { font-size: 16px; }
+}
