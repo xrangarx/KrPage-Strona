@@ -249,41 +249,215 @@ const tools = [
       ))}
     </div>
 
-    <!-- ─── WERSJA PIONOWA PEŁNA (lg+, pod poziomą) — do wyboru ─── -->
-    <div class="hidden lg:block mt-xl pt-xl border-t border-outline-variant/30">
-      <p class="text-label-sm text-on-surface-variant/40 uppercase tracking-widest mb-lg text-center">↑ Wersja pozioma powyżej · Wersja pionowa poniżej ↓</p>
-      <div class="space-y-0 max-w-3xl mx-auto">
-        {timeline.map((item, i) => (
-          <div class="flex gap-6 relative">
-            <div class="flex flex-col items-center">
-              <div class:list={[
-                'w-10 h-10 rounded-full border-2 flex items-center justify-center shrink-0 z-10',
-                item.current ? 'bg-neon border-neon shadow-neon-sm' : 'bg-[#050A07] border-neon/40',
-              ]}>
-                <span class:list={['material-symbols-outlined text-sm', item.current ? 'text-on-primary' : 'text-neon/60']}>
-                  {item.current ? 'star' : 'circle'}
-                </span>
-              </div>
-              {i < timeline.length - 1 && (
-                <div class="w-px flex-1 bg-neon/20 my-1"></div>
-              )}
-            </div>
-            <div class:list={['pb-8 flex-1', i === timeline.length - 1 ? 'pb-0' : '']}>
-              <span class="text-label-sm text-neon uppercase tracking-widest">{item.period}</span>
-              <h3 class="text-headline-md text-on-surface mt-1">{item.company}</h3>
-              <p class:list={['text-label-md uppercase tracking-wider mb-2', item.current ? 'text-neon' : 'text-on-surface-variant']}>{item.role}</p>
-              <p class="text-body-md text-on-surface-variant mb-2">{item.desc}</p>
-              <div class="flex flex-wrap gap-1">
-                {item.tags.map(tag => (
-                  <span class="px-2 py-0.5 bg-surface-container border border-outline-variant text-label-sm text-on-surface-variant uppercase">{tag}</span>
-                ))}
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
+    <!-- CTA do modala -->
+    <div class="mt-xl pt-lg border-t border-outline-variant/30 flex flex-col sm:flex-row items-center justify-between gap-md">
+      <p class="text-body-md text-on-surface-variant max-w-md">
+        6 lat, 3 firmy, jedna ścieżka — od kodu przez jakość po pełną strategię SEO i własne narzędzia.
+      </p>
+      <button
+        id="open-career-modal"
+        class="shrink-0 inline-flex items-center gap-2
+               border border-neon/40 text-neon font-bold text-label-md uppercase tracking-widest
+               px-lg py-md hover:bg-neon/10 hover:border-neon hover:shadow-neon-sm
+               active:scale-95 transition-all duration-200 group"
+      >
+        <span class="material-symbols-outlined text-sm group-hover:rotate-90 transition-transform duration-300">add_circle</span>
+        Sprawdź pełne doświadczenie
+      </button>
     </div>
   </section>
+
+  <!-- ═══════ MODAL KARIERY ═══════ -->
+  <div
+    id="career-modal"
+    class="fixed inset-0 z-[100] hidden items-center justify-center p-4"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-title"
+  >
+    <!-- Backdrop -->
+    <div id="modal-backdrop" class="absolute inset-0 bg-[#050A07]/95 backdrop-blur-md"></div>
+
+    <!-- Panel -->
+    <div class="relative z-10 w-full max-w-3xl max-h-[90vh] overflow-y-auto
+                bg-[#080F09] border border-neon/20
+                shadow-[0_0_60px_rgba(45,255,95,0.1)]">
+
+      <!-- Header -->
+      <div class="sticky top-0 z-20 flex items-center justify-between px-lg py-md
+                  bg-[#080F09]/95 backdrop-blur-sm border-b border-neon/10">
+        <div>
+          <p class="text-label-sm text-neon uppercase tracking-widest mb-0.5">Krzysztof Parfieniuk</p>
+          <h2 id="modal-title" class="text-headline-md text-on-surface">Pełna ścieżka kariery</h2>
+        </div>
+        <button
+          id="close-career-modal"
+          class="w-10 h-10 flex items-center justify-center border border-outline-variant
+                 text-on-surface-variant hover:border-neon/40 hover:text-neon transition-all"
+          aria-label="Zamknij"
+        >
+          <span class="material-symbols-outlined text-base">close</span>
+        </button>
+      </div>
+
+      <!-- Neon accent line -->
+      <div class="h-px bg-gradient-to-r from-neon via-neon/40 to-transparent"></div>
+
+      <!-- Content -->
+      <div class="px-lg py-xl space-y-0">
+
+        <!-- Pozycja 5 — obecnie -->
+        <div class="flex gap-6 relative">
+          <div class="flex flex-col items-center shrink-0">
+            <div class="w-10 h-10 rounded-full bg-neon border-2 border-neon shadow-neon-sm flex items-center justify-center z-10">
+              <span class="material-symbols-outlined text-sm text-on-primary">star</span>
+            </div>
+            <div class="w-px flex-1 bg-neon/20 my-2"></div>
+          </div>
+          <div class="pb-10">
+            <div class="flex flex-wrap items-center gap-2 mb-sm">
+              <span class="text-label-sm text-neon uppercase tracking-widest font-bold">07.2024 – obecnie</span>
+              <span class="px-2 py-0.5 bg-neon/10 border border-neon/30 text-label-sm text-neon uppercase">Aktualnie</span>
+            </div>
+            <h3 class="text-headline-md text-on-surface mb-xs">Ćwierkają.pl</h3>
+            <p class="text-label-md text-neon uppercase tracking-wider mb-md">Senior SEO & MarTech Specialist — Freelancer B2B</p>
+            <p class="text-body-md text-on-surface-variant mb-md leading-relaxed">
+              Tu zaczęła się prawdziwa wolność — i największa odpowiedzialność. Jako B2B freelancer prowadzę kompleksowe projekty SEO: od audytu technicznego, przez strategię contentową, aż po link building i monitoring wyników. Ale to nie wszystko co mnie tutaj wyróżnia.
+            </p>
+            <p class="text-body-md text-on-surface-variant mb-md leading-relaxed">
+              Zacząłem budować <strong class="text-on-surface">własne narzędzia SEO</strong> z pomocą Claude Code i platformy Antigravity — vibecoding skryptów, które automatyzują żmudne procesy analizy i crawlowania. Stworzyłem też <strong class="text-on-surface">zaawansowane automatyzacje w n8n</strong>, które dziś oszczędzają mi i moim klientom dziesiątki godzin miesięcznie.
+            </p>
+            <p class="text-body-md text-on-surface-variant mb-md leading-relaxed">
+              Buduję zapleczy blogowe, piszę content z głową (NLP, silosy, encje), optymalizuję technicznie on-site i prowadzę kampanie link buildingowe. Nie jestem klasycznym freelancerem — jestem jednosobowym działem SEO + MarTech.
+            </p>
+            <div class="flex flex-wrap gap-1.5">
+              {['SEO Strategy', 'Tech Audit', 'Link Building', 'n8n Automation', 'Vibe Coding', 'Claude Code', 'Content NLP', 'Zapleczy'].map(t => (
+                <span class="px-2 py-0.5 bg-surface-container border border-neon/20 text-label-sm text-neon/80 uppercase">{t}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <!-- Pozycja 4 -->
+        <div class="flex gap-6 relative">
+          <div class="flex flex-col items-center shrink-0">
+            <div class="w-10 h-10 rounded-full bg-[#050A07] border-2 border-neon/40 flex items-center justify-center z-10">
+              <span class="material-symbols-outlined text-sm text-neon/60">circle</span>
+            </div>
+            <div class="w-px flex-1 bg-neon/20 my-2"></div>
+          </div>
+          <div class="pb-10">
+            <span class="text-label-sm text-neon/70 uppercase tracking-widest font-bold">04.2024 – 06.2024</span>
+            <h3 class="text-headline-md text-on-surface mt-1 mb-xs">Dynamic Solutions</h3>
+            <p class="text-label-md text-on-surface-variant uppercase tracking-wider mb-md">Digital Marketing Specialist</p>
+            <p class="text-body-md text-on-surface-variant mb-md leading-relaxed">
+              Krótki, intensywny projekt przy starcie-upie StreamX.dev. Rola pełna przekrojowych zadań: SEO strategy od zera, audyt, analiza konkurencji i widoczności, optymalizacja on-page — ale też praca ramię w ramię z deweloperami przy testowaniu nowych komponentów i tworzeniu dokumentacji technicznej.
+            </p>
+            <p class="text-body-md text-on-surface-variant mb-md leading-relaxed">
+              To doświadczenie pokazało mi jak ważna jest <strong class="text-on-surface">komunikacja między SEO a deveolpmentem</strong> — i jak pisać specyfikacje techniczne, które programiści faktycznie chcą czytać. Pisałem też przewodniki dla content kreatorów, które łączyły zasady NLP z praktyką pisarską.
+            </p>
+            <div class="flex flex-wrap gap-1.5">
+              {['SEO Strategy', 'UX/UI Audit', 'Tech Docs', 'Content Guides', 'QA Testing'].map(t => (
+                <span class="px-2 py-0.5 bg-surface-container border border-outline-variant text-label-sm text-on-surface-variant uppercase">{t}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <!-- Pozycja 3 -->
+        <div class="flex gap-6 relative">
+          <div class="flex flex-col items-center shrink-0">
+            <div class="w-10 h-10 rounded-full bg-[#050A07] border-2 border-neon/40 flex items-center justify-center z-10">
+              <span class="material-symbols-outlined text-sm text-neon/60">circle</span>
+            </div>
+            <div class="w-px flex-1 bg-neon/20 my-2"></div>
+          </div>
+          <div class="pb-10">
+            <span class="text-label-sm text-neon/70 uppercase tracking-widest font-bold">06.2022 – 03.2024</span>
+            <h3 class="text-headline-md text-on-surface mt-1 mb-xs">WENET</h3>
+            <p class="text-label-md text-on-surface-variant uppercase tracking-wider mb-md">Specjalista ds. SEO</p>
+            <p class="text-body-md text-on-surface-variant mb-md leading-relaxed">
+              Tutaj nauczyłem się SEO w realiach agencyjnych — szybko, pod presją, z różnorodnymi klientami jednocześnie. Prowadziłem strategie pozycjonowania dla stron i sklepów internetowych, przeprowadzałem audyty, tworzyłem rekomendacje optymalizacyjne i link buildingowe.
+            </p>
+            <p class="text-body-md text-on-surface-variant mb-md leading-relaxed">
+              Kluczowe było <strong class="text-on-surface">monitorowanie efektów i błyskawiczne reagowanie na spadki</strong> — czasem aktualizacja algorytmu potrafiła zrujnować miesiące pracy i trzeba było działać w godzinach, nie dniach. Nauczyłem się też jak skutecznie przekazywać rekomendacje SEO do innych działów: programistów, copywriterów, webdesignerów i opiekunów klienta.
+            </p>
+            <p class="text-body-md text-on-surface-variant mb-md leading-relaxed">
+              To tutaj po raz pierwszy zarządzałem własnym portfelem klientów i rozumiałem co to znaczy być odpowiedzialnym za wyniki od A do Z.
+            </p>
+            <div class="flex flex-wrap gap-1.5">
+              {['SEO Strategy', 'Audyt', 'Link Building', 'Keyword Research', 'Analiza Widoczności', 'Portfolio Klientów'].map(t => (
+                <span class="px-2 py-0.5 bg-surface-container border border-outline-variant text-label-sm text-on-surface-variant uppercase">{t}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <!-- Pozycja 2 -->
+        <div class="flex gap-6 relative">
+          <div class="flex flex-col items-center shrink-0">
+            <div class="w-10 h-10 rounded-full bg-[#050A07] border-2 border-neon/40 flex items-center justify-center z-10">
+              <span class="material-symbols-outlined text-sm text-neon/60">circle</span>
+            </div>
+            <div class="w-px flex-1 bg-neon/20 my-2"></div>
+          </div>
+          <div class="pb-10">
+            <span class="text-label-sm text-neon/70 uppercase tracking-widest font-bold">11.2020 – 05.2022</span>
+            <h3 class="text-headline-md text-on-surface mt-1 mb-xs">WENET</h3>
+            <p class="text-label-md text-on-surface-variant uppercase tracking-wider mb-md">Specjalista ds. Kontroli Jakości WEB</p>
+            <p class="text-body-md text-on-surface-variant mb-md leading-relaxed">
+              Rola, która ukształtowała moje patrzenie na strony internetowe przez pryzmat danych i użytkownika jednocześnie. Testowałem manualnie dziesiątki projektów — szukając błędów technicznych, problemów z RWD, niedociągnięć UX/UI — i tworzyłem dokumentację techniczną z konkretnymi wytycznymi do poprawy.
+            </p>
+            <p class="text-body-md text-on-surface-variant mb-md leading-relaxed">
+              To tu nauczyłem się <strong class="text-on-surface">myśleć jak Google i jak użytkownik jednocześnie</strong>. Analiza stron pod kątem jakości i optymalizacji On-Site była codziennością — i stanowi dziś fundament każdego audytu który przeprowadzam. Weryfikowałem też wdrożenia poprawek po deweloperach, co dało mi głębokie rozumienie procesu wytwarzania oprogramowania webowego.
+            </p>
+            <div class="flex flex-wrap gap-1.5">
+              {['QA Testing', 'UX/UI', 'RWD', 'On-Site SEO', 'Tech Documentation'].map(t => (
+                <span class="px-2 py-0.5 bg-surface-container border border-outline-variant text-label-sm text-on-surface-variant uppercase">{t}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <!-- Pozycja 1 -->
+        <div class="flex gap-6 relative">
+          <div class="flex flex-col items-center shrink-0">
+            <div class="w-10 h-10 rounded-full bg-[#050A07] border-2 border-neon/40 flex items-center justify-center z-10">
+              <span class="material-symbols-outlined text-sm text-neon/60">circle</span>
+            </div>
+          </div>
+          <div class="pb-2">
+            <span class="text-label-sm text-neon/70 uppercase tracking-widest font-bold">09.2019 – 10.2020</span>
+            <h3 class="text-headline-md text-on-surface mt-1 mb-xs">WENET</h3>
+            <p class="text-label-md text-on-surface-variant uppercase tracking-wider mb-md">Web Developer Joomla</p>
+            <p class="text-body-md text-on-surface-variant mb-md leading-relaxed">
+              Punkt startowy. Budowanie stron internetowych w Joomla na podstawie szablonów od grafików — implementacja struktury, tekstów, grafik i funkcjonalności zgodnie z wytycznymi klientów. Poprawki techniczne, wizualne, walidacja kodu źródłowego.
+            </p>
+            <p class="text-body-md text-on-surface-variant mb-md leading-relaxed">
+              Praca z kodem na co dzień dała mi coś, czego wielu SEO-wców nie ma: <strong class="text-on-surface">rozumienie jak strona działa od środka</strong>. Widzę zależności między HTML, CSS a tym co indeksuje Google. To bezcenne przy audytach technicznych — problemy które inni opisują z perspektywy raportu, ja widzę w strukturze kodu.
+            </p>
+            <div class="flex flex-wrap gap-1.5">
+              {['Joomla', 'HTML/CSS', 'RWD', 'Web Development'].map(t => (
+                <span class="px-2 py-0.5 bg-surface-container border border-outline-variant text-label-sm text-on-surface-variant uppercase">{t}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Footer -->
+      <div class="px-lg py-md border-t border-neon/10 flex items-center justify-between">
+        <p class="text-label-sm text-on-surface-variant/50 uppercase tracking-widest">Białystok · Polska · B2B</p>
+        <a href="/kontakt"
+           class="inline-flex items-center gap-2 bg-neon text-on-primary font-bold text-label-sm uppercase tracking-widest px-md py-sm hover:brightness-125 transition-all shadow-neon-sm"
+           onclick="document.getElementById('career-modal').classList.add('hidden'); document.getElementById('career-modal').classList.remove('flex')">
+          <span class="material-symbols-outlined text-sm">calendar_month</span>
+          Umów konsultację
+        </a>
+      </div>
+    </div>
+  </div>
 
   <!-- ═══════ MISJA ═══════ -->
   <section class="max-w-7xl mx-auto px-6 md:px-12 pb-xl">
@@ -430,4 +604,29 @@ const tools = [
     toolIdx = (toolIdx + 1) % toolCards.length
     activateTool(toolIdx)
   }, 2000)
+
+  /* ── Career Modal ── */
+  const modal     = document.getElementById('career-modal')!
+  const openBtn   = document.getElementById('open-career-modal')!
+  const closeBtn  = document.getElementById('close-career-modal')!
+  const backdrop  = document.getElementById('modal-backdrop')!
+
+  function openModal() {
+    modal.classList.remove('hidden')
+    modal.classList.add('flex')
+    document.body.style.overflow = 'hidden'
+  }
+
+  function closeModal() {
+    modal.classList.add('hidden')
+    modal.classList.remove('flex')
+    document.body.style.overflow = ''
+  }
+
+  openBtn.addEventListener('click', openModal)
+  closeBtn.addEventListener('click', closeModal)
+  backdrop.addEventListener('click', closeModal)
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal()
+  })
 </script>
