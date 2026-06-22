@@ -3,7 +3,7 @@ title: "Topical Authority — jak zbudować autorytet tematyczny domeny"
 description: "Topical authority to jeden z kluczowych czynników rankingowych Google w 2025. Wyjaśniamy jak projektować silosy i mapę tematyczną."
 date: "2026-02-03"
 category: "Strategia"
-image: "https://picsum.photos/seed/topical2025/800/450"
+image: "https://placehold.co/800x450/050A07/2DFF5F?text=Topical+Authority"
 readTime: "9 min"
 ---
 

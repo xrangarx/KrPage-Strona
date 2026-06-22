@@ -5,7 +5,7 @@ industry: "Gastronomia"
 result: "3 tyg."
 resultLabel: "pierwsze leady"
 period: "6 tygodni"
-image: "https://picsum.photos/seed/resto-local/800/450"
+image: "https://placehold.co/800x450/050A07/2DFF5F?text=Restauracja"
 tags: ["Web Design", "Local SEO", "Rezerwacje", "GMB"]
 ---
 

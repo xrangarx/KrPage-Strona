@@ -3,7 +3,7 @@ title: "Core Web Vitals 2025 — jak osiągnąć zielone wyniki"
 description: "LCP, CLS, INP — kompleksowy przewodnik po optymalizacji Core Web Vitals dla WordPressa, Astro i niestandardowych stron."
 date: "2026-02-20"
 category: "Tech SEO"
-image: "https://picsum.photos/seed/webvitals/800/450"
+image: "https://placehold.co/800x450/050A07/2DFF5F?text=Core+Web+Vitals"
 readTime: "11 min"
 ---
 

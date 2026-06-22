@@ -3,7 +3,7 @@ title: "Link Building w 2025 — strategie które działają"
 description: "Guest posting, digital PR, broken link building i linkowanie wewnętrzne. Które strategie przynoszą najlepszy ROI w polskim SEO."
 date: "2026-03-05"
 category: "Link Building"
-image: "https://picsum.photos/seed/linkbuild25/800/450"
+image: "https://placehold.co/800x450/050A07/2DFF5F?text=Link+Building"
 readTime: "14 min"
 ---
 

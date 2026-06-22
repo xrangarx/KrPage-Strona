@@ -3,7 +3,7 @@ title: "Local SEO i Google Moja Firma — kompletny poradnik"
 description: "Jak zoptymalizować profil GMB, zdobyć recenzje i dominować w lokalnych wynikach Google Maps dla swojego biznesu."
 date: "2026-04-01"
 category: "Local SEO"
-image: "https://picsum.photos/seed/localseo25/800/450"
+image: "https://placehold.co/800x450/050A07/2DFF5F?text=Local+SEO"
 readTime: "10 min"
 ---
 

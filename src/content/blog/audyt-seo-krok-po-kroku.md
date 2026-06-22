@@ -3,7 +3,7 @@ title: "Audyt SEO krok po kroku — kompletny przewodnik 2025"
 description: "Dowiedz się jak przeprowadzić pełny audyt techniczny strony. Omawiamy Core Web Vitals, crawlowanie, indeksowanie i profil linkowy."
 date: "2026-01-15"
 category: "Tech SEO"
-image: "https://picsum.photos/seed/seoaudit/800/450"
+image: "https://placehold.co/800x450/050A07/2DFF5F?text=Audyt+SEO"
 readTime: "12 min"
 ---
 

@@ -5,7 +5,7 @@ industry: "Usługi B2B"
 result: "TOP 3"
 resultLabel: "na 47 fraz"
 period: "4 miesiące"
-image: "https://picsum.photos/seed/b2b-consult/800/450"
+image: "https://placehold.co/800x450/050A07/2DFF5F?text=B2B+SEO"
 tags: ["Topical Authority", "Content Silos", "Keyword Mapping", "Interlinking"]
 ---
 

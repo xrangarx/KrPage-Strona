@@ -5,7 +5,7 @@ industry: "E-commerce"
 result: "+318%"
 resultLabel: "ruchu organicznego"
 period: "6 miesięcy"
-image: "https://picsum.photos/seed/ecomm-seo/800/450"
+image: "https://placehold.co/800x450/050A07/2DFF5F?text=E-commerce+SEO"
 tags: ["Audyt Tech", "Architektura URL", "Link Building", "Core Web Vitals"]
 ---
 

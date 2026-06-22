@@ -5,7 +5,7 @@ industry: "Local SEO"
 result: "+520%"
 resultLabel: "widoczność Maps"
 period: "3 miesiące"
-image: "https://picsum.photos/seed/local-med/800/450"
+image: "https://placehold.co/800x450/050A07/2DFF5F?text=Local+SEO"
 tags: ["Google Moja Firma", "Local Citations", "Recenzje", "Local Content"]
 ---
 

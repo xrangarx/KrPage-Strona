@@ -3,7 +3,7 @@ title: "NLP w SEO — jak pisać treści pod algorytmy Google"
 description: "Google rozumie kontekst i semantykę. Pokazujemy jak używać NLP, LSI i encji do tworzenia treści rankujących w TOP3."
 date: "2026-03-18"
 category: "Content"
-image: "https://picsum.photos/seed/nlpcontent/800/450"
+image: "https://placehold.co/800x450/050A07/2DFF5F?text=NLP+%26+Content"
 readTime: "8 min"
 ---
 

@@ -5,7 +5,7 @@ industry: "Personal Brand"
 result: "+240%"
 resultLabel: "zapytań o współpracę"
 period: "2 miesiące"
-image: "https://picsum.photos/seed/coach-brand/800/450"
+image: "https://placehold.co/800x450/050A07/2DFF5F?text=Personal+Brand"
 tags: ["Personal Brand", "Blog", "Kursy Online", "SEO Contentowy"]
 ---
 

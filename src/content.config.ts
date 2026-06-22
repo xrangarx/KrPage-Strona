@@ -8,7 +8,7 @@ const blog = defineCollection({
     description: z.string(),
     date:        z.string(),
     category:    z.enum(['Tech SEO', 'Strategia', 'Content', 'Link Building', 'Local SEO']),
-    image:       z.string().optional().default('https://picsum.photos/seed/default/800/450'),
+    image:       z.string().optional().default('https://placehold.co/800x450/050A07/2DFF5F?text=KrPage+SEO'),
     readTime:    z.string(),
   }),
 })
@@ -22,7 +22,7 @@ const realizacje = defineCollection({
     result:      z.string(),
     resultLabel: z.string(),
     period:      z.string(),
-    image:       z.string().optional().default('https://picsum.photos/seed/default/800/450'),
+    image:       z.string().optional().default('https://placehold.co/800x450/050A07/2DFF5F?text=KrPage+SEO'),
     tags:        z.array(z.string()),
   }),
 })

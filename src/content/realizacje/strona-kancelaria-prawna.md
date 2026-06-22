@@ -5,7 +5,7 @@ industry: "Prawo"
 result: "99/100"
 resultLabel: "PageSpeed"
 period: "3 tygodnie"
-image: "https://picsum.photos/seed/law-site/800/450"
+image: "https://placehold.co/800x450/050A07/2DFF5F?text=Kancelaria"
 tags: ["Astro", "Schema.org", "Lead Gen", "PageSpeed 99"]
 ---
 
