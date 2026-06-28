@@ -8,7 +8,8 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props
-const { Content } = await render(post)
+const { Content, headings } = await render(post)
+const tocHeadings = headings.filter(h => h.depth <= 3)
 
 const allPosts = await getCollection('blog')
 const related  = allPosts
@@ -23,56 +24,137 @@ const related  = allPosts
   schemaProps={{ headline: post.data.title, datePublished: post.data.date, image: post.data.image }}
 >
 
+  <!-- Fixed top scroll progress bar -->
+  <div id="top-progress" class="fixed top-0 left-0 h-[3px] bg-neon z-50 w-0 shadow-neon-sm pointer-events-none" style="transition: width 80ms linear;"></div>
+
   <!-- Hero image -->
-  <div class="w-full h-64 md:h-96 overflow-hidden relative">
+  <div class="w-full h-56 md:h-80 overflow-hidden relative">
     <img src={post.data.image} alt={post.data.title} class="w-full h-full object-cover" />
     <div class="absolute inset-0 bg-gradient-to-t from-[#050A07] via-[#050A07]/40 to-transparent"></div>
   </div>
 
-  <article class="max-w-3xl mx-auto px-6 md:px-12 py-xl">
+  <!-- Main layout -->
+  <div class="max-w-7xl mx-auto px-6 md:px-12 py-xl">
+    <div class="flex gap-xl items-start">
 
-    <!-- Meta -->
-    <div class="flex flex-wrap items-center gap-3 mb-md">
-      <span class="text-label-sm text-neon uppercase tracking-widest border border-neon/20 px-2 py-0.5">
-        {post.data.category}
-      </span>
-      <span class="text-label-sm text-on-surface-variant">{post.data.date}</span>
-      <span class="text-label-sm text-on-surface-variant">·</span>
-      <span class="text-label-sm text-on-surface-variant">{post.data.readTime} czytania</span>
+      <!-- TOC Sidebar (desktop) -->
+      {tocHeadings.length > 0 && (
+        <aside class="hidden lg:block w-60 xl:w-72 shrink-0">
+          <div class="sticky top-24">
+
+            <p class="flex items-center gap-2 text-label-md text-neon uppercase tracking-widest mb-sm">
+              <span class="material-symbols-outlined text-base">format_list_bulleted</span>
+              Spis treści
+            </p>
+
+            <nav id="toc-nav" class="flex flex-col">
+              {tocHeadings.map(h => (
+                <a
+                  href={`#${h.slug}`}
+                  data-toc-link={h.slug}
+                  class:list={[
+                    'toc-link block py-1.5 text-[12px] border-l-2 border-outline-variant text-on-surface-variant',
+                    'hover:text-neon hover:border-neon transition-all duration-150',
+                    h.depth === 3 ? 'pl-6 text-[11px]' : 'pl-3 font-medium',
+                  ]}
+                >
+                  {h.text}
+                </a>
+              ))}
+            </nav>
+
+            <!-- Sidebar scroll progress -->
+            <div class="mt-lg pt-md border-t border-outline-variant/30">
+              <div class="flex justify-between mb-2">
+                <span class="text-[10px] text-on-surface-variant/50 uppercase tracking-widest">Postęp czytania</span>
+                <span id="progress-pct" class="text-[10px] text-neon font-semibold">0%</span>
+              </div>
+              <div class="h-1 bg-outline-variant/20 w-full rounded-full overflow-hidden">
+                <div id="sidebar-progress" class="h-full bg-neon rounded-full w-0 shadow-neon-sm" style="transition: width 80ms linear;"></div>
+              </div>
+            </div>
+
+          </div>
+        </aside>
+      )}
+
+      <!-- Article -->
+      <article class="min-w-0 flex-1 max-w-3xl">
+
+        <!-- Mobile TOC (collapsible) -->
+        {tocHeadings.length > 0 && (
+          <div class="lg:hidden bento-card p-md mb-lg">
+            <button id="toc-toggle" class="w-full flex items-center justify-between text-label-md text-neon uppercase tracking-widest">
+              <span class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-base">format_list_bulleted</span>
+                Spis treści
+              </span>
+              <span class="material-symbols-outlined text-base" id="toc-chevron" style="transition: transform 0.2s;">expand_more</span>
+            </button>
+            <nav id="toc-mobile" class="hidden flex-col gap-0.5 mt-sm">
+              {tocHeadings.map(h => (
+                <a
+                  href={`#${h.slug}`}
+                  class:list={[
+                    'block py-1 text-[12px] border-l-2 border-outline-variant text-on-surface-variant',
+                    'hover:text-neon hover:border-neon transition-colors',
+                    h.depth === 3 ? 'pl-6' : 'pl-3 font-medium',
+                  ]}
+                >
+                  {h.text}
+                </a>
+              ))}
+            </nav>
+          </div>
+        )}
+
+        <!-- Meta -->
+        <div class="flex flex-wrap items-center gap-3 mb-md">
+          <span class="text-label-sm text-neon uppercase tracking-widest border border-neon/20 px-2 py-0.5">
+            {post.data.category}
+          </span>
+          <span class="text-label-sm text-on-surface-variant">{post.data.date}</span>
+          <span class="text-label-sm text-on-surface-variant">·</span>
+          <span class="text-label-sm text-on-surface-variant">{post.data.readTime} czytania</span>
+        </div>
+
+        <!-- Title -->
+        <h1 class="text-headline-xl text-on-surface mb-lg">{post.data.title}</h1>
+
+        <!-- Content -->
+        <div class="prose prose-invert max-w-none
+                    prose-headings:text-on-surface prose-headings:font-black prose-headings:scroll-mt-28
+                    prose-h2:text-2xl prose-h2:mt-16 prose-h2:mb-5 prose-h2:pb-3 prose-h2:border-b prose-h2:border-outline-variant/40
+                    prose-h3:text-xl prose-h3:mt-10 prose-h3:mb-4 prose-h3:text-neon/80
+                    prose-p:text-on-surface-variant prose-p:leading-relaxed prose-p:mb-6 prose-p:text-base
+                    prose-li:text-on-surface-variant prose-li:leading-relaxed
+                    prose-ul:my-4 prose-ol:my-4
+                    prose-strong:text-on-surface prose-strong:font-semibold
+                    prose-a:text-neon prose-a:font-medium prose-a:no-underline hover:prose-a:underline
+                    prose-hr:border-outline-variant/30 prose-hr:my-12
+                    prose-code:text-neon prose-code:bg-surface-container prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-mono prose-code:before:content-none prose-code:after:content-none
+                    prose-pre:bg-surface-container-lowest prose-pre:border prose-pre:border-outline-variant/30 prose-pre:rounded-lg prose-pre:shadow-none
+                    prose-blockquote:border-l-2 prose-blockquote:border-neon/60 prose-blockquote:text-on-surface-variant prose-blockquote:bg-surface-container/40 prose-blockquote:px-5 prose-blockquote:py-3 prose-blockquote:rounded-r-lg prose-blockquote:not-italic prose-blockquote:my-8
+                    prose-img:rounded-lg prose-img:border prose-img:border-outline-variant/30 prose-img:shadow-neon-sm">
+          <Content />
+        </div>
+
+        <!-- CTA -->
+        <div class="mt-xl pt-xl border-t border-outline-variant/30">
+          <div class="bento-card p-lg text-center">
+            <p class="text-body-lg text-on-surface mb-md">
+              Potrzebujesz pomocy z SEO? <span class="text-neon">Pierwsza analiza bezpłatna.</span>
+            </p>
+            <a href="/kontakt"
+               class="inline-flex items-center gap-2 bg-neon text-on-primary font-bold text-label-md uppercase tracking-widest px-xl py-md hover:brightness-125 hover:shadow-neon active:scale-95 transition-all shadow-neon-sm">
+              Umów konsultację
+            </a>
+          </div>
+        </div>
+
+      </article>
     </div>
-
-    <!-- Title -->
-    <h1 class="text-headline-xl text-on-surface mb-lg">{post.data.title}</h1>
-
-    <!-- Content -->
-    <div class="prose prose-invert prose-neon max-w-none
-                prose-headings:text-on-surface prose-headings:font-black
-                prose-h2:text-headline-lg prose-h2:mt-xl prose-h2:mb-md
-                prose-h3:text-headline-md prose-h3:mt-lg prose-h3:mb-sm
-                prose-p:text-body-md prose-p:text-on-surface-variant prose-p:leading-relaxed prose-p:mb-md
-                prose-li:text-body-md prose-li:text-on-surface-variant
-                prose-strong:text-on-surface prose-strong:font-bold
-                prose-a:text-neon prose-a:no-underline hover:prose-a:underline
-                prose-hr:border-outline-variant/30
-                prose-code:text-neon prose-code:bg-surface-container prose-code:px-1.5 prose-code:py-0.5
-                prose-blockquote:border-l-neon prose-blockquote:text-on-surface-variant">
-      <Content />
-    </div>
-
-    <!-- CTA -->
-    <div class="mt-xl pt-xl border-t border-outline-variant/30">
-      <div class="bento-card p-lg text-center">
-        <p class="text-body-lg text-on-surface mb-md">
-          Potrzebujesz pomocy z SEO? <span class="text-neon">Pierwsza analiza bezpłatna.</span>
-        </p>
-        <a href="/kontakt"
-           class="inline-flex items-center gap-2 bg-neon text-on-primary font-bold text-label-md uppercase tracking-widest px-xl py-md hover:brightness-125 hover:shadow-neon active:scale-95 transition-all shadow-neon-sm">
-          Umów konsultację
-        </a>
-      </div>
-    </div>
-
-  </article>
+  </div>
 
   <!-- Related posts -->
   {related.length > 0 && (
@@ -99,5 +181,74 @@ const related  = allPosts
       </div>
     </section>
   )}
+
+  <script is:inline>
+    // === Scroll progress ===
+    function updateProgress() {
+      var scrollTop = window.scrollY || document.documentElement.scrollTop
+      var docHeight = document.documentElement.scrollHeight - window.innerHeight
+      var pct = docHeight > 0 ? Math.min(100, Math.round((scrollTop / docHeight) * 100)) : 0
+      var pctStr = pct + '%'
+      var topBar = document.getElementById('top-progress')
+      var sideBar = document.getElementById('sidebar-progress')
+      var pctLabel = document.getElementById('progress-pct')
+      if (topBar) topBar.style.width = pctStr
+      if (sideBar) sideBar.style.width = pctStr
+      if (pctLabel) pctLabel.textContent = pctStr
+    }
+    window.addEventListener('scroll', updateProgress, { passive: true })
+    updateProgress()
+
+    // === TOC active heading (IntersectionObserver) ===
+    var tocLinks = document.querySelectorAll('.toc-link')
+    if (tocLinks.length > 0) {
+      var headingEls = document.querySelectorAll('article h2[id], article h3[id]')
+
+      function setActive(slug) {
+        tocLinks.forEach(function(link) {
+          var isActive = link.getAttribute('data-toc-link') === slug
+          if (isActive) {
+            link.style.color = '#2dff5f'
+            link.style.borderLeftColor = '#2dff5f'
+            link.style.fontWeight = '700'
+          } else {
+            link.style.color = ''
+            link.style.borderLeftColor = ''
+            link.style.fontWeight = ''
+          }
+        })
+      }
+
+      if (headingEls.length > 0) {
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              setActive(entry.target.id)
+            }
+          })
+        }, { rootMargin: '-5% 0px -75% 0px', threshold: 0 })
+
+        headingEls.forEach(function(el) { observer.observe(el) })
+      }
+    }
+
+    // === Mobile TOC toggle ===
+    var tocToggle = document.getElementById('toc-toggle')
+    var tocMobile = document.getElementById('toc-mobile')
+    var tocChevron = document.getElementById('toc-chevron')
+    if (tocToggle && tocMobile) {
+      tocToggle.addEventListener('click', function() {
+        var isOpen = tocMobile.style.display === 'flex'
+        if (isOpen) {
+          tocMobile.style.display = 'none'
+          if (tocChevron) tocChevron.style.transform = 'rotate(0deg)'
+        } else {
+          tocMobile.style.display = 'flex'
+          tocMobile.style.flexDirection = 'column'
+          if (tocChevron) tocChevron.style.transform = 'rotate(180deg)'
+        }
+      })
+    }
+  </script>
 
 </BaseLayout>
