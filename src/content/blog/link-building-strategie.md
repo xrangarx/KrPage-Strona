@@ -41,7 +41,7 @@ Pisz artykuły gościnne na stronach z realnym ruchem organicznym. Sprawdź prze
 Niedoceniana strategia. Dobre linkowanie wewnętrzne:
 
 - Przekazuje autorytet do ważnych podstron
-- Pomaga Google zrozumieć hierarchię treści
+- Pomaga Google zrozumieć hierarchię treścia
 - Zmniejsza orphan pages
 
 ## ROI — co wybrać?
