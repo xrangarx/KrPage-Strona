@@ -1,5 +1,5 @@
 ---
-// Standalone admin panel — no BaseLayout, no sitemap, noindex
+// Standalone admin — noindex, no BaseLayout
 ---
 <!doctype html>
 <html lang="pl">
@@ -13,366 +13,287 @@
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#050A07;--bg2:#0D1410;--bg3:#151C17;
+      --border:rgba(45,255,95,0.12);--neon:#2DFF5F;
+      --neon10:rgba(45,255,95,0.08);--neon30:rgba(45,255,95,0.3);
+      --text:#dee4de;--muted:#7a9478;--danger:#ff4d6d;--warn:#ffc800;
+    }
+    body{font-family:'Manrope',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+    .hidden{display:none!important}
+    .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;vertical-align:middle}
 
-    :root {
-      --bg:      #050A07;
-      --bg2:     #0D1410;
-      --bg3:     #151C17;
-      --border:  rgba(45,255,95,0.12);
-      --neon:    #2DFF5F;
-      --neon10:  rgba(45,255,95,0.1);
-      --neon30:  rgba(45,255,95,0.3);
-      --text:    #dee4de;
-      --muted:   #7a9478;
-      --danger:  #ff4d6d;
-    }
+    /* LOGIN */
+    #login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center}
+    .login-box{width:100%;max-width:460px;padding:48px 40px;background:var(--bg2);border:1px solid var(--border);box-shadow:0 0 60px rgba(45,255,95,0.06)}
+    .admin-logo{display:flex;align-items:center;gap:10px;font-size:22px;font-weight:800;color:var(--neon);margin-bottom:8px}
+    .login-box>p{color:var(--muted);font-size:14px;margin-bottom:24px;line-height:1.6}
+    .login-warn{background:rgba(255,200,0,0.08);border:1px solid rgba(255,200,0,0.3);color:var(--warn);font-size:12px;padding:10px 14px;margin-bottom:16px;line-height:1.6}
+    .login-warn strong{display:block;margin-bottom:4px}
 
-    body { font-family: 'Manrope', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
-    .hidden { display: none !important; }
-    .material-symbols-outlined { font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; vertical-align: middle; }
+    /* BUTTONS */
+    .btn{display:inline-flex;align-items:center;gap:7px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;padding:10px 18px;border:none;cursor:pointer;transition:all .15s}
+    .btn-primary{background:var(--neon);color:#003010}
+    .btn-primary:hover{filter:brightness(1.15)}
+    .btn-primary:disabled{opacity:.5;cursor:not-allowed}
+    .btn-secondary{background:transparent;color:var(--muted);border:1px solid var(--border)}
+    .btn-secondary:hover{border-color:var(--neon30);color:var(--text)}
+    .btn-ghost{background:transparent;color:var(--muted);border:1px solid transparent;padding:6px 10px;font-size:12px}
+    .btn-ghost:hover{border-color:var(--border);color:var(--text)}
+    .btn-danger{background:transparent;color:var(--danger);border:1px solid rgba(255,77,109,0.2);font-size:12px;padding:6px 10px}
+    .btn-danger:hover{background:rgba(255,77,109,0.08);border-color:rgba(255,77,109,0.4)}
+    .btn-full{width:100%;justify-content:center}
 
-    /* ── Login ── */
-    #login-screen {
-      min-height: 100vh; display: flex; align-items: center; justify-content: center;
-      background: var(--bg);
+    /* INPUTS */
+    .admin-input,.admin-select,.admin-textarea{
+      width:100%;padding:10px 12px;background:var(--bg3);
+      border:1px solid var(--border);color:var(--text);
+      font-family:'Manrope',sans-serif;font-size:14px;outline:none;transition:border-color .15s
     }
-    .login-box {
-      width: 100%; max-width: 440px; padding: 48px 40px;
-      background: var(--bg2); border: 1px solid var(--border);
-      box-shadow: 0 0 60px rgba(45,255,95,0.06);
-    }
-    .admin-logo {
-      display: flex; align-items: center; gap: 10px;
-      font-size: 22px; font-weight: 800; color: var(--neon); margin-bottom: 8px;
-    }
-    .login-box p { color: var(--muted); font-size: 14px; margin-bottom: 28px; }
-    .login-box input {
-      width: 100%; padding: 12px 14px; background: var(--bg3);
-      border: 1px solid var(--border); color: var(--text);
-      font-family: 'Manrope', monospace; font-size: 14px;
-      margin-bottom: 12px; outline: none;
-    }
-    .login-box input:focus { border-color: var(--neon30); }
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--neon); color: #003010;
-      font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 800;
-      text-transform: uppercase; letter-spacing: 0.08em;
-      padding: 12px 24px; border: none; cursor: pointer; width: 100%;
-      justify-content: center; transition: filter 0.15s;
-    }
-    .btn-primary:hover { filter: brightness(1.15); }
-    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
-    .btn-secondary {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: transparent; color: var(--muted);
-      font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.06em;
-      padding: 10px 18px; border: 1px solid var(--border); cursor: pointer;
-      transition: all 0.15s;
-    }
-    .btn-secondary:hover { border-color: var(--neon30); color: var(--text); }
-    .btn-danger {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: transparent; color: var(--danger);
-      font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.06em;
-      padding: 8px 14px; border: 1px solid rgba(255,77,109,0.2); cursor: pointer;
-      transition: all 0.15s;
-    }
-    .btn-danger:hover { background: rgba(255,77,109,0.08); border-color: rgba(255,77,109,0.4); }
-    .hint { font-size: 12px; color: var(--muted); margin-top: 16px; line-height: 1.6; }
-    .hint a { color: var(--neon); }
+    .admin-input:focus,.admin-select:focus,.admin-textarea:focus{border-color:var(--neon30)}
+    .admin-select option{background:var(--bg2)}
+    .field-label{display:block;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px}
+    .field-group{display:flex;flex-direction:column}
 
-    /* ── Dashboard ── */
-    #dashboard { display: flex; flex-direction: column; min-height: 100vh; }
+    /* DASHBOARD */
+    #dashboard{display:flex;flex-direction:column;min-height:100vh}
+    .admin-header{
+      display:flex;align-items:center;gap:16px;padding:0 24px;height:56px;
+      background:var(--bg2);border-bottom:1px solid var(--border);
+      position:sticky;top:0;z-index:100
+    }
+    .header-logo{font-size:15px;font-weight:800;color:var(--neon);white-space:nowrap;display:flex;align-items:center;gap:8px}
+    .tab-nav{display:flex;gap:2px;flex:1;overflow-x:auto}
+    .tab-btn{
+      display:inline-flex;align-items:center;gap:6px;padding:8px 14px;
+      background:transparent;border:none;border-bottom:2px solid transparent;
+      color:var(--muted);font-family:'Manrope',sans-serif;font-size:12px;font-weight:700;
+      cursor:pointer;text-transform:uppercase;letter-spacing:.06em;
+      transition:all .15s;white-space:nowrap
+    }
+    .tab-btn:hover{color:var(--text)}
+    .tab-btn.active{color:var(--neon);border-bottom-color:var(--neon)}
 
-    .admin-header {
-      display: flex; align-items: center; gap: 24px;
-      padding: 0 32px; height: 60px;
-      background: var(--bg2); border-bottom: 1px solid var(--border);
-      position: sticky; top: 0; z-index: 100;
-    }
-    .admin-header .logo { font-size: 15px; font-weight: 800; color: var(--neon); white-space: nowrap; }
-    .tab-nav { display: flex; gap: 4px; flex: 1; }
-    .tab-btn {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 7px 16px; background: transparent;
-      border: none; border-bottom: 2px solid transparent;
-      color: var(--muted); font-family: 'Manrope', sans-serif;
-      font-size: 13px; font-weight: 600; cursor: pointer;
-      text-transform: uppercase; letter-spacing: 0.05em;
-      transition: all 0.15s; white-space: nowrap;
-    }
-    .tab-btn:hover { color: var(--text); }
-    .tab-btn.active { color: var(--neon); border-bottom-color: var(--neon); }
-    .logout-btn {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: none; border: 1px solid var(--border);
-      color: var(--muted); font-size: 12px; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.05em;
-      padding: 6px 14px; cursor: pointer; transition: all 0.15s; white-space: nowrap;
-    }
-    .logout-btn:hover { border-color: var(--neon30); color: var(--text); }
+    .tab-content{flex:1;padding:28px;display:none}
+    .tab-content.active{display:block}
+    .section-title{font-size:18px;font-weight:800;margin-bottom:0}
 
-    .tab-content { flex: 1; padding: 32px; display: none; }
-    .tab-content.active { display: block; }
+    /* POSTS */
+    .posts-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+    .post-card{
+      background:var(--bg2);border:1px solid var(--border);
+      padding:16px 20px;display:flex;align-items:center;gap:16px;
+      margin-bottom:10px;transition:border-color .15s
+    }
+    .post-card:hover{border-color:var(--neon30)}
+    .post-info{flex:1;min-width:0}
+    .post-title{font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:4px}
+    .post-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+    .cat-badge{display:inline-block;padding:2px 7px;border:1px solid var(--neon30);color:var(--neon);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+    .meta-text{font-size:11px;color:var(--muted)}
+    .loading{color:var(--muted);font-size:14px;display:flex;align-items:center;gap:8px;padding:16px 0}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .spin{display:inline-block;animation:spin .8s linear infinite}
 
-    /* ── Posts list ── */
-    .section-title { font-size: 20px; font-weight: 800; margin-bottom: 20px; }
-    .posts-grid { display: grid; gap: 12px; }
-    .post-card {
-      background: var(--bg2); border: 1px solid var(--border);
-      padding: 20px 24px; display: flex; align-items: center;
-      gap: 20px; transition: border-color 0.15s;
-    }
-    .post-card:hover { border-color: var(--neon30); }
-    .post-card-info { flex: 1; min-width: 0; }
-    .post-card-title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .post-card-meta { font-size: 12px; color: var(--muted); display: flex; gap: 12px; }
-    .cat-badge {
-      display: inline-block; padding: 2px 8px;
-      border: 1px solid var(--neon30); color: var(--neon);
-      font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
-    }
-    .post-actions { display: flex; gap: 8px; }
-    .loading { color: var(--muted); font-size: 14px; padding: 24px 0; display: flex; align-items: center; gap: 8px; }
-    .spin { display: inline-block; animation: spin 0.8s linear infinite; }
-    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    /* EDITOR */
+    .form-grid{display:grid;gap:12px;margin-bottom:12px}
+    .g2{grid-template-columns:1fr 1fr}
+    .g3{grid-template-columns:1fr 1fr 1fr}
+    .g1{grid-template-columns:1fr}
+    .editor-split{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0;height:calc(100vh - 430px);min-height:280px}
+    .editor-pane,.preview-pane{background:var(--bg2);border:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden}
+    .pane-label{padding:7px 14px;border-bottom:1px solid var(--border);font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+    #md-editor{flex:1;padding:14px;background:transparent;border:none;color:var(--text);font-family:'Courier New',monospace;font-size:13px;line-height:1.7;resize:none;outline:none}
+    #md-preview{flex:1;padding:16px;overflow-y:auto;font-size:14px;line-height:1.7}
+    #md-preview h1,#md-preview h2,#md-preview h3{color:var(--text);margin:1em 0 .4em;font-weight:700}
+    #md-preview h2{font-size:1.2em}
+    #md-preview h3{font-size:1.05em}
+    #md-preview p{color:#9cb89c;margin-bottom:.7em}
+    #md-preview strong{color:var(--text)}
+    #md-preview a{color:var(--neon)}
+    #md-preview code{background:var(--bg3);padding:1px 5px;font-size:.85em;color:var(--neon)}
+    #md-preview ul,#md-preview ol{padding-left:1.4em;margin-bottom:.7em;color:#9cb89c}
+    #md-preview blockquote{border-left:3px solid var(--neon30);padding-left:12px;color:var(--muted);font-style:italic}
+    .editor-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+    #save-status{font-size:13px;font-weight:600}
+    #save-status.ok{color:var(--neon)}
+    #save-status.err{color:var(--danger)}
 
-    /* ── Editor ── */
-    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
-    .form-grid.three { grid-template-columns: 1fr 1fr 1fr; }
-    .form-grid.full { grid-template-columns: 1fr; }
-    .field-group { display: flex; flex-direction: column; gap: 6px; }
-    .field-label { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
-    .admin-input, .admin-select, .admin-textarea {
-      padding: 10px 12px; background: var(--bg3);
-      border: 1px solid var(--border); color: var(--text);
-      font-family: 'Manrope', sans-serif; font-size: 14px;
-      outline: none; width: 100%; transition: border-color 0.15s;
+    /* IMAGES */
+    .img-subtabs{display:flex;gap:4px;margin-bottom:20px;border-bottom:1px solid var(--border);padding-bottom:0}
+    .img-subtab{padding:8px 16px;background:transparent;border:none;border-bottom:2px solid transparent;color:var(--muted);font-family:'Manrope',sans-serif;font-size:12px;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:.06em;transition:all .15s;margin-bottom:-1px}
+    .img-subtab:hover{color:var(--text)}
+    .img-subtab.active{color:var(--neon);border-bottom-color:var(--neon)}
+    .upload-zone{
+      border:2px dashed var(--border);padding:40px 24px;text-align:center;
+      cursor:pointer;transition:all .15s;margin-bottom:20px;
     }
-    .admin-input:focus, .admin-select:focus, .admin-textarea:focus { border-color: var(--neon30); }
-    .admin-select option { background: var(--bg2); }
+    .upload-zone:hover,.upload-zone.dragover{border-color:var(--neon30);background:var(--neon10)}
+    .upload-zone .material-symbols-outlined{font-size:36px;color:var(--muted);display:block;margin-bottom:10px}
+    .upload-zone p{color:var(--muted);font-size:14px}
+    .upload-zone p.strong{color:var(--text);font-weight:700;margin-bottom:4px}
+    .webp-toggle{display:flex;align-items:center;gap:10px;margin-bottom:16px;font-size:13px;color:var(--muted)}
+    .webp-toggle input{accent-color:var(--neon);width:16px;height:16px;cursor:pointer}
+    .webp-toggle span{cursor:pointer}
+    #upload-progress{margin-bottom:12px}
+    .prog-item{display:flex;align-items:center;gap:10px;font-size:13px;padding:8px 12px;background:var(--bg2);border:1px solid var(--border);margin-bottom:6px}
+    .prog-ok{color:var(--neon);font-weight:700}
+    .prog-err{color:var(--danger);font-weight:700}
+    .prog-url{font-family:monospace;font-size:11px;color:var(--neon);margin-left:auto;white-space:nowrap}
+    .images-count{font-size:12px;color:var(--muted);margin-bottom:14px}
+    .images-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+    .image-card{background:var(--bg2);border:1px solid var(--border);overflow:hidden;position:relative}
+    .image-card img{width:100%;height:110px;object-fit:cover;display:block}
+    .image-card-info{padding:8px 10px}
+    .image-card-name{font-size:10px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:6px}
+    .image-card-actions{display:flex;gap:4px}
+    .img-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:3px;padding:5px 6px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--muted);transition:all .15s}
+    .img-btn:hover{border-color:var(--neon30);color:var(--neon)}
+    .img-btn.copy{color:var(--neon);border-color:var(--neon30)}
+    .rename-input-wrap{display:none;padding:8px 10px;border-top:1px solid var(--border);gap:4px;flex-direction:column}
+    .rename-input-wrap.active{display:flex}
+    .rename-input-wrap input{width:100%;padding:5px 8px;background:var(--bg3);border:1px solid var(--border);color:var(--text);font-size:11px;outline:none}
+    .rename-input-wrap input:focus{border-color:var(--neon30)}
+    .rename-actions{display:flex;gap:4px}
+    .rename-confirm,.rename-cancel{flex:1;padding:4px 8px;font-size:10px;font-weight:700;text-transform:uppercase;cursor:pointer;border:none}
+    .rename-confirm{background:var(--neon);color:#003010}
+    .rename-cancel{background:var(--bg3);color:var(--muted);border:1px solid var(--border)}
 
-    .editor-split {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
-      margin: 16px 0; height: calc(100vh - 420px); min-height: 320px;
+    /* INSPECTOR */
+    .inspector-box{max-width:680px}
+    .inspector-box h2{font-size:20px;font-weight:800;margin-bottom:10px}
+    .inspector-box>p{color:var(--muted);font-size:14px;line-height:1.7;margin-bottom:24px}
+    .bookmarklet-link{
+      display:inline-flex;align-items:center;gap:8px;
+      background:var(--neon);color:#003010;font-size:14px;font-weight:800;
+      padding:12px 20px;text-decoration:none;cursor:grab;letter-spacing:.02em
     }
-    .editor-pane, .preview-pane {
-      background: var(--bg2); border: 1px solid var(--border);
-      display: flex; flex-direction: column; overflow: hidden;
-    }
-    .pane-label {
-      padding: 8px 14px; border-bottom: 1px solid var(--border);
-      font-size: 11px; font-weight: 700; color: var(--muted);
-      text-transform: uppercase; letter-spacing: 0.08em;
-    }
-    #md-editor {
-      flex: 1; padding: 16px; background: transparent;
-      border: none; color: var(--text); font-family: 'Courier New', monospace;
-      font-size: 14px; line-height: 1.7; resize: none; outline: none;
-    }
-    #md-preview {
-      flex: 1; padding: 16px; overflow-y: auto; font-size: 15px; line-height: 1.7;
-    }
-    #md-preview h1,#md-preview h2,#md-preview h3 { color: var(--text); margin: 1em 0 0.5em; font-weight: 700; }
-    #md-preview h2 { font-size: 1.3em; }
-    #md-preview h3 { font-size: 1.1em; }
-    #md-preview p { color: #9cb89c; margin-bottom: 0.8em; }
-    #md-preview strong { color: var(--text); }
-    #md-preview a { color: var(--neon); }
-    #md-preview code { background: var(--bg3); padding: 2px 6px; font-size: 0.85em; color: var(--neon); }
-    #md-preview ul,#md-preview ol { padding-left: 1.5em; margin-bottom: 0.8em; color: #9cb89c; }
-    #md-preview blockquote { border-left: 3px solid var(--neon30); padding-left: 12px; color: var(--muted); font-style: italic; }
+    .drag-hint{font-size:12px;color:var(--muted);margin-top:8px;margin-bottom:24px}
+    .steps{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+    .steps li{display:flex;gap:14px;background:var(--bg2);border:1px solid var(--border);padding:12px 14px}
+    .step-n{color:var(--neon);font-weight:800;font-size:17px;min-width:20px}
+    .step-t{font-size:13px;color:var(--muted);line-height:1.5}
+    .step-t strong{color:var(--text)}
+    .ex-box{background:var(--bg3);border:1px solid var(--border);border-left:3px solid var(--neon);padding:14px 18px}
+    .ex-box p{font-size:12px;color:var(--muted);margin-bottom:6px}
+    .ex-box code{font-family:'Courier New',monospace;font-size:12px;color:var(--neon)}
 
-    .editor-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-    #save-status {
-      font-size: 13px; font-weight: 600; padding: 4px 0;
+    /* TOAST */
+    #toast{
+      position:fixed;bottom:20px;right:20px;z-index:9999;
+      background:var(--bg2);border:1px solid var(--neon30);color:var(--neon);
+      padding:10px 18px;font-size:13px;font-weight:600;display:none;
+      align-items:center;gap:8px;box-shadow:0 0 20px rgba(45,255,95,0.15);
+      animation:slideIn .2s ease
     }
-    #save-status.ok { color: var(--neon); }
-    #save-status.err { color: var(--danger); }
+    @keyframes slideIn{from{transform:translateY(8px);opacity:0}to{transform:translateY(0);opacity:1}}
+    #toast.err{border-color:rgba(255,77,109,.4);color:var(--danger)}
+    #toast.warn{border-color:rgba(255,200,0,.4);color:var(--warn)}
 
-    /* ── Images ── */
-    .upload-zone {
-      border: 2px dashed var(--border); padding: 48px 32px;
-      text-align: center; cursor: pointer; transition: all 0.15s;
-      margin-bottom: 24px;
+    @media(max-width:900px){
+      .editor-split{grid-template-columns:1fr;height:auto}
+      .preview-pane{display:none}
+      .g3{grid-template-columns:1fr 1fr}
     }
-    .upload-zone:hover, .upload-zone.dragover { border-color: var(--neon30); background: var(--neon10); }
-    .upload-zone .material-symbols-outlined { font-size: 40px; color: var(--muted); display: block; margin-bottom: 12px; }
-    .upload-zone p { color: var(--muted); font-size: 14px; }
-    #upload-progress { margin-bottom: 16px; }
-    .progress-item { display: flex; align-items: center; gap: 10px; font-size: 13px; padding: 8px 12px; background: var(--bg2); border: 1px solid var(--border); margin-bottom: 8px; }
-    .progress-item .status { color: var(--neon); font-weight: 700; }
-    .progress-item .status.err { color: var(--danger); }
-    .images-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
-    .image-card { background: var(--bg2); border: 1px solid var(--border); overflow: hidden; }
-    .image-card img { width: 100%; height: 120px; object-fit: cover; display: block; }
-    .image-card-info { padding: 10px 12px; }
-    .image-card-name { font-size: 11px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 6px; }
-    .copy-url-btn {
-      display: flex; align-items: center; gap: 4px; width: 100%;
-      background: var(--neon10); border: 1px solid var(--neon30); color: var(--neon);
-      font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
-      padding: 5px 10px; cursor: pointer; transition: all 0.15s;
-    }
-    .copy-url-btn:hover { background: var(--neon30); }
-
-    /* ── Inspector ── */
-    .inspector-box { max-width: 700px; }
-    .inspector-box h2 { font-size: 22px; font-weight: 800; margin-bottom: 12px; }
-    .inspector-box > p { color: var(--muted); font-size: 15px; line-height: 1.7; margin-bottom: 28px; }
-    .bookmarklet-link {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--neon); color: #003010;
-      font-size: 14px; font-weight: 800; padding: 12px 20px;
-      text-decoration: none; cursor: grab; border: none; letter-spacing: 0.02em;
-      transition: filter 0.15s;
-    }
-    .bookmarklet-link:hover { filter: brightness(1.15); }
-    .drag-hint { font-size: 13px; color: var(--muted); margin-top: 10px; margin-bottom: 28px; }
-    .inspector-steps { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
-    .inspector-steps li {
-      display: flex; gap: 14px; align-items: flex-start;
-      background: var(--bg2); border: 1px solid var(--border); padding: 14px 16px;
-    }
-    .step-num { color: var(--neon); font-weight: 800; font-size: 18px; min-width: 24px; }
-    .step-text { font-size: 14px; color: var(--muted); line-height: 1.5; }
-    .step-text strong { color: var(--text); }
-    .example-box { background: var(--bg3); border: 1px solid var(--border); border-left: 3px solid var(--neon); padding: 16px 20px; }
-    .example-box p { font-size: 13px; color: var(--muted); margin-bottom: 8px; }
-    .example-box code { font-family: 'Courier New', monospace; font-size: 13px; color: var(--neon); }
-
-    /* ── Toast ── */
-    #toast {
-      position: fixed; bottom: 24px; right: 24px; z-index: 9999;
-      background: var(--bg2); border: 1px solid var(--neon30); color: var(--neon);
-      padding: 12px 20px; font-size: 13px; font-weight: 600;
-      display: none; align-items: center; gap: 8px;
-      box-shadow: 0 0 20px rgba(45,255,95,0.15);
-      animation: slideIn 0.2s ease;
-    }
-    @keyframes slideIn { from { transform: translateY(12px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-    #toast.err { border-color: rgba(255,77,109,0.4); color: var(--danger); }
-
-    /* Responsive */
-    @media (max-width: 900px) {
-      .editor-split { grid-template-columns: 1fr; height: auto; }
-      .preview-pane { display: none; }
-      .form-grid.three { grid-template-columns: 1fr 1fr; }
-    }
-    @media (max-width: 600px) {
-      .admin-header { padding: 0 16px; gap: 12px; }
-      .tab-content { padding: 16px; }
-      .form-grid, .form-grid.three { grid-template-columns: 1fr; }
+    @media(max-width:600px){
+      .tab-content{padding:14px}
+      .g2,.g3{grid-template-columns:1fr}
     }
   </style>
 </head>
 <body>
 
-<!-- ═══ LOGIN ═══ -->
+<!-- LOGIN -->
 <section id="login-screen">
   <div class="login-box">
     <div class="admin-logo">
       <span class="material-symbols-outlined">terminal</span>
       KrPage Admin
     </div>
-    <p>Panel zarządzania treściami. Zaloguj się swoim GitHub Personal Access Token.</p>
-    <input type="password" id="pat-input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" autocomplete="current-password" />
-    <button class="btn-primary" id="login-btn">
-      <span class="material-symbols-outlined">lock_open</span>
+    <p>Panel zarządzania treściami. Zaloguj się GitHub Personal Access Token z uprawnieniami do zapisu.</p>
+    <div class="login-warn">
+      <strong>⚠ Wymagany token z uprawnieniami do zapisu</strong>
+      GitHub → Settings → Developer settings → Personal access tokens → Fine-grained →
+      repo: KrPage-Strona → <strong>Contents: Read & write</strong> + Metadata: Read
+    </div>
+    <input class="admin-input" type="password" id="pat-input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" autocomplete="current-password" style="margin-bottom:10px" />
+    <button class="btn btn-primary btn-full" id="login-btn">
+      <span class="material-symbols-outlined" style="font-size:16px">lock_open</span>
       <span id="login-label">Zaloguj</span>
     </button>
-    <p class="hint">
-      Token wygenerujesz na:
-      <a href="https://github.com/settings/tokens?type=beta" target="_blank">GitHub → Settings → Developer settings → Fine-grained tokens</a>.
-      Wymagane uprawnienia: <strong>Contents (Read &amp; write)</strong> + <strong>Metadata (Read)</strong>.
-    </p>
   </div>
 </section>
 
-<!-- ═══ DASHBOARD ═══ -->
+<!-- DASHBOARD -->
 <div id="dashboard" class="hidden">
   <header class="admin-header">
-    <div class="logo">
-      <span class="material-symbols-outlined" style="font-size:18px">terminal</span>
-      KrPage
+    <div class="header-logo">
+      <span class="material-symbols-outlined" style="font-size:16px">terminal</span>KrPage
     </div>
     <nav class="tab-nav">
       <button class="tab-btn active" data-tab="posts">
-        <span class="material-symbols-outlined" style="font-size:16px">article</span>
-        Wpisy
+        <span class="material-symbols-outlined" style="font-size:15px">article</span>Wpisy
       </button>
       <button class="tab-btn" data-tab="editor">
-        <span class="material-symbols-outlined" style="font-size:16px">edit_note</span>
-        Nowy wpis
+        <span class="material-symbols-outlined" style="font-size:15px">edit_note</span>Nowy wpis
       </button>
       <button class="tab-btn" data-tab="images">
-        <span class="material-symbols-outlined" style="font-size:16px">photo_library</span>
-        Zdjęcia
+        <span class="material-symbols-outlined" style="font-size:15px">photo_library</span>Zdjęcia
       </button>
       <button class="tab-btn" data-tab="inspector">
-        <span class="material-symbols-outlined" style="font-size:16px">search</span>
-        Inspektor
+        <span class="material-symbols-outlined" style="font-size:15px">search</span>Inspektor
       </button>
     </nav>
-    <button class="logout-btn" id="logout-btn">
-      <span class="material-symbols-outlined" style="font-size:14px">logout</span>
-      Wyloguj
+    <button class="btn btn-ghost" id="logout-btn" style="margin-left:auto;white-space:nowrap">
+      <span class="material-symbols-outlined" style="font-size:13px">logout</span>Wyloguj
     </button>
   </header>
 
-  <!-- Tab: Posts list -->
+  <!-- WPISY -->
   <div id="tab-posts" class="tab-content active">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+    <div class="posts-header">
       <p class="section-title">Wpisy blogowe</p>
-      <button class="btn-primary" style="width:auto" onclick="openNewPost()">
-        <span class="material-symbols-outlined" style="font-size:16px">add</span>
-        Nowy wpis
+      <button class="btn btn-primary" id="btn-new-post" style="font-size:12px">
+        <span class="material-symbols-outlined" style="font-size:15px">add</span>Nowy wpis
       </button>
     </div>
     <div id="posts-loading" class="loading">
-      <span class="material-symbols-outlined spin">progress_activity</span>
-      Ładowanie wpisów z GitHub...
+      <span class="material-symbols-outlined spin">progress_activity</span>Ładowanie z GitHub...
     </div>
-    <div id="posts-grid" class="posts-grid"></div>
+    <div id="posts-grid"></div>
   </div>
 
-  <!-- Tab: Editor -->
+  <!-- EDYTOR -->
   <div id="tab-editor" class="tab-content">
-    <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">
       <p class="section-title" id="editor-title">Nowy wpis</p>
-      <span id="editing-badge" class="cat-badge hidden" style="border-color:rgba(255,200,0,0.4);color:#ffc800">Edycja</span>
+      <span id="editing-badge" class="cat-badge hidden" style="border-color:rgba(255,200,0,.4);color:var(--warn)">Edycja</span>
     </div>
 
-    <div class="form-grid">
+    <div class="form-grid g2">
       <div class="field-group">
         <label class="field-label">Tytuł *</label>
-        <input class="admin-input" id="f-title" placeholder="np. Jak przeprowadzić audyt SEO" oninput="autoSlug()" />
+        <input class="admin-input" id="f-title" placeholder="np. Jak przeprowadzić audyt SEO w 2025" />
       </div>
       <div class="field-group">
-        <label class="field-label">Slug (URL)</label>
-        <input class="admin-input" id="f-slug" placeholder="auto-generowany z tytułu" />
+        <label class="field-label">Slug (URL) — auto z tytułu</label>
+        <input class="admin-input" id="f-slug" placeholder="audyt-seo-2025" />
       </div>
     </div>
-    <div class="form-grid full">
+    <div class="form-grid g1">
       <div class="field-group">
         <label class="field-label">Opis SEO (meta description) *</label>
-        <input class="admin-input" id="f-description" placeholder="Krótki opis widoczny w Google (120–160 znaków)" />
+        <input class="admin-input" id="f-description" placeholder="Krótki opis widoczny w Google — 120–160 znaków" />
       </div>
     </div>
-    <div class="form-grid three">
+    <div class="form-grid g3">
       <div class="field-group">
         <label class="field-label">Kategoria *</label>
         <select class="admin-select" id="f-category">
           <option value="">Wybierz...</option>
-          <option>Tech SEO</option>
-          <option>Strategia</option>
-          <option>Content</option>
-          <option>Link Building</option>
-          <option>Local SEO</option>
+          <option>Tech SEO</option><option>Strategia</option>
+          <option>Content</option><option>Link Building</option><option>Local SEO</option>
         </select>
       </div>
       <div class="field-group">
@@ -384,17 +305,17 @@
         <input class="admin-input" id="f-readtime" placeholder="np. 7 min" />
       </div>
     </div>
-    <div class="form-grid full">
+    <div class="form-grid g1">
       <div class="field-group">
-        <label class="field-label">URL zdjęcia okładkowego</label>
-        <input class="admin-input" id="f-image" placeholder="https://... (wgraj w zakładce Zdjęcia, potem wklej URL)" />
+        <label class="field-label">URL zdjęcia okładkowego (wgraj w zakładce Zdjęcia → kopiuj URL)</label>
+        <input class="admin-input" id="f-image" placeholder="https://... lub /images/blog/..." />
       </div>
     </div>
 
     <div class="editor-split">
       <div class="editor-pane">
         <div class="pane-label">✏️ Markdown</div>
-        <textarea id="md-editor" placeholder="# Nagłówek H1&#10;&#10;Treść wpisu...&#10;&#10;## Sekcja&#10;&#10;Tekst z **pogrubieniem** i [linkiem](https://...)"></textarea>
+        <textarea id="md-editor" placeholder="# Nagłówek&#10;&#10;Treść wpisu...&#10;&#10;## Sekcja&#10;&#10;Tekst z **pogrubieniem** i [linkiem](https://...)"></textarea>
       </div>
       <div class="preview-pane">
         <div class="pane-label">👁 Podgląd live</div>
@@ -403,555 +324,644 @@
     </div>
 
     <div class="editor-actions">
-      <button class="btn-secondary hidden" id="cancel-edit-btn" onclick="cancelEdit()">
-        <span class="material-symbols-outlined" style="font-size:15px">close</span>
-        Anuluj
+      <button class="btn btn-secondary hidden" id="cancel-edit-btn">
+        <span class="material-symbols-outlined" style="font-size:14px">close</span>Anuluj
       </button>
-      <button class="btn-primary" style="width:auto;min-width:180px" id="save-btn" onclick="savePost()">
-        <span class="material-symbols-outlined" style="font-size:16px">rocket_launch</span>
+      <button class="btn btn-primary" id="save-btn" style="min-width:170px">
+        <span class="material-symbols-outlined" style="font-size:15px">rocket_launch</span>
         <span id="save-label">Opublikuj</span>
       </button>
       <span id="save-status"></span>
     </div>
   </div>
 
-  <!-- Tab: Images -->
+  <!-- ZDJĘCIA -->
   <div id="tab-images" class="tab-content">
-    <p class="section-title" style="margin-bottom:20px">Zdjęcia</p>
-    <div class="upload-zone" id="upload-zone">
-      <input type="file" id="file-input" accept="image/*" multiple style="display:none" />
-      <span class="material-symbols-outlined">cloud_upload</span>
-      <p style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px">Przeciągnij zdjęcia tutaj lub kliknij</p>
-      <p>JPEG, PNG, WebP, GIF — max 5MB na plik</p>
+    <p class="section-title" style="margin-bottom:18px">Zdjęcia</p>
+
+    <div class="img-subtabs">
+      <button class="img-subtab active" data-folder="blog">📁 Blog (/images/blog/)</button>
+      <button class="img-subtab" data-folder="site">📁 Podstrony (/images/)</button>
     </div>
+
+    <div id="upload-section">
+      <div class="upload-zone" id="upload-zone">
+        <input type="file" id="file-input" accept="image/*" multiple style="display:none" />
+        <span class="material-symbols-outlined">cloud_upload</span>
+        <p class="strong">Przeciągnij zdjęcia tutaj lub kliknij</p>
+        <p>JPEG, PNG, WebP, GIF — max 5MB na plik</p>
+      </div>
+      <div class="webp-toggle">
+        <input type="checkbox" id="webp-toggle" checked />
+        <span onclick="document.getElementById('webp-toggle').click()">
+          Automatycznie konwertuj na <strong>WebP</strong> (mniejszy plik, lepsza wydajność)
+        </span>
+      </div>
+    </div>
+
     <div id="upload-progress"></div>
-    <div style="color:var(--muted);font-size:13px;margin-bottom:16px" id="images-count"></div>
+    <div class="images-count" id="images-count"></div>
     <div class="images-grid" id="images-grid"></div>
   </div>
 
-  <!-- Tab: Inspector -->
+  <!-- INSPEKTOR -->
   <div id="tab-inspector" class="tab-content">
     <div class="inspector-box">
       <h2>🔍 Inspektor elementów</h2>
-      <p>Przeciągnij poniższy przycisk na pasek zakładek. Na stronie kliknij go żeby włączyć tryb inspekcji — najedź na dowolny element, kliknij i gotowy opis trafi do schowka. Wklej go tutaj do Claude Code z opisem co chcesz zmienić.</p>
-
+      <p>Przeciągnij poniższy przycisk na pasek zakładek. Na żywej stronie kliknij go — wejdziesz w tryb inspekcji. Kliknij dowolny element i opis trafi do schowka. Wklej go tutaj do Claude Code z opisem co chcesz zmienić.</p>
       <a id="bookmarklet-link" href="#" class="bookmarklet-link">
-        <span class="material-symbols-outlined" style="font-size:16px">search</span>
-        KrPage Inspector
+        <span class="material-symbols-outlined" style="font-size:15px">search</span>KrPage Inspector
       </a>
-      <p class="drag-hint">↑ Przeciągnij ten przycisk na pasek zakładek przeglądarki</p>
-
-      <ul class="inspector-steps">
-        <li>
-          <span class="step-num">1</span>
-          <span class="step-text">Przeciągnij przycisk <strong>KrPage Inspector</strong> na pasek zakładek (jeden raz)</span>
-        </li>
-        <li>
-          <span class="step-num">2</span>
-          <span class="step-text">Wejdź na <strong>krpage.pl</strong> i kliknij zakładkę Inspector — elementy zaczną się podświetlać</span>
-        </li>
-        <li>
-          <span class="step-num">3</span>
-          <span class="step-text">Kliknij element który chcesz zmienić — opis trafi do <strong>schowka</strong></span>
-        </li>
-        <li>
-          <span class="step-num">4</span>
-          <span class="step-text">Wklej do Claude Code i opisz co ma być inaczej, np. <em>"zmień kolor tego przycisku na biały"</em></span>
-        </li>
+      <p class="drag-hint">↑ Przeciągnij ten przycisk na pasek zakładek (jednorazowo)</p>
+      <ul class="steps">
+        <li><span class="step-n">1</span><span class="step-t">Przeciągnij <strong>KrPage Inspector</strong> na pasek zakładek</span></li>
+        <li><span class="step-n">2</span><span class="step-t">Wejdź na <strong>krpage.pl</strong> i kliknij zakładkę — elementy podświetlają się zielono</span></li>
+        <li><span class="step-n">3</span><span class="step-t">Kliknij element który chcesz zmienić → opis trafi do <strong>schowka</strong></span></li>
+        <li><span class="step-n">4</span><span class="step-t">Wklej do Claude Code i napisz co ma być inaczej, np. <em>"zmień kolor tła tego elementu"</em></span></li>
       </ul>
-
-      <div class="example-box">
-        <p>Przykładowy opis który trafi do schowka po kliknięciu:</p>
+      <div class="ex-box">
+        <p>Przykład co trafi do schowka:</p>
         <code>button.job-detail-btn | sekcja: "Doświadczenie zawodowe"</code>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Toast notification -->
 <div id="toast"></div>
 
-<script>
-  /* ══════════════════════════════════════════
-     CONFIG
-  ══════════════════════════════════════════ */
-  const OWNER  = 'xrangarx'
-  const REPO   = 'KrPage-Strona'
-  const BRANCH = 'main'
-  const BLOG   = 'src/content/blog'
-  const IMGS   = 'public/images/blog'
+<!-- is:inline prevents Astro from treating this as ESM module — functions stay global -->
+<script is:inline>
+/* ══════════════════════════════════════════
+   CONFIG
+══════════════════════════════════════════ */
+var OWNER  = 'xrangarx'
+var REPO   = 'KrPage-Strona'
+var BRANCH = 'main'
+var BLOG   = 'src/content/blog'
+var REAL   = 'src/content/realizacje'
+var IMG_BLOG = 'public/images/blog'
+var IMG_SITE = 'public/images'
 
-  let token = ''
-  let editingFile = null  // { path, sha } during edit
+var token = ''
+var editingFile = null  // {path, sha}
+var currentImgFolder = 'blog'
 
-  /* ── Utils ── */
-  function b64enc(str) {
-    const bytes = new TextEncoder().encode(str)
-    let bin = ''
-    bytes.forEach(b => bin += String.fromCharCode(b))
-    return btoa(bin)
-  }
-  function b64dec(b64) {
-    const bin = atob(b64.replace(/\s/g, ''))
-    const bytes = new Uint8Array(bin.length)
-    for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i)
-    return new TextDecoder().decode(bytes)
-  }
-  function imgToB64(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader()
-      reader.onload = e => {
-        const dataUrl = e.target.result
-        const b64 = dataUrl.split(',')[1]
-        resolve(b64)
-      }
-      reader.onerror = reject
-      reader.readAsDataURL(file)
-    })
-  }
-  function slugify(str) {
-    return str.toLowerCase()
-      .replace(/ą/g,'a').replace(/ć/g,'c').replace(/ę/g,'e').replace(/ł/g,'l')
-      .replace(/ń/g,'n').replace(/ó/g,'o').replace(/ś/g,'s').replace(/ź/g,'z').replace(/ż/g,'z')
-      .replace(/[^a-z0-9\s-]/g,'').replace(/\s+/g,'-').replace(/-+/g,'-').slice(0,64)
-  }
-  function toast(msg, isErr = false) {
-    const t = document.getElementById('toast')
-    t.textContent = msg
-    t.className = isErr ? 'err' : ''
-    t.style.display = 'flex'
-    setTimeout(() => { t.style.display = 'none' }, 3000)
-  }
-  function today() {
-    return new Date().toISOString().slice(0,10)
-  }
+/* ══════════════════════════════════════════
+   UTILS
+══════════════════════════════════════════ */
+function b64enc(str) {
+  var bytes = new TextEncoder().encode(str)
+  var bin = ''
+  bytes.forEach(function(b){ bin += String.fromCharCode(b) })
+  return btoa(bin)
+}
+function b64dec(b64) {
+  var bin = atob(b64.replace(/\s/g,''))
+  var bytes = new Uint8Array(bin.length)
+  for (var i=0;i<bin.length;i++) bytes[i]=bin.charCodeAt(i)
+  return new TextDecoder().decode(bytes)
+}
+function slugify(s) {
+  return s.toLowerCase()
+    .replace(/ą/g,'a').replace(/ć/g,'c').replace(/ę/g,'e').replace(/ł/g,'l')
+    .replace(/ń/g,'n').replace(/ó/g,'o').replace(/ś/g,'s')
+    .replace(/ź/g,'z').replace(/ż/g,'z')
+    .replace(/[^a-z0-9\s-]/g,'').replace(/\s+/g,'-').replace(/-+/g,'-').slice(0,60)
+}
+function today() {
+  return new Date().toISOString().slice(0,10)
+}
+function toast(msg, type) {
+  var t = document.getElementById('toast')
+  t.textContent = msg
+  t.className = type||''
+  t.style.display = 'flex'
+  clearTimeout(t._timer)
+  t._timer = setTimeout(function(){ t.style.display='none' }, 3500)
+}
+function qs(sel){ return document.querySelector(sel) }
+function qsa(sel){ return document.querySelectorAll(sel) }
 
-  /* ── GitHub API ── */
-  async function gh(path, opts = {}) {
-    const res = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`, {
-      headers: {
-        Authorization: `token ${token}`,
-        Accept: 'application/vnd.github+json',
-        ...(opts.headers || {})
-      },
-      ...opts
-    })
-    return res
-  }
-  async function ghList(path) {
-    const r = await gh(path)
-    if (!r.ok) throw new Error(`HTTP ${r.status}`)
-    return r.json()
-  }
-  async function ghGet(path) {
-    const r = await gh(path)
-    if (!r.ok) throw new Error(`HTTP ${r.status}`)
-    const d = await r.json()
-    return { content: b64dec(d.content), sha: d.sha, path: d.path }
-  }
-  async function ghPut(path, content, sha, message) {
-    const body = { message, content: b64enc(content), branch: BRANCH }
-    if (sha) body.sha = sha
-    const r = await gh(path, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
-    })
-    const d = await r.json()
-    if (!r.ok) throw new Error(d.message || `HTTP ${r.status}`)
-    return d
-  }
-  async function ghPutBin(path, b64content, sha, message) {
-    const body = { message, content: b64content, branch: BRANCH }
-    if (sha) body.sha = sha
-    const r = await gh(path, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
-    })
-    const d = await r.json()
-    if (!r.ok) throw new Error(d.message || `HTTP ${r.status}`)
-    return d
-  }
+/* ══════════════════════════════════════════
+   GITHUB API
+══════════════════════════════════════════ */
+function ghHeaders(extra) {
+  return Object.assign({ Authorization:'token '+token, Accept:'application/vnd.github+json' }, extra||{})
+}
+function ghUrl(path) {
+  return 'https://api.github.com/repos/'+OWNER+'/'+REPO+'/contents/'+path
+}
 
-  /* ── Frontmatter ── */
-  function buildMd({ title, description, date, category, image, readTime, body }) {
-    const img = image || `https://placehold.co/800x450/050A07/2DFF5F?text=${encodeURIComponent(category)}`
-    return `---
-title: "${title.replace(/"/g,'\\"')}"
-description: "${description.replace(/"/g,'\\"')}"
-date: "${date}"
-category: "${category}"
-image: "${img}"
-readTime: "${readTime}"
----
-
-${body}`
-  }
-  function parseMd(raw) {
-    const m = raw.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/)
-    if (!m) return { body: raw }
-    const fm = {}
-    m[1].split('\n').forEach(line => {
-      const idx = line.indexOf(':')
-      if (idx < 0) return
-      const k = line.slice(0,idx).trim()
-      fm[k] = line.slice(idx+1).trim().replace(/^"(.*)"$/,'$1')
-    })
-    fm.body = m[2].trim()
-    return fm
-  }
-
-  /* ══════════════════════════════════════════
-     LOGIN
-  ══════════════════════════════════════════ */
-  document.getElementById('login-btn').addEventListener('click', async () => {
-    const input = document.getElementById('pat-input').value.trim()
-    if (!input) return
-    const btn = document.getElementById('login-btn')
-    document.getElementById('login-label').textContent = 'Sprawdzam...'
-    btn.disabled = true
-    try {
-      const r = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}`, {
-        headers: { Authorization: `token ${input}` }
-      })
-      if (!r.ok) throw new Error('Nieprawidłowy token')
-      token = input
-      sessionStorage.setItem('krpage_pat', token)
-      showDashboard()
-    } catch (e) {
-      document.getElementById('login-label').textContent = 'Zaloguj'
-      btn.disabled = false
-      toast('Błąd: ' + e.message, true)
-    }
+async function ghList(path) {
+  var r = await fetch(ghUrl(path), { headers: ghHeaders() })
+  if (r.status===404) return []
+  if (!r.ok) { var d=await r.json(); throw new Error(d.message||'HTTP '+r.status) }
+  return r.json()
+}
+async function ghGet(path) {
+  var r = await fetch(ghUrl(path), { headers: ghHeaders() })
+  if (!r.ok) { var d=await r.json(); throw new Error(d.message||'HTTP '+r.status) }
+  var d = await r.json()
+  return { content: b64dec(d.content), sha: d.sha, path: d.path, rawB64: d.content.replace(/\s/g,'') }
+}
+async function ghPut(path, content, sha, msg) {
+  var body = { message: msg, content: b64enc(content), branch: BRANCH }
+  if (sha) body.sha = sha
+  var r = await fetch(ghUrl(path), {
+    method:'PUT', headers: ghHeaders({'Content-Type':'application/json'}),
+    body: JSON.stringify(body)
   })
-  document.getElementById('pat-input').addEventListener('keydown', e => {
-    if (e.key === 'Enter') document.getElementById('login-btn').click()
+  var d = await r.json()
+  if (!r.ok) throw new Error(d.message||'HTTP '+r.status)
+  return d
+}
+async function ghPutBin(path, rawB64, sha, msg) {
+  var body = { message: msg, content: rawB64, branch: BRANCH }
+  if (sha) body.sha = sha
+  var r = await fetch(ghUrl(path), {
+    method:'PUT', headers: ghHeaders({'Content-Type':'application/json'}),
+    body: JSON.stringify(body)
   })
-  document.getElementById('logout-btn').addEventListener('click', () => {
-    sessionStorage.removeItem('krpage_pat')
-    token = ''
-    document.getElementById('dashboard').classList.add('hidden')
-    document.getElementById('login-screen').style.display = 'flex'
+  var d = await r.json()
+  if (!r.ok) throw new Error(d.message||'HTTP '+r.status)
+  return d
+}
+async function ghDelete(path, sha, msg) {
+  var r = await fetch(ghUrl(path), {
+    method:'DELETE', headers: ghHeaders({'Content-Type':'application/json'}),
+    body: JSON.stringify({ message: msg, sha: sha, branch: BRANCH })
   })
+  if (!r.ok) { var d=await r.json(); throw new Error(d.message||'HTTP '+r.status) }
+}
 
-  /* ── Auto-login ── */
-  const saved = sessionStorage.getItem('krpage_pat')
-  if (saved) {
-    token = saved
-    document.getElementById('login-screen').style.display = 'none'
+/* ══════════════════════════════════════════
+   FRONTMATTER
+══════════════════════════════════════════ */
+function buildMd(f) {
+  var img = f.image || ('https://placehold.co/800x450/050A07/2DFF5F?text='+encodeURIComponent(f.category))
+  return '---\ntitle: "'+f.title.replace(/"/g,'\\"')+'"\ndescription: "'+f.description.replace(/"/g,'\\"')+'"\ndate: "'+f.date+'"\ncategory: "'+f.category+'"\nimage: "'+img+'"\nreadTime: "'+f.readTime+'"\n---\n\n'+f.body
+}
+function parseMd(raw) {
+  var m = raw.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/)
+  if (!m) return { body: raw }
+  var fm = {}
+  m[1].split('\n').forEach(function(line){
+    var idx = line.indexOf(':')
+    if (idx<0) return
+    fm[line.slice(0,idx).trim()] = line.slice(idx+1).trim().replace(/^"(.*)"$/,'$1')
+  })
+  fm.body = m[2].trim()
+  return fm
+}
+
+/* ══════════════════════════════════════════
+   LOGIN
+══════════════════════════════════════════ */
+document.getElementById('login-btn').addEventListener('click', async function() {
+  var inp = document.getElementById('pat-input').value.trim()
+  if (!inp) return
+  document.getElementById('login-label').textContent = 'Sprawdzam...'
+  this.disabled = true
+  try {
+    // Test read
+    var r = await fetch('https://api.github.com/repos/'+OWNER+'/'+REPO, {
+      headers: { Authorization:'token '+inp }
+    })
+    if (!r.ok) throw new Error('Nieprawidłowy token lub brak dostępu do repozytorium')
+    // Test write by getting a file (actual write test would modify repo)
+    token = inp
+    sessionStorage.setItem('krpage_pat', token)
     showDashboard()
+  } catch(e) {
+    document.getElementById('login-label').textContent = 'Zaloguj'
+    this.disabled = false
+    toast('❌ '+e.message, 'err')
   }
+})
+document.getElementById('pat-input').addEventListener('keydown', function(e){
+  if (e.key==='Enter') document.getElementById('login-btn').click()
+})
+document.getElementById('logout-btn').addEventListener('click', function(){
+  sessionStorage.removeItem('krpage_pat')
+  token = ''
+  document.getElementById('dashboard').classList.add('hidden')
+  document.getElementById('login-screen').style.display = 'flex'
+})
 
-  function showDashboard() {
-    document.getElementById('login-screen').style.display = 'none'
-    document.getElementById('dashboard').classList.remove('hidden')
-    loadPosts()
-    loadImages()
-    initBookmarklet()
-    document.getElementById('f-date').value = today()
-  }
+// Auto-login
+;(function(){
+  var saved = sessionStorage.getItem('krpage_pat')
+  if (saved) { token=saved; document.getElementById('login-screen').style.display='none'; showDashboard() }
+})()
 
-  /* ══════════════════════════════════════════
-     TABS
-  ══════════════════════════════════════════ */
-  document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const tab = btn.dataset.tab
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'))
-      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'))
-      btn.classList.add('active')
-      document.getElementById('tab-' + tab).classList.add('active')
-    })
-  })
-  function switchTab(name) {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === name))
-    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'))
-    document.getElementById('tab-' + name).classList.add('active')
-  }
+function showDashboard() {
+  document.getElementById('login-screen').style.display = 'none'
+  document.getElementById('dashboard').classList.remove('hidden')
+  document.getElementById('f-date').value = today()
+  loadPosts()
+  loadImages()
+  initBookmarklet()
+}
 
-  /* ══════════════════════════════════════════
-     POSTS LIST
-  ══════════════════════════════════════════ */
-  async function loadPosts() {
-    const grid = document.getElementById('posts-grid')
-    const loading = document.getElementById('posts-loading')
-    loading.style.display = 'flex'
-    grid.innerHTML = ''
-    try {
-      const files = await ghList(BLOG)
-      loading.style.display = 'none'
-      if (!files.length) { grid.innerHTML = '<p style="color:var(--muted)">Brak wpisów.</p>'; return }
+/* ══════════════════════════════════════════
+   TABS
+══════════════════════════════════════════ */
+qsa('.tab-btn').forEach(function(btn){
+  btn.addEventListener('click', function(){ switchTab(this.dataset.tab) })
+})
+function switchTab(name) {
+  qsa('.tab-btn').forEach(function(b){ b.classList.toggle('active', b.dataset.tab===name) })
+  qsa('.tab-content').forEach(function(t){ t.classList.remove('active') })
+  var el = document.getElementById('tab-'+name)
+  if (el) el.classList.add('active')
+}
 
-      const posts = await Promise.all(
-        files.filter(f => f.name.endsWith('.md'))
-             .map(f => ghGet(f.path).then(r => ({ ...r, name: f.name })))
-      )
-
-      posts.sort((a,b) => {
-        const da = parseMd(a.content).date || ''
-        const db = parseMd(b.content).date || ''
-        return db.localeCompare(da)
-      })
-
-      posts.forEach(post => {
-        const fm = parseMd(post.content)
-        const card = document.createElement('div')
-        card.className = 'post-card'
-        card.innerHTML = `
-          <div class="post-card-info">
-            <div class="post-card-title">${fm.title || post.name}</div>
-            <div class="post-card-meta">
-              <span class="cat-badge">${fm.category || '—'}</span>
-              <span>${fm.date || '—'}</span>
-              <span>${fm.readTime || '—'}</span>
-            </div>
-          </div>
-          <div class="post-actions">
-            <button class="btn-secondary" style="padding:6px 14px;font-size:12px">
-              <span class="material-symbols-outlined" style="font-size:14px">edit</span>
-              Edytuj
-            </button>
-          </div>`
-        card.querySelector('button').addEventListener('click', () => editPost(post))
-        grid.appendChild(card)
-      })
-    } catch(e) {
-      loading.innerHTML = `<span style="color:var(--danger)">Błąd: ${e.message}</span>`
-    }
-  }
-
-  /* ══════════════════════════════════════════
-     EDITOR
-  ══════════════════════════════════════════ */
-  function autoSlug() {
-    const title = document.getElementById('f-title').value
-    if (!editingFile) document.getElementById('f-slug').value = slugify(title)
-  }
-
-  function openNewPost() {
-    editingFile = null
-    document.getElementById('f-title').value = ''
-    document.getElementById('f-slug').value = ''
-    document.getElementById('f-description').value = ''
-    document.getElementById('f-category').value = ''
-    document.getElementById('f-date').value = today()
-    document.getElementById('f-readtime').value = ''
-    document.getElementById('f-image').value = ''
-    document.getElementById('md-editor').value = ''
-    document.getElementById('md-preview').innerHTML = ''
-    document.getElementById('editor-title').textContent = 'Nowy wpis'
-    document.getElementById('editing-badge').classList.add('hidden')
-    document.getElementById('cancel-edit-btn').classList.add('hidden')
-    document.getElementById('save-label').textContent = 'Opublikuj'
-    document.getElementById('save-status').textContent = ''
-    switchTab('editor')
-  }
-
-  function editPost(post) {
-    const fm = parseMd(post.content)
-    editingFile = { path: post.path, sha: post.sha }
-    document.getElementById('f-title').value = fm.title || ''
-    document.getElementById('f-slug').value = post.name.replace('.md','')
-    document.getElementById('f-description').value = fm.description || ''
-    document.getElementById('f-category').value = fm.category || ''
-    document.getElementById('f-date').value = fm.date || today()
-    document.getElementById('f-readtime').value = fm.readTime || ''
-    document.getElementById('f-image').value = fm.image || ''
-    document.getElementById('md-editor').value = fm.body || ''
-    updatePreview()
-    document.getElementById('editor-title').textContent = 'Edycja wpisu'
-    document.getElementById('editing-badge').classList.remove('hidden')
-    document.getElementById('cancel-edit-btn').classList.remove('hidden')
-    document.getElementById('save-label').textContent = 'Zapisz zmiany'
-    document.getElementById('save-status').textContent = ''
-    switchTab('editor')
-  }
-
-  function cancelEdit() {
-    editingFile = null
-    document.getElementById('editing-badge').classList.add('hidden')
-    document.getElementById('cancel-edit-btn').classList.add('hidden')
-    document.getElementById('editor-title').textContent = 'Nowy wpis'
-    document.getElementById('save-label').textContent = 'Opublikuj'
-    switchTab('posts')
-  }
-
-  async function savePost() {
-    const title = document.getElementById('f-title').value.trim()
-    const description = document.getElementById('f-description').value.trim()
-    const category = document.getElementById('f-category').value
-    const body = document.getElementById('md-editor').value.trim()
-    if (!title || !description || !category || !body) {
-      toast('Uzupełnij wymagane pola: tytuł, opis, kategorię i treść', true)
+/* ══════════════════════════════════════════
+   POSTS LIST
+══════════════════════════════════════════ */
+async function loadPosts() {
+  var grid = document.getElementById('posts-grid')
+  var loading = document.getElementById('posts-loading')
+  loading.style.display = 'flex'
+  grid.innerHTML = ''
+  try {
+    var files = await ghList(BLOG)
+    var mdFiles = files.filter(function(f){ return f.name.endsWith('.md') })
+    if (!mdFiles.length) {
+      loading.style.display='none'
+      grid.innerHTML='<p style="color:var(--muted)">Brak wpisów blogowych.</p>'
       return
     }
-    const slug = document.getElementById('f-slug').value.trim() || slugify(title)
-    const fields = {
-      title, description, category, body,
-      date: document.getElementById('f-date').value || today(),
-      readTime: document.getElementById('f-readtime').value.trim() || '5 min',
-      image: document.getElementById('f-image').value.trim(),
-    }
-    const content = buildMd(fields)
-    const path = editingFile ? editingFile.path : `${BLOG}/${slug}.md`
-    const sha = editingFile?.sha || null
-    const verb = editingFile ? 'update' : 'add'
-    const statusEl = document.getElementById('save-status')
-    const btn = document.getElementById('save-btn')
-    document.getElementById('save-label').textContent = 'Publikuję...'
-    btn.disabled = true
-    statusEl.textContent = ''
-    try {
-      await ghPut(path, content, sha, `${verb}: blog/${slug}.md`)
-      toast(editingFile ? '✅ Wpis zaktualizowany!' : '✅ Wpis opublikowany!')
-      statusEl.textContent = '✅ Opublikowano. Strona będzie gotowa za ~1 minutę.'
-      statusEl.className = 'ok'
-      editingFile = null
-      document.getElementById('editing-badge').classList.add('hidden')
-      document.getElementById('cancel-edit-btn').classList.add('hidden')
-      document.getElementById('save-label').textContent = 'Opublikuj'
-      loadPosts()
-    } catch(e) {
-      toast('Błąd: ' + e.message, true)
-      statusEl.textContent = '❌ ' + e.message
-      statusEl.className = 'err'
-      document.getElementById('save-label').textContent = editingFile ? 'Zapisz zmiany' : 'Opublikuj'
-    } finally {
-      btn.disabled = false
-    }
-  }
-
-  // Live preview
-  document.getElementById('md-editor').addEventListener('input', updatePreview)
-  function updatePreview() {
-    const raw = document.getElementById('md-editor').value
-    if (typeof marked !== 'undefined') {
-      document.getElementById('md-preview').innerHTML = marked.parse(raw)
-    }
-  }
-
-  /* ══════════════════════════════════════════
-     IMAGES
-  ══════════════════════════════════════════ */
-  const uploadZone = document.getElementById('upload-zone')
-  const fileInput  = document.getElementById('file-input')
-
-  uploadZone.addEventListener('click', () => fileInput.click())
-  uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('dragover') })
-  uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('dragover'))
-  uploadZone.addEventListener('drop', e => {
-    e.preventDefault()
-    uploadZone.classList.remove('dragover')
-    handleFiles(e.dataTransfer.files)
-  })
-  fileInput.addEventListener('change', e => handleFiles(e.target.files))
-
-  async function handleFiles(files) {
-    const progress = document.getElementById('upload-progress')
-    progress.innerHTML = ''
-    for (const file of files) {
-      if (file.size > 5 * 1024 * 1024) { toast(`${file.name}: za duży plik (max 5MB)`, true); continue }
-      const item = document.createElement('div')
-      item.className = 'progress-item'
-      item.innerHTML = `<span class="material-symbols-outlined spin" style="font-size:16px">progress_activity</span> <span>${file.name}</span> <span class="status">Wgrywanie...</span>`
-      progress.appendChild(item)
-      try {
-        const b64 = await imgToB64(file)
-        const filename = `${Date.now()}-${file.name.replace(/\s+/g,'-')}`
-        const imgPath = `${IMGS}/${filename}`
-        // Check if file exists (for sha)
-        let sha = null
-        try { const ex = await ghGet(imgPath); sha = ex.sha } catch {}
-        await ghPutBin(imgPath, b64, sha, `upload: images/blog/${filename}`)
-        const url = `/images/blog/${filename}`
-        item.querySelector('.status').textContent = '✅ OK'
-        item.querySelector('.status').className = 'status ok'
-        item.innerHTML += ` <code style="font-size:11px;color:var(--neon);margin-left:auto">${url}</code>`
-        item.innerHTML += ` <button onclick="copyUrl('${url}',this)" style="background:var(--neon10);border:1px solid var(--neon30);color:var(--neon);font-size:11px;padding:3px 10px;cursor:pointer">Kopiuj URL</button>`
-        item.querySelector('.spin')?.remove()
-      } catch(e) {
-        item.querySelector('.status').textContent = '❌ ' + e.message
-        item.querySelector('.status').className = 'status err'
-      }
-    }
-    loadImages()
-    fileInput.value = ''
-  }
-
-  async function loadImages() {
-    const grid = document.getElementById('images-grid')
-    const count = document.getElementById('images-count')
-    grid.innerHTML = ''
-    try {
-      const files = await ghList(IMGS).catch(() => [])
-      const imgs = files.filter(f => /\.(jpg|jpeg|png|webp|gif)$/i.test(f.name))
-      count.textContent = `${imgs.length} zdjęć w /images/blog/`
-      imgs.reverse().forEach(f => {
-        const url = `/images/blog/${f.name}`
-        const card = document.createElement('div')
-        card.className = 'image-card'
-        card.innerHTML = `
-          <img src="${url}" alt="${f.name}" loading="lazy" onerror="this.src='https://placehold.co/180x120/0D1410/2DFF5F?text=IMG'" />
-          <div class="image-card-info">
-            <div class="image-card-name">${f.name}</div>
-            <button class="copy-url-btn" onclick="copyUrl('${url}',this)">
-              <span class="material-symbols-outlined" style="font-size:12px">content_copy</span>
-              Kopiuj URL
-            </button>
-          </div>`
-        grid.appendChild(card)
-      })
-    } catch {}
-  }
-
-  function copyUrl(url, btn) {
-    navigator.clipboard.writeText(url).then(() => {
-      const orig = btn.innerHTML
-      btn.textContent = '✅ Skopiowano!'
-      setTimeout(() => { btn.innerHTML = orig }, 1500)
+    // Load all posts in parallel
+    var posts = await Promise.all(mdFiles.map(function(f){
+      return ghGet(f.path).then(function(r){ return Object.assign(r,{name:f.name}) })
+    }))
+    posts.sort(function(a,b){
+      var da=parseMd(a.content).date||''; var db=parseMd(b.content).date||''
+      return db.localeCompare(da)
     })
+    loading.style.display = 'none'
+    posts.forEach(function(post){
+      var fm = parseMd(post.content)
+      var card = document.createElement('div')
+      card.className = 'post-card'
+      card.innerHTML =
+        '<div class="post-info">'+
+          '<div class="post-title">'+(fm.title||post.name)+'</div>'+
+          '<div class="post-meta">'+
+            '<span class="cat-badge">'+(fm.category||'—')+'</span>'+
+            '<span class="meta-text">'+(fm.date||'—')+'</span>'+
+            '<span class="meta-text">'+(fm.readTime||'—')+'</span>'+
+          '</div>'+
+        '</div>'+
+        '<button class="btn btn-secondary" style="font-size:11px;padding:6px 12px">'+
+          '<span class="material-symbols-outlined" style="font-size:13px">edit</span>Edytuj'+
+        '</button>'
+      card.querySelector('button').addEventListener('click', function(){ editPost(post) })
+      grid.appendChild(card)
+    })
+  } catch(e) {
+    loading.innerHTML = '<span style="color:var(--danger)">Błąd: '+e.message+'</span>'
   }
+}
 
-  /* ══════════════════════════════════════════
-     BOOKMARKLET (Element Inspector)
-  ══════════════════════════════════════════ */
-  function initBookmarklet() {
-    const code = `(function(){
-      var ID='krpage-ins';
-      if(document.getElementById(ID)){
-        document.getElementById(ID).remove();
-        document.getElementById(ID+'-t').remove();
-        return;
-      }
-      var s=document.createElement('style');
-      s.id=ID;
-      s.textContent='.ki-h{outline:2px solid #2dff5f!important;outline-offset:2px!important;cursor:crosshair!important;}#'+ID+'-t{position:fixed;bottom:0;left:0;right:0;background:#050A07;border-top:2px solid #2dff5f;color:#2dff5f;padding:10px 20px;font:700 13px/1 monospace;z-index:2147483647;pointer-events:none;}';
-      document.head.appendChild(s);
-      var t=document.createElement('div');
-      t.id=ID+'-t';
-      t.textContent='🔍 KrPage Inspector — kliknij dowolny element | kliknij zakładkę ponownie aby wyłączyć';
-      document.body.appendChild(t);
-      var last=null;
-      function ov(e){if(last)last.classList.remove('ki-h');last=e.target;if(last.id!==ID+'-t')last.classList.add('ki-h');}
-      function cl(e){
-        e.preventDefault();e.stopPropagation();
-        var el=e.target;
-        var cls=Array.from(el.classList).join('.');
-        var tag=el.tagName.toLowerCase();
-        var sec=el.closest('section');
-        var sh=sec&&sec.querySelector('h1,h2,h3,h4');
-        var info=tag+(cls?'.'+cls:'')+(sh?' | sekcja: \\"'+sh.textContent.trim()+'\\"':'');
-        navigator.clipboard.writeText(info).then(function(){
-          t.textContent='✅ Skopiowano: '+info+' — wklej do Claude Code i opisz co zmienić';
-          setTimeout(function(){t.textContent='🔍 KrPage Inspector — kliknij element';},3000);
-        });
-      }
-      document.addEventListener('mouseover',ov,true);
-      document.addEventListener('click',cl,true);
-    })()`
-    document.getElementById('bookmarklet-link').href = 'javascript:' + code
+document.getElementById('btn-new-post').addEventListener('click', openNewPost)
+
+/* ══════════════════════════════════════════
+   EDITOR
+══════════════════════════════════════════ */
+document.getElementById('f-title').addEventListener('input', function(){
+  if (!editingFile) document.getElementById('f-slug').value = slugify(this.value)
+})
+document.getElementById('md-editor').addEventListener('input', updatePreview)
+
+function updatePreview() {
+  var raw = document.getElementById('md-editor').value
+  if (typeof marked !== 'undefined')
+    document.getElementById('md-preview').innerHTML = marked.parse(raw)
+}
+
+function openNewPost() {
+  editingFile = null
+  document.getElementById('f-title').value = ''
+  document.getElementById('f-slug').value = ''
+  document.getElementById('f-description').value = ''
+  document.getElementById('f-category').value = ''
+  document.getElementById('f-date').value = today()
+  document.getElementById('f-readtime').value = ''
+  document.getElementById('f-image').value = ''
+  document.getElementById('md-editor').value = ''
+  document.getElementById('md-preview').innerHTML = ''
+  document.getElementById('editor-title').textContent = 'Nowy wpis'
+  document.getElementById('editing-badge').classList.add('hidden')
+  document.getElementById('cancel-edit-btn').classList.add('hidden')
+  document.getElementById('save-label').textContent = 'Opublikuj'
+  document.getElementById('save-status').textContent = ''
+  document.getElementById('save-status').className = ''
+  switchTab('editor')
+}
+
+function editPost(post) {
+  var fm = parseMd(post.content)
+  editingFile = { path: post.path, sha: post.sha }
+  document.getElementById('f-title').value = fm.title||''
+  document.getElementById('f-slug').value = post.name.replace('.md','')
+  document.getElementById('f-description').value = fm.description||''
+  document.getElementById('f-category').value = fm.category||''
+  document.getElementById('f-date').value = fm.date||today()
+  document.getElementById('f-readtime').value = fm.readTime||''
+  document.getElementById('f-image').value = fm.image||''
+  document.getElementById('md-editor').value = fm.body||''
+  updatePreview()
+  document.getElementById('editor-title').textContent = 'Edycja wpisu'
+  document.getElementById('editing-badge').classList.remove('hidden')
+  document.getElementById('cancel-edit-btn').classList.remove('hidden')
+  document.getElementById('save-label').textContent = 'Zapisz zmiany'
+  document.getElementById('save-status').textContent = ''
+  document.getElementById('save-status').className = ''
+  switchTab('editor')
+}
+
+document.getElementById('cancel-edit-btn').addEventListener('click', function(){
+  editingFile = null
+  document.getElementById('editing-badge').classList.add('hidden')
+  document.getElementById('cancel-edit-btn').classList.add('hidden')
+  document.getElementById('editor-title').textContent = 'Nowy wpis'
+  document.getElementById('save-label').textContent = 'Opublikuj'
+  switchTab('posts')
+})
+
+document.getElementById('save-btn').addEventListener('click', async function(){
+  var title       = document.getElementById('f-title').value.trim()
+  var description = document.getElementById('f-description').value.trim()
+  var category    = document.getElementById('f-category').value
+  var body        = document.getElementById('md-editor').value.trim()
+  if (!title||!description||!category||!body) {
+    toast('⚠ Uzupełnij wymagane pola: tytuł, opis, kategorię i treść', 'warn')
+    return
   }
+  var slug = document.getElementById('f-slug').value.trim() || slugify(title)
+  var content = buildMd({
+    title, description, category, body,
+    date:     document.getElementById('f-date').value || today(),
+    readTime: document.getElementById('f-readtime').value.trim() || '5 min',
+    image:    document.getElementById('f-image').value.trim(),
+  })
+  var path = editingFile ? editingFile.path : BLOG+'/'+slug+'.md'
+  var sha  = editingFile ? editingFile.sha : null
+  var statusEl = document.getElementById('save-status')
+  this.disabled = true
+  document.getElementById('save-label').textContent = 'Publikuję...'
+  statusEl.textContent = ''
+  try {
+    await ghPut(path, content, sha, (editingFile?'update':'add')+': blog/'+slug+'.md')
+    toast('✅ '+(editingFile?'Wpis zaktualizowany':'Wpis opublikowany')+'!')
+    statusEl.textContent = '✅ Gotowe — strona będzie live za ~1 min.'
+    statusEl.className = 'ok'
+    editingFile = null
+    document.getElementById('editing-badge').classList.add('hidden')
+    document.getElementById('cancel-edit-btn').classList.add('hidden')
+    document.getElementById('save-label').textContent = 'Opublikuj'
+    loadPosts()
+  } catch(e) {
+    var msg = e.message.includes('Requires authentication')
+      ? 'Brak uprawnień do zapisu — sprawdź czy token ma "Contents: Read & write"'
+      : e.message
+    toast('❌ '+msg, 'err')
+    statusEl.textContent = '❌ '+msg
+    statusEl.className = 'err'
+    document.getElementById('save-label').textContent = editingFile?'Zapisz zmiany':'Opublikuj'
+  } finally {
+    this.disabled = false
+  }
+})
+
+/* ══════════════════════════════════════════
+   IMAGES — folder subtabs
+══════════════════════════════════════════ */
+qsa('.img-subtab').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    qsa('.img-subtab').forEach(function(b){ b.classList.remove('active') })
+    this.classList.add('active')
+    currentImgFolder = this.dataset.folder
+    // Show upload only for blog folder
+    document.getElementById('upload-section').style.display = currentImgFolder==='blog' ? 'block' : 'none'
+    loadImages()
+  })
+})
+
+/* WebP conversion */
+function toWebP(file, quality) {
+  return new Promise(function(resolve){
+    var img = new Image()
+    var url = URL.createObjectURL(file)
+    img.onload = function(){
+      var c = document.createElement('canvas')
+      c.width = img.naturalWidth; c.height = img.naturalHeight
+      c.getContext('2d').drawImage(img,0,0)
+      c.toBlob(function(blob){ URL.revokeObjectURL(url); resolve(blob) }, 'image/webp', quality||0.85)
+    }
+    img.onerror = function(){ URL.revokeObjectURL(url); resolve(file) }
+    img.src = url
+  })
+}
+function blobToB64(blob) {
+  return new Promise(function(resolve){
+    var r = new FileReader()
+    r.onload = function(e){ resolve(e.target.result.split(',')[1]) }
+    r.readAsDataURL(blob)
+  })
+}
+
+var uploadZone = document.getElementById('upload-zone')
+var fileInput  = document.getElementById('file-input')
+uploadZone.addEventListener('click', function(){ fileInput.click() })
+uploadZone.addEventListener('dragover', function(e){ e.preventDefault(); this.classList.add('dragover') })
+uploadZone.addEventListener('dragleave', function(){ this.classList.remove('dragover') })
+uploadZone.addEventListener('drop', function(e){ e.preventDefault(); this.classList.remove('dragover'); handleFiles(e.dataTransfer.files) })
+fileInput.addEventListener('change', function(){ handleFiles(this.files) })
+
+async function handleFiles(files) {
+  var progress = document.getElementById('upload-progress')
+  progress.innerHTML = ''
+  var convertWebP = document.getElementById('webp-toggle').checked
+  var destFolder = currentImgFolder==='blog' ? IMG_BLOG : IMG_SITE
+
+  for (var i=0; i<files.length; i++) {
+    var file = files[i]
+    if (file.size > 5*1024*1024) { toast('❌ '+file.name+': za duży plik (max 5MB)', 'err'); continue }
+    var item = document.createElement('div')
+    item.className = 'prog-item'
+    item.innerHTML = '<span class="material-symbols-outlined spin" style="font-size:15px">progress_activity</span>'+
+      '<span>'+file.name+'</span><span class="prog-ok">Konwertowanie...</span>'
+    progress.appendChild(item)
+    try {
+      var blob = file
+      var ext  = file.name.replace(/.*\./,'').toLowerCase()
+      var baseName = file.name.replace(/\.[^.]+$/,'')
+      if (convertWebP && ext !== 'webp') {
+        blob = await toWebP(file, 0.85)
+        ext = 'webp'
+      }
+      var b64  = await blobToB64(blob)
+      var filename = Date.now()+'-'+slugify(baseName)+'.'+ext
+      var path = destFolder+'/'+filename
+      var url  = '/'+path.replace('public/','')
+      item.querySelector('.prog-ok').textContent = 'Wgrywanie...'
+      // Check if exists
+      var sha = null
+      try { var ex = await ghGet(path); sha = ex.sha } catch{}
+      await ghPutBin(path, b64, sha, 'upload: '+filename)
+      item.querySelector('.spin').remove()
+      item.querySelector('.prog-ok').textContent = '✅ OK'
+      var urlEl = document.createElement('span')
+      urlEl.className = 'prog-url'
+      urlEl.textContent = url
+      item.appendChild(urlEl)
+      var cpBtn = document.createElement('button')
+      cpBtn.className = 'btn btn-ghost'
+      cpBtn.style.cssText = 'font-size:10px;padding:3px 8px;margin-left:4px'
+      cpBtn.textContent = 'Kopiuj URL'
+      cpBtn.onclick = function(u){ return function(){ copyUrl(u, this) } }(url)
+      item.appendChild(cpBtn)
+    } catch(e) {
+      if (item.querySelector('.spin')) item.querySelector('.spin').remove()
+      var errEl = item.querySelector('.prog-ok')
+      errEl.className = 'prog-err'
+      var msg = e.message.includes('Requires authentication')
+        ? '❌ Brak uprawnień zapisu — token musi mieć "Contents: Read & write"'
+        : '❌ '+e.message
+      errEl.textContent = msg
+    }
+  }
+  fileInput.value = ''
+  loadImages()
+}
+
+async function loadImages() {
+  var grid  = document.getElementById('images-grid')
+  var count = document.getElementById('images-count')
+  grid.innerHTML = ''
+  count.textContent = ''
+  var folder = currentImgFolder==='blog' ? IMG_BLOG : IMG_SITE
+  try {
+    var files = await ghList(folder)
+    var imgs = files.filter(function(f){
+      return /\.(jpg|jpeg|png|webp|gif|svg)$/i.test(f.name)
+    })
+    // For site folder, exclude blog subfolder entries
+    if (currentImgFolder==='site') {
+      imgs = imgs.filter(function(f){ return f.type==='file' })
+    }
+    count.textContent = imgs.length+' zdjęć w /'+folder.replace('public/','')
+    if (!imgs.length) {
+      grid.innerHTML = '<p style="color:var(--muted);font-size:13px">Brak zdjęć w tym folderze.</p>'
+      return
+    }
+    imgs.reverse().forEach(function(f){
+      var url = '/'+f.path.replace('public/','')
+      var card = document.createElement('div')
+      card.className = 'image-card'
+      card.dataset.path = f.path
+      card.dataset.sha  = f.sha
+      card.dataset.url  = url
+      card.dataset.name = f.name
+      card.innerHTML =
+        '<img src="'+url+'" alt="'+f.name+'" loading="lazy" onerror="this.src=\'https://placehold.co/160x110/0D1410/2DFF5F?text=IMG\'" />'+
+        '<div class="image-card-info">'+
+          '<div class="image-card-name">'+f.name+'</div>'+
+          '<div class="image-card-actions">'+
+            '<button class="img-btn copy" data-action="copy">'+
+              '<span class="material-symbols-outlined" style="font-size:11px">content_copy</span>URL'+
+            '</button>'+
+            '<button class="img-btn" data-action="rename">'+
+              '<span class="material-symbols-outlined" style="font-size:11px">edit</span>Zmień'+
+            '</button>'+
+          '</div>'+
+        '</div>'+
+        '<div class="rename-input-wrap" id="ri-'+f.sha.slice(0,8)+'">'+
+          '<input type="text" value="'+f.name+'" placeholder="nowa-nazwa.webp" />'+
+          '<div class="rename-actions">'+
+            '<button class="rename-confirm" data-sha="'+f.sha.slice(0,8)+'">✓ Zmień</button>'+
+            '<button class="rename-cancel" data-sha="'+f.sha.slice(0,8)+'">✗</button>'+
+          '</div>'+
+        '</div>'
+      // events
+      card.querySelector('[data-action="copy"]').addEventListener('click', function(){
+        copyUrl(card.dataset.url, this)
+      })
+      card.querySelector('[data-action="rename"]').addEventListener('click', function(){
+        var wrap = card.querySelector('.rename-input-wrap')
+        wrap.classList.toggle('active')
+        if (wrap.classList.contains('active')) wrap.querySelector('input').focus()
+      })
+      card.querySelector('.rename-confirm').addEventListener('click', function(){
+        var newName = card.querySelector('.rename-input-wrap input').value.trim()
+        if (!newName) return
+        renameImage(card.dataset.path, card.dataset.sha, newName, card.dataset.url)
+      })
+      card.querySelector('.rename-cancel').addEventListener('click', function(){
+        card.querySelector('.rename-input-wrap').classList.remove('active')
+      })
+      grid.appendChild(card)
+    })
+  } catch(e) {
+    grid.innerHTML = '<p style="color:var(--danger);font-size:13px">Błąd: '+e.message+'</p>'
+  }
+}
+
+function copyUrl(url, btn) {
+  navigator.clipboard.writeText(url).then(function(){
+    var orig = btn.innerHTML
+    btn.textContent = '✅ Skopiowano'
+    setTimeout(function(){ btn.innerHTML = orig }, 1500)
+  })
+}
+
+async function renameImage(oldPath, sha, newName, oldUrl) {
+  // Ensure extension
+  if (!newName.includes('.')) newName += '.webp'
+  var dir = oldPath.substring(0, oldPath.lastIndexOf('/'))
+  var newPath = dir+'/'+newName
+  var newUrl  = '/'+newPath.replace('public/','')
+  if (newPath === oldPath) return
+
+  toast('↻ Zmieniam nazwę i aktualizuję linki...', 'warn')
+  try {
+    // 1. Get raw binary
+    var fileData = await ghGet(oldPath)
+    // 2. Create new file
+    await ghPutBin(newPath, fileData.rawB64, null, 'rename: '+newPath)
+    // 3. Update refs in all .md files
+    var updated = 0
+    var allMd = []
+    try { allMd = allMd.concat(await ghList(BLOG)) } catch{}
+    try { allMd = allMd.concat(await ghList(REAL)) } catch{}
+    allMd = allMd.filter(function(f){ return f.name.endsWith('.md') })
+    for (var i=0; i<allMd.length; i++) {
+      var md = await ghGet(allMd[i].path)
+      if (md.content.indexOf(oldUrl) >= 0) {
+        var fixed = md.content.split(oldUrl).join(newUrl)
+        await ghPut(md.path, fixed, md.sha, 'update ref: '+newName)
+        updated++
+      }
+    }
+    // 4. Delete old file
+    await ghDelete(oldPath, sha, 'delete: '+oldPath.split('/').pop())
+    toast('✅ Zmieniono nazwę! Zaktualizowano '+updated+' pliki md.', '')
+    loadImages()
+  } catch(e) {
+    toast('❌ '+e.message, 'err')
+  }
+}
+
+/* ══════════════════════════════════════════
+   BOOKMARKLET
+══════════════════════════════════════════ */
+function initBookmarklet() {
+  var code = "(function(){var ID='krpage-ins';if(document.getElementById(ID)){document.getElementById(ID).remove();var t2=document.getElementById(ID+'-t');if(t2)t2.remove();return;}var s=document.createElement('style');s.id=ID;s.textContent='.ki-h{outline:2px solid #2dff5f!important;outline-offset:2px!important;cursor:crosshair!important;}#'+ID+'-t{position:fixed;bottom:0;left:0;right:0;background:#050A07;border-top:2px solid #2dff5f;color:#2dff5f;padding:10px 20px;font:700 12px/1 monospace;z-index:2147483647;pointer-events:none;}';document.head.appendChild(s);var t=document.createElement('div');t.id=ID+'-t';t.textContent='🔍 KrPage Inspector — kliknij element | ponowny klik zakładki = wyłącz';document.body.appendChild(t);var last=null;document.addEventListener('mouseover',function(e){if(last)last.classList.remove('ki-h');last=e.target;if(last.id!==ID+'-t')last.classList.add('ki-h');},true);document.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();var el=e.target;var cls=Array.from(el.classList).join('.');var tag=el.tagName.toLowerCase();var sec=el.closest('section');var sh=sec&&sec.querySelector('h1,h2,h3,h4');var info=tag+(cls?'.'+cls:'')+(sh?' | sekcja: \"'+sh.textContent.trim()+'\"':'');navigator.clipboard.writeText(info).then(function(){t.textContent='✅ Skopiowano: '+info;setTimeout(function(){t.textContent='🔍 KrPage Inspector — kliknij element';},3000);});},true);})();"
+  document.getElementById('bookmarklet-link').href = 'javascript:'+code
+}
 </script>
 </body>
 </html>
