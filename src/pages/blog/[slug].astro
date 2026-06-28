@@ -39,42 +39,40 @@ const related  = allPosts
 
       <!-- TOC Sidebar (desktop) -->
       {tocHeadings.length > 0 && (
-        <aside class="hidden lg:block w-60 xl:w-72 shrink-0">
-          <div class="sticky top-24">
+        <aside class="hidden lg:flex flex-col w-60 xl:w-72 shrink-0 sticky top-24 self-start">
 
-            <p class="flex items-center gap-2 text-label-md text-neon uppercase tracking-widest mb-sm">
-              <span class="material-symbols-outlined text-base">format_list_bulleted</span>
-              Spis treści
-            </p>
+          <p class="flex items-center gap-2 text-label-md text-neon uppercase tracking-widest mb-sm">
+            <span class="material-symbols-outlined text-base">format_list_bulleted</span>
+            Spis treści
+          </p>
 
-            <nav id="toc-nav" class="flex flex-col">
-              {tocHeadings.map(h => (
-                <a
-                  href={`#${h.slug}`}
-                  data-toc-link={h.slug}
-                  class:list={[
-                    'toc-link block py-1.5 text-[12px] border-l-2 border-outline-variant text-on-surface-variant',
-                    'hover:text-neon hover:border-neon transition-all duration-150',
-                    h.depth === 3 ? 'pl-6 text-[11px]' : 'pl-3 font-medium',
-                  ]}
-                >
-                  {h.text}
-                </a>
-              ))}
-            </nav>
+          <nav id="toc-nav" class="flex flex-col">
+            {tocHeadings.map(h => (
+              <a
+                href={`#${h.slug}`}
+                data-toc-link={h.slug}
+                class:list={[
+                  'toc-link block py-1.5 text-[12px] border-l-2 border-outline-variant text-on-surface-variant',
+                  'hover:text-neon hover:border-neon transition-all duration-150',
+                  h.depth === 3 ? 'pl-6 text-[11px]' : 'pl-3 font-medium',
+                ]}
+              >
+                {h.text}
+              </a>
+            ))}
+          </nav>
 
-            <!-- Sidebar scroll progress -->
-            <div class="mt-lg pt-md border-t border-outline-variant/30">
-              <div class="flex justify-between mb-2">
-                <span class="text-[10px] text-on-surface-variant/50 uppercase tracking-widest">Postęp czytania</span>
-                <span id="progress-pct" class="text-[10px] text-neon font-semibold">0%</span>
-              </div>
-              <div class="h-1 bg-outline-variant/20 w-full rounded-full overflow-hidden">
-                <div id="sidebar-progress" class="h-full bg-neon rounded-full w-0 shadow-neon-sm" style="transition: width 80ms linear;"></div>
-              </div>
+          <!-- Sidebar scroll progress -->
+          <div class="mt-lg pt-md border-t border-outline-variant/30">
+            <div class="flex justify-between mb-2">
+              <span class="text-[10px] text-on-surface-variant/50 uppercase tracking-widest">Postęp czytania</span>
+              <span id="progress-pct" class="text-[10px] text-neon font-semibold">0%</span>
             </div>
-
+            <div class="h-1 bg-outline-variant/20 w-full rounded-full overflow-hidden">
+              <div id="sidebar-progress" class="h-full bg-neon rounded-full w-0 shadow-neon-sm" style="transition: width 80ms linear;"></div>
+            </div>
           </div>
+
         </aside>
       )}
 
