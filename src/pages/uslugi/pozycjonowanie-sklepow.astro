@@ -1,0 +1,114 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+---
+
+<BaseLayout
+  title="Pozycjonowanie Sklepów Internetowych — SEO dla E-commerce | KrPage"
+  description="Pozycjonowanie sklepów WooCommerce, PrestaShop, Shopify. Optymalizacja kategorii, kart produktów i struktury technicznej. Więcej ruchu organicznego = więcej sprzedaży."
+  schemaType="service"
+  schemaProps={{ serviceName: 'Pozycjonowanie Sklepów Internetowych' }}
+>
+
+  <!-- HERO -->
+  <section class="max-w-7xl mx-auto px-6 md:px-12 pt-16 pb-xl relative overflow-hidden">
+    <div class="absolute -top-32 -left-32 w-[500px] h-[500px] bg-neon/5 blur-[120px] rounded-full pointer-events-none"></div>
+    <div class="grid lg:grid-cols-2 gap-lg items-center">
+      <div class="space-y-6 z-10">
+        <div class="section-label">E-commerce SEO</div>
+        <h1 class="text-headline-xl text-on-surface">
+          Organic traffic<br />
+          <span class="text-neon">który sprzedaje</span>
+        </h1>
+        <p class="text-body-lg text-on-surface-variant max-w-xl">
+          Specjalizuję się w SEO dla sklepów internetowych — od architektury kategorii, przez karty produktów, po link building w e-commerce. Ruch, który przynosi przychód.
+        </p>
+        <div class="flex flex-wrap gap-md">
+          <a href="/kontakt"
+             class="inline-flex items-center gap-2 bg-neon text-on-primary font-bold text-label-md uppercase tracking-widest px-lg py-md hover:brightness-110 active:scale-95 transition-all shadow-neon-sm">
+            <span class="material-symbols-outlined text-sm">calendar_month</span>
+            Umów konsultację
+          </a>
+          <a href="/uslugi/audyt-seo"
+             class="inline-flex items-center gap-2 border border-neon/30 text-neon font-bold text-label-md uppercase tracking-widest px-lg py-md hover:bg-neon/5 transition-all">
+            Najpierw audyt
+          </a>
+        </div>
+      </div>
+
+      <!-- Stats panel -->
+      <div class="bento-card p-lg">
+        <div class="text-label-sm text-neon uppercase tracking-widest mb-md">Wyniki e-commerce</div>
+        <div class="grid grid-cols-2 gap-md">
+          {[
+            { value: '+318%', label: 'Wzrost ruchu organicznego', sub: 'sklep elektronika, 6 mies.' },
+            { value: 'x4.2',  label: 'Wzrost przychodu z SEO',    sub: 'sklep mody, 8 mies.'       },
+            { value: '+890',  label: 'Nowych fraz w TOP 10',       sub: 'sklep RTV/AGD, 5 mies.'   },
+            { value: '-62%',  label: 'Spadek CPC z PPC',           sub: 'dzięki wzrostowi organic'  },
+          ].map(s => (
+            <div class="bg-surface-container p-md border border-outline-variant/30">
+              <p class="text-headline-md text-neon font-black mb-xs">{s.value}</p>
+              <p class="text-label-sm text-on-surface uppercase tracking-wide mb-1">{s.label}</p>
+              <p class="text-[10px] text-on-surface-variant/60 font-mono">{s.sub}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ZAKRES -->
+  <section class="bg-surface-container-low border-y border-white/5 py-xl">
+    <div class="max-w-7xl mx-auto px-6 md:px-12">
+      <div class="section-label mb-sm">Zakres działań</div>
+      <h2 class="text-headline-lg text-on-surface mb-lg">SEO dla sklepu<br /><span class="text-neon">od fundamentów po skalowanie</span></h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+        {[
+          { icon: 'category',         title: 'Optymalizacja Kategorii',  desc: 'Struktura kategorii pod frazy transakcyjne. Faceted navigation bez duplikatów. Interlinking między poziomami.' },
+          { icon: 'inventory_2',      title: 'Karty Produktów',          desc: 'Unikalne opisy produktów z NLP, schema markup Product/Review, optymalizacja tytułów i meta.' },
+          { icon: 'storefront',       title: 'Schema Markup',            desc: 'Implementacja danych strukturalnych: Product, Breadcrumb, FAQPage — rich snippets w wynikach Google.' },
+          { icon: 'speed',            title: 'Core Web Vitals',          desc: 'Optymalizacja LCP, CLS i INP dla platform e-commerce. Lazy loading, kompresja obrazów, cache.' },
+          { icon: 'shopping_cart',    title: 'Google Merchant Center',   desc: 'Integracja i optymalizacja feedu produktowego dla Shopping — lepsza widoczność w zakupach Google.' },
+          { icon: 'link',             title: 'Link Building E-comm',     desc: 'Backlinki z branżowych portali, recenzji i mediów. Budowa autorytetu w niszy produktowej.' },
+        ].map(item => (
+          <div class="bento-card p-lg group hover:border-neon/40 transition-all">
+            <span class="material-symbols-outlined text-neon text-3xl mb-md">{item.icon}</span>
+            <h3 class="text-headline-md text-on-surface mb-sm">{item.title}</h3>
+            <p class="text-body-md text-on-surface-variant">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PLATFORMY -->
+  <section class="max-w-7xl mx-auto px-6 md:px-12 py-xl">
+    <div class="section-label mb-sm">Platformy</div>
+    <h2 class="text-headline-lg text-on-surface mb-lg">Pracuję z każdą <span class="text-neon">platformą e-commerce</span></h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-gutter mb-xl">
+      {['WooCommerce', 'PrestaShop', 'Shopify', 'Magento'].map(platform => (
+        <div class="bento-card p-lg text-center hover:border-neon/40 transition-all">
+          <span class="material-symbols-outlined text-neon text-3xl mb-sm">storefront</span>
+          <p class="text-label-md text-on-surface uppercase tracking-widest">{platform}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="bento-card p-xl text-center relative overflow-hidden">
+      <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div class="w-96 h-48 bg-neon/5 blur-[80px] rounded-full"></div>
+      </div>
+      <div class="relative z-10">
+        <h2 class="text-headline-lg text-on-surface mb-md">
+          Chcesz więcej sprzedaży<br />
+          <span class="text-neon">z ruchu organicznego?</span>
+        </h2>
+        <a href="/kontakt"
+           class="inline-flex items-center gap-2 bg-neon text-on-primary font-bold text-label-md uppercase tracking-widest px-xl py-md hover:brightness-110 active:scale-95 transition-all shadow-neon mt-md">
+          <span class="material-symbols-outlined text-sm">troubleshoot</span>
+          Zamów bezpłatny audyt sklepu
+        </a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

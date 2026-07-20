@@ -1,0 +1,122 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+---
+
+<BaseLayout
+  title="Pozycjonowanie Lokalne — Local SEO i Google Maps | KrPage"
+  description="Pozycjonowanie lokalne w Google i Google Maps. Optymalizacja Google Moja Firma, lokalne cytowania NAP, lokalny content i link building. Więcej klientów z okolicy."
+  schemaType="service"
+  schemaProps={{ serviceName: 'Pozycjonowanie Lokalne' }}
+>
+
+  <!-- HERO -->
+  <section class="max-w-7xl mx-auto px-6 md:px-12 pt-16 pb-xl relative overflow-hidden">
+    <div class="absolute -top-32 -right-32 w-[500px] h-[500px] bg-neon/5 blur-[120px] rounded-full pointer-events-none"></div>
+    <div class="grid lg:grid-cols-2 gap-lg items-center">
+      <div class="space-y-6 z-10">
+        <div class="section-label">Local SEO</div>
+        <h1 class="text-headline-xl text-on-surface">
+          Dominuj w wynikach<br />
+          <span class="text-neon">lokalnych Google</span>
+        </h1>
+        <p class="text-body-lg text-on-surface-variant max-w-xl">
+          Pomagam firmom usługowym i lokalnym biznesom zdobywać klientów z Google Maps i lokalnych wyników wyszukiwania. Twój biznes na pierwszym miejscu w okolicy.
+        </p>
+        <div class="flex flex-wrap gap-md">
+          <a href="/kontakt"
+             class="inline-flex items-center gap-2 bg-neon text-on-primary font-bold text-label-md uppercase tracking-widest px-lg py-md hover:brightness-110 active:scale-95 transition-all shadow-neon-sm">
+            <span class="material-symbols-outlined text-sm">calendar_month</span>
+            Umów konsultację
+          </a>
+          <a href="/uslugi/audyt-seo"
+             class="inline-flex items-center gap-2 border border-neon/30 text-neon font-bold text-label-md uppercase tracking-widest px-lg py-md hover:bg-neon/5 transition-all">
+            Najpierw audyt
+          </a>
+        </div>
+      </div>
+
+      <!-- Map widget mockup -->
+      <div class="bento-card p-lg">
+        <div class="text-label-sm text-neon uppercase tracking-widest mb-md">Widoczność lokalna</div>
+        <div class="space-y-3">
+          {[
+            { query: 'mechanik białystok',        pos: 1, maps: true  },
+            { query: 'dentysta warszawa centrum',  pos: 1, maps: true  },
+            { query: 'prawnik gdańsk',             pos: 2, maps: true  },
+            { query: 'fryzjer kraków',             pos: 1, maps: true  },
+            { query: 'restauracja włoska poznań',  pos: 3, maps: true  },
+          ].map(r => (
+            <div class="flex items-center justify-between py-2 border-b border-outline-variant/30">
+              <span class="text-body-md text-on-surface-variant font-mono text-xs">{r.query}</span>
+              <div class="flex items-center gap-3">
+                {r.maps && <span class="text-[10px] text-neon/60 border border-neon/20 px-1.5 py-0.5">Maps</span>}
+                <span class="text-neon font-bold text-label-md">#{r.pos}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ZAKRES -->
+  <section class="bg-surface-container-low border-y border-white/5 py-xl">
+    <div class="max-w-7xl mx-auto px-6 md:px-12">
+      <div class="section-label mb-sm">Zakres działań</div>
+      <h2 class="text-headline-lg text-on-surface mb-lg">Jak buduję<br /><span class="text-neon">widoczność lokalną</span></h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+        {[
+          { icon: 'location_on',   title: 'Google Moja Firma',       desc: 'Pełna optymalizacja profilu GMB: kategorie, opisy, zdjęcia, godziny, atrybuty. Strategia postów i Q&A.' },
+          { icon: 'format_list_bulleted', title: 'Lokalne Cytowania (NAP)', desc: 'Budowa spójnych wpisów w katalogach: nazwa, adres, telefon. Korekta niespójności, które blokują pozycje.' },
+          { icon: 'star',          title: 'Strategia Opinii',         desc: 'Procesy pozyskiwania recenzji Google, odpowiedzi na opinie i zarządzanie reputacją online.' },
+          { icon: 'article',       title: 'Lokalny Content',          desc: 'Treści optymalizowane pod frazy "[usługa] + [miasto]". Podstrony lokalne dla wielu oddziałów.' },
+          { icon: 'link',          title: 'Lokalny Link Building',    desc: 'Backlinki z lokalnych portali, sponsoringów i organizacji. Wzmacniają sygnały geograficzne w Google.' },
+          { icon: 'manage_search', title: 'Monitoring Lokalny',       desc: 'Śledzenie pozycji w Google Maps i wynikach lokalnych z podziałem na konkretne miasto i dzielnicę.' },
+        ].map(item => (
+          <div class="bento-card p-lg group hover:border-neon/40 transition-all">
+            <span class="material-symbols-outlined text-neon text-3xl mb-md">{item.icon}</span>
+            <h3 class="text-headline-md text-on-surface mb-sm">{item.title}</h3>
+            <p class="text-body-md text-on-surface-variant">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- BRANŻE -->
+  <section class="max-w-7xl mx-auto px-6 md:px-12 py-xl">
+    <div class="section-label mb-sm">Branże</div>
+    <h2 class="text-headline-lg text-on-surface mb-lg">Pracuję z lokalnymi <span class="text-neon">firmami usługowymi</span></h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-gutter mb-xl">
+      {[
+        { icon: 'medical_services', label: 'Medycyna i zdrowie'   },
+        { icon: 'gavel',            label: 'Prawo i finanse'       },
+        { icon: 'build',            label: 'Usługi techniczne'     },
+        { icon: 'restaurant',       label: 'Gastronomia i handel'  },
+      ].map(b => (
+        <div class="bento-card p-lg flex flex-col items-center text-center hover:border-neon/40 transition-all">
+          <span class="material-symbols-outlined text-neon text-3xl mb-sm">{b.icon}</span>
+          <p class="text-label-sm text-on-surface uppercase tracking-widest">{b.label}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="bento-card p-xl text-center relative overflow-hidden">
+      <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div class="w-96 h-48 bg-neon/5 blur-[80px] rounded-full"></div>
+      </div>
+      <div class="relative z-10">
+        <h2 class="text-headline-lg text-on-surface mb-md">
+          Chcesz być #1 w Google<br />
+          <span class="text-neon">w swojej okolicy?</span>
+        </h2>
+        <a href="/kontakt"
+           class="inline-flex items-center gap-2 bg-neon text-on-primary font-bold text-label-md uppercase tracking-widest px-xl py-md hover:brightness-110 active:scale-95 transition-all shadow-neon mt-md">
+          <span class="material-symbols-outlined text-sm">location_on</span>
+          Zamów bezpłatną analizę lokalną
+        </a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

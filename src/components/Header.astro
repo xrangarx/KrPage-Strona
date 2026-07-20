@@ -11,11 +11,25 @@ const navLinks = [
   { href: '/kontakt',     label: 'Kontakt'      },
 ]
 
-const uslugiLinks = [
-  { href: '/uslugi/audyt-seo',         label: 'Audyt SEO',        icon: 'troubleshoot' },
-  { href: '/uslugi/pozycjonowanie',    label: 'Pozycjonowanie',   icon: 'trending_up'  },
-  { href: '/uslugi/content-marketing', label: 'Content Marketing',icon: 'article'      },
+const uslugiGroups = [
+  {
+    heading: 'Pozycjonowanie',
+    links: [
+      { href: '/uslugi/pozycjonowanie-stron',     label: 'Stron internetowych',    icon: 'hub'            },
+      { href: '/uslugi/pozycjonowanie-sklepow',   label: 'Sklepów internetowych',  icon: 'storefront'     },
+      { href: '/uslugi/pozycjonowanie-lokalne',   label: 'Lokalne (Local SEO)',     icon: 'location_on'    },
+    ],
+  },
+  {
+    heading: 'Usługi',
+    links: [
+      { href: '/uslugi/audyt-seo',                label: 'Audyt SEO',              icon: 'troubleshoot'   },
+      { href: '/uslugi/konsultacje-seo',          label: 'Konsultacje SEO',        icon: 'forum'          },
+      { href: '/uslugi/strony-internetowe',       label: 'Strony internetowe',     icon: 'web'            },
+    ],
+  },
 ]
+const uslugiLinks = uslugiGroups.flatMap(g => g.links)
 
 const isUslugiActive = pathname === '/uslugi' || pathname.startsWith('/uslugi/')
 ---
@@ -72,40 +86,41 @@ const isUslugiActive = pathname === '/uslugi' || pathname.startsWith('/uslugi/')
           </span>
         </div>
 
-        <!-- Dropdown panel -->
+        <!-- Dropdown panel — 2 columns -->
         <div
           id="uslugi-dropdown"
           class="absolute top-full left-1/2 -translate-x-1/2 mt-3
-                 min-w-[220px] bg-[#050A07] border border-neon/20
+                 w-[440px] bg-[#050A07] border border-neon/20
                  shadow-[0_8px_32px_rgba(45,255,95,0.1)]
                  opacity-0 invisible translate-y-2
                  group-hover/uslugi:opacity-100 group-hover/uslugi:visible group-hover/uslugi:translate-y-0
                  transition-all duration-200 ease-out"
         >
-          <!-- Top accent line -->
           <div class="h-px bg-gradient-to-r from-transparent via-neon to-transparent"></div>
-
-          <ul class="py-2">
-            {uslugiLinks.map((link, i) => {
-              const isActive = pathname === link.href
-              return (
-                <li>
-                  <a
-                    href={link.href}
-                    class:list={[
-                      'flex items-center gap-3 px-4 py-2.5 text-label-sm uppercase tracking-wider transition-colors duration-150',
-                      isActive
-                        ? 'text-neon bg-neon/5'
-                        : 'text-on-surface-variant hover:text-neon hover:bg-neon/5',
-                    ]}
-                  >
-                    <span class="material-symbols-outlined text-sm text-neon/60">{link.icon}</span>
-                    {link.label}
-                  </a>
-                </li>
-              )
-            })}
-          </ul>
+          <div class="grid grid-cols-2 divide-x divide-neon/10 py-2">
+            {uslugiGroups.map(group => (
+              <div>
+                <p class="px-4 pt-2 pb-1 text-[10px] font-bold tracking-widest text-neon/40 uppercase">{group.heading}</p>
+                {group.links.map(link => {
+                  const isActive = pathname === link.href
+                  return (
+                    <a
+                      href={link.href}
+                      class:list={[
+                        'flex items-center gap-3 px-4 py-2 text-label-sm uppercase tracking-wider transition-colors duration-150',
+                        isActive
+                          ? 'text-neon bg-neon/5'
+                          : 'text-on-surface-variant hover:text-neon hover:bg-neon/5',
+                      ]}
+                    >
+                      <span class="material-symbols-outlined text-sm text-neon/60 shrink-0">{link.icon}</span>
+                      {link.label}
+                    </a>
+                  )
+                })}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -212,24 +227,29 @@ const isUslugiActive = pathname === '/uslugi' || pathname.startsWith('/uslugi/')
           isUslugiActive ? '' : 'hidden',
         ]}
       >
-        {uslugiLinks.map((link, i) => {
-          const isActive = pathname === link.href
-          return (
-            <a
-              href={link.href}
-              class:list={[
-                'flex items-center gap-3 pl-4 py-2.5 text-label-sm uppercase tracking-wider border-b border-neon/5 transition-colors',
-                i === 0 ? 'border-t border-neon/10 mt-1' : '',
-                isActive
-                  ? 'text-neon'
-                  : 'text-on-surface-variant hover:text-neon',
-              ]}
-            >
-              <span class="material-symbols-outlined text-sm text-neon/50">{link.icon}</span>
-              {link.label}
-            </a>
-          )
-        })}
+        {uslugiGroups.map((group, gi) => (
+          <>
+            <p class:list={[
+              'pl-4 pt-3 pb-1 text-[10px] font-bold tracking-widest text-neon/40 uppercase',
+              gi === 0 ? 'border-t border-neon/10 mt-1' : 'border-t border-neon/5',
+            ]}>{group.heading}</p>
+            {group.links.map(link => {
+              const isActive = pathname === link.href
+              return (
+                <a
+                  href={link.href}
+                  class:list={[
+                    'flex items-center gap-3 pl-6 py-2.5 text-label-sm uppercase tracking-wider border-b border-neon/5 transition-colors',
+                    isActive ? 'text-neon' : 'text-on-surface-variant hover:text-neon',
+                  ]}
+                >
+                  <span class="material-symbols-outlined text-sm text-neon/50">{link.icon}</span>
+                  {link.label}
+                </a>
+              )
+            })}
+          </>
+        ))}
       </div>
     </div>
 

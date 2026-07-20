@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+---
+
+<BaseLayout
+  title="Konsultacje SEO — Doradztwo i Strategia | KrPage"
+  description="Indywidualne konsultacje SEO dla firm i agencji. Przegląd strategii, analiza konkurencji, plan działania. Bezpośredni kontakt z doświadczonym specjalistą SEO."
+  schemaType="service"
+  schemaProps={{ serviceName: 'Konsultacje SEO' }}
+>
+
+  <!-- HERO -->
+  <section class="max-w-7xl mx-auto px-6 md:px-12 pt-16 pb-xl relative overflow-hidden">
+    <div class="absolute -top-32 left-1/2 w-[500px] h-[500px] bg-neon/5 blur-[120px] rounded-full pointer-events-none"></div>
+    <div class="grid lg:grid-cols-2 gap-lg items-center">
+      <div class="space-y-6 z-10">
+        <div class="section-label">Konsultacje SEO</div>
+        <h1 class="text-headline-xl text-on-surface">
+          Bezpośredni kontakt<br />
+          <span class="text-neon">ze specjalistą</span>
+        </h1>
+        <p class="text-body-lg text-on-surface-variant max-w-xl">
+          Bez agencyjnego pośrednictwa — rozmawiasz bezpośrednio ze mną. Konsultacje SEO dla firm, e-commerce i agencji: od jednorazowej sesji strategicznej po regularne wsparcie.
+        </p>
+        <div class="flex flex-wrap gap-md">
+          <a href="/kontakt"
+             class="inline-flex items-center gap-2 bg-neon text-on-primary font-bold text-label-md uppercase tracking-widest px-lg py-md hover:brightness-110 active:scale-95 transition-all shadow-neon-sm">
+            <span class="material-symbols-outlined text-sm">calendar_month</span>
+            Zarezerwuj termin
+          </a>
+        </div>
+      </div>
+
+      <!-- Format konsultacji -->
+      <div class="bento-card p-lg">
+        <div class="text-label-sm text-neon uppercase tracking-widest mb-md">Formaty konsultacji</div>
+        <div class="space-y-3">
+          {[
+            { label: 'Sesja strategiczna', time: '60–90 min', desc: 'Przegląd sytuacji, diagnoza problemów, plan priorytetów' },
+            { label: 'Przegląd projektu',  time: '45–60 min', desc: 'Ocena aktualnych działań SEO + rekomendacje zmian'        },
+            { label: 'Szkolenie SEO',      time: '2–4 godz.', desc: 'Dla zespołów in-house i właścicieli firm'                 },
+            { label: 'Wsparcie stałe',     time: 'Miesięcznie',desc: 'Regularne konsultacje + monitoring wyników'              },
+          ].map(f => (
+            <div class="flex items-start gap-3 py-3 border-b border-outline-variant/30 last:border-0">
+              <span class="material-symbols-outlined text-neon text-sm mt-0.5 shrink-0">check_circle</span>
+              <div>
+                <p class="text-label-md text-on-surface uppercase tracking-wide">{f.label}
+                  <span class="text-neon/60 font-mono ml-2 text-[10px]">{f.time}</span>
+                </p>
+                <p class="text-body-md text-on-surface-variant text-sm">{f.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ZAKRES -->
+  <section class="bg-surface-container-low border-y border-white/5 py-xl">
+    <div class="max-w-7xl mx-auto px-6 md:px-12">
+      <div class="section-label mb-sm">Co omawiamy</div>
+      <h2 class="text-headline-lg text-on-surface mb-lg">Tematy <span class="text-neon">konsultacji SEO</span></h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+        {[
+          { icon: 'troubleshoot',   title: 'Audyt i diagnoza',        desc: 'Przegląd kondycji technicznej domeny, analiza błędów indeksowania i ocena potencjału wzrostu.' },
+          { icon: 'hub',            title: 'Strategia keyword',        desc: 'Dobór fraz, mapowanie na podstrony, analiza intencji wyszukiwania i priorytetyzacja działań.' },
+          { icon: 'link',           title: 'Profil linków',            desc: 'Ocena aktualnego profilu backlinków, plan budowy autorytetu i identyfikacja toksycznych linków.' },
+          { icon: 'article',        title: 'Strategia treści',         desc: 'Planowanie silosów tematycznych, content gap analysis i mapowanie treści pod topical authority.' },
+          { icon: 'groups',         title: 'Szkolenie in-house',       desc: 'Edukacja zespołu marketingowego lub redakcyjnego z podstaw i zaawansowanego SEO.' },
+          { icon: 'analytics',      title: 'Analityka i KPI',          desc: 'Konfiguracja GA4, Search Console i dashboardów raportujących. Mierzenie tego, co naprawdę ważne.' },
+        ].map(item => (
+          <div class="bento-card p-lg group hover:border-neon/40 transition-all">
+            <span class="material-symbols-outlined text-neon text-3xl mb-md">{item.icon}</span>
+            <h3 class="text-headline-md text-on-surface mb-sm">{item.title}</h3>
+            <p class="text-body-md text-on-surface-variant">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="max-w-7xl mx-auto px-6 md:px-12 py-xl">
+    <div class="bento-card p-xl text-center relative overflow-hidden">
+      <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div class="w-96 h-48 bg-neon/5 blur-[80px] rounded-full"></div>
+      </div>
+      <div class="relative z-10">
+        <h2 class="text-headline-lg text-on-surface mb-md">
+          Masz pytania o SEO?<br />
+          <span class="text-neon">Porozmawiajmy.</span>
+        </h2>
+        <p class="text-body-md text-on-surface-variant max-w-xl mx-auto mb-lg">
+          Pierwsza, krótka rozmowa wstępna jest bezpłatna. Powiedz mi o swoim projekcie — ocenię, czy i jak mogę pomóc.
+        </p>
+        <a href="/kontakt"
+           class="inline-flex items-center gap-2 bg-neon text-on-primary font-bold text-label-md uppercase tracking-widest px-xl py-md hover:brightness-110 active:scale-95 transition-all shadow-neon mt-md">
+          <span class="material-symbols-outlined text-sm">calendar_month</span>
+          Zarezerwuj bezpłatną rozmowę
+        </a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

@@ -1,0 +1,105 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+---
+
+<BaseLayout
+  title="Pozycjonowanie Stron Internetowych — SEO dla Firm | KrPage"
+  description="Profesjonalne pozycjonowanie stron firmowych w Google. Strategia oparta o analizę luk konkurencji, topical authority i link building. Mierzalny wzrost widoczności."
+  schemaType="service"
+  schemaProps={{ serviceName: 'Pozycjonowanie Stron Internetowych' }}
+>
+
+  <!-- HERO -->
+  <section class="max-w-7xl mx-auto px-6 md:px-12 pt-16 pb-xl relative overflow-hidden">
+    <div class="absolute -top-32 -right-32 w-[500px] h-[500px] bg-neon/5 blur-[120px] rounded-full pointer-events-none"></div>
+    <div class="grid lg:grid-cols-2 gap-lg items-center">
+      <div class="space-y-6 z-10">
+        <div class="section-label">Pozycjonowanie stron</div>
+        <h1 class="text-headline-xl text-on-surface">
+          SEO, które<br />
+          <span class="text-neon">realnie konwertuje</span>
+        </h1>
+        <p class="text-body-lg text-on-surface-variant max-w-xl">
+          Buduję długofalową widoczność strony firmowej w oparciu o autorytet tematyczny, mapowanie intencji i precyzyjny link building. Zero skrótów — tylko wyniki.
+        </p>
+        <div class="flex flex-wrap gap-md">
+          <a href="/kontakt"
+             class="inline-flex items-center gap-2 bg-neon text-on-primary font-bold text-label-md uppercase tracking-widest px-lg py-md hover:brightness-110 active:scale-95 transition-all shadow-neon-sm">
+            <span class="material-symbols-outlined text-sm">calendar_month</span>
+            Umów konsultację
+          </a>
+          <a href="/uslugi/audyt-seo"
+             class="inline-flex items-center gap-2 border border-neon/30 text-neon font-bold text-label-md uppercase tracking-widest px-lg py-md hover:bg-neon/5 transition-all">
+            Najpierw audyt
+          </a>
+        </div>
+      </div>
+
+      <div class="bento-card p-lg">
+        <div class="text-label-sm text-neon uppercase tracking-widest mb-md">Ranking Progress</div>
+        <div class="space-y-3">
+          {[
+            { phrase: 'audyt seo białystok',    pos: 1, change: '+12' },
+            { phrase: 'pozycjonowanie firm',    pos: 2, change: '+8'  },
+            { phrase: 'seo techniczne firma',   pos: 3, change: '+15' },
+            { phrase: 'content marketing seo',  pos: 5, change: '+6'  },
+            { phrase: 'agencja seo podlaskie',  pos: 7, change: '+21' },
+          ].map(r => (
+            <div class="flex items-center justify-between py-2 border-b border-outline-variant/30">
+              <span class="text-body-md text-on-surface-variant font-mono text-xs">{r.phrase}</span>
+              <div class="flex items-center gap-3">
+                <span class="text-neon font-bold text-label-md">#{r.pos}</span>
+                <span class="text-neon/60 text-label-sm">{r.change}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ZAKRES -->
+  <section class="bg-surface-container-low border-y border-white/5 py-xl">
+    <div class="max-w-7xl mx-auto px-6 md:px-12">
+      <div class="section-label mb-sm">Zakres działań</div>
+      <h2 class="text-headline-lg text-on-surface mb-lg">Co wchodzi w zakres<br /><span class="text-neon">pozycjonowania stron</span></h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+        {[
+          { icon: 'map',              title: 'Keyword Mapping',        desc: 'Mapowanie fraz na podstrony z uwzględnieniem intencji wyszukiwania. Każda sekcja strony atakuje konkretne zapytania.' },
+          { icon: 'hub',              title: 'Linkowanie Wewnętrzne',  desc: 'Architektura silosów tematycznych — przepływ autorytetu tam, gdzie generuje wyniki sprzedażowe.' },
+          { icon: 'link',             title: 'Link Building',          desc: 'Pozyskiwanie wartościowych backlinków z domenami o wysokim autorytecie. Zero farm i PBN.' },
+          { icon: 'psychology',       title: 'Topical Authority',      desc: 'Budowa pozycji eksperta przez systematyczne pokrywanie tematów i pytań Twoich klientów.' },
+          { icon: 'manage_search',    title: 'Monitoring Pozycji',     desc: 'Codzienny tracking fraz z alertami dla istotnych zmian — reagujemy zanim Google Cię zaskoczy.' },
+          { icon: 'bar_chart_4_bars', title: 'Raporty Miesięczne',     desc: 'Przejrzyste raporty z danymi, które mają znaczenie dla Twojego biznesu — bez zbędnego szumu.' },
+        ].map(item => (
+          <div class="bento-card p-lg group hover:border-neon/40 transition-all">
+            <span class="material-symbols-outlined text-neon text-3xl mb-md">{item.icon}</span>
+            <h3 class="text-headline-md text-on-surface mb-sm">{item.title}</h3>
+            <p class="text-body-md text-on-surface-variant">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="max-w-7xl mx-auto px-6 md:px-12 py-xl">
+    <div class="bento-card p-xl text-center relative overflow-hidden">
+      <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div class="w-96 h-48 bg-neon/5 blur-[80px] rounded-full"></div>
+      </div>
+      <div class="relative z-10">
+        <h2 class="text-headline-lg text-on-surface mb-md">
+          Twoja strona może być następna.<br />
+          <span class="text-neon">Zacznij od bezpłatnej analizy.</span>
+        </h2>
+        <a href="/kontakt"
+           class="inline-flex items-center gap-2 bg-neon text-on-primary font-bold text-label-md uppercase tracking-widest px-xl py-md hover:brightness-110 active:scale-95 transition-all shadow-neon mt-md">
+          <span class="material-symbols-outlined text-sm">calendar_month</span>
+          Umów bezpłatną konsultację
+        </a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

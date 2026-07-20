@@ -1,0 +1,122 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+---
+
+<BaseLayout
+  title="Strony Internetowe — Projektowanie i Tworzenie z SEO | KrPage"
+  description="Tworzenie stron internetowych zoptymalizowanych pod SEO od podstaw. Nowoczesny stos technologiczny, błyskawiczne ładowanie, Core Web Vitals w normie. Strona, która rankuje."
+  schemaType="service"
+  schemaProps={{ serviceName: 'Strony Internetowe' }}
+>
+
+  <!-- HERO -->
+  <section class="max-w-7xl mx-auto px-6 md:px-12 pt-16 pb-xl relative overflow-hidden">
+    <div class="absolute -top-32 -right-32 w-[500px] h-[500px] bg-neon/5 blur-[120px] rounded-full pointer-events-none"></div>
+    <div class="grid lg:grid-cols-2 gap-lg items-center">
+      <div class="space-y-6 z-10">
+        <div class="section-label">Strony internetowe</div>
+        <h1 class="text-headline-xl text-on-surface">
+          Strona zbudowana<br />
+          <span class="text-neon">pod ranking od dnia 1</span>
+        </h1>
+        <p class="text-body-lg text-on-surface-variant max-w-xl">
+          Projektuję i buduję strony internetowe z SEO wbudowanym od fundamentów — nie dorzucanym po fakcie. Szybkie, techniczne perfekcyjne i gotowe do pozycjonowania.
+        </p>
+        <div class="flex flex-wrap gap-md">
+          <a href="/kontakt"
+             class="inline-flex items-center gap-2 bg-neon text-on-primary font-bold text-label-md uppercase tracking-widest px-lg py-md hover:brightness-110 active:scale-95 transition-all shadow-neon-sm">
+            <span class="material-symbols-outlined text-sm">calendar_month</span>
+            Omówmy projekt
+          </a>
+        </div>
+      </div>
+
+      <!-- Metrics panel -->
+      <div class="bento-card p-lg">
+        <div class="text-label-sm text-neon uppercase tracking-widest mb-md">Core Web Vitals — przykład</div>
+        <div class="space-y-4">
+          {[
+            { metric: 'LCP (Largest Contentful Paint)', value: '0.8s',   max: 2.5, pct: 68, color: 'var(--neon)' },
+            { metric: 'INP (Interaction to Next Paint)', value: '48ms',  max: 200, pct: 76, color: 'var(--neon)' },
+            { metric: 'CLS (Cumulative Layout Shift)',   value: '0.02',  max: 0.1, pct: 80, color: 'var(--neon)' },
+          ].map(m => (
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="text-label-sm text-on-surface-variant">{m.metric}</span>
+                <span class="text-label-sm text-neon font-bold">{m.value}</span>
+              </div>
+              <div class="h-1.5 bg-outline-variant/20 rounded-full overflow-hidden">
+                <div class="h-full bg-neon rounded-full shadow-neon-sm" style={`width: ${m.pct}%`}></div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div class="mt-md pt-md border-t border-outline-variant/30 flex items-center gap-2">
+          <span class="material-symbols-outlined text-neon text-sm">verified</span>
+          <span class="text-label-sm text-on-surface-variant">Lighthouse Score: <strong class="text-neon">98 / 100</strong></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ZAKRES -->
+  <section class="bg-surface-container-low border-y border-white/5 py-xl">
+    <div class="max-w-7xl mx-auto px-6 md:px-12">
+      <div class="section-label mb-sm">Jak buduję</div>
+      <h2 class="text-headline-lg text-on-surface mb-lg">Co otrzymujesz<br /><span class="text-neon">w każdym projekcie</span></h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+        {[
+          { icon: 'speed',         title: 'Błyskawiczne Ładowanie',   desc: 'Astro + statyczny output = Core Web Vitals w normie od dnia 1. LCP poniżej 1s to standard, nie wyjątek.' },
+          { icon: 'search',        title: 'SEO od Fundamentów',       desc: 'Semantyczny HTML, schema markup, hreflang, sitemap, robots.txt — techniczna baza pod pozycjonowanie.' },
+          { icon: 'devices',       title: 'Responsywny Design',        desc: 'Perfekcyjne wyświetlanie na każdym urządzeniu. Mobile-first z dbałością o UX i konwersje.' },
+          { icon: 'lock',          title: 'Bezpieczeństwo (HTTPS)',    desc: 'SSL, Content Security Policy, ochrona przed typowymi atakami. Strona bezpieczna dla użytkowników.' },
+          { icon: 'analytics',     title: 'Analityka od Początku',     desc: 'Integracja GA4, Search Console i opcjonalnie Hotjar. Wiesz kto odwiedza Twoją stronę od dnia premiery.' },
+          { icon: 'edit_note',     title: 'Łatwa Edycja Treści',       desc: 'Opcjonalne CMS (Netlify CMS, Keystatic). Zmieniasz treści samodzielnie bez dotykania kodu.' },
+        ].map(item => (
+          <div class="bento-card p-lg group hover:border-neon/40 transition-all">
+            <span class="material-symbols-outlined text-neon text-3xl mb-md">{item.icon}</span>
+            <h3 class="text-headline-md text-on-surface mb-sm">{item.title}</h3>
+            <p class="text-body-md text-on-surface-variant">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- STACK + CTA -->
+  <section class="max-w-7xl mx-auto px-6 md:px-12 py-xl">
+    <div class="section-label mb-sm">Technologie</div>
+    <h2 class="text-headline-lg text-on-surface mb-lg">Nowoczesny <span class="text-neon">stos technologiczny</span></h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-gutter mb-xl">
+      {[
+        { icon: 'rocket_launch', label: 'Astro' },
+        { icon: 'palette',       label: 'Tailwind CSS' },
+        { icon: 'cloud',         label: 'Netlify / Vercel' },
+        { icon: 'edit_note',     label: 'Headless CMS' },
+      ].map(t => (
+        <div class="bento-card p-lg flex flex-col items-center text-center hover:border-neon/40 transition-all">
+          <span class="material-symbols-outlined text-neon text-3xl mb-sm">{t.icon}</span>
+          <p class="text-label-md text-on-surface uppercase tracking-widest">{t.label}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="bento-card p-xl text-center relative overflow-hidden">
+      <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div class="w-96 h-48 bg-neon/5 blur-[80px] rounded-full"></div>
+      </div>
+      <div class="relative z-10">
+        <h2 class="text-headline-lg text-on-surface mb-md">
+          Potrzebujesz strony,<br />
+          <span class="text-neon">która rankuje i konwertuje?</span>
+        </h2>
+        <a href="/kontakt"
+           class="inline-flex items-center gap-2 bg-neon text-on-primary font-bold text-label-md uppercase tracking-widest px-xl py-md hover:brightness-110 active:scale-95 transition-all shadow-neon mt-md">
+          <span class="material-symbols-outlined text-sm">calendar_month</span>
+          Omówmy Twój projekt
+        </a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
