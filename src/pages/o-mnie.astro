@@ -118,7 +118,7 @@ const tools = [
           style="filter: brightness(0.95) contrast(1.05);"
         />
         <div class="absolute -bottom-3 left-1/2 -translate-x-1/2 z-20 w-max max-w-[90%]
-                    bg-[#050A07] border border-neon/30 px-3 py-1.5
+                    bg-[#06070f] border border-neon/30 px-3 py-1.5
                     flex items-center gap-2 shadow-neon-sm">
           <span class="w-2 h-2 rounded-full bg-neon animate-pulse shrink-0"></span>
           <span class="text-label-sm text-neon uppercase tracking-widest leading-snug">Dostępny dla nowych projektów</span>
@@ -148,7 +148,7 @@ const tools = [
             data-tool={i}
             class:list={[
               'tool-card bento-card p-lg transition-all duration-500',
-              i === 0 ? 'border-neon/40 shadow-[0_0_20px_rgba(45,255,95,0.08)]' : 'opacity-70',
+              i === 0 ? 'border-neon/40 shadow-[0_0_20px_rgba(64,77,255,0.08)]' : 'opacity-70',
             ]}
           >
             <div class:list={[
@@ -188,7 +188,7 @@ const tools = [
                 'w-10 h-10 rounded-full border-2 flex items-center justify-center mb-4 z-10 transition-all duration-300',
                 item.current
                   ? 'bg-neon border-neon shadow-neon-sm'
-                  : 'bg-[#050A07] border-neon/40 group-hover:border-neon',
+                  : 'bg-[#06070f] border-neon/40 group-hover:border-neon',
               ]}>
                 <span class:list={[
                   'material-symbols-outlined text-sm',
@@ -233,7 +233,7 @@ const tools = [
           <div class="flex flex-col items-center">
             <div class:list={[
               'w-10 h-10 rounded-full border-2 flex items-center justify-center shrink-0 z-10',
-              item.current ? 'bg-neon border-neon shadow-neon-sm' : 'bg-[#050A07] border-neon/40',
+              item.current ? 'bg-neon border-neon shadow-neon-sm' : 'bg-[#06070f] border-neon/40',
             ]}>
               <span class:list={['material-symbols-outlined text-sm', item.current ? 'text-on-primary' : 'text-neon/60']}>
                 {item.current ? 'star' : 'circle'}
@@ -278,11 +278,11 @@ const tools = [
     aria-modal="true"
     aria-labelledby="modal-company"
   >
-    <div id="modal-backdrop" class="absolute inset-0 bg-[#050A07]/95 backdrop-blur-md"></div>
+    <div id="modal-backdrop" class="absolute inset-0 bg-[#06070f]/95 backdrop-blur-md"></div>
 
     <div class="relative z-10 w-full max-w-2xl max-h-[90vh] overflow-y-auto
                 bg-[#080F09] border border-neon/20
-                shadow-[0_0_60px_rgba(45,255,95,0.1)]">
+                shadow-[0_0_60px_rgba(64,77,255,0.1)]">
 
       <!-- Header -->
       <div class="sticky top-0 z-20 flex items-center justify-between px-lg py-md
@@ -374,7 +374,7 @@ const tools = [
   <section class="max-w-7xl mx-auto px-6 md:px-12 pb-xl">
     <div class="bento-card p-xl flex flex-col items-center text-center relative overflow-hidden">
       <div class="absolute inset-0 opacity-5 pointer-events-none"
-           style="background-image: linear-gradient(rgba(45,255,95,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(45,255,95,0.3) 1px, transparent 1px); background-size: 20px 20px;"></div>
+           style="background-image: linear-gradient(rgba(64,77,255,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(64,77,255,0.3) 1px, transparent 1px); background-size: 20px 20px;"></div>
       <div class="relative z-10">
         <h2 class="text-headline-xl text-on-surface mb-md">
           Gotowy na <span class="text-neon">nowy wymiar</span> wzrostu?
@@ -449,14 +449,14 @@ const tools = [
       const iconBox = card.querySelector<HTMLElement>('.w-12')
       if (i === idx) {
         card.classList.remove('opacity-70')
-        card.classList.add('border-neon/40', 'shadow-[0_0_20px_rgba(45,255,95,0.08)]')
+        card.classList.add('border-neon/40', 'shadow-[0_0_20px_rgba(64,77,255,0.08)]')
         if (iconBox) {
           iconBox.classList.replace('bg-surface-container-highest', 'bg-neon/10')
           iconBox.classList.replace('border-white/5', 'border-neon/40')
         }
       } else {
         card.classList.add('opacity-70')
-        card.classList.remove('border-neon/40', 'shadow-[0_0_20px_rgba(45,255,95,0.08)]')
+        card.classList.remove('border-neon/40', 'shadow-[0_0_20px_rgba(64,77,255,0.08)]')
         if (iconBox) {
           iconBox.classList.replace('bg-neon/10', 'bg-surface-container-highest')
           iconBox.classList.replace('border-neon/40', 'border-white/5')

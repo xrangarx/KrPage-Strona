@@ -83,7 +83,7 @@ const latestPosts = allPosts
           />
           <!-- Status badge -->
           <div class="absolute -bottom-3 left-1/2 -translate-x-1/2 z-20 w-max max-w-[90%]
-                      bg-[#050A07] border border-neon/30 px-3 py-1.5
+                      bg-[#06070f] border border-neon/30 px-3 py-1.5
                       flex items-center gap-2 shadow-neon-sm">
             <span class="w-2 h-2 rounded-full bg-neon animate-pulse shrink-0"></span>
             <span class="text-label-sm text-neon uppercase tracking-widest leading-snug">Dostępny dla nowych projektów</span>
@@ -175,7 +175,7 @@ const latestPosts = allPosts
           href:    '/uslugi/content-marketing',
         },
       ].map(s => (
-        <div class="bento-card p-lg relative overflow-hidden group flex flex-col hover:border-neon/40 hover:shadow-[0_0_24px_rgba(45,255,95,0.08)] transition-all duration-300">
+        <div class="bento-card p-lg relative overflow-hidden group flex flex-col hover:border-neon/40 hover:shadow-[0_0_24px_rgba(64,77,255,0.08)] transition-all duration-300">
           <div class="absolute top-0 right-0 p-4 text-neon/10 group-hover:text-neon/25 transition-colors">
             <span class="material-symbols-outlined text-6xl">{s.icon}</span>
           </div>
@@ -295,7 +295,7 @@ const latestPosts = allPosts
         { category: 'Usługi B2B',  prefix: 'Top 3 na ', num: 47, suffix: ' fraz',    period: '4 miesiące',  desc: 'Firma consultingowa. Strategia treści oparta o topical authority w wąskiej niszy.' },
         { category: 'Local SEO',   prefix: '+', num: 520, suffix: '% w Google Maps', period: '3 miesiące',  desc: 'Sieć gabinetów medycznych. Optymalizacja GMB + lokalne silosy contentowe.' },
       ].map((cs, i) => (
-        <div class="bento-card p-lg flex flex-col gap-sm hover:border-neon/40 hover:shadow-[0_0_24px_rgba(45,255,95,0.08)] transition-all duration-300 group">
+        <div class="bento-card p-lg flex flex-col gap-sm hover:border-neon/40 hover:shadow-[0_0_24px_rgba(64,77,255,0.08)] transition-all duration-300 group">
           <span class="text-label-sm uppercase tracking-widest text-neon/60 font-mono">{cs.category}</span>
           <p class="text-headline-md text-neon font-black">
             {cs.prefix}<span class="counter" data-target={cs.num} data-index={i}>0</span>{cs.suffix}
@@ -328,7 +328,7 @@ const latestPosts = allPosts
 
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-gutter">
       {latestPosts.map(post => (
-        <article class="bento-card overflow-hidden group hover:border-neon/40 hover:shadow-[0_0_24px_rgba(45,255,95,0.08)] transition-all duration-300 flex flex-col">
+        <article class="bento-card overflow-hidden group hover:border-neon/40 hover:shadow-[0_0_24px_rgba(64,77,255,0.08)] transition-all duration-300 flex flex-col">
           <a href={`/blog/${post.id}`} class="block overflow-hidden h-48">
             <img
               src={post.data.image}

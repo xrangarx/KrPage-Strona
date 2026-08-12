@@ -15,10 +15,10 @@
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
-      --bg:#050A07;--bg2:#0D1410;--bg3:#151C17;
-      --border:rgba(45,255,95,0.12);--neon:#2DFF5F;
-      --neon10:rgba(45,255,95,0.08);--neon30:rgba(45,255,95,0.3);
-      --text:#dee4de;--muted:#7a9478;--danger:#ff4d6d;--warn:#ffc800;
+      --bg:#06070f;--bg2:#0b0c1e;--bg3:#111229;
+      --border:rgba(64,77,255,0.12);--neon:#404DFF;
+      --neon10:rgba(64,77,255,0.08);--neon30:rgba(64,77,255,0.3);
+      --text:#e2e1ff;--muted:#7a7aaa;--danger:#ff4d6d;--warn:#ffc800;
     }
     body{font-family:'Manrope',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
     .hidden{display:none!important}
@@ -26,7 +26,7 @@
 
     /* LOGIN */
     #login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center}
-    .login-box{width:100%;max-width:460px;padding:48px 40px;background:var(--bg2);border:1px solid var(--border);box-shadow:0 0 60px rgba(45,255,95,0.06)}
+    .login-box{width:100%;max-width:460px;padding:48px 40px;background:var(--bg2);border:1px solid var(--border);box-shadow:0 0 60px rgba(64,77,255,0.06)}
     .admin-logo{display:flex;align-items:center;gap:10px;font-size:22px;font-weight:800;color:var(--neon);margin-bottom:8px}
     .login-box>p{color:var(--muted);font-size:14px;margin-bottom:24px;line-height:1.6}
     .login-warn{background:rgba(255,200,0,0.08);border:1px solid rgba(255,200,0,0.3);color:var(--warn);font-size:12px;padding:10px 14px;margin-bottom:16px;line-height:1.6}
@@ -34,7 +34,7 @@
 
     /* BUTTONS */
     .btn{display:inline-flex;align-items:center;gap:7px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;padding:10px 18px;border:none;cursor:pointer;transition:all .15s}
-    .btn-primary{background:var(--neon);color:#003010}
+    .btn-primary{background:var(--neon);color:#ffffff}
     .btn-primary:hover{filter:brightness(1.15)}
     .btn-primary:disabled{opacity:.5;cursor:not-allowed}
     .btn-secondary{background:transparent;color:var(--muted);border:1px solid var(--border)}
@@ -157,7 +157,7 @@
     .rename-input-wrap input:focus{border-color:var(--neon30)}
     .rename-actions{display:flex;gap:4px}
     .rename-confirm,.rename-cancel{flex:1;padding:4px 8px;font-size:10px;font-weight:700;text-transform:uppercase;cursor:pointer;border:none}
-    .rename-confirm{background:var(--neon);color:#003010}
+    .rename-confirm{background:var(--neon);color:#ffffff}
     .rename-cancel{background:var(--bg3);color:var(--muted);border:1px solid var(--border)}
 
     /* INSPECTOR */
@@ -166,7 +166,7 @@
     .inspector-box>p{color:var(--muted);font-size:14px;line-height:1.7;margin-bottom:24px}
     .bookmarklet-link{
       display:inline-flex;align-items:center;gap:8px;
-      background:var(--neon);color:#003010;font-size:14px;font-weight:800;
+      background:var(--neon);color:#ffffff;font-size:14px;font-weight:800;
       padding:12px 20px;text-decoration:none;cursor:grab;letter-spacing:.02em
     }
     .drag-hint{font-size:12px;color:var(--muted);margin-top:8px;margin-bottom:24px}
@@ -180,9 +180,9 @@
     .ex-box code{font-family:'Courier New',monospace;font-size:12px;color:var(--neon)}
 
     /* IMAGE PICKER MODAL */
-    #img-picker-modal{position:fixed;inset:0;background:rgba(5,10,7,.92);z-index:9000;display:none;align-items:center;justify-content:center;padding:20px}
+    #img-picker-modal{position:fixed;inset:0;background:rgba(6,7,15,.92);z-index:9000;display:none;align-items:center;justify-content:center;padding:20px}
     #img-picker-modal.open{display:flex}
-    .img-picker-inner{background:var(--bg2);border:1px solid var(--border);width:100%;max-width:820px;max-height:85vh;display:flex;flex-direction:column;box-shadow:0 0 60px rgba(45,255,95,.12)}
+    .img-picker-inner{background:var(--bg2);border:1px solid var(--border);width:100%;max-width:820px;max-height:85vh;display:flex;flex-direction:column;box-shadow:0 0 60px rgba(64,77,255,.12)}
     .img-picker-header{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--border)}
     .img-picker-header h3{font-size:15px;font-weight:800;flex:1;color:var(--neon)}
     .img-picker-tabs{display:flex;gap:4px;padding:12px 16px 0;border-bottom:1px solid var(--border)}
@@ -200,7 +200,7 @@
       position:fixed;bottom:20px;right:20px;z-index:9999;
       background:var(--bg2);border:1px solid var(--neon30);color:var(--neon);
       padding:10px 18px;font-size:13px;font-weight:600;display:none;
-      align-items:center;gap:8px;box-shadow:0 0 20px rgba(45,255,95,0.15);
+      align-items:center;gap:8px;box-shadow:0 0 20px rgba(64,77,255,0.15);
       animation:slideIn .2s ease
     }
     @keyframes slideIn{from{transform:translateY(8px);opacity:0}to{transform:translateY(0);opacity:1}}
@@ -538,7 +538,7 @@ async function ghDelete(path, sha, msg) {
    FRONTMATTER
 ══════════════════════════════════════════ */
 function buildMd(f) {
-  var img = f.image || ('https://placehold.co/800x450/050A07/2DFF5F?text='+encodeURIComponent(f.category))
+  var img = f.image || ('https://placehold.co/800x450/06070F/404DFF?text='+encodeURIComponent(f.category))
   return '---\ntitle: "'+f.title.replace(/"/g,'\\"')+'"\ndescription: "'+f.description.replace(/"/g,'\\"')+'"\ndate: "'+f.date+'"\ncategory: "'+f.category+'"\nimage: "'+img+'"\nreadTime: "'+f.readTime+'"\n---\n\n'+f.body
 }
 function parseMd(raw) {
@@ -907,7 +907,7 @@ async function loadImages() {
       card.dataset.url  = url
       card.dataset.name = f.name
       card.innerHTML =
-        '<img src="'+url+'" alt="'+f.name+'" loading="lazy" onerror="this.src=\'https://placehold.co/160x110/0D1410/2DFF5F?text=IMG\'" />'+
+        '<img src="'+url+'" alt="'+f.name+'" loading="lazy" onerror="this.src=\'https://placehold.co/160x110/0b0c1e/404DFF?text=IMG\'" />'+
         '<div class="image-card-info">'+
           '<div class="image-card-name">'+f.name+'</div>'+
           '<div class="image-card-actions">'+
@@ -1039,7 +1039,7 @@ async function loadPickerImages() {
       card.className = 'picker-img-card'
       card.title = f.name
       card.innerHTML =
-        '<img src="'+url+'" alt="'+f.name+'" loading="lazy" onerror="this.src=\'https://placehold.co/140x90/0D1410/2DFF5F?text=IMG\'" />'+
+        '<img src="'+url+'" alt="'+f.name+'" loading="lazy" onerror="this.src=\'https://placehold.co/140x90/0b0c1e/404DFF?text=IMG\'" />'+
         '<div class="picker-img-name">'+f.name+'</div>'
       card.addEventListener('click', function(){
         document.getElementById('f-image').value = url
@@ -1057,7 +1057,7 @@ async function loadPickerImages() {
    BOOKMARKLET
 ══════════════════════════════════════════ */
 function initBookmarklet() {
-  var code = "(function(){var ID='krpage-ins';if(document.getElementById(ID)){document.getElementById(ID).remove();var t2=document.getElementById(ID+'-t');if(t2)t2.remove();return;}var s=document.createElement('style');s.id=ID;s.textContent='.ki-h{outline:2px solid #2dff5f!important;outline-offset:2px!important;cursor:crosshair!important;}#'+ID+'-t{position:fixed;bottom:0;left:0;right:0;background:#050A07;border-top:2px solid #2dff5f;color:#2dff5f;padding:10px 20px;font:700 12px/1 monospace;z-index:2147483647;pointer-events:none;}';document.head.appendChild(s);var t=document.createElement('div');t.id=ID+'-t';t.textContent='🔍 KrPage Inspector — kliknij element | ponowny klik zakładki = wyłącz';document.body.appendChild(t);var last=null;document.addEventListener('mouseover',function(e){if(last)last.classList.remove('ki-h');last=e.target;if(last.id!==ID+'-t')last.classList.add('ki-h');},true);document.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();var el=e.target;var cls=Array.from(el.classList).join('.');var tag=el.tagName.toLowerCase();var sec=el.closest('section');var sh=sec&&sec.querySelector('h1,h2,h3,h4');var info=tag+(cls?'.'+cls:'')+(sh?' | sekcja: \"'+sh.textContent.trim()+'\"':'');navigator.clipboard.writeText(info).then(function(){t.textContent='✅ Skopiowano: '+info;setTimeout(function(){t.textContent='🔍 KrPage Inspector — kliknij element';},3000);});},true);})();"
+  var code = "(function(){var ID='krpage-ins';if(document.getElementById(ID)){document.getElementById(ID).remove();var t2=document.getElementById(ID+'-t');if(t2)t2.remove();return;}var s=document.createElement('style');s.id=ID;s.textContent='.ki-h{outline:2px solid #404dff!important;outline-offset:2px!important;cursor:crosshair!important;}#'+ID+'-t{position:fixed;bottom:0;left:0;right:0;background:#06070f;border-top:2px solid #404dff;color:#404dff;padding:10px 20px;font:700 12px/1 monospace;z-index:2147483647;pointer-events:none;}';document.head.appendChild(s);var t=document.createElement('div');t.id=ID+'-t';t.textContent='🔍 KrPage Inspector — kliknij element | ponowny klik zakładki = wyłącz';document.body.appendChild(t);var last=null;document.addEventListener('mouseover',function(e){if(last)last.classList.remove('ki-h');last=e.target;if(last.id!==ID+'-t')last.classList.add('ki-h');},true);document.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();var el=e.target;var cls=Array.from(el.classList).join('.');var tag=el.tagName.toLowerCase();var sec=el.closest('section');var sh=sec&&sec.querySelector('h1,h2,h3,h4');var info=tag+(cls?'.'+cls:'')+(sh?' | sekcja: \"'+sh.textContent.trim()+'\"':'');navigator.clipboard.writeText(info).then(function(){t.textContent='✅ Skopiowano: '+info;setTimeout(function(){t.textContent='🔍 KrPage Inspector — kliknij element';},3000);});},true);})();"
   document.getElementById('bookmarklet-link').href = 'javascript:'+code
 }
 </script>

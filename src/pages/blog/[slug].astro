@@ -30,7 +30,7 @@ const related  = allPosts
   <!-- Hero image -->
   <div class="w-full h-56 md:h-80 overflow-hidden relative">
     <img src={post.data.image} alt={post.data.title} class="w-full h-full object-cover" />
-    <div class="absolute inset-0 bg-gradient-to-t from-[#050A07] via-[#050A07]/40 to-transparent"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-[#06070f] via-[#06070f]/40 to-transparent"></div>
   </div>
 
   <!-- Main layout -->
@@ -206,8 +206,8 @@ const related  = allPosts
         tocLinks.forEach(function(link) {
           var isActive = link.getAttribute('data-toc-link') === slug
           if (isActive) {
-            link.style.color = '#2dff5f'
-            link.style.borderLeftColor = '#2dff5f'
+            link.style.color = '#404dff'
+            link.style.borderLeftColor = '#404dff'
             link.style.fontWeight = '700'
           } else {
             link.style.color = ''
