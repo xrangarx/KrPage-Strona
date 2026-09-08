@@ -74,3 +74,6 @@
   .text-display     { font-size: clamp(36px, 9vw, 48px); line-height: 1.1;  }
   .text-body-lg     { font-size: 16px; }
 }
+.inline-flex{
+  display: flex;
+}
