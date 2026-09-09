@@ -1,10 +1,13 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
-import { getCollection } from 'astro:content'
+import { getCollection, getEntry, render } from 'astro:content'
 
 const allCases = await getCollection('realizacje')
 const cases    = allCases.sort((a, b) => a.data.title.localeCompare(b.data.title))
 const typeFilters = ['Wszystkie', 'SEO', 'Strona']
+
+const jakDziaEntry = await getEntry('pages', 'jak-dzialm')
+const { Content: JakDziaContent } = jakDziaEntry ? await render(jakDziaEntry) : { Content: null }
 ---
 
 <BaseLayout
@@ -24,6 +27,18 @@ const typeFilters = ['Wszystkie', 'SEO', 'Strona']
         Konkretne projekty, konkretne liczby. Poniżej znajdziesz case studies z pozycjonowania SEO oraz realizacji stron internetowych — bez upiększeń, z prawdziwymi wynikami.
       </p>
     </div>
+
+    {JakDziaContent && (
+      <div class="max-w-3xl mb-xl prose prose-invert max-w-none
+                  prose-headings:text-on-surface prose-headings:font-black
+                  prose-h2:text-xl prose-h2:mt-6 prose-h2:mb-3 prose-h2:pb-2 prose-h2:border-b prose-h2:border-outline-variant/40
+                  prose-p:text-on-surface-variant prose-p:leading-relaxed prose-p:mb-4 prose-p:text-base
+                  prose-li:text-on-surface-variant prose-li:leading-relaxed
+                  prose-ol:my-3 prose-ul:my-3
+                  prose-strong:text-on-surface prose-strong:font-semibold">
+        <JakDziaContent />
+      </div>
+    )}
 
     <!-- Type filters -->
     <div class="flex flex-wrap gap-2 mb-xl">
