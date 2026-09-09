@@ -1,20 +1,24 @@
 ---
 title: "Pozycjonowanie Lokalne — Local SEO i Google Moja Firma"
-description: "Pozycjonowanie lokalne dla firm usługowych. Optymalizacja Google Moja Firma, local pack, cytowania NAP i content lokalny."
+description: "Pozycjonowanie lokalne w Google i Google Maps. Optymalizacja Google Moja Firma, lokalne cytowania NAP, lokalny content i link building. Więcej klientów z okolicy."
 image: "/images/og-pozycjonowanie-lokalne.webp"
+hero_desc: "Pomagam firmom usługowym i lokalnym biznesom zdobywać klientów z Google Maps i lokalnych wyników wyszukiwania. Twój biznes na pierwszym miejscu w okolicy."
+zakres_desc: "Kompleksowe działania Local SEO — od optymalizacji profilu GMB po budowę lokalnego autorytetu domenowego."
+cta_title: "Chcesz być #1 w Google"
+item1_title: "Google Moja Firma"
+item1_desc: "Pełna optymalizacja profilu GMB: kategorie, opisy, zdjęcia, godziny, atrybuty. Strategia postów i Q&A."
+item2_title: "Lokalne Cytowania (NAP)"
+item2_desc: "Budowa spójnych wpisów w katalogach: nazwa, adres, telefon. Korekta niespójności, które blokują pozycje."
+item3_title: "Strategia Opinii"
+item3_desc: "Procesy pozyskiwania recenzji Google, odpowiedzi na opinie i zarządzanie reputacją online."
+item4_title: "Lokalny Content"
+item4_desc: "Treści optymalizowane pod frazy \"[usługa] + [miasto]\". Podstrony lokalne dla wielu oddziałów."
+item5_title: "Lokalny Link Building"
+item5_desc: "Backlinki z lokalnych portali, sponsoringów i organizacji. Wzmacniają sygnały geograficzne w Google."
+item6_title: "Monitoring Lokalny"
+item6_desc: "Śledzenie pozycji w Google Maps i wynikach lokalnych z podziałem na konkretne miasto i dzielnicę."
+branza1_label: "Medycyna i zdrowie"
+branza2_label: "Prawo i finanse"
+branza3_label: "Usługi techniczne"
+branza4_label: "Gastronomia i handel"
 ---
-
-## Widoczność tam, gdzie szukają klienci
-
-Local SEO to nie tylko Google Maps — to pełen ekosystem: profil GMB, cytowania w katalogach, recenzje i content z lokalnymi słowami kluczowymi.
-
-## Co optymalizuję?
-
-- Google Business Profile: opis, zdjęcia, kategorie, posty, Q&A
-- Cytowania NAP (Name, Address, Phone) w katalogach branżowych
-- Strony lokalne i landing pages dla konkretnych miejscowości
-- Strategie zdobywania recenzji Google
-
-## Dla kogo?
-
-Idealnie sprawdza się dla: gabinetów lekarskich, restauracji, prawników, firm budowlanych, salonów beauty — każdego, kto obsługuje klientów w konkretnej lokalizacji.

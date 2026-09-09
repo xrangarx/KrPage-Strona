@@ -1,20 +1,34 @@
 ---
-title: "Content Marketing — Treści które Pozycjonują i Sprzedają"
-description: "Strategia content marketingowa oparta na SEO: planowanie klastrów tematycznych, pisanie artykułów, optymalizacja istniejących treści i budowa topical authority."
+title: "Content Marketing SEO — Treści które Pozycjonują"
+description: "SEO content marketing: strategia treści oparta o topical authority, silosy tematyczne i optymalizację NLP. Tworzymy treści, które rankują i konwertują."
 image: "/images/og-content-marketing.webp"
+hero_desc: "Nie piszemy artykułów dla samego pisania. Każdy tekst to precyzyjnie zaprojektowany asset SEO — z mapą fraz, strukturą NLP i celem konwersyjnym."
+cta_title: "Chcesz treści które"
+cta_desc: "Omówmy strategię contentową dla Twojej domeny. Pokażę Ci jak budować autorytet tematyczny krok po kroku."
+type1_title: "Artykuły Blogowe"
+type1_desc: "Długie formy zoptymalizowane pod frazy informacyjne i topical authority."
+type2_title: "Teksty na Strony"
+type2_desc: "Landing pages i strony usługowe pisane pod konwersję i intencję transakcyjną."
+type3_title: "Opisy Produktów"
+type3_desc: "Unikalne opisy e-commerce z semantyką i słowami kluczowymi long-tail."
+type4_title: "Treści Pillar"
+type4_desc: "Strony filarowe budujące topical authority dla całych silosów tematycznych."
+step1_title: "Keyword Research"
+step1_desc: "Mapowanie intencji użytkowników i identyfikacja fraz o najwyższym potencjale konwersji."
+step2_title: "Topical Map"
+step2_desc: "Projektowanie silosów tematycznych — które tematy, w jakiej kolejności, z jakimi linkami."
+step3_title: "Brief + NLP Outline"
+step3_desc: "Szczegółowy brief z frazami LSI, pytaniami użytkowników i wymaganą strukturą semantyczną."
+step4_title: "Tworzenie i wdrożenie"
+step4_desc: "Pisanie, optymalizacja on-page, CTA i interlinking zgodnie z architekturą silosów."
+step5_title: "Monitoring wyników"
+step5_desc: "Śledzenie pozycji, ruchu i czasu na stronie — iterujemy na podstawie danych."
+stat1_value: "3x"
+stat1_label: "Więcej ruchu organicznego vs. treści bez strategii"
+stat2_value: "68%"
+stat2_label: "Artykułów rankuje w TOP10 w ciągu 6 miesięcy"
+stat3_value: "2.4x"
+stat3_label: "Wyższy czas na stronie po optymalizacji NLP"
+stat4_value: "0%"
+stat4_label: "Duplicate content w dostarczanych materiałach"
 ---
-
-## Treść to fundament SEO
-
-Bez wartościowego contentu nie ma pozycji — Google nagradza ekspertyzę, nie liczbę słów. Buduję strategie oparte na topical authority i searcher intent.
-
-## Co dostajesz?
-
-- Audyt istniejących treści: co zachować, co poprawić, co usunąć
-- Mapa klastrów tematycznych (pillar pages + supporting content)
-- Briefe contentowe z wytycznymi SEO i NLP
-- Opcjonalnie: tworzenie treści lub nadzór redakcyjny
-
-## Podejście
-
-Piszę dla ludzi, optymalizuję pod algorytmy. Każdy artykuł ma jasny cel — ruch z konkretnych fraz i konwersja czytelnika w klienta.

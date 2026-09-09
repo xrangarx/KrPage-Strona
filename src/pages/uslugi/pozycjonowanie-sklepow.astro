@@ -1,14 +1,30 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
-import { getEntry, render } from 'astro:content'
+import { getEntry } from 'astro:content'
 
-const pozycjonowanie_sklepowEntry = await getEntry('uslugi', 'pozycjonowanie-sklepow')
-const { Content: PozycjonowaniesklepowContent } = pozycjonowanie_sklepowEntry ? await render(pozycjonowanie_sklepowEntry) : { Content: null }
+const entry = await getEntry('uslugi', 'pozycjonowanie-sklepow')
+const d = entry?.data ?? {}
+
+const items = [
+  { icon: 'category',      title: d.item1_title ?? 'Optymalizacja Kategorii', desc: d.item1_desc ?? 'Struktura kategorii pod frazy transakcyjne. Faceted navigation bez duplikatów. Interlinking między poziomami.' },
+  { icon: 'inventory_2',   title: d.item2_title ?? 'Karty Produktów',         desc: d.item2_desc ?? 'Unikalne opisy produktów z NLP, schema markup Product/Review, optymalizacja tytułów i meta.' },
+  { icon: 'storefront',    title: d.item3_title ?? 'Schema Markup',            desc: d.item3_desc ?? 'Implementacja danych strukturalnych: Product, Breadcrumb, FAQPage — rich snippets w wynikach Google.' },
+  { icon: 'speed',         title: d.item4_title ?? 'Core Web Vitals',          desc: d.item4_desc ?? 'Optymalizacja LCP, CLS i INP dla platform e-commerce. Lazy loading, kompresja obrazów, cache.' },
+  { icon: 'shopping_cart', title: d.item5_title ?? 'Google Merchant Center',   desc: d.item5_desc ?? 'Integracja i optymalizacja feedu produktowego dla Shopping — lepsza widoczność w zakupach Google.' },
+  { icon: 'link',          title: d.item6_title ?? 'Link Building E-comm',     desc: d.item6_desc ?? 'Backlinki z branżowych portali, recenzji i mediów. Budowa autorytetu w niszy produktowej.' },
+]
+
+const platforms = [
+  d.platform1_label ?? 'WooCommerce',
+  d.platform2_label ?? 'PrestaShop',
+  d.platform3_label ?? 'Shopify',
+  d.platform4_label ?? 'Magento',
+]
 ---
 
 <BaseLayout
-  title="Pozycjonowanie Sklepów Internetowych — SEO dla E-commerce | KrPage"
-  description="Pozycjonowanie sklepów WooCommerce, PrestaShop, Shopify. Optymalizacja kategorii, kart produktów i struktury technicznej. Więcej ruchu organicznego = więcej sprzedaży."
+  title={d.title ?? 'Pozycjonowanie Sklepów Internetowych — SEO dla E-commerce | KrPage'}
+  description={d.description ?? 'Pozycjonowanie sklepów WooCommerce, PrestaShop, Shopify. Optymalizacja kategorii, kart produktów i struktury technicznej. Więcej ruchu organicznego = więcej sprzedaży.'}
   schemaType="service"
   schemaProps={{ serviceName: 'Pozycjonowanie Sklepów Internetowych' }}
 >
@@ -24,7 +40,7 @@ const { Content: PozycjonowaniesklepowContent } = pozycjonowanie_sklepowEntry ? 
           <span class="text-neon">który sprzedaje</span>
         </h1>
         <p class="text-body-lg text-on-surface-variant max-w-xl">
-          Specjalizuję się w SEO dla sklepów internetowych — od architektury kategorii, przez karty produktów, po link building w e-commerce. Ruch, który przynosi przychód.
+          {d.hero_desc ?? 'Specjalizuję się w SEO dla sklepów internetowych — od architektury kategorii, przez karty produktów, po link building w e-commerce. Ruch, który przynosi przychód.'}
         </p>
         <div class="flex flex-wrap gap-md">
           <a href="/kontakt"
@@ -39,7 +55,6 @@ const { Content: PozycjonowaniesklepowContent } = pozycjonowanie_sklepowEntry ? 
         </div>
       </div>
 
-      <!-- Stats panel -->
       <div class="bento-card p-lg">
         <div class="text-label-sm text-neon uppercase tracking-widest mb-md">Wyniki e-commerce</div>
         <div class="grid grid-cols-2 gap-md">
@@ -60,29 +75,16 @@ const { Content: PozycjonowaniesklepowContent } = pozycjonowanie_sklepowEntry ? 
     </div>
   </section>
 
-  <!-- CMS CONTENT -->
-  {PozycjonowaniesklepowContent && (
-    <section class="max-w-7xl mx-auto px-6 md:px-12 py-xl border-t border-surface-container-high">
-      <div class="max-w-3xl prose prose-invert max-w-none prose-headings:text-on-surface prose-headings:font-black prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4 prose-h2:pb-3 prose-h2:border-b prose-h2:border-outline-variant/40 prose-h3:text-xl prose-h3:mt-6 prose-h3:mb-3 prose-h3:text-neon/80 prose-p:text-on-surface-variant prose-p:leading-relaxed prose-p:mb-5 prose-p:text-base prose-li:text-on-surface-variant prose-li:leading-relaxed prose-ul:my-3 prose-ol:my-3 prose-strong:text-on-surface prose-strong:font-semibold prose-a:text-neon prose-a:no-underline hover:prose-a:underline">
-        <PozycjonowaniesklepowContent />
-      </div>
-    </section>
-  )}
-
   <!-- ZAKRES -->
   <section class="bg-surface-container-low border-y border-white/5 py-xl">
     <div class="max-w-7xl mx-auto px-6 md:px-12">
       <div class="section-label mb-sm">Zakres działań</div>
       <h2 class="text-headline-lg text-on-surface mb-lg">SEO dla sklepu<br /><span class="text-neon">od fundamentów po skalowanie</span></h2>
+      <p class="text-body-md text-on-surface-variant max-w-2xl mb-lg">
+        {d.zakres_desc ?? 'Kompleksowe SEO dla e-commerce — technika, treść i linki w jednej spójnej strategii wzrostu organicznego.'}
+      </p>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
-        {[
-          { icon: 'category',         title: 'Optymalizacja Kategorii',  desc: 'Struktura kategorii pod frazy transakcyjne. Faceted navigation bez duplikatów. Interlinking między poziomami.' },
-          { icon: 'inventory_2',      title: 'Karty Produktów',          desc: 'Unikalne opisy produktów z NLP, schema markup Product/Review, optymalizacja tytułów i meta.' },
-          { icon: 'storefront',       title: 'Schema Markup',            desc: 'Implementacja danych strukturalnych: Product, Breadcrumb, FAQPage — rich snippets w wynikach Google.' },
-          { icon: 'speed',            title: 'Core Web Vitals',          desc: 'Optymalizacja LCP, CLS i INP dla platform e-commerce. Lazy loading, kompresja obrazów, cache.' },
-          { icon: 'shopping_cart',    title: 'Google Merchant Center',   desc: 'Integracja i optymalizacja feedu produktowego dla Shopping — lepsza widoczność w zakupach Google.' },
-          { icon: 'link',             title: 'Link Building E-comm',     desc: 'Backlinki z branżowych portali, recenzji i mediów. Budowa autorytetu w niszy produktowej.' },
-        ].map(item => (
+        {items.map(item => (
           <div class="bento-card p-lg group hover:border-neon/40 transition-all">
             <span class="material-symbols-outlined text-neon text-3xl mb-md">{item.icon}</span>
             <h3 class="text-headline-md text-on-surface mb-sm">{item.title}</h3>
@@ -98,7 +100,7 @@ const { Content: PozycjonowaniesklepowContent } = pozycjonowanie_sklepowEntry ? 
     <div class="section-label mb-sm">Platformy</div>
     <h2 class="text-headline-lg text-on-surface mb-lg">Pracuję z każdą <span class="text-neon">platformą e-commerce</span></h2>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-gutter mb-xl">
-      {['WooCommerce', 'PrestaShop', 'Shopify', 'Magento'].map(platform => (
+      {platforms.map(platform => (
         <div class="bento-card p-lg text-center hover:border-neon/40 transition-all">
           <span class="material-symbols-outlined text-neon text-3xl mb-sm">storefront</span>
           <p class="text-label-md text-on-surface uppercase tracking-widest">{platform}</p>
@@ -112,7 +114,7 @@ const { Content: PozycjonowaniesklepowContent } = pozycjonowanie_sklepowEntry ? 
       </div>
       <div class="relative z-10">
         <h2 class="text-headline-lg text-on-surface mb-md">
-          Chcesz więcej sprzedaży<br />
+          {d.cta_title ?? 'Chcesz więcej sprzedaży'}<br />
           <span class="text-neon">z ruchu organicznego?</span>
         </h2>
         <a href="/kontakt"

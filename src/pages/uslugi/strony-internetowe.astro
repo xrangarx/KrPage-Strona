@@ -1,14 +1,30 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
-import { getEntry, render } from 'astro:content'
+import { getEntry } from 'astro:content'
 
-const strony_internetoweEntry = await getEntry('uslugi', 'strony-internetowe')
-const { Content: StronyinternetoweContent } = strony_internetoweEntry ? await render(strony_internetoweEntry) : { Content: null }
+const entry = await getEntry('uslugi', 'strony-internetowe')
+const d = entry?.data ?? {}
+
+const items = [
+  { icon: 'speed',     title: d.item1_title ?? 'Błyskawiczne Ładowanie',  desc: d.item1_desc ?? 'Astro + statyczny output = Core Web Vitals w normie od dnia 1. LCP poniżej 1s to standard, nie wyjątek.' },
+  { icon: 'search',    title: d.item2_title ?? 'SEO od Fundamentów',      desc: d.item2_desc ?? 'Semantyczny HTML, schema markup, hreflang, sitemap, robots.txt — techniczna baza pod pozycjonowanie.' },
+  { icon: 'devices',   title: d.item3_title ?? 'Responsywny Design',       desc: d.item3_desc ?? 'Perfekcyjne wyświetlanie na każdym urządzeniu. Mobile-first z dbałością o UX i konwersje.' },
+  { icon: 'lock',      title: d.item4_title ?? 'Bezpieczeństwo (HTTPS)',   desc: d.item4_desc ?? 'SSL, Content Security Policy, ochrona przed typowymi atakami. Strona bezpieczna dla użytkowników.' },
+  { icon: 'analytics', title: d.item5_title ?? 'Analityka od Początku',    desc: d.item5_desc ?? 'Integracja GA4, Search Console i opcjonalnie Hotjar. Wiesz kto odwiedza Twoją stronę od dnia premiery.' },
+  { icon: 'edit_note', title: d.item6_title ?? 'Łatwa Edycja Treści',      desc: d.item6_desc ?? 'Opcjonalne CMS (Netlify CMS, Keystatic). Zmieniasz treści samodzielnie bez dotykania kodu.' },
+]
+
+const stack = [
+  { icon: 'rocket_launch', label: d.stack1_label ?? 'Astro'           },
+  { icon: 'palette',       label: d.stack2_label ?? 'Tailwind CSS'    },
+  { icon: 'cloud',         label: d.stack3_label ?? 'Netlify / Vercel' },
+  { icon: 'edit_note',     label: d.stack4_label ?? 'Headless CMS'   },
+]
 ---
 
 <BaseLayout
-  title="Strony Internetowe — Projektowanie i Tworzenie z SEO | KrPage"
-  description="Tworzenie stron internetowych zoptymalizowanych pod SEO od podstaw. Nowoczesny stos technologiczny, błyskawiczne ładowanie, Core Web Vitals w normie. Strona, która rankuje."
+  title={d.title ?? 'Strony Internetowe — Projektowanie i Tworzenie z SEO | KrPage'}
+  description={d.description ?? 'Tworzenie stron internetowych zoptymalizowanych pod SEO od podstaw. Nowoczesny stos technologiczny, błyskawiczne ładowanie, Core Web Vitals w normie.'}
   schemaType="service"
   schemaProps={{ serviceName: 'Strony Internetowe' }}
 >
@@ -24,7 +40,7 @@ const { Content: StronyinternetoweContent } = strony_internetoweEntry ? await re
           <span class="text-neon">pod ranking od dnia 1</span>
         </h1>
         <p class="text-body-lg text-on-surface-variant max-w-xl">
-          Projektuję i buduję strony internetowe z SEO wbudowanym od fundamentów — nie dorzucanym po fakcie. Szybkie, techniczne perfekcyjne i gotowe do pozycjonowania.
+          {d.hero_desc ?? 'Projektuję i buduję strony internetowe z SEO wbudowanym od fundamentów — nie dorzucanym po fakcie. Szybkie, techniczne perfekcyjne i gotowe do pozycjonowania.'}
         </p>
         <div class="flex flex-wrap gap-md">
           <a href="/kontakt"
@@ -35,14 +51,13 @@ const { Content: StronyinternetoweContent } = strony_internetoweEntry ? await re
         </div>
       </div>
 
-      <!-- Metrics panel -->
       <div class="bento-card p-lg">
         <div class="text-label-sm text-neon uppercase tracking-widest mb-md">Core Web Vitals — przykład</div>
         <div class="space-y-4">
           {[
-            { metric: 'LCP (Largest Contentful Paint)', value: '0.8s',   max: 2.5, pct: 68, color: 'var(--neon)' },
-            { metric: 'INP (Interaction to Next Paint)', value: '48ms',  max: 200, pct: 76, color: 'var(--neon)' },
-            { metric: 'CLS (Cumulative Layout Shift)',   value: '0.02',  max: 0.1, pct: 80, color: 'var(--neon)' },
+            { metric: 'LCP (Largest Contentful Paint)', value: '0.8s',  pct: 68 },
+            { metric: 'INP (Interaction to Next Paint)', value: '48ms', pct: 76 },
+            { metric: 'CLS (Cumulative Layout Shift)',   value: '0.02', pct: 80 },
           ].map(m => (
             <div>
               <div class="flex justify-between mb-1">
@@ -63,29 +78,16 @@ const { Content: StronyinternetoweContent } = strony_internetoweEntry ? await re
     </div>
   </section>
 
-  <!-- CMS CONTENT -->
-  {StronyinternetoweContent && (
-    <section class="max-w-7xl mx-auto px-6 md:px-12 py-xl border-t border-surface-container-high">
-      <div class="max-w-3xl prose prose-invert max-w-none prose-headings:text-on-surface prose-headings:font-black prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4 prose-h2:pb-3 prose-h2:border-b prose-h2:border-outline-variant/40 prose-h3:text-xl prose-h3:mt-6 prose-h3:mb-3 prose-h3:text-neon/80 prose-p:text-on-surface-variant prose-p:leading-relaxed prose-p:mb-5 prose-p:text-base prose-li:text-on-surface-variant prose-li:leading-relaxed prose-ul:my-3 prose-ol:my-3 prose-strong:text-on-surface prose-strong:font-semibold prose-a:text-neon prose-a:no-underline hover:prose-a:underline">
-        <StronyinternetoweContent />
-      </div>
-    </section>
-  )}
-
   <!-- ZAKRES -->
   <section class="bg-surface-container-low border-y border-white/5 py-xl">
     <div class="max-w-7xl mx-auto px-6 md:px-12">
       <div class="section-label mb-sm">Jak buduję</div>
       <h2 class="text-headline-lg text-on-surface mb-lg">Co otrzymujesz<br /><span class="text-neon">w każdym projekcie</span></h2>
+      <p class="text-body-md text-on-surface-variant max-w-2xl mb-lg">
+        {d.zakres_desc ?? 'Każda strona to kompletny produkt — dopracowany technicznie, przygotowany na SEO i gotowy do skalowania.'}
+      </p>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
-        {[
-          { icon: 'speed',         title: 'Błyskawiczne Ładowanie',   desc: 'Astro + statyczny output = Core Web Vitals w normie od dnia 1. LCP poniżej 1s to standard, nie wyjątek.' },
-          { icon: 'search',        title: 'SEO od Fundamentów',       desc: 'Semantyczny HTML, schema markup, hreflang, sitemap, robots.txt — techniczna baza pod pozycjonowanie.' },
-          { icon: 'devices',       title: 'Responsywny Design',        desc: 'Perfekcyjne wyświetlanie na każdym urządzeniu. Mobile-first z dbałością o UX i konwersje.' },
-          { icon: 'lock',          title: 'Bezpieczeństwo (HTTPS)',    desc: 'SSL, Content Security Policy, ochrona przed typowymi atakami. Strona bezpieczna dla użytkowników.' },
-          { icon: 'analytics',     title: 'Analityka od Początku',     desc: 'Integracja GA4, Search Console i opcjonalnie Hotjar. Wiesz kto odwiedza Twoją stronę od dnia premiery.' },
-          { icon: 'edit_note',     title: 'Łatwa Edycja Treści',       desc: 'Opcjonalne CMS (Netlify CMS, Keystatic). Zmieniasz treści samodzielnie bez dotykania kodu.' },
-        ].map(item => (
+        {items.map(item => (
           <div class="bento-card p-lg group hover:border-neon/40 transition-all">
             <span class="material-symbols-outlined text-neon text-3xl mb-md">{item.icon}</span>
             <h3 class="text-headline-md text-on-surface mb-sm">{item.title}</h3>
@@ -101,12 +103,7 @@ const { Content: StronyinternetoweContent } = strony_internetoweEntry ? await re
     <div class="section-label mb-sm">Technologie</div>
     <h2 class="text-headline-lg text-on-surface mb-lg">Nowoczesny <span class="text-neon">stos technologiczny</span></h2>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-gutter mb-xl">
-      {[
-        { icon: 'rocket_launch', label: 'Astro' },
-        { icon: 'palette',       label: 'Tailwind CSS' },
-        { icon: 'cloud',         label: 'Netlify / Vercel' },
-        { icon: 'edit_note',     label: 'Headless CMS' },
-      ].map(t => (
+      {stack.map(t => (
         <div class="bento-card p-lg flex flex-col items-center text-center hover:border-neon/40 transition-all">
           <span class="material-symbols-outlined text-neon text-3xl mb-sm">{t.icon}</span>
           <p class="text-label-md text-on-surface uppercase tracking-widest">{t.label}</p>
@@ -120,7 +117,7 @@ const { Content: StronyinternetoweContent } = strony_internetoweEntry ? await re
       </div>
       <div class="relative z-10">
         <h2 class="text-headline-lg text-on-surface mb-md">
-          Potrzebujesz strony,<br />
+          {d.cta_title ?? 'Potrzebujesz strony,'}<br />
           <span class="text-neon">która rankuje i konwertuje?</span>
         </h2>
         <a href="/kontakt"

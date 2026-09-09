@@ -1,20 +1,32 @@
 ---
-title: "Pozycjonowanie SEO — Organiczny Wzrost Widoczności"
-description: "Skuteczne pozycjonowanie stron w Google. Strategia SEO oparta na danych, audyt techniczny, link building i content marketing dla długoterminowych wyników."
+title: "Pozycjonowanie Stron Internetowych — SEO dla Firm"
+description: "Profesjonalne pozycjonowanie stron w Google. Strategia oparta o analizę konkurencji, topical authority i link building. Sprawdź jak zwiększamy widoczność organiczną."
 image: "/images/og-pozycjonowanie.webp"
+hero_desc: "Budujemy długofalową widoczność opartą o autorytet tematyczny, a nie chwilowe sztuczki. Wyniki, które rosną miesiąc po miesiącu."
+zakres_desc: "Kompleksowa strategia SEO dopasowana do Twojej domeny i branży — od fundamentów technicznych po budowę autorytetu."
+cta_title: "Twoja strona może być następna."
+item1_title: "Keyword Mapping"
+item1_desc: "Mapowanie fraz kluczowych na strony docelowe. Każda podstrona atakuje konkretne zapytania z określoną intencją."
+item2_title: "Linkowanie Wewnętrzne"
+item2_desc: "Architektura silosów tematycznych — przepływ autorytetu tam, gdzie ma generować wyniki."
+item3_title: "Link Building"
+item3_desc: "Pozyskiwanie wartościowych backlinków z domenami o wysokim autorytecie. Zero farm i PBN."
+item4_title: "Topical Authority"
+item4_desc: "Budowa pozycji eksperta w niszy przez systematyczne pokrywanie tematów i pytań użytkowników."
+item5_title: "Monitoring Pozycji"
+item5_desc: "Codzienny tracking fraz z alertami dla istotnych zmian. Reagujemy zanim Google Cię wyprzedzi."
+item6_title: "Miesięczne Raporty"
+item6_desc: "Przejrzyste raporty z danymi, które mają znaczenie dla Twojego biznesu — nie dla naszego ego."
+case1_cat: "E-commerce"
+case1_result: "+318% ruchu"
+case1_period: "6 miesięcy"
+case1_desc: "Sklep z elektroniką. Przebudowa architektury kategorii + content + link building."
+case2_cat: "Usługi B2B"
+case2_result: "Top 3 / 47 fraz"
+case2_period: "4 miesiące"
+case2_desc: "Firma consultingowa. Topical authority w wąskiej niszy B2B."
+case3_cat: "Local SEO"
+case3_result: "+520% w Maps"
+case3_period: "3 miesiące"
+case3_desc: "Sieć gabinetów medycznych. GMB + lokalne silosy treści."
 ---
-
-## SEO oparte na danych
-
-Nie ma jednej recepty na TOP3 — każda domena wymaga indywidualnej strategii. Zaczynam od audytu, definiuję priorytety i realizuję etapami z mierzalnymi KPI.
-
-## Co obejmuje współpraca?
-
-- Audyt techniczny i optymalizacja on-page
-- Strategia słów kluczowych i architektury treści
-- Budowa profilu linkowego (white-hat link building)
-- Comiesięczne raporty z realnych wyników
-
-## Wyniki w liczbach
-
-Pracuję na Google Search Console i Ahrefs — nie na własnych narzędziach z podkolorowanymi danymi. Widzisz dokładnie tyle samo co ja.

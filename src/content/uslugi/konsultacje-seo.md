@@ -1,19 +1,21 @@
 ---
-title: "Konsultacje SEO — Strategiczne Doradztwo dla Firm"
-description: "Konsultacje SEO dla działów marketingu, właścicieli firm i agencji. Jednorazowe doradztwo, regularne sesje lub wsparcie przy konkretnym projekcie."
+title: "Konsultacje SEO — Doradztwo i Strategia | KrPage"
+description: "Indywidualne konsultacje SEO dla firm i agencji. Przegląd strategii, analiza konkurencji, plan działania. Bezpośredni kontakt z doświadczonym specjalistą SEO."
 image: "/images/og-konsultacje-seo.webp"
+hero_desc: "Bez agencyjnego pośrednictwa — rozmawiasz bezpośrednio ze mną. Konsultacje SEO dla firm, e-commerce i agencji: od jednorazowej sesji strategicznej po regularne wsparcie."
+zakres_desc: "Każda konsultacja jest dostosowana do Twojej sytuacji — omawiamy dokładnie to, czego potrzebujesz."
+cta_title: "Masz pytania o SEO?"
+cta_desc: "Pierwsza, krótka rozmowa wstępna jest bezpłatna. Powiedz mi o swoim projekcie — ocenię, czy i jak mogę pomóc."
+item1_title: "Audyt i diagnoza"
+item1_desc: "Przegląd kondycji technicznej domeny, analiza błędów indeksowania i ocena potencjału wzrostu."
+item2_title: "Strategia keyword"
+item2_desc: "Dobór fraz, mapowanie na podstrony, analiza intencji wyszukiwania i priorytetyzacja działań."
+item3_title: "Profil linków"
+item3_desc: "Ocena aktualnego profilu backlinków, plan budowy autorytetu i identyfikacja toksycznych linków."
+item4_title: "Strategia treści"
+item4_desc: "Planowanie silosów tematycznych, content gap analysis i mapowanie treści pod topical authority."
+item5_title: "Szkolenie in-house"
+item5_desc: "Edukacja zespołu marketingowego lub redakcyjnego z podstaw i zaawansowanego SEO."
+item6_title: "Analityka i KPI"
+item6_desc: "Konfiguracja GA4, Search Console i dashboardów raportujących. Mierzenie tego, co naprawdę ważne."
 ---
-
-## Kiedy konsultacja ma sens?
-
-Nie każda firma potrzebuje pełnej obsługi SEO. Czasem wystarczy jedna sesja, żeby odblokować to, co blokuje wzrost widoczności.
-
-## Formy współpracy
-
-- **Jednorazowa konsultacja (2h)** — przegląd domeny, priorytetyzacja działań, lista "quick wins"
-- **Mentoring dla in-house** — regularne sesje dla Twojego zespołu marketingowego
-- **Wsparcie projektowe** — doradztwo przy migracji domeny, rebrandingu, redesignie
-
-## Co dostajesz?
-
-Konkretne wnioski i plan działania — nie ogólniki. Nagranie sesji + notatki z priorytetami to standard każdej konsultacji.

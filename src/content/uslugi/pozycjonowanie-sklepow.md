@@ -1,20 +1,24 @@
 ---
-title: "Pozycjonowanie Sklepów — SEO dla E-commerce"
-description: "SEO dla sklepów internetowych: optymalizacja kart produktów, kategorii, struktury URL i link building e-commerce. Więcej ruchu organicznego = więcej sprzedaży."
+title: "Pozycjonowanie Sklepów Internetowych — SEO dla E-commerce | KrPage"
+description: "Pozycjonowanie sklepów WooCommerce, PrestaShop, Shopify. Optymalizacja kategorii, kart produktów i struktury technicznej. Więcej ruchu organicznego = więcej sprzedaży."
 image: "/images/og-pozycjonowanie-sklepow.webp"
+hero_desc: "Specjalizuję się w SEO dla sklepów internetowych — od architektury kategorii, przez karty produktów, po link building w e-commerce. Ruch, który przynosi przychód."
+zakres_desc: "Kompleksowe SEO dla e-commerce — technika, treść i linki w jednej spójnej strategii wzrostu organicznego."
+cta_title: "Chcesz więcej sprzedaży"
+item1_title: "Optymalizacja Kategorii"
+item1_desc: "Struktura kategorii pod frazy transakcyjne. Faceted navigation bez duplikatów. Interlinking między poziomami."
+item2_title: "Karty Produktów"
+item2_desc: "Unikalne opisy produktów z NLP, schema markup Product/Review, optymalizacja tytułów i meta."
+item3_title: "Schema Markup"
+item3_desc: "Implementacja danych strukturalnych: Product, Breadcrumb, FAQPage — rich snippets w wynikach Google."
+item4_title: "Core Web Vitals"
+item4_desc: "Optymalizacja LCP, CLS i INP dla platform e-commerce. Lazy loading, kompresja obrazów, cache."
+item5_title: "Google Merchant Center"
+item5_desc: "Integracja i optymalizacja feedu produktowego dla Shopping — lepsza widoczność w zakupach Google."
+item6_title: "Link Building E-comm"
+item6_desc: "Backlinki z branżowych portali, recenzji i mediów. Budowa autorytetu w niszy produktowej."
+platform1_label: "WooCommerce"
+platform2_label: "PrestaShop"
+platform3_label: "Shopify"
+platform4_label: "Magento"
 ---
-
-## E-commerce SEO to osobna dyscyplina
-
-Sklep internetowy ma tysiące podstron — każda karta produktu, każda kategoria to potencjalny punkt wejścia z Google. Wymaga to innego podejścia niż klasyczne SEO.
-
-## Co robię dla sklepów?
-
-- Optymalizacja kart produktów: tytuły, opisy, schema Product
-- Architektura kategorii i silo tematyczne
-- Eliminacja duplikatów treści (warianty, filtry, paginacja)
-- Link building dla e-commerce: recenzje, porównywarki, katalogi
-
-## Platformy
-
-Pracuję z WooCommerce, Shoper, PrestaShop, Shopify i rozwiązaniami customowymi.

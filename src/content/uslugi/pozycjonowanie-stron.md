@@ -1,20 +1,20 @@
 ---
-title: "Pozycjonowanie Stron Firmowych — SEO B2B i Landing Pages"
-description: "Pozycjonowanie stron firmowych, landing pages i portali B2B. Strategia content, techniczne SEO i link building dopasowane do branży."
+title: "Pozycjonowanie Stron Internetowych — SEO dla Firm | KrPage"
+description: "Profesjonalne pozycjonowanie stron firmowych w Google. Strategia oparta o analizę luk konkurencji, topical authority i link building. Mierzalny wzrost widoczności."
 image: "/images/og-pozycjonowanie-stron.webp"
+hero_desc: "Buduję długofalową widoczność strony firmowej w oparciu o autorytet tematyczny, mapowanie intencji i precyzyjny link building. Zero skrótów — tylko wyniki."
+zakres_desc: "Kompleksowe działania SEO prowadzone etapami — z jasno określonymi celami, mierzalnymi KPI i comiesięczną transparentnością."
+cta_title: "Twoja strona może być następna."
+item1_title: "Keyword Mapping"
+item1_desc: "Mapowanie fraz na podstrony z uwzględnieniem intencji wyszukiwania. Każda sekcja strony atakuje konkretne zapytania."
+item2_title: "Linkowanie Wewnętrzne"
+item2_desc: "Architektura silosów tematycznych — przepływ autorytetu tam, gdzie generuje wyniki sprzedażowe."
+item3_title: "Link Building"
+item3_desc: "Pozyskiwanie wartościowych backlinków z domenami o wysokim autorytecie. Zero farm i PBN."
+item4_title: "Topical Authority"
+item4_desc: "Budowa pozycji eksperta przez systematyczne pokrywanie tematów i pytań Twoich klientów."
+item5_title: "Monitoring Pozycji"
+item5_desc: "Codzienny tracking fraz z alertami dla istotnych zmian — reagujemy zanim Google Cię zaskoczy."
+item6_title: "Raporty Miesięczne"
+item6_desc: "Przejrzyste raporty z danymi, które mają znaczenie dla Twojego biznesu — bez zbędnego szumu."
 ---
-
-## Strona firmowa jako kanał sprzedaży
-
-Strona bez ruchu organicznego to koszt, nie inwestycja. SEO zmienia ją w maszynę generującą zapytania ofertowe — bez budżetu reklamowego.
-
-## Specjalizacja
-
-- Branże B2B: usługi profesjonalne, doradztwo, technologia
-- Landing pages dla konkretnych usług i lokalizacji
-- Content marketing oparty na topical authority
-- Poprawa konwersji (CRO) w połączeniu z SEO
-
-## Jak mierzę sukces?
-
-Pozycje to środek, nie cel. Mierzę ruch organiczny, zapytania z formularzy i telefony — realne leady, nie rankingi na papierze.

@@ -1,19 +1,24 @@
 ---
-title: "Strony Internetowe — Szybkie, Bezpieczne, SEO-ready"
-description: "Tworzenie stron internetowych na Astro + GitHub Pages. Najwyższe Core Web Vitals, własny CMS, zero hostingu miesięcznego."
+title: "Strony Internetowe — Projektowanie i Tworzenie z SEO | KrPage"
+description: "Tworzenie stron internetowych zoptymalizowanych pod SEO od podstaw. Nowoczesny stos technologiczny, błyskawiczne ładowanie, Core Web Vitals w normie. Strona, która rankuje."
 image: "/images/og-strony-internetowe.webp"
+hero_desc: "Projektuję i buduję strony internetowe z SEO wbudowanym od fundamentów — nie dorzucanym po fakcie. Szybkie, technicznie perfekcyjne i gotowe do pozycjonowania."
+zakres_desc: "Każda strona to kompletny produkt — dopracowany technicznie, przygotowany na SEO i gotowy do skalowania."
+cta_title: "Potrzebujesz strony,"
+item1_title: "Błyskawiczne Ładowanie"
+item1_desc: "Astro + statyczny output = Core Web Vitals w normie od dnia 1. LCP poniżej 1s to standard, nie wyjątek."
+item2_title: "SEO od Fundamentów"
+item2_desc: "Semantyczny HTML, schema markup, hreflang, sitemap, robots.txt — techniczna baza pod pozycjonowanie."
+item3_title: "Responsywny Design"
+item3_desc: "Perfekcyjne wyświetlanie na każdym urządzeniu. Mobile-first z dbałością o UX i konwersje."
+item4_title: "Bezpieczeństwo (HTTPS)"
+item4_desc: "SSL, Content Security Policy, ochrona przed typowymi atakami. Strona bezpieczna dla użytkowników."
+item5_title: "Analityka od Początku"
+item5_desc: "Integracja GA4, Search Console i opcjonalnie Hotjar. Wiesz kto odwiedza Twoją stronę od dnia premiery."
+item6_title: "Łatwa Edycja Treści"
+item6_desc: "Opcjonalne CMS (Netlify CMS, Keystatic). Zmieniasz treści samodzielnie bez dotykania kodu."
+stack1_label: "Astro"
+stack2_label: "Tailwind CSS"
+stack3_label: "Netlify / Vercel"
+stack4_label: "Headless CMS"
 ---
-
-## Strona jako inwestycja, nie koszt
-
-Buduję strony, które pracują na Ciebie przez lata — bez miesięcznych opłat za hosting, bez aktualizacji WordPressa o 2 w nocy, bez podatności na włamania.
-
-## Stack który wybieram
-
-- **Astro** — statyczny HTML, najszybszy możliwy czas ładowania
-- **GitHub Pages** — 100% uptime, darmowy hosting
-- **GitHub CMS** — edytujesz treści przez przeglądarkę bez technikaliów
-
-## Czego nie robię
-
-Nie stawiam WordPressów na współdzielonym hostingu. Jeśli zależy Ci na szybkości, bezpieczeństwie i SEO — JAMstack jest jedyną sensowną odpowiedzią.
