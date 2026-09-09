@@ -7,7 +7,11 @@ image: "https://placehold.co/800x450/050A07/2DFF5F?text=Local+SEO"
 readTime: "10 min"
 ---
 
+<div style="text-align:center">
 ## Czym jest Local SEO?
+</div>
+
+
 
 Local SEO to zestaw działań mających na celu zwiększenie widoczności firmy w lokalnych wynikach Google — zarówno w wyszukiwarce jak i na Google Maps.
 
