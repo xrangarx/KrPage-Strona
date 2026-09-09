@@ -288,6 +288,45 @@
     .img-btn:hover{border-color:var(--accent30);color:var(--accent)}
     .img-btn.copy{color:var(--accent);border-color:var(--accent30)}
 
+    /* ── MD TOOLBAR ── */
+    .md-toolbar{
+      display:flex;gap:2px;padding:5px 10px;align-items:center;
+      background:var(--bg2);border-bottom:1px solid var(--border);flex-wrap:wrap;
+    }
+    .md-tb-btn{
+      display:flex;align-items:center;justify-content:center;gap:3px;
+      padding:3px 9px;background:transparent;border:1px solid transparent;
+      color:var(--muted);cursor:pointer;font-family:'Manrope',sans-serif;
+      font-size:12px;font-weight:700;letter-spacing:.02em;transition:all .12s;
+    }
+    .md-tb-btn:hover,.md-tb-btn:focus{border-color:var(--accent30);color:var(--accent);background:var(--accent10);outline:none}
+    .md-tb-sep{width:1px;background:var(--border);height:16px;margin:0 4px;flex-shrink:0}
+
+    /* ── LIGHTBOX ── */
+    #lightbox{
+      position:fixed;inset:0;background:rgba(0,0,0,.94);z-index:9200;
+      display:none;flex-direction:column;align-items:center;justify-content:center;cursor:zoom-out;padding:20px;
+    }
+    #lightbox.open{display:flex}
+    #lightbox-img-el{max-width:92vw;max-height:88vh;object-fit:contain;display:block;cursor:default}
+    #lightbox-cap{color:var(--text2);font-size:11px;margin-top:10px;opacity:.6}
+
+    /* ── IMG EDIT MODAL ── */
+    #img-edit-modal{
+      position:fixed;inset:0;background:rgba(9,10,24,.92);z-index:9100;
+      display:none;align-items:center;justify-content:center;padding:20px;
+    }
+    #img-edit-modal.open{display:flex}
+    .img-edit-inner{background:var(--bg2);border:1px solid var(--border);width:100%;max-width:520px;display:flex;flex-direction:column}
+    .img-edit-head{
+      display:flex;align-items:center;padding:12px 16px;border-bottom:1px solid var(--border);
+      font-size:14px;font-weight:700;color:var(--accent);gap:8px;
+    }
+    #img-edit-prev{width:100%;height:190px;object-fit:contain;background:var(--bg3);border-bottom:1px solid var(--border);display:block}
+    .img-edit-body{padding:16px;display:flex;flex-direction:column;gap:14px}
+    .img-edit-row{display:flex;gap:8px;align-items:flex-end}
+    .img-edit-row .field{flex:1}
+
     /* ── IMG PICKER MODAL ── */
     #picker-modal{
       position:fixed;inset:0;background:rgba(9,10,24,.9);z-index:9000;
@@ -422,6 +461,17 @@
           <div class="md-split">
             <div class="md-pane">
               <div class="pane-label">✏ Markdown</div>
+              <div class="md-toolbar">
+                <button class="md-tb-btn" type="button" data-md="bold" title="Pogrubienie"><b>B</b></button>
+                <button class="md-tb-btn" type="button" data-md="italic" title="Kursywa"><i>I</i></button>
+                <button class="md-tb-btn" type="button" data-md="h2" title="Nagłówek H2"><span class="material-symbols-outlined" style="font-size:13px">title</span>H2</button>
+                <div class="md-tb-sep"></div>
+                <button class="md-tb-btn" type="button" data-md="link" title="Link"><span class="material-symbols-outlined" style="font-size:13px">link</span>Link</button>
+                <button class="md-tb-btn" type="button" data-md="image" title="Obrazek z galerii"><span class="material-symbols-outlined" style="font-size:13px">image</span>Obraz</button>
+                <div class="md-tb-sep"></div>
+                <button class="md-tb-btn" type="button" data-md="ul" title="Lista punktowana"><span class="material-symbols-outlined" style="font-size:13px">format_list_bulleted</span>Lista</button>
+                <button class="md-tb-btn" type="button" data-md="quote" title="Cytat"><span class="material-symbols-outlined" style="font-size:13px">format_quote</span>Cytat</button>
+              </div>
               <textarea id="md-editor" placeholder="## Nagłówek&#10;&#10;Treść wpisu..."></textarea>
             </div>
             <div class="md-pane">
@@ -474,6 +524,46 @@
       <button class="picker-tab" data-pfolder="images">📁 Ogólne</button>
     </div>
     <div class="picker-body" id="picker-body"></div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox">
+  <img id="lightbox-img-el" src="" alt="" />
+  <div id="lightbox-cap"></div>
+</div>
+
+<!-- IMG EDIT MODAL -->
+<div id="img-edit-modal">
+  <div class="img-edit-inner">
+    <div class="img-edit-head">
+      <span class="material-symbols-outlined" style="font-size:17px">edit</span>
+      Edytuj zdjęcie
+      <button class="btn btn-ghost btn-sm" id="img-edit-close" style="margin-left:auto">
+        <span class="material-symbols-outlined" style="font-size:17px">close</span>
+      </button>
+    </div>
+    <img id="img-edit-prev" src="" alt="" />
+    <div class="img-edit-body">
+      <div class="img-edit-row">
+        <div class="field">
+          <label class="field-label">Nazwa pliku</label>
+          <input class="inp" id="img-rename-inp" />
+        </div>
+        <button class="btn btn-ghost btn-sm" id="img-rename-btn" style="flex-shrink:0;align-self:flex-end">
+          <span class="material-symbols-outlined" style="font-size:15px">drive_file_rename_outline</span>Zmień
+        </button>
+      </div>
+      <div class="img-edit-row">
+        <div class="field">
+          <label class="field-label" style="display:flex;gap:6px;align-items:baseline">Alt text <span style="font-size:10px;font-weight:400;color:var(--muted);text-transform:none;letter-spacing:0">opis dla SEO i czytników ekranu</span></label>
+          <input class="inp" id="img-alt-inp" placeholder="np. Wykres wzrostu ruchu organicznego" />
+        </div>
+        <button class="btn btn-ghost btn-sm" id="img-alt-btn" style="flex-shrink:0;align-self:flex-end">
+          <span class="material-symbols-outlined" style="font-size:15px">save</span>Zapisz
+        </button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -547,6 +637,17 @@ var CONFIG = {
         { name:'image',       label:'Zdjęcie',          type:'image' },
         { name:'tags',        label:'Tagi (przecinkami)', type:'tags',
           placeholder:'np. Audyt Tech, Link Building' },
+      ]
+    },
+    {
+      id:     'podstrony',
+      label:  'Podstrony',
+      icon:   'web',
+      folder: 'src/content/pages',
+      fields: [
+        { name:'title',       label:'Tytuł',            type:'string', required:true },
+        { name:'description', label:'Opis SEO',          type:'text' },
+        { name:'image',       label:'Zdjęcie OG',        type:'image' },
       ]
     }
   ]
@@ -994,13 +1095,67 @@ function updatePreview(){
     qs('#md-preview').innerHTML=marked.parse(raw)
 }
 
+/* ══ MD TOOLBAR ══ */
+function mdInsert(type){
+  var ed=qs('#md-editor')
+  var s=ed.selectionStart, e=ed.selectionEnd
+  var sel=ed.value.slice(s,e)
+  var before=ed.value.slice(0,s), after=ed.value.slice(e)
+  var ins='', selS=-1, selE=-1
+
+  function nl(){ return (before===''||before.endsWith('\n'))?'':'\n' }
+
+  if(type==='bold'){
+    ins='**'+(sel||'pogrubiony tekst')+'**'
+    if(!sel){selS=s+2;selE=s+ins.length-2}
+  } else if(type==='italic'){
+    ins='*'+(sel||'kursywa')+'*'
+    if(!sel){selS=s+1;selE=s+ins.length-1}
+  } else if(type==='h2'){
+    ins=nl()+'## '+(sel||'Nagłówek')+'\n'
+    selS=selE=s+ins.length
+  } else if(type==='ul'){
+    ins=nl()+'- '+(sel||'element')+'\n'
+    selS=selE=s+ins.length
+  } else if(type==='quote'){
+    ins=nl()+'> '+(sel||'cytat')+'\n'
+    selS=selE=s+ins.length
+  } else if(type==='link'){
+    var url=prompt('URL linku:','https://')
+    if(!url) return
+    ins='['+(sel||'tekst linku')+']('+url+')'
+    selS=selE=s+ins.length
+  } else if(type==='image'){
+    // capture cursor before async picker
+    var savedS=s, savedE=e, savedSel=sel
+    openPicker(function(url){
+      var alt=prompt('Alt text obrazka:')||savedSel||''
+      var ins2='!['+alt+']('+url+')'
+      ed.value=ed.value.slice(0,savedS)+ins2+ed.value.slice(savedE)
+      ed.focus();ed.setSelectionRange(savedS+ins2.length,savedS+ins2.length)
+      updatePreview()
+    })
+    return
+  }
+  ed.value=before+ins+after
+  ed.focus()
+  if(selS>=0) ed.setSelectionRange(selS,selE)
+  else ed.setSelectionRange(s+ins.length,s+ins.length)
+  updatePreview()
+}
+document.addEventListener('click',function(e){
+  var btn=e.target.closest('[data-md]')
+  if(btn&&qs('#view-editor')&&!qs('#view-editor').classList.contains('hidden')) mdInsert(btn.dataset.md)
+})
+
 /* ══ IMAGES ══ */
-function switchToImages(){
+async function switchToImages(){
   currentView='images'
   setActiveNav('images')
   hideAllViews()
   show(qs('#view-images'))
   qs('#toolbar-title').textContent='Zdjęcia'
+  await loadAltTexts()
   loadImages()
 }
 
@@ -1093,17 +1248,26 @@ async function loadImages(){
       var url='/'+f.path.replace('public/','')
       var card=document.createElement('div'); card.className='img-card'
       card.innerHTML=
-        '<img src="'+url+'" alt="'+f.name+'" loading="lazy" onerror="this.src=\'https://placehold.co/152x100/111224/404dff?text=IMG\'"/>'+
+        '<img src="'+url+'" alt="'+(altTexts[f.name]||f.name)+'" loading="lazy" style="cursor:zoom-in" onerror="this.src=\'https://placehold.co/152x100/111224/404dff?text=IMG\'"/>'+
         '<div class="img-info">'+
           '<div class="img-name">'+f.name+'</div>'+
           '<div class="img-actions">'+
             '<button class="img-btn copy" data-url="'+url+'">'+
               '<span class="material-symbols-outlined" style="font-size:11px">content_copy</span>URL'+
             '</button>'+
+            '<button class="img-btn" title="Edytuj">'+
+              '<span class="material-symbols-outlined" style="font-size:11px">edit</span>'+
+            '</button>'+
           '</div>'+
         '</div>'
-      card.querySelector('.img-btn.copy').addEventListener('click',function(){
+      card.querySelector('img').addEventListener('click',function(){ openLightbox(url,f.name) })
+      card.querySelector('.img-btn.copy').addEventListener('click',function(ev){
+        ev.stopPropagation()
         navigator.clipboard.writeText(this.dataset.url).then(function(){toast('✅ URL skopiowany!','ok')})
+      })
+      card.querySelector('.img-btn:not(.copy)').addEventListener('click',function(ev){
+        ev.stopPropagation()
+        openImgEdit({url:url,path:f.path,name:f.name,sha:f.sha})
       })
       grid.appendChild(card)
     })
@@ -1111,6 +1275,85 @@ async function loadImages(){
     grid.innerHTML='<p style="color:var(--err);font-size:13px">Błąd: '+e.message+'</p>'
   }
 }
+
+/* ══ LIGHTBOX ══ */
+function openLightbox(url, name){
+  qs('#lightbox-img-el').src=url
+  qs('#lightbox-img-el').alt=name||''
+  qs('#lightbox-cap').textContent=name||''
+  qs('#lightbox').classList.add('open')
+}
+qs('#lightbox').addEventListener('click',function(e){ if(e.target!==qs('#lightbox-img-el')) this.classList.remove('open') })
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){
+    qs('#lightbox').classList.remove('open')
+    qs('#img-edit-modal').classList.remove('open')
+  }
+})
+
+/* ══ ALT TEXTS MANIFEST ══ */
+var altTexts={}, altTextsSha=null
+async function loadAltTexts(){
+  try{
+    var d=await ghGet(CONFIG.imgRoot+'/alt-texts.json')
+    altTexts=JSON.parse(d.content)
+    altTextsSha=d.sha
+  } catch(e){ altTexts={}; altTextsSha=null }
+}
+async function saveAltTexts(){
+  var content=JSON.stringify(altTexts,null,2)
+  var res=await ghPut(CONFIG.imgRoot+'/alt-texts.json',content,altTextsSha,'update: alt-texts.json')
+  altTextsSha=res.content.sha
+}
+
+/* ══ IMG EDIT MODAL ══ */
+var currentEditImg=null
+function openImgEdit(info){
+  currentEditImg=info
+  qs('#img-edit-prev').src=info.url
+  qs('#img-rename-inp').value=info.name
+  qs('#img-alt-inp').value=altTexts[info.name]||''
+  qs('#img-edit-modal').classList.add('open')
+}
+qs('#img-edit-close').addEventListener('click',function(){ qs('#img-edit-modal').classList.remove('open') })
+qs('#img-edit-modal').addEventListener('click',function(e){ if(e.target===this) this.classList.remove('open') })
+
+qs('#img-rename-btn').addEventListener('click',async function(){
+  if(!currentEditImg) return
+  var newName=qs('#img-rename-inp').value.trim()
+  if(!newName||newName===currentEditImg.name){ toast('⚠ Podaj nową nazwę','warn'); return }
+  var parts=currentEditImg.path.split('/')
+  parts[parts.length-1]=newName
+  var newPath=parts.join('/')
+  this.disabled=true
+  try{
+    var existing=await ghGet(currentEditImg.path)
+    await ghPutBin(newPath,existing.rawB64,null,'rename: '+currentEditImg.name+' → '+newName)
+    await ghDelete(currentEditImg.path,existing.sha,'rename: '+currentEditImg.name)
+    if(altTexts[currentEditImg.name]!==undefined){
+      altTexts[newName]=altTexts[currentEditImg.name]
+      delete altTexts[currentEditImg.name]
+      await saveAltTexts()
+    }
+    toast('✅ Zmieniono nazwę: '+newName,'ok')
+    qs('#img-edit-modal').classList.remove('open')
+    loadImages()
+  } catch(e){ toast('❌ '+e.message,'err') }
+  this.disabled=false
+})
+
+qs('#img-alt-btn').addEventListener('click',async function(){
+  if(!currentEditImg) return
+  var alt=qs('#img-alt-inp').value.trim()
+  this.disabled=true
+  try{
+    if(alt) altTexts[currentEditImg.name]=alt
+    else delete altTexts[currentEditImg.name]
+    await saveAltTexts()
+    toast('✅ Alt text zapisany!','ok')
+  } catch(e){ toast('❌ '+e.message,'err') }
+  this.disabled=false
+})
 
 /* ══ IMAGE PICKER MODAL ══ */
 function openPicker(cb){
