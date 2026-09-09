@@ -1,0 +1,307 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+
+const stack = [
+  {
+    icon: 'bolt',
+    name: 'Astro',
+    role: 'Framework',
+    desc: 'Generuje czysty HTML bez zbędnego JavaScript. Najwyższe wyniki Core Web Vitals out of the box. Żadnych pluginów do aktualizowania.',
+    tags: ['Statyczny HTML', 'MIT', 'Open Source'],
+  },
+  {
+    icon: 'code_blocks',
+    name: 'GitHub Pages',
+    role: 'Hosting',
+    desc: 'Strona to zwykły plik tekstowy w repozytorium GitHub. Automatyczny deploy po każdym zapisie — 100% uptime, bezpłatny.',
+    tags: ['Free tier', 'CI/CD', 'Auto-deploy'],
+  },
+  {
+    icon: 'terminal',
+    name: 'Panel CMS',
+    role: 'Zarządzanie treścią',
+    desc: 'Własny panel admina pod /admin/. Klient loguje się tokenem, edytuje wpisy i dodaje zdjęcia. Dane lądują wprost w GitHubie.',
+    tags: ['GitHub API', 'Bez serwera', 'Po polsku'],
+  },
+]
+
+const steps = [
+  {
+    n: '01',
+    title: 'Projektuję stronę',
+    desc: 'Buduję strukturę, design i treści na lokalnym środowisku deweloperskim. Żadnych ograniczeń szablonu — strona wygląda dokładnie tak, jak zaprojektowałem.',
+    detail: 'Astro + Tailwind CSS + własny design system',
+  },
+  {
+    n: '02',
+    title: 'Wdrożenie na GitHub Pages',
+    desc: 'Jeden push do repozytorium — GitHub Actions automatycznie buduje i publikuje stronę. Certyfikat SSL Let\'s Encrypt gratis.',
+    detail: 'git push → live w ~60 sekund',
+  },
+  {
+    n: '03',
+    title: 'Klient przejmuje panel',
+    desc: 'Wysyłam klientowi link do panelu /admin/ i token dostępu. Loguje się raz, przeglądarka zapamiętuje. Edytuje wpisy jak w edytorze tekstu.',
+    detail: 'strona.pl/admin/ — brak konfiguracji po stronie klienta',
+  },
+  {
+    n: '04',
+    title: 'Zapis = automatyczny deploy',
+    desc: 'Klient klika „Opublikuj" → wpis trafia jako plik Markdown do GitHuba → GitHub Actions buduje stronę → zmiana widoczna na żywo.',
+    detail: 'Bez Twojej interwencji — klient jest samodzielny',
+  },
+]
+
+const benefits = [
+  { icon: 'speed',          title: 'Szybkość',         desc: 'Core Web Vitals: zielone we wszystkich kategoriach. Strony Astro ładują się szybciej niż 95% WordPressów.' },
+  { icon: 'shield',         title: 'Bezpieczeństwo',    desc: 'Zero PHP, zero bazy danych, zero panelu wp-admin. Nie ma co zaatakować — statyczny HTML to plik tekstowy.' },
+  { icon: 'edit_note',      title: 'Samodzielna edycja',desc: 'Klient edytuje wpisy blogowe, realizacje i zdjęcia przez przeglądarkę. Bez treningu, bez wsparcia technicznego.' },
+  { icon: 'trending_up',    title: 'SEO-ready',         desc: 'Czysta semantyka HTML, natywna obsługa meta tagów i Schema.org, szybkie ładowanie — Google to lubi.' },
+  { icon: 'savings',        title: 'Niski koszt',       desc: 'Jedyny koszt stały to domena (~50–80 zł/rok). Hosting, CMS, pipeline CI/CD — wszystko bezpłatne.' },
+  { icon: 'update',         title: 'Brak utrzymania',   desc: 'Nie ma co aktualizować. Żadnych pluginów z lukami, żadnych patchów bezpieczeństwa, zero zepsutych aktualizacji.' },
+]
+
+const costs = [
+  { item: 'Astro (framework)',        cost: '0 zł',        note: 'MIT, open source' },
+  { item: 'GitHub Pages (hosting)',   cost: '0 zł',        note: 'Free tier, 100 GB bandwidth/mies.' },
+  { item: 'Panel CMS (/admin/)',      cost: '0 zł',        note: 'Własny, działa na GitHub Pages' },
+  { item: 'GitHub Actions (CI/CD)',   cost: '0 zł',        note: '2000 min/mies. w free tier' },
+  { item: 'SSL (HTTPS)',              cost: '0 zł',        note: 'Let\'s Encrypt automatycznie' },
+  { item: 'Domena klienta',           cost: '~50–80 zł/rok', note: 'Jedyny realny koszt' },
+]
+---
+
+<BaseLayout
+  title="Jak buduję strony klientom — KrPage"
+  description="Transparentny opis procesu, narzędzi i kosztów tworzenia nowoczesnych, bezpiecznych i szybkich stron internetowych na bazie Astro + GitHub Pages."
+  schemaType="webpage"
+>
+
+  <!-- ═══════ HERO ═══════ -->
+  <section class="max-w-7xl mx-auto px-6 md:px-12 py-xl relative overflow-hidden">
+    <div class="absolute -top-20 -right-20 w-[500px] h-[500px] bg-neon/5 blur-[120px] rounded-full pointer-events-none"></div>
+
+    <div class="max-w-3xl relative z-10">
+      <div class="section-label mb-md">Transparentny proces</div>
+      <h1 class="text-headline-xl text-on-surface mb-lg">
+        Jak buduję<br />
+        <span class="text-neon">strony klientom</span>
+      </h1>
+      <p class="text-body-lg text-on-surface-variant mb-lg max-w-2xl">
+        Nowoczesny JAMstack zamiast WordPress — szybciej, bezpieczniej, taniej. Klient dostaje stronę
+        którą może samodzielnie edytować przez przeglądarkę. Ty dostajesz projekt bez kosztów utrzymania.
+      </p>
+
+      <!-- Trzy filary -->
+      <div class="grid grid-cols-3 gap-3">
+        {[
+          { n: '~60s', label: 'czas deployu' },
+          { n: '0 zł', label: 'hosting miesięcznie' },
+          { n: '100%', label: 'statyczny HTML' },
+        ].map(s => (
+          <div class="bento-card p-md text-center">
+            <p class="text-headline-lg text-neon mb-0">{s.n}</p>
+            <p class="text-label-sm text-on-surface-variant uppercase tracking-wider mt-1">{s.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ DLACZEGO NIE WORDPRESS ═══════ -->
+  <section class="max-w-7xl mx-auto px-6 md:px-12 py-xl border-t border-surface-container-high">
+    <div class="section-label mb-md">Filozofia</div>
+    <h2 class="text-headline-lg text-on-surface mb-lg max-w-xl" style="text-wrap:balance">
+      Dlaczego nie WordPress?
+    </h2>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      <!-- WordPress -->
+      <div class="bento-card p-lg border-surface-container-high">
+        <div class="flex items-center gap-3 mb-md">
+          <span class="material-symbols-outlined text-on-surface-variant" style="font-size:20px">dangerous</span>
+          <h3 class="text-label-lg text-on-surface-variant uppercase tracking-wider">WordPress — stare podejście</h3>
+        </div>
+        <ul class="space-y-3">
+          {[
+            'PHP + MySQL = wektor ataku. Każdy plugin może mieć lukę',
+            'Aktualizacje pluginów psują działanie strony',
+            'Hosting PHP kosztuje ~50–150 zł/mies.',
+            'Wolniejszy czas ładowania bez agresywnego cache\'u',
+            'Strona zainfekowana na subdomenie testowej = infekcja całej domeny',
+          ].map(item => (
+            <li class="flex gap-3 text-body-sm text-on-surface-variant">
+              <span class="material-symbols-outlined flex-shrink-0" style="font-size:16px;color:rgba(255,77,109,0.7);margin-top:2px">close</span>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- JAMstack -->
+      <div class="bento-card p-lg border-neon/20" style="background:rgba(64,77,255,0.04)">
+        <div class="flex items-center gap-3 mb-md">
+          <span class="material-symbols-outlined text-neon" style="font-size:20px">verified</span>
+          <h3 class="text-label-lg text-neon uppercase tracking-wider">JAMstack — nowoczesne podejście</h3>
+        </div>
+        <ul class="space-y-3">
+          {[
+            'Statyczny HTML — brak PHP, brak bazy danych, zero wektorów ataku',
+            'Żadnych pluginów do aktualizowania, żadnych broken updates',
+            'GitHub Pages: hosting bezpłatny z 100 GB bandwidth',
+            'Core Web Vitals w zieleni — szybkość jest wbudowana w architekturę',
+            'Każda zmiana to commit w Git — pełna historia, łatwy rollback',
+          ].map(item => (
+            <li class="flex gap-3 text-body-sm text-on-surface-variant">
+              <span class="material-symbols-outlined flex-shrink-0 text-neon" style="font-size:16px;margin-top:2px">check</span>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ STACK ═══════ -->
+  <section class="max-w-7xl mx-auto px-6 md:px-12 py-xl border-t border-surface-container-high">
+    <div class="section-label mb-md">Narzędzia</div>
+    <h2 class="text-headline-lg text-on-surface mb-lg max-w-xl" style="text-wrap:balance">
+      Stack technologiczny
+    </h2>
+
+    <div class="grid md:grid-cols-3 gap-5">
+      {stack.map(tool => (
+        <div class="bento-card p-lg hover:border-neon/30 transition-colors">
+          <div class="flex items-center gap-3 mb-md">
+            <div class="w-9 h-9 bg-neon/10 border border-neon/30 flex items-center justify-center flex-shrink-0">
+              <span class="material-symbols-outlined text-neon" style="font-size:18px">{tool.icon}</span>
+            </div>
+            <div>
+              <p class="text-label-sm text-on-surface-variant uppercase tracking-wider">{tool.role}</p>
+              <p class="text-title-md text-on-surface font-bold">{tool.name}</p>
+            </div>
+          </div>
+          <p class="text-body-sm text-on-surface-variant mb-md">{tool.desc}</p>
+          <div class="flex flex-wrap gap-2">
+            {tool.tags.map(tag => (
+              <span class="text-xs font-bold uppercase tracking-wider px-2 py-1 border border-neon/25 text-neon" style="font-size:10px">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ═══════ WORKFLOW ═══════ -->
+  <section class="max-w-7xl mx-auto px-6 md:px-12 py-xl border-t border-surface-container-high">
+    <div class="section-label mb-md">Workflow</div>
+    <h2 class="text-headline-lg text-on-surface mb-lg max-w-xl" style="text-wrap:balance">
+      Od projektu do live — 4 kroki
+    </h2>
+
+    <div class="max-w-3xl space-y-0">
+      {steps.map((step, i) => (
+        <div class="flex gap-6 relative">
+          {/* vertical line */}
+          {i < steps.length - 1 && (
+            <div class="absolute left-[19px] top-[48px] bottom-0 w-px bg-neon/15"></div>
+          )}
+          {/* number */}
+          <div class="w-10 h-10 border border-neon/30 bg-neon/8 flex items-center justify-center flex-shrink-0 z-10" style="background:rgba(64,77,255,0.08)">
+            <span class="text-neon font-bold" style="font-size:13px;font-family:monospace">{step.n}</span>
+          </div>
+          {/* content */}
+          <div class="pb-10">
+            <h3 class="text-title-md text-on-surface font-bold mb-2" style="text-wrap:balance">{step.title}</h3>
+            <p class="text-body-sm text-on-surface-variant mb-3">{step.desc}</p>
+            <code class="text-xs text-neon bg-surface-container px-2 py-1" style="font-size:11px">{step.detail}</code>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ═══════ BENEFITY ═══════ -->
+  <section class="max-w-7xl mx-auto px-6 md:px-12 py-xl border-t border-surface-container-high">
+    <div class="section-label mb-md">Korzyści</div>
+    <h2 class="text-headline-lg text-on-surface mb-lg max-w-xl" style="text-wrap:balance">
+      Co dostaje klient
+    </h2>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+      {benefits.map(b => (
+        <div class="bento-card p-lg hover:border-neon/30 transition-colors">
+          <div class="flex items-start gap-3">
+            <span class="material-symbols-outlined text-neon flex-shrink-0" style="font-size:20px;margin-top:1px">{b.icon}</span>
+            <div>
+              <h3 class="text-title-sm text-on-surface font-bold mb-2">{b.title}</h3>
+              <p class="text-body-sm text-on-surface-variant">{b.desc}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ═══════ KOSZTY ═══════ -->
+  <section class="max-w-7xl mx-auto px-6 md:px-12 py-xl border-t border-surface-container-high">
+    <div class="section-label mb-md">Transparentność</div>
+    <h2 class="text-headline-lg text-on-surface mb-lg max-w-xl" style="text-wrap:balance">
+      Koszty per projekt klienta
+    </h2>
+
+    <div class="max-w-2xl">
+      <div class="border border-surface-container-high" style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums">
+          <thead>
+            <tr style="border-bottom:1px solid rgba(64,77,255,0.14)">
+              <th class="text-label-sm text-on-surface-variant uppercase tracking-wider" style="text-align:left;padding:10px 20px;font-size:10px">Składnik</th>
+              <th class="text-label-sm text-on-surface-variant uppercase tracking-wider" style="text-align:left;padding:10px 20px;font-size:10px">Koszt</th>
+              <th class="text-label-sm text-on-surface-variant uppercase tracking-wider" style="text-align:left;padding:10px 20px;font-size:10px">Uwagi</th>
+            </tr>
+          </thead>
+          <tbody>
+            {costs.map((row, i) => (
+              <tr style={`border-bottom:1px solid rgba(64,77,255,0.08);${i===costs.length-1?'border-bottom:none':''}`}>
+                <td class="text-body-sm text-on-surface font-medium" style="padding:11px 20px">{row.item}</td>
+                <td style="padding:11px 20px">
+                  <span class={row.cost === '0 zł' ? 'text-neon' : 'text-on-surface'}
+                        style="font-family:monospace;font-size:13px;font-weight:700">
+                    {row.cost}
+                  </span>
+                </td>
+                <td class="text-body-sm text-on-surface-variant" style="padding:11px 20px">{row.note}</td>
+              </tr>
+            ))}
+          </tbody>
+          <tfoot>
+            <tr style="border-top:1px solid rgba(64,77,255,0.2)">
+              <td class="text-on-surface font-bold" style="padding:14px 20px">Łącznie / rok</td>
+              <td style="padding:14px 20px">
+                <span class="text-on-surface font-bold" style="font-family:monospace;font-size:14px">~50–80 zł</span>
+              </td>
+              <td class="text-body-sm text-on-surface-variant" style="padding:14px 20px">Sama domena. Reszta gratis.</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <!-- CTA -->
+      <div class="bento-card p-lg mt-6 border-neon/25" style="background:rgba(64,77,255,0.04)">
+        <h3 class="text-title-md text-on-surface font-bold mb-3" style="text-wrap:balance">
+          Zainteresowany taką stroną dla siebie lub klienta?
+        </h3>
+        <p class="text-body-sm text-on-surface-variant mb-md">
+          Odzywam się w ciągu 24 godzin. Bezpłatna konsultacja wstępna, analiza potrzeb i wycena projektu.
+        </p>
+        <a href="/kontakt" class="btn-neon inline-flex items-center gap-2">
+          <span class="material-symbols-outlined" style="font-size:16px">send</span>
+          Napisz do mnie
+        </a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

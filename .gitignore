@@ -22,10 +22,5 @@ pnpm-debug.log*
 # astro
 .astro/
 
-# TinaCMS build output
-public/admin-tina/
-tina/__generated__/
-tina/tina-lock.json
-
 # Claude Code tooling
 .claude/
