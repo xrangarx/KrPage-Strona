@@ -15,6 +15,11 @@ const allPosts = await getCollection('blog')
 const related  = allPosts
   .filter(p => p.id !== post.id && p.data.category === post.data.category)
   .slice(0, 3)
+
+const sorted   = [...allPosts].sort((a, b) => (a.data.date || '').localeCompare(b.data.date || ''))
+const idx      = sorted.findIndex(p => p.id === post.id)
+const prevPost = idx > 0 ? sorted[idx - 1] : null
+const nextPost = idx < sorted.length - 1 ? sorted[idx + 1] : null
 ---
 
 <BaseLayout
@@ -149,6 +154,38 @@ const related  = allPosts
             </a>
           </div>
         </div>
+
+        <!-- Prev / Next navigation -->
+        {(prevPost || nextPost) && (
+          <div class="grid grid-cols-2 gap-4 mt-xl">
+            {prevPost ? (
+              <a href={`/blog/${prevPost.id}`}
+                 class="group flex items-center gap-3 border-2 border-dashed border-neon/25 p-4 hover:border-neon/50 hover:bg-neon/5 transition-all">
+                {prevPost.data.image && (
+                  <img src={prevPost.data.image} alt={prevPost.data.title}
+                       class="w-14 h-14 rounded-full object-cover shrink-0 ring-2 ring-outline-variant/30 group-hover:ring-neon/50 transition-all" />
+                )}
+                <div class="min-w-0">
+                  <div class="text-[10px] text-neon uppercase tracking-widest font-bold mb-1">← Poprzedni wpis</div>
+                  <div class="text-[13px] text-on-surface font-semibold leading-snug group-hover:text-neon transition-colors line-clamp-2">{prevPost.data.title}</div>
+                </div>
+              </a>
+            ) : <div />}
+            {nextPost ? (
+              <a href={`/blog/${nextPost.id}`}
+                 class="group flex items-center gap-3 border-2 border-dashed border-neon/25 p-4 hover:border-neon/50 hover:bg-neon/5 transition-all justify-end text-right">
+                <div class="min-w-0">
+                  <div class="text-[10px] text-neon uppercase tracking-widest font-bold mb-1">Następny wpis →</div>
+                  <div class="text-[13px] text-on-surface font-semibold leading-snug group-hover:text-neon transition-colors line-clamp-2">{nextPost.data.title}</div>
+                </div>
+                {nextPost.data.image && (
+                  <img src={nextPost.data.image} alt={nextPost.data.title}
+                       class="w-14 h-14 rounded-full object-cover shrink-0 ring-2 ring-outline-variant/30 group-hover:ring-neon/50 transition-all" />
+                )}
+              </a>
+            ) : <div />}
+          </div>
+        )}
 
       </article>
     </div>

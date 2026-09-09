@@ -289,18 +289,50 @@
     .img-btn.copy{color:var(--accent);border-color:var(--accent30)}
 
     /* ── MD TOOLBAR ── */
-    .md-toolbar{
-      display:flex;gap:2px;padding:5px 10px;align-items:center;
-      background:var(--bg2);border-bottom:1px solid var(--border);flex-wrap:wrap;
-    }
+    .md-toolbar{background:var(--bg2);border-bottom:1px solid var(--border);display:flex;flex-direction:column}
+    .md-toolbar-row{display:flex;gap:1px;padding:3px 8px;align-items:center;flex-wrap:wrap}
+    .md-toolbar-row+.md-toolbar-row{border-top:1px solid var(--border2)}
     .md-tb-btn{
-      display:flex;align-items:center;justify-content:center;gap:3px;
-      padding:3px 9px;background:transparent;border:1px solid transparent;
+      display:flex;align-items:center;justify-content:center;gap:2px;
+      padding:3px 7px;background:transparent;border:1px solid transparent;
       color:var(--muted);cursor:pointer;font-family:'Manrope',sans-serif;
-      font-size:12px;font-weight:700;letter-spacing:.02em;transition:all .12s;
+      font-size:11px;font-weight:700;letter-spacing:.02em;transition:all .12s;
     }
     .md-tb-btn:hover,.md-tb-btn:focus{border-color:var(--accent30);color:var(--accent);background:var(--accent10);outline:none}
-    .md-tb-sep{width:1px;background:var(--border);height:16px;margin:0 4px;flex-shrink:0}
+    .md-tb-sep{width:1px;background:var(--border);height:14px;margin:0 3px;flex-shrink:0}
+    .md-tb-select{
+      background:var(--bg3);border:1px solid var(--border2);color:var(--text2);
+      font-family:'Manrope',sans-serif;font-size:11px;font-weight:700;
+      padding:2px 6px;cursor:pointer;outline:none;height:24px;
+    }
+    .md-tb-select:focus{border-color:var(--accent30)}
+    .md-color-wrap{position:relative;display:inline-flex;align-items:center}
+    .md-color-palette{
+      position:absolute;top:calc(100% + 3px);left:0;z-index:9500;
+      background:var(--bg2);border:1px solid var(--border);
+      padding:5px;display:none;flex-wrap:wrap;gap:3px;width:114px;
+    }
+    .md-color-palette.open{display:flex}
+    .md-color-swatch{
+      width:15px;height:15px;cursor:pointer;flex-shrink:0;
+      border:2px solid transparent;transition:border-color .1s;
+    }
+    .md-color-swatch:hover{border-color:var(--text)}
+    #md-color-input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+
+    /* ── META TOGGLE (collapsible fields) ── */
+    .meta-toggle{
+      display:flex;align-items:center;gap:8px;padding:9px 16px;
+      background:var(--bg2);border-bottom:1px solid var(--border2);
+      cursor:pointer;font-size:11px;font-weight:700;color:var(--muted);
+      text-transform:uppercase;letter-spacing:.07em;user-select:none;
+    }
+    .meta-toggle:hover{color:var(--text2);background:var(--bg3)}
+    .meta-toggle .material-symbols-outlined{font-size:15px;transition:transform .2s}
+    #form-fields.meta-collapsed{display:none}
+
+    /* ── IMG FIELD PREVIEW ── */
+    .img-field-prev{margin-top:6px;max-width:220px;max-height:130px;object-fit:contain;border:1px solid var(--border);background:var(--bg3);display:block}
 
     /* ── LIGHTBOX ── */
     #lightbox{
@@ -455,6 +487,11 @@
     <!-- EDITOR VIEW -->
     <div id="view-editor" class="hidden">
       <div class="editor-scroll" id="editor-scroll">
+        <div class="meta-toggle" id="meta-toggle">
+          <span class="material-symbols-outlined">tune</span>
+          Metadane i pola
+          <span class="material-symbols-outlined" id="meta-chevron" style="margin-left:auto">expand_more</span>
+        </div>
         <div id="form-fields"></div>
         <div class="field" style="margin-top:16px">
           <div class="field-label">Treść <span class="req">*</span></div>
@@ -462,15 +499,61 @@
             <div class="md-pane">
               <div class="pane-label">✏ Markdown</div>
               <div class="md-toolbar">
-                <button class="md-tb-btn" type="button" data-md="bold" title="Pogrubienie"><b>B</b></button>
-                <button class="md-tb-btn" type="button" data-md="italic" title="Kursywa"><i>I</i></button>
-                <button class="md-tb-btn" type="button" data-md="h2" title="Nagłówek H2"><span class="material-symbols-outlined" style="font-size:13px">title</span>H2</button>
-                <div class="md-tb-sep"></div>
-                <button class="md-tb-btn" type="button" data-md="link" title="Link"><span class="material-symbols-outlined" style="font-size:13px">link</span>Link</button>
-                <button class="md-tb-btn" type="button" data-md="image" title="Obrazek z galerii"><span class="material-symbols-outlined" style="font-size:13px">image</span>Obraz</button>
-                <div class="md-tb-sep"></div>
-                <button class="md-tb-btn" type="button" data-md="ul" title="Lista punktowana"><span class="material-symbols-outlined" style="font-size:13px">format_list_bulleted</span>Lista</button>
-                <button class="md-tb-btn" type="button" data-md="quote" title="Cytat"><span class="material-symbols-outlined" style="font-size:13px">format_quote</span>Cytat</button>
+                <!-- Row 1: format, inline styles, lists, alignment -->
+                <div class="md-toolbar-row">
+                  <select class="md-tb-select" id="md-format-sel" title="Format bloku">
+                    <option value="">Akapit/Nagłówek…</option>
+                    <option value="h1">Nagłówek H1</option>
+                    <option value="h2">Nagłówek H2</option>
+                    <option value="h3">Nagłówek H3</option>
+                    <option value="h4">Nagłówek H4</option>
+                    <option value="h5">Nagłówek H5</option>
+                    <option value="h6">Nagłówek H6</option>
+                    <option value="p">Akapit</option>
+                  </select>
+                  <div class="md-tb-sep"></div>
+                  <button class="md-tb-btn" type="button" data-md="bold" title="Pogrubienie"><b>B</b></button>
+                  <button class="md-tb-btn" type="button" data-md="italic" title="Kursywa"><i>I</i></button>
+                  <button class="md-tb-btn" type="button" data-md="strike" title="Przekreślony" style="text-decoration:line-through">S</button>
+                  <div class="md-color-wrap">
+                    <button class="md-tb-btn" type="button" id="md-color-btn" title="Kolor tekstu">
+                      <span style="font-weight:900;border-bottom:2px solid #404dff">A</span>
+                    </button>
+                    <div class="md-color-palette" id="md-color-palette">
+                      <div class="md-color-swatch" data-color="#404dff" style="background:#404dff" title="#404dff"></div>
+                      <div class="md-color-swatch" data-color="#3fcf77" style="background:#3fcf77" title="#3fcf77"></div>
+                      <div class="md-color-swatch" data-color="#ff4d6d" style="background:#ff4d6d" title="#ff4d6d"></div>
+                      <div class="md-color-swatch" data-color="#ffc800" style="background:#ffc800" title="#ffc800"></div>
+                      <div class="md-color-swatch" data-color="#00d4ff" style="background:#00d4ff" title="#00d4ff"></div>
+                      <div class="md-color-swatch" data-color="#ff6b35" style="background:#ff6b35" title="#ff6b35"></div>
+                      <div class="md-color-swatch" data-color="#e2e1ff" style="background:#e2e1ff" title="#e2e1ff"></div>
+                      <div class="md-color-swatch" data-color="#7f7f9c" style="background:#7f7f9c" title="#7f7f9c"></div>
+                      <div class="md-color-swatch" data-color="#ffffff" style="background:#fff;border-color:rgba(255,255,255,.3)" title="Biały"></div>
+                      <div class="md-color-swatch" data-color="#111224" style="background:#111224;border-color:#333" title="Ciemny"></div>
+                      <div class="md-color-swatch" title="Własny kolor" id="md-color-custom-btn"
+                           style="background:conic-gradient(red,yellow,green,blue,red)"></div>
+                      <input type="color" id="md-color-input" />
+                    </div>
+                  </div>
+                  <div class="md-tb-sep"></div>
+                  <button class="md-tb-btn" type="button" data-md="ul" title="Lista punktowana"><span class="material-symbols-outlined" style="font-size:12px">format_list_bulleted</span></button>
+                  <button class="md-tb-btn" type="button" data-md="ol" title="Lista numerowana"><span class="material-symbols-outlined" style="font-size:12px">format_list_numbered</span></button>
+                  <button class="md-tb-btn" type="button" data-md="indent" title="Dodaj wcięcie"><span class="material-symbols-outlined" style="font-size:12px">format_indent_increase</span></button>
+                  <button class="md-tb-btn" type="button" data-md="outdent" title="Usuń wcięcie"><span class="material-symbols-outlined" style="font-size:12px">format_indent_decrease</span></button>
+                  <div class="md-tb-sep"></div>
+                  <button class="md-tb-btn" type="button" data-md="align-left" title="Do lewej"><span class="material-symbols-outlined" style="font-size:12px">format_align_left</span></button>
+                  <button class="md-tb-btn" type="button" data-md="align-center" title="Wyśrodkuj"><span class="material-symbols-outlined" style="font-size:12px">format_align_center</span></button>
+                  <button class="md-tb-btn" type="button" data-md="align-right" title="Do prawej"><span class="material-symbols-outlined" style="font-size:12px">format_align_right</span></button>
+                </div>
+                <!-- Row 2: blocks, media, insert -->
+                <div class="md-toolbar-row">
+                  <button class="md-tb-btn" type="button" data-md="link" title="Link"><span class="material-symbols-outlined" style="font-size:12px">link</span>Link</button>
+                  <button class="md-tb-btn" type="button" data-md="image" title="Obrazek (z podpisem)"><span class="material-symbols-outlined" style="font-size:12px">image</span>Obraz</button>
+                  <button class="md-tb-btn" type="button" data-md="btn" title="Przycisk CTA"><span class="material-symbols-outlined" style="font-size:12px">smart_button</span>Przycisk</button>
+                  <div class="md-tb-sep"></div>
+                  <button class="md-tb-btn" type="button" data-md="quote" title="Cytat"><span class="material-symbols-outlined" style="font-size:12px">format_quote</span>Cytat</button>
+                  <button class="md-tb-btn" type="button" data-md="hr" title="Pozioma linia"><span class="material-symbols-outlined" style="font-size:12px">horizontal_rule</span>Linia</button>
+                </div>
               </div>
               <textarea id="md-editor" placeholder="## Nagłówek&#10;&#10;Treść wpisu..."></textarea>
             </div>
@@ -961,7 +1044,11 @@ function renderForm(col, post){
   var gridItems=[]
   col.fields.forEach(function(f){
     var val=fm[f.name]!==undefined?fm[f.name]:''
+    // normalize arrays (YAML array) and inline JSON arrays to comma string
     if(Array.isArray(val)) val=val.join(', ')
+    else if(typeof val==='string'&&val.trim().startsWith('[')){
+      try{ var arr=JSON.parse(val); if(Array.isArray(arr)) val=arr.join(', ') }catch(e){}
+    }
     var req=f.required?'<span class="req">*</span>':''
     var fieldHtml='<div class="field">'+'<label class="field-label" for="ff-'+f.name+'">'+f.label+req+'</label>'
 
@@ -983,7 +1070,9 @@ function renderForm(col, post){
           '<button class="btn btn-ghost btn-sm" type="button" data-picker-target="ff-'+f.name+'" style="padding:0 12px;flex-shrink:0">'+
             '<span class="material-symbols-outlined" style="font-size:15px">photo_library</span>Galeria'+
           '</button>'+
-        '</div>'
+        '</div>'+
+        (val?'<img class="img-field-prev" id="fimg-'+f.name+'" src="'+esc(val)+'" alt="" onerror="this.style.display=\'none\'" />':
+             '<img class="img-field-prev" id="fimg-'+f.name+'" src="" alt="" style="display:none" />')
     } else if(f.type==='tags'){
       fieldHtml+='<input class="inp" id="ff-'+f.name+'" data-field="'+f.name+'" value="'+esc(val)+'" placeholder="'+(f.placeholder||'tag1, tag2, tag3')+'" />'
     }
@@ -1019,11 +1108,28 @@ function renderForm(col, post){
     })
   }
 
-  // image picker buttons
+  // image picker buttons + live preview
   qsa('[data-picker-target]').forEach(function(btn){
     btn.addEventListener('click',function(){
       var target=btn.dataset.pickerTarget
-      openPicker(function(url){ var el=qs('#'+target); if(el){el.value=url;toast('✅ Wybrano: '+url.split('/').pop())} })
+      openPicker(function(url){
+        var el=qs('#'+target)
+        if(!el) return
+        el.value=url
+        var fname=target.replace('ff-','')
+        var prev=qs('#fimg-'+fname)
+        if(prev){prev.src=url;prev.style.display='block'}
+        toast('✅ Wybrano: '+url.split('/').pop())
+      })
+    })
+  })
+  // live preview on manual URL input
+  qsa('.img-field-prev').forEach(function(img){
+    var fname=img.id.replace('fimg-','')
+    var inp=qs('#ff-'+fname)
+    if(inp) inp.addEventListener('input',function(){
+      var u=this.value.trim()
+      if(u){img.src=u;img.style.display='block'}else img.style.display='none'
     })
   })
 }
@@ -1095,6 +1201,13 @@ function updatePreview(){
     qs('#md-preview').innerHTML=marked.parse(raw)
 }
 
+/* ══ META TOGGLE ══ */
+qs('#meta-toggle').addEventListener('click',function(){
+  var ff=qs('#form-fields'), ch=qs('#meta-chevron')
+  ff.classList.toggle('meta-collapsed')
+  ch.style.transform=ff.classList.contains('meta-collapsed')?'rotate(-90deg)':'rotate(0deg)'
+})
+
 /* ══ MD TOOLBAR ══ */
 function mdInsert(type){
   var ed=qs('#md-editor')
@@ -1104,45 +1217,113 @@ function mdInsert(type){
   var ins='', selS=-1, selE=-1
 
   function nl(){ return (before===''||before.endsWith('\n'))?'':'\n' }
+  function commit(){
+    ed.value=before+ins+after
+    ed.focus()
+    if(selS>=0) ed.setSelectionRange(selS,selE)
+    else ed.setSelectionRange(s+ins.length,s+ins.length)
+    updatePreview()
+  }
 
   if(type==='bold'){
     ins='**'+(sel||'pogrubiony tekst')+'**'
     if(!sel){selS=s+2;selE=s+ins.length-2}
+    commit()
   } else if(type==='italic'){
     ins='*'+(sel||'kursywa')+'*'
     if(!sel){selS=s+1;selE=s+ins.length-1}
-  } else if(type==='h2'){
-    ins=nl()+'## '+(sel||'Nagłówek')+'\n'
-    selS=selE=s+ins.length
+    commit()
+  } else if(type==='strike'){
+    ins='~~'+(sel||'przekreślony tekst')+'~~'
+    if(!sel){selS=s+2;selE=s+ins.length-2}
+    commit()
   } else if(type==='ul'){
-    ins=nl()+'- '+(sel||'element')+'\n'
-    selS=selE=s+ins.length
+    ins=nl()+'- '+(sel||'element')+'\n'; commit()
+  } else if(type==='ol'){
+    ins=nl()+'1. '+(sel||'element')+'\n'; commit()
   } else if(type==='quote'){
-    ins=nl()+'> '+(sel||'cytat')+'\n'
-    selS=selE=s+ins.length
+    ins=nl()+'> '+(sel||'cytat')+'\n'; commit()
+  } else if(type==='hr'){
+    ins=nl()+'\n---\n\n'; commit()
+  } else if(type==='indent'){
+    var lines=(sel||'').split('\n')
+    ins=nl()+lines.map(function(l){return '  '+l}).join('\n')+'\n'; commit()
+  } else if(type==='outdent'){
+    var lines2=(sel||'').split('\n')
+    ins=nl()+lines2.map(function(l){return l.startsWith('  ')?l.slice(2):l}).join('\n')+'\n'; commit()
+  } else if(type==='align-left'){
+    ins=nl()+'<div style="text-align:left">\n\n'+(sel||'Tekst')+'\n\n</div>\n'; commit()
+  } else if(type==='align-center'){
+    ins=nl()+'<div style="text-align:center">\n\n'+(sel||'Tekst wyśrodkowany')+'\n\n</div>\n'; commit()
+  } else if(type==='align-right'){
+    ins=nl()+'<div style="text-align:right">\n\n'+(sel||'Tekst')+'\n\n</div>\n'; commit()
   } else if(type==='link'){
     var url=prompt('URL linku:','https://')
     if(!url) return
-    ins='['+(sel||'tekst linku')+']('+url+')'
-    selS=selE=s+ins.length
+    ins='['+(sel||'tekst linku')+']('+url+')'; commit()
+  } else if(type==='btn'){
+    var burl=prompt('URL przycisku:','https://')
+    if(!burl) return
+    var btxt=prompt('Tekst przycisku:',sel||'Dowiedz się więcej')||'Kliknij tutaj'
+    ins=nl()+'<a href="'+burl+'" class="btn-content">'+btxt+'</a>\n'; commit()
   } else if(type==='image'){
-    // capture cursor before async picker
-    var savedS=s, savedE=e, savedSel=sel
+    var savedS=s, savedE=e
     openPicker(function(url){
-      var alt=prompt('Alt text obrazka:')||savedSel||''
-      var ins2='!['+alt+']('+url+')'
+      var alt=prompt('Alt text (opis zdjęcia dla SEO):')||''
+      var cap=prompt('Podpis pod zdjęciem (opcjonalnie):')||''
+      var ins2=nl()+'!['+alt+']('+url+')'+(cap?'\n*'+cap+'*':'')+'\n'
       ed.value=ed.value.slice(0,savedS)+ins2+ed.value.slice(savedE)
       ed.focus();ed.setSelectionRange(savedS+ins2.length,savedS+ins2.length)
       updatePreview()
     })
-    return
   }
+}
+
+/* Format selector (heading / paragraph) */
+qs('#md-format-sel').addEventListener('change',function(){
+  var ed=qs('#md-editor')
+  var s=ed.selectionStart, e=ed.selectionEnd
+  var sel=ed.value.slice(s,e)||'Tekst'
+  var before=ed.value.slice(0,s), after=ed.value.slice(e)
+  var val=this.value; if(!val){this.selectedIndex=0;return}
+  var nl=(before===''||before.endsWith('\n'))?'':'\n'
+  var ins=val==='p'? (nl+sel+'\n') : (nl+'#'.repeat(parseInt(val.replace('h','')))+' '+sel+'\n')
   ed.value=before+ins+after
-  ed.focus()
-  if(selS>=0) ed.setSelectionRange(selS,selE)
-  else ed.setSelectionRange(s+ins.length,s+ins.length)
+  ed.focus();ed.setSelectionRange(s+ins.length,s+ins.length)
+  updatePreview()
+  this.selectedIndex=0
+})
+
+/* Color picker */
+var _colorPalette=qs('#md-color-palette')
+qs('#md-color-btn').addEventListener('click',function(e){
+  e.stopPropagation(); _colorPalette.classList.toggle('open')
+})
+document.addEventListener('click',function(e){
+  if(_colorPalette&&!e.target.closest('#md-color-palette')&&!e.target.closest('#md-color-btn'))
+    _colorPalette.classList.remove('open')
+})
+qsa('[data-color]').forEach(function(sw){
+  sw.addEventListener('click',function(){
+    applyColor(this.dataset.color); _colorPalette.classList.remove('open')
+  })
+})
+qs('#md-color-custom-btn').addEventListener('click',function(e){
+  e.stopPropagation(); qs('#md-color-input').click()
+})
+qs('#md-color-input').addEventListener('input',function(){
+  applyColor(this.value); _colorPalette.classList.remove('open')
+})
+function applyColor(color){
+  var ed=qs('#md-editor')
+  var s=ed.selectionStart, e=ed.selectionEnd
+  var sel=ed.value.slice(s,e)||'tekst'
+  var ins='<span style="color:'+color+'">'+sel+'</span>'
+  ed.value=ed.value.slice(0,s)+ins+ed.value.slice(e)
+  ed.focus();ed.setSelectionRange(s+ins.length,s+ins.length)
   updatePreview()
 }
+
 document.addEventListener('click',function(e){
   var btn=e.target.closest('[data-md]')
   if(btn&&qs('#view-editor')&&!qs('#view-editor').classList.contains('hidden')) mdInsert(btn.dataset.md)
