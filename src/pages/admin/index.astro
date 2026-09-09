@@ -226,6 +226,13 @@
     .g2{grid-template-columns:1fr 1fr}
     .g3{grid-template-columns:1fr 1fr 1fr}
     @media(max-width:800px){.g2,.g3{grid-template-columns:1fr}}
+    .field-section{border:1px solid var(--border2);margin-bottom:10px;border-radius:2px}
+    .field-section-hdr{display:flex;align-items:center;gap:8px;padding:9px 14px;background:var(--bg3);cursor:pointer;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;user-select:none;border-bottom:1px solid transparent}
+    .field-section.open>.field-section-hdr{border-bottom-color:var(--border2)}
+    .field-section-hdr .sec-chev{font-size:16px!important;transition:transform .18s;flex-shrink:0}
+    .field-section.open>.field-section-hdr .sec-chev{transform:rotate(90deg)}
+    .field-section-body{display:none;padding:14px 16px}
+    .field-section.open>.field-section-body{display:block}
     .md-split{
       display:grid;grid-template-columns:1fr 1fr;gap:0;
       border-top:1px solid var(--border);flex:1;min-height:0;
@@ -744,25 +751,26 @@ var CONFIG = {
       icon:   'handyman',
       folder: 'src/content/uslugi',
       fields: [
-        { name:'title',       label:'Tytuł strony',      type:'string', required:true },
-        { name:'description', label:'Opis SEO (meta)',    type:'text' },
-        { name:'image',       label:'Zdjęcie OG',         type:'image' },
-        { name:'hero_desc',   label:'Hero — opis intro',  type:'text',
-          placeholder:'Krótki opis widoczny w sekcji hero pod nagłówkiem H1' },
-        { name:'zakres_desc', label:'Zakres — opis sekcji', type:'text',
-          placeholder:'Podtytuł sekcji z blokami usługi' },
-        { name:'block_tech_title', label:'Blok 1 — tytuł',  type:'string', placeholder:'np. Technical Analysis' },
-        { name:'block_tech_desc',  label:'Blok 1 — opis',   type:'text' },
+        { name:'title',       label:'Tytuł strony',   type:'string', required:true },
+        { name:'description', label:'Opis SEO (meta)', type:'text' },
+        { name:'image',       label:'Zdjęcie OG',      type:'image' },
+        { type:'section', label:'Sekcja Hero', icon:'hero' },
+        { name:'hero_desc', label:'Opis pod nagłówkiem H1', type:'text' },
+        { type:'section', label:'Bloki oferty', icon:'grid_view' },
+        { name:'zakres_desc',      label:'Podtytuł sekcji bloków', type:'text' },
+        { name:'block_tech_title', label:'Blok 1 — tytuł',         type:'string' },
+        { name:'block_tech_desc',  label:'Blok 1 — opis',           type:'text' },
         { name:'block_tech_items', label:'Blok 1 — lista (przecinkami)', type:'string',
-          placeholder:'np. JS Rendering Check, Core Web Vitals, Robots.txt' },
+          placeholder:'np. JS Rendering Check, Core Web Vitals' },
         { name:'block_keyword_title', label:'Blok 2 — tytuł', type:'string' },
         { name:'block_keyword_desc',  label:'Blok 2 — opis',  type:'text' },
         { name:'block_ux_title', label:'Blok 3 — tytuł', type:'string' },
         { name:'block_ux_desc',  label:'Blok 3 — opis',  type:'text' },
-        { name:'block_intel_title', label:'Blok 4 — tytuł', type:'string' },
-        { name:'block_intel_desc',  label:'Blok 4 — opis',  type:'text' },
+        { name:'block_intel_title', label:'Blok 4 — tytuł',              type:'string' },
+        { name:'block_intel_desc',  label:'Blok 4 — opis',               type:'text' },
         { name:'block_intel_tags',  label:'Blok 4 — tagi (przecinkami)', type:'string' },
-        { name:'problems_intro', label:'Problemy — wstęp', type:'text' },
+        { type:'section', label:'Sekcja Problemów', icon:'report_problem' },
+        { name:'problems_intro', label:'Wstęp sekcji problemów', type:'text' },
         { name:'problem1_title', label:'Problem 1 — tytuł', type:'string' },
         { name:'problem1_desc',  label:'Problem 1 — opis',  type:'text' },
         { name:'problem2_title', label:'Problem 2 — tytuł', type:'string' },
@@ -1067,42 +1075,29 @@ function renderForm(col, post){
   var fm={}, body=''
   if(post){ var p=parseFM(post.content); fm=p.fm; body=p.body }
 
-  // slug field (always first, derived from title)
   var slugVal=post?post.name.replace('.md',''):''
 
-  var html='<div class="form-grid g2" style="margin-bottom:12px">'+
-    '<div class="field">'+
-      '<label class="field-label" for="f-slug">Slug (URL pliku)</label>'+
-      '<input class="inp" id="f-slug" value="'+esc(slugVal)+'" placeholder="np. audyt-seo-2025" />'+
-    '</div>'+
-    '<div></div>'+
-  '</div>'+
-  '<div class="form-grid g2" style="margin-bottom:0">'
-
-  var gridItems=[]
-  col.fields.forEach(function(f){
+  function buildFieldHtml(f){
     var val=fm[f.name]!==undefined?fm[f.name]:''
-    // normalize arrays (YAML array) and inline JSON arrays to comma string
     if(Array.isArray(val)) val=val.join(', ')
     else if(typeof val==='string'&&val.trim().startsWith('[')){
       try{ var arr=JSON.parse(val); if(Array.isArray(arr)) val=arr.join(', ') }catch(e){}
     }
     var req=f.required?'<span class="req">*</span>':''
-    var fieldHtml='<div class="field">'+'<label class="field-label" for="ff-'+f.name+'">'+f.label+req+'</label>'
-
+    var fh='<div class="field"><label class="field-label" for="ff-'+f.name+'">'+f.label+req+'</label>'
     if(f.type==='string'){
-      fieldHtml+='<input class="inp" id="ff-'+f.name+'" data-field="'+f.name+'" value="'+esc(val)+'" placeholder="'+(f.placeholder||'')+'" />'
+      fh+='<input class="inp" id="ff-'+f.name+'" data-field="'+f.name+'" value="'+esc(val)+'" placeholder="'+(f.placeholder||'')+'" />'
     } else if(f.type==='text'){
-      fieldHtml+='<textarea class="ta" id="ff-'+f.name+'" data-field="'+f.name+'" rows="2">'+esc(val)+'</textarea>'
+      fh+='<textarea class="ta" id="ff-'+f.name+'" data-field="'+f.name+'" rows="2">'+esc(val)+'</textarea>'
     } else if(f.type==='date'){
-      fieldHtml+='<input class="inp" type="date" id="ff-'+f.name+'" data-field="'+f.name+'" value="'+esc(val||today())+'" />'
+      fh+='<input class="inp" type="date" id="ff-'+f.name+'" data-field="'+f.name+'" value="'+esc(val||today())+'" />'
     } else if(f.type==='select'){
       var opts=f.options.map(function(o){
         return '<option value="'+esc(o)+'"'+(val===o?' selected':'')+'>'+o+'</option>'
       }).join('')
-      fieldHtml+='<select class="sel" id="ff-'+f.name+'" data-field="'+f.name+'"><option value="">Wybierz…</option>'+opts+'</select>'
+      fh+='<select class="sel" id="ff-'+f.name+'" data-field="'+f.name+'"><option value="">Wybierz…</option>'+opts+'</select>'
     } else if(f.type==='image'){
-      fieldHtml+=
+      fh+=
         '<div class="inp-row">'+
           '<input class="inp" id="ff-'+f.name+'" data-field="'+f.name+'" value="'+esc(val)+'" placeholder="/images/... lub https://..." />'+
           '<button class="btn btn-ghost btn-sm" type="button" data-picker-target="ff-'+f.name+'" style="padding:0 12px;flex-shrink:0">'+
@@ -1112,27 +1107,61 @@ function renderForm(col, post){
         (val?'<img class="img-field-prev" id="fimg-'+f.name+'" src="'+esc(val)+'" alt="" onerror="this.style.display=\'none\'" />':
              '<img class="img-field-prev" id="fimg-'+f.name+'" src="" alt="" style="display:none" />')
     } else if(f.type==='tags'){
-      fieldHtml+='<input class="inp" id="ff-'+f.name+'" data-field="'+f.name+'" value="'+esc(val)+'" placeholder="'+(f.placeholder||'tag1, tag2, tag3')+'" />'
+      fh+='<input class="inp" id="ff-'+f.name+'" data-field="'+f.name+'" value="'+esc(val)+'" placeholder="'+(f.placeholder||'tag1, tag2, tag3')+'" />'
     }
-    fieldHtml+='</div>'
-    gridItems.push({f:f, html:fieldHtml})
-  })
-
-  // layout: wide fields (text, image) go full-width; others pair up
-  var rows=''
-  var i=0
-  while(i<gridItems.length){
-    var cur=gridItems[i]
-    var isWide=cur.f.type==='text'||cur.f.type==='image'||cur.f.type==='tags'
-    if(isWide){
-      rows+='</div><div class="form-grid g2" style="margin-bottom:12px"><div style="grid-column:1/-1">'+cur.html+'</div></div><div class="form-grid g2" style="margin-bottom:0">'
-      i++
-    } else {
-      rows+=cur.html
-      i++
-    }
+    return fh+'</div>'
   }
-  html+=rows+'</div>'
+
+  function layoutGroup(fields){
+    var items=fields.map(function(f){ return {f:f,html:buildFieldHtml(f)} })
+    var rows='<div class="form-grid g2" style="margin-bottom:0">'
+    var i=0
+    while(i<items.length){
+      var cur=items[i]
+      var isWide=cur.f.type==='text'||cur.f.type==='image'||cur.f.type==='tags'
+      if(isWide){
+        rows+='</div><div class="form-grid g2" style="margin-bottom:12px"><div style="grid-column:1/-1">'+cur.html+'</div></div><div class="form-grid g2" style="margin-bottom:0">'
+      } else {
+        rows+=cur.html
+      }
+      i++
+    }
+    return rows+'</div>'
+  }
+
+  // Split fields into groups at 'section' boundaries
+  var groups=[], curGroup={label:null,fields:[]}
+  col.fields.forEach(function(f){
+    if(f.type==='section'){
+      groups.push(curGroup)
+      curGroup={label:f.label, icon:f.icon||'tune', fields:[]}
+    } else {
+      curGroup.fields.push(f)
+    }
+  })
+  groups.push(curGroup)
+
+  var html='<div class="form-grid g2" style="margin-bottom:12px">'+
+    '<div class="field"><label class="field-label" for="f-slug">Slug (URL pliku)</label>'+
+    '<input class="inp" id="f-slug" value="'+esc(slugVal)+'" placeholder="np. audyt-seo-2025" /></div>'+
+    '<div></div></div>'
+
+  groups.forEach(function(g){
+    if(!g.fields.length) return
+    if(g.label){
+      html+=
+        '<div class="field-section">'+
+          '<div class="field-section-hdr" onclick="this.parentElement.classList.toggle(\'open\')">'+
+            '<span class="material-symbols-outlined sec-chev">chevron_right</span>'+
+            '<span class="material-symbols-outlined" style="font-size:15px;opacity:.5">'+g.icon+'</span>'+
+            g.label+
+          '</div>'+
+          '<div class="field-section-body">'+layoutGroup(g.fields)+'</div>'+
+        '</div>'
+    } else {
+      html+=layoutGroup(g.fields)
+    }
+  })
 
   qs('#form-fields').innerHTML=html
   qs('#md-editor').value=body
