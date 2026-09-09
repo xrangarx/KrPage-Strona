@@ -1,6 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
 import { SITE } from '../data/site'
+import { getEntry, render } from 'astro:content'
+
+const kontaktEntry = await getEntry('pages', 'kontakt')
+const { Content: KontaktContent } = kontaktEntry ? await render(kontaktEntry) : { Content: null }
 ---
 
 <BaseLayout
@@ -76,6 +80,20 @@ import { SITE } from '../data/site'
           <span class="w-2 h-2 rounded-full bg-neon animate-pulse"></span>
           Średni czas odpowiedzi: <span class="text-neon font-bold">&lt; 24h</span>
         </div>
+
+        {KontaktContent && (
+          <div class="mt-xl prose prose-invert max-w-none
+                      prose-headings:text-on-surface prose-headings:font-black
+                      prose-h2:text-xl prose-h2:mt-6 prose-h2:mb-3 prose-h2:pb-2 prose-h2:border-b prose-h2:border-outline-variant/40
+                      prose-h3:text-lg prose-h3:mt-4 prose-h3:mb-2 prose-h3:text-neon/80
+                      prose-p:text-on-surface-variant prose-p:leading-relaxed prose-p:mb-4 prose-p:text-base
+                      prose-li:text-on-surface-variant prose-li:leading-relaxed
+                      prose-ul:my-3 prose-ol:my-3
+                      prose-strong:text-on-surface prose-strong:font-semibold
+                      prose-a:text-neon prose-a:no-underline hover:prose-a:underline">
+            <KontaktContent />
+          </div>
+        )}
       </div>
 
       <!-- Right: form -->

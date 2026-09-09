@@ -215,14 +215,20 @@
 
     /* ── EDITOR VIEW ── */
     #view-editor{display:flex;flex-direction:column;height:100%;overflow:hidden}
-    .editor-scroll{flex:1;overflow-y:auto;padding:24px}
+    /* editor-scroll: pass-through flex column (no own scrolling/padding) */
+    .editor-scroll{flex:1;display:flex;flex-direction:column;overflow:hidden;padding:0}
+    /* form-fields: scrollable panel, starts collapsed */
+    #form-fields{overflow-y:auto;padding:16px 24px;max-height:55vh;flex-shrink:0;border-bottom:1px solid var(--border2)}
+    #form-fields.meta-collapsed{display:none}
+    /* markdown content area: fills remaining height */
+    #md-content-field{flex:1;display:flex;flex-direction:column;overflow:hidden;gap:0!important;margin:0!important}
     .form-grid{display:grid;gap:12px}
     .g2{grid-template-columns:1fr 1fr}
     .g3{grid-template-columns:1fr 1fr 1fr}
     @media(max-width:800px){.g2,.g3{grid-template-columns:1fr}}
     .md-split{
       display:grid;grid-template-columns:1fr 1fr;gap:0;
-      border:1px solid var(--border);margin-top:4px;height:360px;
+      border-top:1px solid var(--border);flex:1;min-height:0;
     }
     .md-pane{display:flex;flex-direction:column;overflow:hidden}
     .md-pane+.md-pane{border-left:1px solid var(--border)}
@@ -492,9 +498,8 @@
           Metadane i pola
           <span class="material-symbols-outlined" id="meta-chevron" style="margin-left:auto">expand_more</span>
         </div>
-        <div id="form-fields"></div>
-        <div class="field" style="margin-top:16px">
-          <div class="field-label">Treść <span class="req">*</span></div>
+        <div id="form-fields" class="meta-collapsed"></div>
+        <div class="field" id="md-content-field">
           <div class="md-split">
             <div class="md-pane">
               <div class="pane-label">✏ Markdown</div>
@@ -1202,6 +1207,8 @@ function updatePreview(){
 }
 
 /* ══ META TOGGLE ══ */
+// start with chevron pointing right (fields collapsed)
+qs('#meta-chevron').style.transform='rotate(-90deg)'
 qs('#meta-toggle').addEventListener('click',function(){
   var ff=qs('#form-fields'), ch=qs('#meta-chevron')
   ff.classList.toggle('meta-collapsed')
