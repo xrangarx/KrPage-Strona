@@ -5,6 +5,7 @@ import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
 import '../styles/global.css'
 import { SITE } from '../data/site'
+import tracking from '../data/tracking.json'
 
 interface Props {
   title: string
@@ -68,15 +69,15 @@ const {
       {...schemaProps}
     />
 
-    <!-- Weryfikacja właściwości -->
-    {SITE.verification.gsc  && <meta name="google-site-verification" content={SITE.verification.gsc} />}
-    {SITE.verification.bing && <meta name="msvalidate.01" content={SITE.verification.bing} />}
+    <!-- Weryfikacja właściwości (z tracking.json) -->
+    {tracking.gsc  && <meta name="google-site-verification" content={tracking.gsc} />}
+    {tracking.bing && <meta name="msvalidate.01" content={tracking.bing} />}
 
     <!-- Google Analytics 4 -->
-    {SITE.tracking.ga && (
+    {tracking.ga && (
       <>
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=${SITE.tracking.ga}`}></script>
-        <script define:vars={{ gaId: SITE.tracking.ga }}>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${tracking.ga}`}></script>
+        <script define:vars={{ gaId: tracking.ga }}>
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
@@ -86,8 +87,8 @@ const {
     )}
 
     <!-- Microsoft Clarity -->
-    {SITE.tracking.clarity && (
-      <script define:vars={{ clarityId: SITE.tracking.clarity }}>
+    {tracking.clarity && (
+      <script define:vars={{ clarityId: tracking.clarity }}>
         (function(c,l,a,r,i,t,y){
           c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
           t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;

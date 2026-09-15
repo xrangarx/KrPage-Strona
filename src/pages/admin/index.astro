@@ -459,6 +459,11 @@
       <button class="nav-item" data-view="images">
         <span class="material-symbols-outlined" style="font-size:16px">photo_library</span>Zdjęcia
       </button>
+      <div class="sidebar-sep"></div>
+      <div class="sidebar-section">Konfiguracja</div>
+      <button class="nav-item" data-view="settings">
+        <span class="material-symbols-outlined" style="font-size:16px">settings</span>Ustawienia
+      </button>
     </div>
     <div class="sidebar-foot">
       <a class="btn btn-ghost btn-full" id="site-link" href="#" target="_blank" rel="noopener" style="justify-content:flex-start;font-size:12px;padding:7px 10px">
@@ -576,6 +581,105 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- SETTINGS VIEW -->
+    <div class="view hidden" id="view-settings" style="padding:24px;overflow-y:auto;max-height:calc(100vh - 52px)">
+
+      <!-- Tracking & Verification -->
+      <div style="margin-bottom:28px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
+          <span class="material-symbols-outlined" style="color:var(--accent)">travel_explore</span>
+          <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">Śledzenie &amp; Weryfikacja</span>
+        </div>
+        <div class="form-grid g2" style="margin-bottom:16px">
+          <div class="field">
+            <label class="field-label" for="set-gsc">Google Search Console <span style="color:var(--muted);font-weight:400">(meta content)</span></label>
+            <input class="inp" id="set-gsc" placeholder="abc123xyz…" autocomplete="off" />
+            <p style="font-size:11px;color:var(--muted);margin-top:4px">Wartość z atrybutu <code style="background:var(--bg3);padding:1px 5px;font-size:10px">content=""</code> tagu meta z GSC</p>
+          </div>
+          <div class="field">
+            <label class="field-label" for="set-bing">Bing Webmaster Tools <span style="color:var(--muted);font-weight:400">(meta content)</span></label>
+            <input class="inp" id="set-bing" placeholder="ABC123…" autocomplete="off" />
+            <p style="font-size:11px;color:var(--muted);margin-top:4px">Wartość z tagu meta <code style="background:var(--bg3);padding:1px 5px;font-size:10px">msvalidate.01</code></p>
+          </div>
+          <div class="field">
+            <label class="field-label" for="set-ga">Google Analytics 4 <span style="color:var(--muted);font-weight:400">(Measurement ID)</span></label>
+            <input class="inp" id="set-ga" placeholder="G-XXXXXXXXXX" autocomplete="off" />
+            <p style="font-size:11px;color:var(--muted);margin-top:4px">Format: <code style="background:var(--bg3);padding:1px 5px;font-size:10px">G-XXXXXXXXXX</code> — z panelu GA4</p>
+          </div>
+          <div class="field">
+            <label class="field-label" for="set-clarity">Microsoft Clarity <span style="color:var(--muted);font-weight:400">(Project ID)</span></label>
+            <input class="inp" id="set-clarity" placeholder="xxxxxxxxxx" autocomplete="off" />
+            <p style="font-size:11px;color:var(--muted);margin-top:4px">Project ID z <a href="https://clarity.microsoft.com" target="_blank" style="color:var(--accent)">clarity.microsoft.com</a> → heat mapy</p>
+          </div>
+        </div>
+        <button class="btn btn-primary btn-sm" id="save-tracking-btn" style="min-width:200px">
+          <span class="material-symbols-outlined" style="font-size:15px">rocket_launch</span>
+          <span id="save-tracking-label">Zapisz kody → GitHub</span>
+        </button>
+        <span id="tracking-status" style="font-size:12px;color:var(--muted);margin-left:12px"></span>
+      </div>
+
+      <div style="height:1px;background:var(--border);margin-bottom:28px"></div>
+
+      <!-- Robots.txt editor -->
+      <div style="margin-bottom:28px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <span class="material-symbols-outlined" style="color:var(--accent)">robot_2</span>
+            <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">robots.txt</span>
+          </div>
+          <a href="/robots.txt" target="_blank" class="btn btn-ghost btn-sm" style="font-size:11px;padding:5px 10px">
+            <span class="material-symbols-outlined" style="font-size:13px">open_in_new</span>Otwórz
+          </a>
+        </div>
+        <textarea id="robots-editor"
+          style="width:100%;min-height:160px;background:var(--bg3);border:1px solid var(--border);color:var(--text);font-family:monospace;font-size:13px;padding:12px;resize:vertical;line-height:1.6;outline:none"
+          spellcheck="false"></textarea>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:10px">
+          <button class="btn btn-primary btn-sm" id="save-robots-btn" style="min-width:220px">
+            <span class="material-symbols-outlined" style="font-size:15px">rocket_launch</span>
+            <span id="save-robots-label">Zapisz robots.txt → GitHub</span>
+          </button>
+          <span id="robots-status" style="font-size:12px;color:var(--muted)"></span>
+        </div>
+      </div>
+
+      <div style="height:1px;background:var(--border);margin-bottom:28px"></div>
+
+      <!-- Sitemap info -->
+      <div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
+          <span class="material-symbols-outlined" style="color:var(--accent)">account_tree</span>
+          <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">Sitemap XML</span>
+        </div>
+        <div style="background:var(--bg2);border:1px solid var(--border);padding:16px 20px;margin-bottom:14px">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+            <div>
+              <p style="font-size:13px;color:var(--text);margin-bottom:4px">
+                Sitemap jest generowana automatycznie przy każdym deploymencie.
+              </p>
+              <p style="font-size:12px;color:var(--muted)">
+                Zawiera wszystkie podstrony + wpisy bloga. Edytuj <code style="background:var(--bg3);padding:1px 5px;font-size:10px">src/pages/sitemap.xml.ts</code> aby zarządzać priorytetami.
+              </p>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <a id="sitemap-link" href="/sitemap.xml" target="_blank" class="btn btn-ghost btn-sm" style="font-size:11px;padding:6px 12px">
+                <span class="material-symbols-outlined" style="font-size:13px">open_in_new</span>sitemap.xml
+              </a>
+            </div>
+          </div>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--border);padding:10px 14px">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
+            <span class="material-symbols-outlined" style="font-size:13px;color:var(--ok)">check_circle</span>
+            <span style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:700">robots.txt wskazuje na:</span>
+          </div>
+          <code style="font-size:12px;color:var(--accent)">Sitemap: https://krpage.pl/sitemap.xml</code>
+        </div>
+      </div>
+
     </div>
 
     <!-- IMAGES VIEW -->
@@ -983,6 +1087,8 @@ function buildSidebarNav(){
   })
   // images nav
   qs('[data-view="images"]').addEventListener('click',switchToImages)
+  // settings nav
+  qs('[data-view="settings"]').addEventListener('click',switchToSettings)
 }
 function setActiveNav(id){
   qsa('.nav-item').forEach(function(b){ b.classList.toggle('active', b.dataset.colId===id||b.dataset.view===id) })
@@ -993,6 +1099,7 @@ function hideAllViews(){
   hide(qs('#view-list'))
   hide(qs('#view-editor'))
   hide(qs('#view-images'))
+  hide(qs('#view-settings'))
   hide(qs('#back-btn'))
   hide(qs('#save-btn'))
   hide(qs('#new-btn'))
@@ -1425,6 +1532,72 @@ async function switchToImages(){
   await loadAltTexts()
   loadImages()
 }
+
+/* ══ SETTINGS ══ */
+var trackingSha = null
+var robotsSha   = null
+
+async function switchToSettings(){
+  currentView='settings'
+  setActiveNav('settings')
+  hideAllViews()
+  show(qs('#view-settings'))
+  qs('#toolbar-title').textContent='Ustawienia'
+
+  // Load tracking.json
+  try{
+    var tr=await ghGet('src/data/tracking.json')
+    trackingSha=tr.sha
+    var data=JSON.parse(atob(tr.content.replace(/\n/g,'')))
+    qs('#set-gsc').value    = data.gsc     || ''
+    qs('#set-bing').value   = data.bing    || ''
+    qs('#set-ga').value     = data.ga      || ''
+    qs('#set-clarity').value= data.clarity || ''
+  } catch(e){ toast('Błąd ładowania tracking.json: '+e.message,'err') }
+
+  // Load robots.txt
+  try{
+    var rb=await ghGet('public/robots.txt')
+    robotsSha=rb.sha
+    qs('#robots-editor').value=atob(rb.content.replace(/\n/g,''))
+  } catch(e){ toast('Błąd ładowania robots.txt: '+e.message,'err') }
+
+  // Sitemap link = siteUrl/sitemap.xml
+  qs('#sitemap-link').href = CONFIG.siteUrl+'/sitemap.xml'
+}
+
+qs('#save-tracking-btn').addEventListener('click', async function(){
+  var btn=this, lbl=qs('#save-tracking-label'), status=qs('#tracking-status')
+  btn.disabled=true; lbl.textContent='Zapisuję…'; status.textContent=''
+  var data={
+    gsc:     qs('#set-gsc').value.trim(),
+    bing:    qs('#set-bing').value.trim(),
+    ga:      qs('#set-ga').value.trim(),
+    clarity: qs('#set-clarity').value.trim(),
+  }
+  try{
+    var res=await ghPut('src/data/tracking.json',JSON.stringify(data,null,2)+'\n',trackingSha,'update: tracking.json')
+    if(!res.ok) throw new Error(await res.text())
+    var j=await res.json(); trackingSha=j.content.sha
+    toast('✓ tracking.json zapisany — rebuild w toku','ok')
+    status.textContent='Zapisano ✓'
+  } catch(e){ toast('❌ '+e.message,'err'); status.textContent='Błąd!' }
+  btn.disabled=false; lbl.textContent='Zapisz kody → GitHub'
+})
+
+qs('#save-robots-btn').addEventListener('click', async function(){
+  var btn=this, lbl=qs('#save-robots-label'), status=qs('#robots-status')
+  btn.disabled=true; lbl.textContent='Zapisuję…'; status.textContent=''
+  try{
+    var content=qs('#robots-editor').value
+    var res=await ghPut('public/robots.txt',content,robotsSha,'update: robots.txt')
+    if(!res.ok) throw new Error(await res.text())
+    var j=await res.json(); robotsSha=j.content.sha
+    toast('✓ robots.txt zapisany — rebuild w toku','ok')
+    status.textContent='Zapisano ✓'
+  } catch(e){ toast('❌ '+e.message,'err'); status.textContent='Błąd!' }
+  btn.disabled=false; lbl.textContent='Zapisz robots.txt → GitHub'
+})
 
 qsa('.img-subtab').forEach(function(btn){
   btn.addEventListener('click',function(){
