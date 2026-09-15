@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import { getCollection, render } from 'astro:content'
+import { SITE } from '../../data/site'
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog')
@@ -20,14 +21,54 @@ const sorted   = [...allPosts].sort((a, b) => (a.data.date || '').localeCompare(
 const idx      = sorted.findIndex(p => p.id === post.id)
 const prevPost = idx > 0 ? sorted[idx - 1] : null
 const nextPost = idx < sorted.length - 1 ? sorted[idx + 1] : null
+
+// ── Schema: FAQ ──────────────────────────────────────────────────────────────
+const faqItems = ([1, 2, 3, 4, 5] as const)
+  .map(i => ({ q: (post.data as Record<string, unknown>)[`faq${i}_q`] as string | undefined, a: (post.data as Record<string, unknown>)[`faq${i}_a`] as string | undefined }))
+  .filter((item): item is { q: string; a: string } => Boolean(item.q && item.a))
+
+const faqSchemaJson = faqItems.length > 0 ? JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map(item => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+}) : null
+
+// ── Schema: Breadcrumb ────────────────────────────────────────────────────────
+const breadcrumbJson = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Strona główna', item: SITE.url },
+    { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE.url}/blog` },
+    { '@type': 'ListItem', position: 3, name: post.data.title, item: `${SITE.url}/blog/${post.id}` },
+  ],
+})
 ---
 
 <BaseLayout
-  title={`${post.data.title} — Blog KrPage`}
-  description={post.data.description}
+  title={post.data.og_title ?? post.data.title}
+  description={post.data.og_description ?? post.data.description}
+  ogImage={post.data.image}
+  noIndex={post.data.noindex}
+  canonicalUrl={post.data.canonical}
   schemaType="blogpost"
-  schemaProps={{ headline: post.data.title, datePublished: post.data.date, image: post.data.image }}
+  schemaProps={{
+    datePublished: post.data.date,
+    dateModified:  post.data.date_modified ?? post.data.date,
+    ogImage:       post.data.image,
+    keywords:      post.data.tags,
+    articleType:   post.data.schema_type ?? 'BlogPosting',
+  }}
 >
+  <!-- Dodatkowe JSON-LD w <head> -->
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={breadcrumbJson} />
+    {faqSchemaJson && <script type="application/ld+json" set:html={faqSchemaJson} />}
+  </Fragment>
 
   <!-- Fixed top scroll progress bar -->
   <div id="top-progress" class="fixed top-0 left-0 h-[3px] bg-neon z-50 w-0 shadow-neon-sm pointer-events-none" style="transition: width 80ms linear;"></div>
@@ -67,7 +108,6 @@ const nextPost = idx < sorted.length - 1 ? sorted[idx + 1] : null
             ))}
           </nav>
 
-          <!-- Sidebar scroll progress -->
           <div class="mt-lg pt-md border-t border-outline-variant/30">
             <div class="flex justify-between mb-2">
               <span class="text-[10px] text-on-surface-variant/50 uppercase tracking-widest">Postęp czytania</span>
@@ -111,6 +151,15 @@ const nextPost = idx < sorted.length - 1 ? sorted[idx + 1] : null
           </div>
         )}
 
+        <!-- Breadcrumb (visual) -->
+        <nav class="flex items-center gap-2 text-[11px] text-on-surface-variant/50 mb-md uppercase tracking-widest">
+          <a href="/" class="hover:text-neon transition-colors">Home</a>
+          <span class="material-symbols-outlined text-[10px]">chevron_right</span>
+          <a href="/blog" class="hover:text-neon transition-colors">Blog</a>
+          <span class="material-symbols-outlined text-[10px]">chevron_right</span>
+          <span class="text-on-surface-variant/70 truncate max-w-[200px]">{post.data.category}</span>
+        </nav>
+
         <!-- Meta -->
         <div class="flex flex-wrap items-center gap-3 mb-md">
           <span class="text-label-sm text-neon uppercase tracking-widest border border-neon/20 px-2 py-0.5">
@@ -119,6 +168,9 @@ const nextPost = idx < sorted.length - 1 ? sorted[idx + 1] : null
           <span class="text-label-sm text-on-surface-variant">{post.data.date}</span>
           <span class="text-label-sm text-on-surface-variant">·</span>
           <span class="text-label-sm text-on-surface-variant">{post.data.readTime} czytania</span>
+          {post.data.focus_keyphrase && (
+            <span class="text-label-sm text-on-surface-variant/40 font-mono">#{post.data.focus_keyphrase}</span>
+          )}
         </div>
 
         <!-- Title -->
@@ -141,6 +193,38 @@ const nextPost = idx < sorted.length - 1 ? sorted[idx + 1] : null
                     prose-img:rounded-lg prose-img:border prose-img:border-outline-variant/30 prose-img:shadow-neon-sm">
           <Content />
         </div>
+
+        <!-- FAQ block (visual) — jeśli są FAQ w frontmatter -->
+        {faqItems.length > 0 && (
+          <div class="mt-xl pt-xl border-t border-outline-variant/30">
+            <h2 class="text-headline-md text-on-surface mb-lg flex items-center gap-2">
+              <span class="material-symbols-outlined text-neon">quiz</span>
+              Najczęstsze pytania
+            </h2>
+            <div class="space-y-md">
+              {faqItems.map((item, i) => (
+                <details class="bento-card p-md group" open={i === 0}>
+                  <summary class="flex items-center justify-between cursor-pointer text-on-surface font-semibold text-body-md list-none">
+                    {item.q}
+                    <span class="material-symbols-outlined text-neon shrink-0 ml-3 transition-transform group-open:rotate-180">expand_more</span>
+                  </summary>
+                  <p class="text-on-surface-variant text-body-md mt-sm leading-relaxed">{item.a}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <!-- Tags -->
+        {post.data.tags && post.data.tags.length > 0 && (
+          <div class="mt-lg flex flex-wrap gap-2">
+            {post.data.tags.map(tag => (
+              <span class="px-3 py-1 bg-surface-container text-label-sm text-on-surface-variant uppercase border border-outline-variant hover:border-neon/40 transition-colors">
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
 
         <!-- CTA -->
         <div class="mt-xl pt-xl border-t border-outline-variant/30">
@@ -218,58 +302,44 @@ const nextPost = idx < sorted.length - 1 ? sorted[idx + 1] : null
   )}
 
   <script is:inline>
-    // === Scroll progress ===
     function updateProgress() {
       var scrollTop = window.scrollY || document.documentElement.scrollTop
       var docHeight = document.documentElement.scrollHeight - window.innerHeight
       var pct = docHeight > 0 ? Math.min(100, Math.round((scrollTop / docHeight) * 100)) : 0
       var pctStr = pct + '%'
-      var topBar = document.getElementById('top-progress')
+      var topBar  = document.getElementById('top-progress')
       var sideBar = document.getElementById('sidebar-progress')
-      var pctLabel = document.getElementById('progress-pct')
-      if (topBar) topBar.style.width = pctStr
+      var pctLbl  = document.getElementById('progress-pct')
+      if (topBar)  topBar.style.width  = pctStr
       if (sideBar) sideBar.style.width = pctStr
-      if (pctLabel) pctLabel.textContent = pctStr
+      if (pctLbl)  pctLbl.textContent  = pctStr
     }
     window.addEventListener('scroll', updateProgress, { passive: true })
     updateProgress()
 
-    // === TOC active heading (IntersectionObserver) ===
     var tocLinks = document.querySelectorAll('.toc-link')
     if (tocLinks.length > 0) {
       var headingEls = document.querySelectorAll('article h2[id], article h3[id]')
-
       function setActive(slug) {
         tocLinks.forEach(function(link) {
           var isActive = link.getAttribute('data-toc-link') === slug
-          if (isActive) {
-            link.style.color = '#404dff'
-            link.style.borderLeftColor = '#404dff'
-            link.style.fontWeight = '700'
-          } else {
-            link.style.color = ''
-            link.style.borderLeftColor = ''
-            link.style.fontWeight = ''
-          }
+          link.style.color              = isActive ? '#404dff' : ''
+          link.style.borderLeftColor    = isActive ? '#404dff' : ''
+          link.style.fontWeight         = isActive ? '700'     : ''
         })
       }
-
       if (headingEls.length > 0) {
         var observer = new IntersectionObserver(function(entries) {
           entries.forEach(function(entry) {
-            if (entry.isIntersecting) {
-              setActive(entry.target.id)
-            }
+            if (entry.isIntersecting) setActive(entry.target.id)
           })
         }, { rootMargin: '-5% 0px -75% 0px', threshold: 0 })
-
         headingEls.forEach(function(el) { observer.observe(el) })
       }
     }
 
-    // === Mobile TOC toggle ===
-    var tocToggle = document.getElementById('toc-toggle')
-    var tocMobile = document.getElementById('toc-mobile')
+    var tocToggle  = document.getElementById('toc-toggle')
+    var tocMobile  = document.getElementById('toc-mobile')
     var tocChevron = document.getElementById('toc-chevron')
     if (tocToggle && tocMobile) {
       tocToggle.addEventListener('click', function() {
@@ -278,7 +348,7 @@ const nextPost = idx < sorted.length - 1 ? sorted[idx + 1] : null
           tocMobile.style.display = 'none'
           if (tocChevron) tocChevron.style.transform = 'rotate(0deg)'
         } else {
-          tocMobile.style.display = 'flex'
+          tocMobile.style.display     = 'flex'
           tocMobile.style.flexDirection = 'column'
           if (tocChevron) tocChevron.style.transform = 'rotate(180deg)'
         }

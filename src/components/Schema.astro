@@ -2,18 +2,18 @@
 import { SITE } from '../data/site'
 
 interface Props {
-  type: 'home' | 'webpage' | 'service' | 'blogpost' | 'breadcrumb'
+  type: 'home' | 'webpage' | 'service' | 'blogpost'
   title?: string
   description?: string
   canonicalUrl?: string
   // service
   serviceName?: string
   // blogpost
-  pubDate?: Date
-  updatedDate?: Date
+  datePublished?: string
+  dateModified?: string
   ogImage?: string
-  // breadcrumb — tablica {name, url}
-  breadcrumbs?: { name: string; url: string }[]
+  keywords?: string[]
+  articleType?: string
 }
 
 const {
@@ -22,10 +22,11 @@ const {
   description,
   canonicalUrl,
   serviceName,
-  pubDate,
-  updatedDate,
+  datePublished,
+  dateModified,
   ogImage,
-  breadcrumbs,
+  keywords,
+  articleType,
 } = Astro.props
 
 const pageUrl = canonicalUrl ?? new URL(Astro.url.pathname, SITE.url).href
@@ -48,12 +49,10 @@ const organization = {
 
 const schemas: object[] = []
 
-// LocalBusiness zawsze na stronie głównej
 if (type === 'home') {
   schemas.push({ '@context': 'https://schema.org', ...organization })
 }
 
-// WebPage na każdej podstronie
 if (type === 'webpage' || type === 'service' || type === 'blogpost') {
   schemas.push({
     '@context': 'https://schema.org',
@@ -65,50 +64,42 @@ if (type === 'webpage' || type === 'service' || type === 'blogpost') {
   })
 }
 
-// Service
 if (type === 'service') {
   schemas.push({
     '@context': 'https://schema.org',
     '@type': 'Service',
     name: serviceName ?? title,
-    provider: { '@type': 'LocalBusiness', name: SITE.name },
+    provider: organization,
     description,
     areaServed: 'PL',
     url: pageUrl,
   })
 }
 
-// BlogPosting
 if (type === 'blogpost') {
   schemas.push({
     '@context': 'https://schema.org',
-    '@type': 'BlogPosting',
+    '@type': articleType ?? 'BlogPosting',
     headline: title,
     description,
-    author: { '@type': 'Person', name: SITE.author },
-    publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url },
-    datePublished: pubDate?.toISOString(),
-    dateModified: (updatedDate ?? pubDate)?.toISOString(),
-    image: ogImage ? new URL(ogImage, SITE.url).href : undefined,
+    author: { '@type': 'Person', name: SITE.author, url: SITE.url },
+    publisher: {
+      '@type': 'Organization',
+      name: SITE.name,
+      url: SITE.url,
+      logo: { '@type': 'ImageObject', url: new URL(SITE.logo, SITE.url).href },
+    },
+    datePublished: datePublished,
+    dateModified: dateModified ?? datePublished,
+    image: ogImage ? (ogImage.startsWith('http') ? ogImage : new URL(ogImage, SITE.url).href) : undefined,
+    keywords: keywords?.join(', '),
     url: pageUrl,
-  })
-}
-
-// BreadcrumbList
-if (type === 'breadcrumb' && breadcrumbs?.length) {
-  schemas.push({
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: breadcrumbs.map((item, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      name: item.name,
-      item: item.url.startsWith('http') ? item.url : new URL(item.url, SITE.url).href,
-    })),
+    inLanguage: 'pl-PL',
+    isPartOf: { '@type': 'Blog', name: `${SITE.name} Blog`, url: `${SITE.url}/blog` },
   })
 }
 ---
 
 {schemas.map(schema => (
-  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(schema, null, 0)} />
 ))}

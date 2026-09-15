@@ -10,6 +10,8 @@ interface Props {
   title: string
   description: string
   ogImage?: string
+  ogTitle?: string
+  ogDescription?: string
   noIndex?: boolean
   canonicalUrl?: string
   schemaType?: 'home' | 'webpage' | 'service' | 'blogpost'
@@ -20,6 +22,8 @@ const {
   title,
   description,
   ogImage,
+  ogTitle,
+  ogDescription,
   noIndex,
   canonicalUrl,
   schemaType = 'webpage',
@@ -35,7 +39,6 @@ const {
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <!-- Google Fonts: Manrope + Material Symbols -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -51,6 +54,8 @@ const {
       title={title}
       description={description}
       ogImage={ogImage}
+      ogTitle={ogTitle}
+      ogDescription={ogDescription}
       noIndex={noIndex}
       canonicalUrl={canonicalUrl}
     />
@@ -62,6 +67,9 @@ const {
       canonicalUrl={canonicalUrl}
       {...schemaProps}
     />
+
+    <!-- dodatkowe tagi w <head> (np. JSON-LD FAQ, breadcrumbs) -->
+    <slot name="head" />
   </head>
 
   <body class="font-sans text-on-surface min-h-dvh flex flex-col">

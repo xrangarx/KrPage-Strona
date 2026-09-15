@@ -5,6 +5,8 @@ interface Props {
   title: string
   description: string
   ogImage?: string
+  ogTitle?: string        // nadpisuje og:title (gdy inne niż <title>)
+  ogDescription?: string  // nadpisuje og:description (gdy inne niż meta description)
   noIndex?: boolean
   canonicalUrl?: string
   type?: 'website' | 'article'
@@ -14,14 +16,18 @@ const {
   title,
   description,
   ogImage = SITE.defaultOgImage,
+  ogTitle,
+  ogDescription,
   noIndex = false,
   canonicalUrl,
   type = 'website',
 } = Astro.props
 
-const canonical = canonicalUrl ?? new URL(Astro.url.pathname, SITE.url).href
+const canonical      = canonicalUrl ?? new URL(Astro.url.pathname, SITE.url).href
 const ogImageAbsolute = ogImage.startsWith('http') ? ogImage : new URL(ogImage, SITE.url).href
-const fullTitle = `${title} | ${SITE.name}`
+const fullTitle      = `${title} | ${SITE.name}`
+const ogTitleFinal   = ogTitle ? `${ogTitle} | ${SITE.name}` : fullTitle
+const ogDescFinal    = ogDescription ?? description
 ---
 
 <title>{fullTitle}</title>
@@ -30,16 +36,18 @@ const fullTitle = `${title} | ${SITE.name}`
 <meta name="robots" content={(!SITE.indexable || noIndex) ? 'noindex,follow' : 'index,follow'} />
 
 <!-- Open Graph -->
-<meta property="og:title" content={fullTitle} />
-<meta property="og:description" content={description} />
+<meta property="og:title" content={ogTitleFinal} />
+<meta property="og:description" content={ogDescFinal} />
 <meta property="og:url" content={canonical} />
 <meta property="og:type" content={type} />
 <meta property="og:image" content={ogImageAbsolute} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
 <meta property="og:locale" content="pl_PL" />
 <meta property="og:site_name" content={SITE.name} />
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content={fullTitle} />
-<meta name="twitter:description" content={description} />
+<meta name="twitter:title" content={ogTitleFinal} />
+<meta name="twitter:description" content={ogDescFinal} />
 <meta name="twitter:image" content={ogImageAbsolute} />

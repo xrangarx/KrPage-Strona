@@ -1,9 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
-import { getEntry } from 'astro:content'
 
-const entry = await getEntry('uslugi', 'pozycjonowanie-lokalne')
-const d = entry?.data ?? {}
+const d: Record<string, string> = {}
 
 const items = [
   { icon: 'location_on',          title: d.item1_title ?? 'Google Moja Firma',         desc: d.item1_desc ?? 'Pełna optymalizacja profilu GMB: kategorie, opisy, zdjęcia, godziny, atrybuty. Strategia postów i Q&A.' },

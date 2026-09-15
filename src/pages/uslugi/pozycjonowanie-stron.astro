@@ -1,9 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
-import { getEntry } from 'astro:content'
 
-const entry = await getEntry('uslugi', 'pozycjonowanie-stron')
-const d = entry?.data ?? {}
+const d: Record<string, string> = {}
 
 const items = [
   { icon: 'map',              title: d.item1_title ?? 'Keyword Mapping',       desc: d.item1_desc ?? 'Mapowanie fraz na podstrony z uwzględnieniem intencji wyszukiwania. Każda sekcja strony atakuje konkretne zapytania.' },

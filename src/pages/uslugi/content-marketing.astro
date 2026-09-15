@@ -1,9 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
-import { getEntry } from 'astro:content'
 
-const entry = await getEntry('uslugi', 'content-marketing')
-const d = entry?.data ?? {}
+const d: Record<string, string> = {}
 
 const types = [
   { icon: 'article',       title: d.type1_title ?? 'Artykuły Blogowe',  desc: d.type1_desc ?? 'Długie formy zoptymalizowane pod frazy informacyjne i topical authority.' },

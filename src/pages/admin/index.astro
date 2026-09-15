@@ -709,12 +709,44 @@ var CONFIG = {
       folder: 'src/content/blog',
       fields: [
         { name:'title',       label:'Tytuł',          type:'string', required:true },
-        { name:'description', label:'Opis SEO',        type:'text',   required:true },
+        { name:'description', label:'Opis SEO (meta description)', type:'text', required:true },
         { name:'date',        label:'Data publikacji', type:'date'  },
         { name:'category',    label:'Kategoria',       type:'select',
           options:['Tech SEO','Strategia','Content','Link Building','Local SEO'] },
         { name:'image',       label:'Zdjęcie okładkowe', type:'image' },
         { name:'readTime',    label:'Czas czytania',   type:'string', placeholder:'np. 8 min' },
+
+        { type:'section', label:'SEO & OpenGraph', icon:'travel_explore' },
+        { name:'og_title',        label:'OG Title (opcjonalnie — inny niż tytuł)', type:'string',
+          placeholder:'Krótszy, bardziej klikalny tytuł dla social media' },
+        { name:'og_description',  label:'OG Description (opcjonalnie)',             type:'text',
+          placeholder:'Opis dla podglądu w social media, może różnić się od meta desc' },
+        { name:'canonical',       label:'Canonical URL (opcjonalnie)',               type:'string',
+          placeholder:'https://krpage.pl/blog/slug — wypełnij tylko jeśli inny niż bieżący URL' },
+        { name:'focus_keyphrase', label:'Focus Keyphrase',                           type:'string',
+          placeholder:'np. pozycjonowanie lokalne Kraków' },
+        { name:'tags',            label:'Tagi / słowa kluczowe (przecinkami)',       type:'tags',
+          placeholder:'np. SEO, pozycjonowanie, Google' },
+        { name:'date_modified',   label:'Data modyfikacji (opcjonalnie)',            type:'date' },
+
+        { type:'section', label:'Indeksowanie', icon:'visibility' },
+        { name:'noindex', label:'Noindex — wyklucz z indeksu Google', type:'checkbox' },
+
+        { type:'section', label:'Schema.org', icon:'code' },
+        { name:'schema_type', label:'Typ artykułu (Schema)', type:'select',
+          options:['BlogPosting','Article','HowTo','FAQPage'] },
+
+        { type:'section', label:'FAQ Schema (generuje FAQPage JSON-LD)', icon:'quiz' },
+        { name:'faq1_q', label:'FAQ 1 — Pytanie', type:'string' },
+        { name:'faq1_a', label:'FAQ 1 — Odpowiedź', type:'text' },
+        { name:'faq2_q', label:'FAQ 2 — Pytanie', type:'string' },
+        { name:'faq2_a', label:'FAQ 2 — Odpowiedź', type:'text' },
+        { name:'faq3_q', label:'FAQ 3 — Pytanie', type:'string' },
+        { name:'faq3_a', label:'FAQ 3 — Odpowiedź', type:'text' },
+        { name:'faq4_q', label:'FAQ 4 — Pytanie', type:'string' },
+        { name:'faq4_a', label:'FAQ 4 — Odpowiedź', type:'text' },
+        { name:'faq5_q', label:'FAQ 5 — Pytanie', type:'string' },
+        { name:'faq5_a', label:'FAQ 5 — Odpowiedź', type:'text' },
       ]
     },
     {
@@ -724,7 +756,7 @@ var CONFIG = {
       folder: 'src/content/realizacje',
       fields: [
         { name:'title',       label:'Tytuł',           type:'string', required:true },
-        { name:'type',        label:'Typ usługi',       type:'string', placeholder:'np. SEO' },
+        { name:'type',        label:'Typ usługi',       type:'select', options:['SEO','Strona'] },
         { name:'industry',    label:'Branża',           type:'string' },
         { name:'result',      label:'Wynik (liczba)',   type:'string', placeholder:'np. +318%' },
         { name:'resultLabel', label:'Opis wyniku',      type:'string', placeholder:'np. ruchu organicznego' },
@@ -732,6 +764,24 @@ var CONFIG = {
         { name:'image',       label:'Zdjęcie',          type:'image' },
         { name:'tags',        label:'Tagi (przecinkami)', type:'tags',
           placeholder:'np. Audyt Tech, Link Building' },
+
+        { type:'section', label:'SEO & OpenGraph', icon:'travel_explore' },
+        { name:'og_description', label:'OG Description (opcjonalnie)', type:'text',
+          placeholder:'Opis podglądu w social media' },
+
+        { type:'section', label:'Indeksowanie', icon:'visibility' },
+        { name:'noindex', label:'Noindex — wyklucz z indeksu Google', type:'checkbox' },
+
+        { type:'section', label:'Schema.org', icon:'code' },
+        { name:'schema_service_type', label:'Typ usługi (Schema.org serviceType)',
+          type:'string', placeholder:'np. SEO Optimization, Web Design' },
+
+        { type:'section', label:'Social Proof & Klient', icon:'star' },
+        { name:'client_url',         label:'URL strony klienta',    type:'string',
+          placeholder:'https://przykład.pl' },
+        { name:'testimonial',        label:'Opinia klienta',        type:'text' },
+        { name:'testimonial_author', label:'Autor opinii (imię, stanowisko)', type:'string',
+          placeholder:'np. Jan Kowalski, CEO Firma XYZ' },
       ]
     },
     {
@@ -745,118 +795,6 @@ var CONFIG = {
         { name:'image',       label:'Zdjęcie OG',        type:'image' },
       ]
     },
-    {
-      id:     'uslugi',
-      label:  'Usługi',
-      icon:   'handyman',
-      folder: 'src/content/uslugi',
-      fields: [
-        { name:'title',       label:'Tytuł strony',    type:'string', required:true },
-        { name:'description', label:'Opis SEO (meta)', type:'text' },
-        { name:'image',       label:'Zdjęcie OG',      type:'image' },
-
-        { type:'section', label:'Hero & CTA', icon:'auto_awesome' },
-        { name:'hero_desc',  label:'Opis pod H1 (hero)', type:'text' },
-        { name:'zakres_desc', label:'Wstęp sekcji zakresu', type:'text' },
-        { name:'cta_title',  label:'CTA — pierwsza linia nagłówka', type:'string' },
-        { name:'cta_desc',   label:'CTA — podtytuł (opcjonalnie)',   type:'text' },
-
-        { type:'section', label:'Siatka 6 elementów', icon:'grid_view' },
-        { name:'item1_title', label:'Element 1 — tytuł', type:'string' },
-        { name:'item1_desc',  label:'Element 1 — opis',  type:'text' },
-        { name:'item2_title', label:'Element 2 — tytuł', type:'string' },
-        { name:'item2_desc',  label:'Element 2 — opis',  type:'text' },
-        { name:'item3_title', label:'Element 3 — tytuł', type:'string' },
-        { name:'item3_desc',  label:'Element 3 — opis',  type:'text' },
-        { name:'item4_title', label:'Element 4 — tytuł', type:'string' },
-        { name:'item4_desc',  label:'Element 4 — opis',  type:'text' },
-        { name:'item5_title', label:'Element 5 — tytuł', type:'string' },
-        { name:'item5_desc',  label:'Element 5 — opis',  type:'text' },
-        { name:'item6_title', label:'Element 6 — tytuł', type:'string' },
-        { name:'item6_desc',  label:'Element 6 — opis',  type:'text' },
-
-        { type:'section', label:'Case Studies (pozycjonowanie)', icon:'bar_chart' },
-        { name:'case1_cat',    label:'Case 1 — kategoria',  type:'string' },
-        { name:'case1_result', label:'Case 1 — wynik',      type:'string' },
-        { name:'case1_period', label:'Case 1 — okres',      type:'string' },
-        { name:'case1_desc',   label:'Case 1 — opis',       type:'text' },
-        { name:'case2_cat',    label:'Case 2 — kategoria',  type:'string' },
-        { name:'case2_result', label:'Case 2 — wynik',      type:'string' },
-        { name:'case2_period', label:'Case 2 — okres',      type:'string' },
-        { name:'case2_desc',   label:'Case 2 — opis',       type:'text' },
-        { name:'case3_cat',    label:'Case 3 — kategoria',  type:'string' },
-        { name:'case3_result', label:'Case 3 — wynik',      type:'string' },
-        { name:'case3_period', label:'Case 3 — okres',      type:'string' },
-        { name:'case3_desc',   label:'Case 3 — opis',       type:'text' },
-
-        { type:'section', label:'Kafelki specjalne', icon:'widgets' },
-        { name:'branza1_label', label:'Branża 1 — etykieta', type:'string' },
-        { name:'branza2_label', label:'Branża 2 — etykieta', type:'string' },
-        { name:'branza3_label', label:'Branża 3 — etykieta', type:'string' },
-        { name:'branza4_label', label:'Branża 4 — etykieta', type:'string' },
-        { name:'stack1_label',  label:'Stack 1 — etykieta',  type:'string' },
-        { name:'stack2_label',  label:'Stack 2 — etykieta',  type:'string' },
-        { name:'stack3_label',  label:'Stack 3 — etykieta',  type:'string' },
-        { name:'stack4_label',  label:'Stack 4 — etykieta',  type:'string' },
-        { name:'platform1_label', label:'Platforma 1', type:'string' },
-        { name:'platform2_label', label:'Platforma 2', type:'string' },
-        { name:'platform3_label', label:'Platforma 3', type:'string' },
-        { name:'platform4_label', label:'Platforma 4', type:'string' },
-
-        { type:'section', label:'Typy treści (content-marketing)', icon:'article' },
-        { name:'type1_title', label:'Typ 1 — tytuł', type:'string' },
-        { name:'type1_desc',  label:'Typ 1 — opis',  type:'text' },
-        { name:'type2_title', label:'Typ 2 — tytuł', type:'string' },
-        { name:'type2_desc',  label:'Typ 2 — opis',  type:'text' },
-        { name:'type3_title', label:'Typ 3 — tytuł', type:'string' },
-        { name:'type3_desc',  label:'Typ 3 — opis',  type:'text' },
-        { name:'type4_title', label:'Typ 4 — tytuł', type:'string' },
-        { name:'type4_desc',  label:'Typ 4 — opis',  type:'text' },
-
-        { type:'section', label:'Kroki procesu (content-marketing)', icon:'format_list_numbered' },
-        { name:'step1_title', label:'Krok 1 — tytuł', type:'string' },
-        { name:'step1_desc',  label:'Krok 1 — opis',  type:'text' },
-        { name:'step2_title', label:'Krok 2 — tytuł', type:'string' },
-        { name:'step2_desc',  label:'Krok 2 — opis',  type:'text' },
-        { name:'step3_title', label:'Krok 3 — tytuł', type:'string' },
-        { name:'step3_desc',  label:'Krok 3 — opis',  type:'text' },
-        { name:'step4_title', label:'Krok 4 — tytuł', type:'string' },
-        { name:'step4_desc',  label:'Krok 4 — opis',  type:'text' },
-        { name:'step5_title', label:'Krok 5 — tytuł', type:'string' },
-        { name:'step5_desc',  label:'Krok 5 — opis',  type:'text' },
-
-        { type:'section', label:'Statystyki (content-marketing)', icon:'query_stats' },
-        { name:'stat1_value', label:'Stat 1 — wartość', type:'string' },
-        { name:'stat1_label', label:'Stat 1 — opis',    type:'string' },
-        { name:'stat2_value', label:'Stat 2 — wartość', type:'string' },
-        { name:'stat2_label', label:'Stat 2 — opis',    type:'string' },
-        { name:'stat3_value', label:'Stat 3 — wartość', type:'string' },
-        { name:'stat3_label', label:'Stat 3 — opis',    type:'string' },
-        { name:'stat4_value', label:'Stat 4 — wartość', type:'string' },
-        { name:'stat4_label', label:'Stat 4 — opis',    type:'string' },
-
-        { type:'section', label:'Audyt SEO — bloki analizy', icon:'manage_search' },
-        { name:'block_tech_title', label:'Blok Technical — tytuł',          type:'string' },
-        { name:'block_tech_desc',  label:'Blok Technical — opis',            type:'text' },
-        { name:'block_tech_items', label:'Blok Technical — lista (przecinkami)', type:'string' },
-        { name:'block_keyword_title', label:'Blok Keyword — tytuł', type:'string' },
-        { name:'block_keyword_desc',  label:'Blok Keyword — opis',  type:'text' },
-        { name:'block_ux_title',      label:'Blok UX — tytuł',      type:'string' },
-        { name:'block_ux_desc',       label:'Blok UX — opis',       type:'text' },
-        { name:'block_intel_title',   label:'Blok Intel — tytuł',   type:'string' },
-        { name:'block_intel_desc',    label:'Blok Intel — opis',    type:'text' },
-        { name:'block_intel_tags',    label:'Blok Intel — tagi (przecinkami)', type:'string' },
-
-        { type:'section', label:'Audyt SEO — problemy', icon:'report_problem' },
-        { name:'problems_intro', label:'Wstęp sekcji problemów', type:'text' },
-        { name:'problem1_title', label:'Problem 1 — tytuł', type:'string' },
-        { name:'problem1_desc',  label:'Problem 1 — opis',  type:'text' },
-        { name:'problem2_title', label:'Problem 2 — tytuł', type:'string' },
-        { name:'problem2_desc',  label:'Problem 2 — opis',  type:'text' },
-        { name:'problem3_title', label:'Problem 3 — tytuł', type:'string' },
-        { name:'problem3_desc',  label:'Problem 3 — opis',  type:'text' },
-      ]
-    }
   ]
 }
 
@@ -976,6 +914,10 @@ function buildFM(col, values, body) {
   var lines=['---']
   col.fields.forEach(function(f){
     var v=values[f.name]
+    if(f.type==='checkbox'){
+      lines.push(f.name+': '+(v?'true':'false'))
+      return
+    }
     if(v===undefined||v===null||v==='') return
     if(f.type==='tags'){
       var items=String(v).split(',').map(function(s){return s.trim()}).filter(Boolean)
@@ -1186,6 +1128,12 @@ function renderForm(col, post){
              '<img class="img-field-prev" id="fimg-'+f.name+'" src="" alt="" style="display:none" />')
     } else if(f.type==='tags'){
       fh+='<input class="inp" id="ff-'+f.name+'" data-field="'+f.name+'" value="'+esc(val)+'" placeholder="'+(f.placeholder||'tag1, tag2, tag3')+'" />'
+    } else if(f.type==='checkbox'){
+      var checked=(val===true||val==='true')
+      fh='<div class="field" style="flex-direction:row;align-items:center;gap:10px">'+
+         '<input type="checkbox" id="ff-'+f.name+'" data-field="'+f.name+'" data-type="checkbox"'+(checked?' checked':'')+
+         ' style="width:16px;height:16px;accent-color:var(--accent);flex-shrink:0;cursor:pointer" />'+
+         '<label class="field-label" for="ff-'+f.name+'" style="margin:0;cursor:pointer">'+f.label+req+'</label>'
     }
     return fh+'</div>'
   }
@@ -1291,7 +1239,9 @@ qs('#save-btn').addEventListener('click', async function(){
   var values={}
   col.fields.forEach(function(f){
     var el=qs('#ff-'+f.name)
-    if(el) values[f.name]=el.value.trim()
+    if(!el) return
+    if(f.type==='checkbox') values[f.name]=el.checked
+    else values[f.name]=el.value.trim()
   })
   var body=qs('#md-editor').value.trim()
 
