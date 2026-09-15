@@ -1,13 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
-import { getCollection, getEntry, render } from 'astro:content'
+import { getCollection } from 'astro:content'
 
 const allCases = await getCollection('realizacje')
 const cases    = allCases.sort((a, b) => a.data.title.localeCompare(b.data.title))
 const typeFilters = ['Wszystkie', 'SEO', 'Strona']
 
-const jakDziaEntry = await getEntry('pages', 'jak-dzialm')
-const { Content: JakDziaContent } = jakDziaEntry ? await render(jakDziaEntry) : { Content: null }
+const JakDziaContent = null
 ---
 
 <BaseLayout

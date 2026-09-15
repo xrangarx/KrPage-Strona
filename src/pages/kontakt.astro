@@ -1,10 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
 import { SITE } from '../data/site'
-import { getEntry, render } from 'astro:content'
 
-const kontaktEntry = await getEntry('pages', 'kontakt')
-const { Content: KontaktContent } = kontaktEntry ? await render(kontaktEntry) : { Content: null }
+const KontaktContent = null
 ---
 
 <BaseLayout

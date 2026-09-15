@@ -1,9 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
-import { getEntry, render } from 'astro:content'
 
-const omnieEntry = await getEntry('pages', 'o-mnie')
-const { Content: OmnieContent } = omnieEntry ? await render(omnieEntry) : { Content: null }
+const OmnieContent = null
 
 const timeline = [
   {

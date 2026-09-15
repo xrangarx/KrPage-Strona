@@ -1,9 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
-import { getEntry, render } from 'astro:content'
 
-const jakBudujeEntry = await getEntry('pages', 'jak-buduje-stronki')
-const { Content: JakBudujeContent } = jakBudujeEntry ? await render(jakBudujeEntry) : { Content: null }
+const JakBudujeContent = null
 
 const stack = [
   {
