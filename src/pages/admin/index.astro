@@ -212,6 +212,16 @@
     .badge-muted{border-color:var(--border);color:var(--muted)}
     .meta-date{font-size:11px;color:var(--muted);white-space:nowrap}
     .doc-arrow{color:var(--muted);font-size:16px;margin-left:auto;flex-shrink:0}
+    .doc-del-btn{
+      display:flex;align-items:center;justify-content:center;
+      width:30px;height:30px;margin-left:8px;flex-shrink:0;
+      background:transparent;border:1px solid transparent;
+      color:var(--muted);cursor:pointer;transition:all .15s;border-radius:2px;
+      opacity:0;
+    }
+    .doc-card:hover .doc-del-btn{opacity:1}
+    .doc-del-btn:hover{background:var(--err10);border-color:rgba(255,77,109,.3);color:var(--err)}
+    .doc-del-btn:disabled{opacity:.4;cursor:not-allowed}
 
     /* ── EDITOR VIEW ── */
     #view-editor{display:flex;flex-direction:column;height:100%;overflow:hidden}
@@ -1161,7 +1171,28 @@ async function loadList(col){
             (sub?'<span class="meta-date">'+sub+'</span>':'')+
           '</div>'+
         '</div>'+
+        '<button class="doc-del-btn" title="Usuń wpis" tabindex="-1">'+
+          '<span class="material-symbols-outlined" style="font-size:16px">delete</span>'+
+        '</button>'+
         '<span class="material-symbols-outlined doc-arrow">chevron_right</span>'
+      card.querySelector('.doc-del-btn').addEventListener('click', async function(e){
+        e.stopPropagation()
+        var title=fm.title||post.name
+        if(!confirm('Usunąć "'+title+'" z repozytorium?\n\nTej operacji nie można cofnąć.')) return
+        this.disabled=true
+        this.innerHTML='<span class="material-symbols-outlined spin" style="font-size:15px">refresh</span>'
+        try{
+          await ghDelete(post.path, post.sha, 'delete: '+post.name)
+          card.style.transition='opacity .2s'
+          card.style.opacity='0'
+          setTimeout(function(){ card.remove(); var c=qs('#cnt-'+col.id); if(c) c.textContent=parseInt(c.textContent||0)-1 }, 200)
+          toast('✓ "'+title+'" usunięty','ok')
+        } catch(err){
+          toast('❌ '+err.message,'err')
+          this.disabled=false
+          this.innerHTML='<span class="material-symbols-outlined" style="font-size:16px">delete</span>'
+        }
+      })
       card.addEventListener('click',function(){openEditor(col,post)})
       grid.appendChild(card)
     })
@@ -1548,7 +1579,7 @@ async function switchToSettings(){
   try{
     var tr=await ghGet('src/data/tracking.json')
     trackingSha=tr.sha
-    var data=JSON.parse(atob(tr.content.replace(/\s/g,'')))
+    var data=JSON.parse(tr.content)
     qs('#set-gsc').value    = data.gsc     || ''
     qs('#set-bing').value   = data.bing    || ''
     qs('#set-ga').value     = data.ga      || ''
@@ -1559,7 +1590,7 @@ async function switchToSettings(){
   try{
     var rb=await ghGet('public/robots.txt')
     robotsSha=rb.sha
-    qs('#robots-editor').value=atob(rb.content.replace(/\s/g,''))
+    qs('#robots-editor').value=rb.content
   } catch(e){ toast('Błąd ładowania robots.txt: '+e.message,'err') }
 
   // Sitemap link = siteUrl/sitemap.xml
