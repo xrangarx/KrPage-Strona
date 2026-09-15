@@ -1548,7 +1548,7 @@ async function switchToSettings(){
   try{
     var tr=await ghGet('src/data/tracking.json')
     trackingSha=tr.sha
-    var data=JSON.parse(atob(tr.content.replace(/\n/g,'')))
+    var data=JSON.parse(atob(tr.content.replace(/\s/g,'')))
     qs('#set-gsc').value    = data.gsc     || ''
     qs('#set-bing').value   = data.bing    || ''
     qs('#set-ga').value     = data.ga      || ''
@@ -1559,7 +1559,7 @@ async function switchToSettings(){
   try{
     var rb=await ghGet('public/robots.txt')
     robotsSha=rb.sha
-    qs('#robots-editor').value=atob(rb.content.replace(/\n/g,''))
+    qs('#robots-editor').value=atob(rb.content.replace(/\s/g,''))
   } catch(e){ toast('Błąd ładowania robots.txt: '+e.message,'err') }
 
   // Sitemap link = siteUrl/sitemap.xml
