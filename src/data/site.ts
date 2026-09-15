@@ -21,4 +21,19 @@ export const SITE = {
   author: 'Krzysztof — KrPage',
   // false = noindex,follow (tryb dev); true = index,follow (produkcja)
   indexable: false,
+
+  // ── Weryfikacja właściwości ──────────────────────────────────────────────
+  // Wklej wartość atrybutu content="" z tagu meta podanego przez daną platformę.
+  // Puste = tag nie zostanie wyrenderowany.
+  verification: {
+    gsc:  '',   // Google Search Console  → meta name="google-site-verification"
+    bing: '',   // Bing Webmaster Tools   → meta name="msvalidate.01"
+  },
+
+  // ── Analityka & Heat mapy ────────────────────────────────────────────────
+  // Puste = skrypt nie zostanie wstrzyknięty.
+  tracking: {
+    ga:      '',   // Google Analytics 4 Measurement ID  (format: G-XXXXXXXXXX)
+    clarity: '',   // Microsoft Clarity Project ID        (format: xxxxxxxxxx)
+  },
 }
