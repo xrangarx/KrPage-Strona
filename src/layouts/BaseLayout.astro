@@ -8,6 +8,66 @@ import { SITE } from '../data/site'
 import tracking from '../data/tracking.json'
 import layout from '../data/layout.json'
 
+const L = layout as Record<string, string>
+const cssVars = {
+  bodyFont:          L.bodyFont          || 'Manrope',
+  bodySize:          (L.bodySize         || '16')    + 'px',
+  bodyWeight:        L.bodyWeight        || '400',
+  bodyLineHeight:    L.bodyLineHeight    || '1.6',
+  bodyLetterSpacing: (L.bodyLetterSpacing|| '0')     + 'em',
+  headingFont:       L.headingFont       || 'Manrope',
+  h1Size:            (L.h1Size           || '64')    + 'px',
+  h1Weight:          L.h1Weight          || '800',
+  h1LineHeight:      L.h1LineHeight      || '1.05',
+  h1LetterSpacing:   (L.h1LetterSpacing  || '0')     + 'em',
+  h2Size:            (L.h2Size           || '48')    + 'px',
+  h2Weight:          L.h2Weight          || '800',
+  h2LineHeight:      L.h2LineHeight      || '1.1',
+  h2LetterSpacing:   (L.h2LetterSpacing  || '0')     + 'em',
+  h3Size:            (L.h3Size           || '32')    + 'px',
+  h3Weight:          L.h3Weight          || '700',
+  h3LineHeight:      L.h3LineHeight      || '1.2',
+  h3LetterSpacing:   (L.h3LetterSpacing  || '0')     + 'em',
+  h4Size:            (L.h4Size           || '24')    + 'px',
+  h4Weight:          L.h4Weight          || '600',
+  h4LineHeight:      L.h4LineHeight      || '1.3',
+  h4LetterSpacing:   (L.h4LetterSpacing  || '0')     + 'em',
+  h5Size:            (L.h5Size           || '20')    + 'px',
+  h5Weight:          L.h5Weight          || '600',
+  h5LineHeight:      L.h5LineHeight      || '1.4',
+  h5LetterSpacing:   (L.h5LetterSpacing  || '0')     + 'em',
+  h6Size:            (L.h6Size           || '18')    + 'px',
+  h6Weight:          L.h6Weight          || '600',
+  h6LineHeight:      L.h6LineHeight      || '1.4',
+  h6LetterSpacing:   (L.h6LetterSpacing  || '0')     + 'em',
+  quoteSize:         (L.quoteSize        || '18')    + 'px',
+  quoteWeight:       L.quoteWeight       || '400',
+  quoteStyle:        L.quoteStyle        || 'italic',
+  quoteLineHeight:   L.quoteLineHeight   || '1.6',
+  btnSize:           (L.btnSize          || '13')    + 'px',
+  btnWeight:         L.btnWeight         || '700',
+  btnLetterSpacing:  (L.btnLetterSpacing || '0.04')  + 'em',
+  btnRadius:         (L.btnRadius        || '0')     + 'px',
+  colorAccent:       L.colorAccent       || '#404dff',
+  colorAccentHover:  L.colorAccentHover  || '#5562ff',
+  colorAccentLight:  L.colorAccentLight  || '#6b76ff',
+  colorText:         L.colorText         || '#e2e1ff',
+  colorTextMuted:    L.colorTextMuted    || '#7f7f9c',
+  colorHeadings:     L.colorHeadings     || '#ffffff',
+  colorBg:           L.colorBg           || '#06070f',
+  colorSurface:      L.colorSurface      || '#0d0e1c',
+  colorSurfaceHigh:  L.colorSurfaceHigh  || '#161729',
+  colorBorder:       L.colorBorder       || 'rgba(64,77,255,0.14)',
+  colorBtnBg:        L.colorBtnBg        || '#404dff',
+  colorBtnText:      L.colorBtnText      || '#ffffff',
+  colorBtnHoverBg:   L.colorBtnHoverBg   || '#5562ff',
+  colorBtnHoverText: L.colorBtnHoverText || '#ffffff',
+  colorLink:         L.colorLink         || '#404dff',
+  colorLinkHover:    L.colorLinkHover    || '#6b76ff',
+  containerWidth:    (L.containerWidth   || '1280')  + 'px',
+  globalRadius:      (L.globalRadius     || '2')     + 'px',
+}
+
 interface Props {
   title: string
   description: string
@@ -40,9 +100,8 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <style define:vars={{ siteFont: layout.font, siteAccent: layout.accentColor, siteAccentDark: layout.accentColorDark }} is:global>
+    <style define:vars={cssVars} is:global>
       /* Unlayered — overrides Tailwind @layer base */
-      body { font-family: var(--siteFont), system-ui, sans-serif; }
     </style>
 
     <SEO

@@ -1,5 +1,73 @@
 {
-  "font": "Manrope",
-  "accentColor": "#ff6d00",
-  "accentColorDark": "#fb923c"
+  "bodyFont": "Manrope",
+  "bodySize": "16",
+  "bodyWeight": "400",
+  "bodyLineHeight": "1.6",
+  "bodyLetterSpacing": "0",
+
+  "headingFont": "Manrope",
+
+  "h1Size": "64",
+  "h1Weight": "800",
+  "h1LineHeight": "1.05",
+  "h1LetterSpacing": "-0.02",
+
+  "h2Size": "48",
+  "h2Weight": "800",
+  "h2LineHeight": "1.1",
+  "h2LetterSpacing": "-0.02",
+
+  "h3Size": "32",
+  "h3Weight": "700",
+  "h3LineHeight": "1.2",
+  "h3LetterSpacing": "-0.01",
+
+  "h4Size": "24",
+  "h4Weight": "600",
+  "h4LineHeight": "1.3",
+  "h4LetterSpacing": "0",
+
+  "h5Size": "20",
+  "h5Weight": "600",
+  "h5LineHeight": "1.4",
+  "h5LetterSpacing": "0",
+
+  "h6Size": "18",
+  "h6Weight": "600",
+  "h6LineHeight": "1.4",
+  "h6LetterSpacing": "0",
+
+  "quoteSize": "18",
+  "quoteWeight": "400",
+  "quoteStyle": "italic",
+  "quoteLineHeight": "1.6",
+
+  "btnSize": "13",
+  "btnWeight": "700",
+  "btnLetterSpacing": "0.04",
+  "btnRadius": "0",
+
+  "colorAccent": "#404dff",
+  "colorAccentHover": "#5562ff",
+  "colorAccentLight": "#6b76ff",
+
+  "colorText": "#e2e1ff",
+  "colorTextMuted": "#7f7f9c",
+  "colorHeadings": "#ffffff",
+
+  "colorBg": "#06070f",
+  "colorSurface": "#0d0e1c",
+  "colorSurfaceHigh": "#161729",
+  "colorBorder": "rgba(64,77,255,0.14)",
+
+  "colorBtnBg": "#404dff",
+  "colorBtnText": "#ffffff",
+  "colorBtnHoverBg": "#5562ff",
+  "colorBtnHoverText": "#ffffff",
+
+  "colorLink": "#404dff",
+  "colorLinkHover": "#6b76ff",
+
+  "containerWidth": "1280",
+  "globalRadius": "2"
 }
