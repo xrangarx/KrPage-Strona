@@ -19,7 +19,6 @@ export const SITE = {
   },
   defaultOgImage: '/images/og-default.jpg',
   author: 'Krzysztof — KrPage',
-  // false = noindex,follow (tryb dev); true = index,follow (produkcja)
-  indexable: true,
-
+  // Indeksowanie przeniesione do src/data/seo.json — sterowane z panelu CMS
+  // (Ustawienia → Indeksowanie). Globalny przełącznik + wyjątki per podstrona.
 }

@@ -444,6 +444,25 @@
     #toast.err{border-color:rgba(255,77,109,.4);color:var(--err)}
     #toast.ok-t{border-color:rgba(63,207,119,.4);color:var(--ok)}
 
+    /* ── INDEKSOWANIE ── */
+    .idx-row{
+      display:flex;align-items:center;gap:10px;padding:9px 14px;
+      border-bottom:1px solid var(--border2);font-size:13px;cursor:pointer;
+      transition:background .12s;
+    }
+    .idx-row:last-child{border-bottom:none}
+    .idx-row:hover{background:var(--bg3)}
+    .idx-row input{width:15px;height:15px;accent-color:var(--accent);flex-shrink:0;cursor:pointer}
+    .idx-path{font-family:monospace;font-size:12px;color:var(--text);flex:1}
+    .idx-file{font-size:11px;color:var(--muted)}
+    .idx-row.off .idx-path{color:var(--muted);text-decoration:line-through}
+    .idx-tag{
+      font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;
+      padding:2px 6px;border:1px solid var(--border);color:var(--muted);
+    }
+    .idx-row.off .idx-tag{border-color:rgba(255,77,109,.4);color:var(--err)}
+    #idx-master-box.off{border-color:rgba(255,200,0,.45)}
+
     /* ── DEPLOY WATCHER ── */
     #deploy-box{
       position:fixed;bottom:20px;right:20px;z-index:9998;width:330px;
@@ -897,6 +916,61 @@
 
     <!-- SETTINGS VIEW -->
     <div class="view hidden" id="view-settings" style="padding:24px;overflow-y:auto;max-height:calc(100vh - 52px)">
+
+      <!-- Indeksowanie -->
+      <div style="margin-bottom:28px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
+          <span class="material-symbols-outlined" style="color:var(--accent)">visibility</span>
+          <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">Indeksowanie w Google</span>
+        </div>
+
+        <!-- Główny przełącznik -->
+        <div id="idx-master-box" style="border:1px solid var(--border);padding:14px 16px;margin-bottom:14px">
+          <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer">
+            <input type="checkbox" id="idx-global" style="width:16px;height:16px;margin-top:2px;accent-color:var(--accent);flex-shrink:0" />
+            <span>
+              <span style="display:block;font-size:13px;font-weight:700;color:var(--text);margin-bottom:2px">
+                Strona widoczna w Google
+              </span>
+              <span style="display:block;font-size:12px;color:var(--muted)">
+                Wyłączone = <strong>cała strona</strong> dostaje <code style="background:var(--bg3);padding:1px 5px;font-size:10px">noindex</code>,
+                niezależnie od ustawień poszczególnych podstron. Zostaw wyłączone, dopóki strona jest w budowie.
+              </span>
+            </span>
+          </label>
+          <div id="idx-warn" class="hidden" style="margin-top:10px;padding:8px 12px;background:rgba(255,200,0,.10);border-left:3px solid var(--warn);font-size:12px;color:var(--text2)">
+            <strong style="color:var(--warn)">Strona jest ukryta przed Google.</strong>
+            Każda podstrona wysyła <code style="background:var(--bg3);padding:1px 5px;font-size:10px">noindex</code>.
+            Włącz przełącznik, gdy strona będzie gotowa.
+          </div>
+        </div>
+
+        <!-- Lista podstron -->
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+          <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">
+            Podstrony
+          </span>
+          <span id="idx-count" style="font-size:11px;color:var(--muted)"></span>
+        </div>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:10px">
+          Odznacz podstronę, żeby wykluczyć ją z Google. Wykluczone znikają też z sitemapy.
+          Wpisy bloga mają własne pole <em>Nie indeksuj</em> w edytorze.
+        </p>
+
+        <div id="idx-pages" style="border:1px solid var(--border);max-height:280px;overflow-y:auto">
+          <p style="padding:14px 16px;font-size:12px;color:var(--muted)">Ładowanie listy podstron…</p>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:12px;margin-top:12px">
+          <button class="btn btn-primary btn-sm" id="save-seo-btn" style="min-width:230px">
+            <span class="material-symbols-outlined" style="font-size:15px">rocket_launch</span>
+            <span id="save-seo-label">Zapisz indeksowanie → GitHub</span>
+          </button>
+          <span id="seo-status" style="font-size:12px;color:var(--muted)"></span>
+        </div>
+      </div>
+
+      <div style="height:1px;background:var(--border);margin-bottom:28px"></div>
 
       <!-- Tracking & Verification -->
       <div style="margin-bottom:28px">
@@ -2371,6 +2445,87 @@ qs('#save-layout-btn').addEventListener('click', async function(){
 var trackingSha = null
 var robotsSha   = null
 var formsSha    = null
+var seoSha      = null
+
+/* ══ INDEKSOWANIE ══════════════════════════════════════════════════
+   Lista podstron czytana wprost z repozytorium (src/pages), żeby nie
+   trzeba było jej nigdzie ręcznie utrzymywać. W seo.json zapisujemy
+   wyłącznie wyjątki — ścieżki wykluczone z indeksowania.
+══════════════════════════════════════════════════════════════════ */
+var idxRoutes = []   // [{route, file}]
+var idxBlocked = []  // ścieżki z noindex
+
+function normPath(p){ return (String(p||'').replace(/\/+$/,'') || '/') }
+
+/* src/pages/uslugi/audyt-seo.astro → /uslugi/audyt-seo */
+function fileToRoute(path){
+  var r = path.replace(/^src\/pages/,'').replace(/\.astro$/,'')
+  r = r.replace(/\/index$/,'')
+  return r === '' ? '/' : r
+}
+
+async function discoverPages(dir){
+  var found = []
+  var entries = await ghList(dir)
+  for(var i=0;i<entries.length;i++){
+    var e = entries[i]
+    if(e.type === 'dir'){
+      if(e.name === 'admin') continue               // panel — nigdy nie indeksowany
+      found = found.concat(await discoverPages(e.path))
+    } else if(/\.astro$/.test(e.name)){
+      if(e.name.indexOf('[') !== -1) continue       // trasy dynamiczne (blog/[slug])
+      found.push({ route: fileToRoute(e.path), file: e.path })
+    }
+  }
+  return found
+}
+
+function renderIndexPages(){
+  var box = qs('#idx-pages')
+  box.innerHTML = ''
+
+  if(!idxRoutes.length){
+    box.innerHTML = '<p style="padding:14px 16px;font-size:12px;color:var(--muted)">Nie znaleziono podstron.</p>'
+    return
+  }
+
+  idxRoutes.sort(function(a,b){ return a.route.localeCompare(b.route) })
+  idxRoutes.forEach(function(p){
+    var blocked = idxBlocked.indexOf(normPath(p.route)) !== -1
+    var row = document.createElement('label')
+    row.className = 'idx-row' + (blocked ? ' off' : '')
+    row.innerHTML =
+      '<input type="checkbox"' + (blocked ? '' : ' checked') + ' />' +
+      '<span class="idx-path">' + esc(p.route) + '</span>' +
+      '<span class="idx-file">' + esc(p.file.replace('src/pages/','')) + '</span>' +
+      '<span class="idx-tag">' + (blocked ? 'noindex' : 'index') + '</span>'
+
+    var cb = row.querySelector('input')
+    cb.addEventListener('change', function(){
+      var path = normPath(p.route)
+      var at = idxBlocked.indexOf(path)
+      if(this.checked){ if(at !== -1) idxBlocked.splice(at,1) }
+      else if(at === -1){ idxBlocked.push(path) }
+      row.classList.toggle('off', !this.checked)
+      row.querySelector('.idx-tag').textContent = this.checked ? 'index' : 'noindex'
+      updateIdxCount()
+    })
+    box.appendChild(row)
+  })
+  updateIdxCount()
+}
+
+function updateIdxCount(){
+  var total = idxRoutes.length
+  var off = idxRoutes.filter(function(p){ return idxBlocked.indexOf(normPath(p.route)) !== -1 }).length
+  qs('#idx-count').textContent = (total - off) + ' z ' + total + ' indeksowanych'
+}
+
+function syncIdxMaster(){
+  var on = qs('#idx-global').checked
+  qs('#idx-master-box').classList.toggle('off', !on)
+  qs('#idx-warn').classList.toggle('hidden', on)
+}
 
 /* Pokazuje tylko pola właściwe dla wybranego dostawcy formularza */
 function syncFormProviderFields(){
@@ -2398,6 +2553,27 @@ async function switchToSettings(){
     qs('#set-ga').value     = data.ga      || ''
     qs('#set-clarity').value= data.clarity || ''
   } catch(e){ toast('Błąd ładowania tracking.json: '+e.message,'err') }
+
+  // Load seo.json + odkryj podstrony
+  try{
+    var sf=await ghGet('src/data/seo.json')
+    seoSha=sf.sha
+    var sd=JSON.parse(sf.content)
+    qs('#idx-global').checked = sd.indexable === true
+    idxBlocked = (sd.noindexPaths || []).map(normPath)
+    syncIdxMaster()
+  } catch(e){
+    qs('#idx-global').checked = false
+    idxBlocked = []
+    syncIdxMaster()
+    toast('Błąd ładowania seo.json: '+e.message,'err')
+  }
+  try{
+    idxRoutes = await discoverPages('src/pages')
+    renderIndexPages()
+  } catch(e){
+    qs('#idx-pages').innerHTML='<p style="padding:14px 16px;font-size:12px;color:var(--err)">Nie udało się wczytać listy podstron: '+esc(e.message)+'</p>'
+  }
 
   // Load forms.json
   try{
@@ -2581,6 +2757,25 @@ qs('#dp-clear').addEventListener('click', async function(){
     toast('✓ Cache wyczyszczony — użyj Ctrl+Shift+R na stronie','ok')
   } catch(e){ toast('❌ '+e.message,'err') }
   btn.disabled = false
+})
+
+qs('#idx-global').addEventListener('change', syncIdxMaster)
+
+qs('#save-seo-btn').addEventListener('click', async function(){
+  var btn=this, lbl=qs('#save-seo-label'), status=qs('#seo-status')
+  btn.disabled=true; lbl.textContent='Zapisuję…'; status.textContent=''
+  var data={
+    indexable:    qs('#idx-global').checked,
+    noindexPaths: idxBlocked.slice().sort(),
+  }
+  try{
+    var cur=await ghGet('src/data/seo.json'); seoSha=cur.sha
+    var j=await ghPut('src/data/seo.json',JSON.stringify(data,null,2)+'\n',seoSha,'update: seo.json')
+    seoSha=j.content.sha
+    toast('✓ Ustawienia indeksowania zapisane','ok'); startDeployWatch()
+    status.textContent='Zapisano ✓'
+  } catch(e){ toast('❌ '+e.message,'err'); status.textContent='Błąd!' }
+  btn.disabled=false; lbl.textContent='Zapisz indeksowanie → GitHub'
 })
 
 qs('#frm-provider').addEventListener('change', syncFormProviderFields)

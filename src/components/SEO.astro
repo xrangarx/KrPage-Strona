@@ -1,5 +1,6 @@
 ---
 import { SITE } from '../data/site'
+import seo from '../data/seo.json'
 
 interface Props {
   title: string
@@ -23,6 +24,18 @@ const {
   type = 'website',
 } = Astro.props
 
+/* ── Indeksowanie ───────────────────────────────────────────────────
+   Trzy poziomy, każdy może włączyć noindex:
+   1. seo.indexable = false  → cała strona (tryb budowy)
+   2. seo.noindexPaths       → wybrane podstrony (panel CMS → Indeksowanie)
+   3. prop noIndex           → pojedynczy wpis (frontmatter bloga)
+─────────────────────────────────────────────────────────────────── */
+const currentPath = Astro.url.pathname.replace(/\/+$/, '') || '/'
+const pathBlocked = (seo.noindexPaths as string[]).some(
+  p => (p.replace(/\/+$/, '') || '/') === currentPath
+)
+const isNoIndex = !seo.indexable || pathBlocked || noIndex
+
 const canonical      = canonicalUrl ?? new URL(Astro.url.pathname, SITE.url).href
 const ogImageAbsolute = ogImage.startsWith('http') ? ogImage : new URL(ogImage, SITE.url).href
 const fullTitle      = `${title} | ${SITE.name}`
@@ -33,7 +46,7 @@ const ogDescFinal    = ogDescription ?? description
 <title>{fullTitle}</title>
 <meta name="description" content={description} />
 <link rel="canonical" href={canonical} />
-<meta name="robots" content={(!SITE.indexable || noIndex) ? 'noindex,follow' : 'index,follow'} />
+<meta name="robots" content={isNoIndex ? 'noindex,follow' : 'index,follow'} />
 
 <!-- Open Graph -->
 <meta property="og:title" content={ogTitleFinal} />

@@ -1,8 +1,19 @@
 import type { APIRoute } from 'astro'
 import { getCollection } from 'astro:content'
 import { SITE } from '../data/site'
+import seo from '../data/seo.json'
 
 const BASE = SITE.url.replace(/\/$/, '')
+
+/* Strona z noindex nie ma czego szukać w sitemapie — trzymamy oba
+   źródła zgodne, żeby nie wysyłać Google sprzecznych sygnałów. */
+const blocked = new Set(
+  (seo.noindexPaths as string[]).map(p => (p.replace(/\/+$/, '') || '/'))
+)
+const isAllowed = (loc: string) => {
+  const path = loc.replace(BASE, '').replace(/\/+$/, '') || '/'
+  return !blocked.has(path)
+}
 
 const staticPages = [
   { loc: `${BASE}/`,                        priority: '1.0', changefreq: 'weekly'  },
@@ -32,7 +43,7 @@ export const GET: APIRoute = async () => {
     changefreq: 'monthly',
   }))
 
-  const allUrls = [...staticPages, ...blogEntries]
+  const allUrls = [...staticPages, ...blogEntries].filter(u => isAllowed(u.loc))
 
   const xml = [
     '<?xml version="1.0" encoding="UTF-8"?>',
