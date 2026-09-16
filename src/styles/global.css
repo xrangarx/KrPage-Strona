@@ -183,8 +183,27 @@
 
   .section-label {
     @apply inline-flex items-center gap-2 text-label-md uppercase tracking-widest
-           text-primary-container border border-primary-container/30
-           px-3 py-1 bg-secondary-container/20;
+           text-neon border border-neon/30
+           px-3 py-1 bg-neon/5;
+  }
+
+  .btn-neon {
+    background-color: var(--colorBtnBg, #404dff);
+    color: var(--colorBtnText, #fff);
+    border-radius: var(--btnRadius, 0px);
+    font-size: var(--btnSize, 13px);
+    font-weight: var(--btnWeight, 700);
+    letter-spacing: var(--btnLetterSpacing, 0.04em);
+    padding: 10px 24px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: uppercase;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+  .btn-neon:hover {
+    background-color: var(--colorBtnHoverBg, #5562ff);
+    color: var(--colorBtnHoverText, #fff);
   }
 }
 
