@@ -443,6 +443,95 @@
     }
     #toast.err{border-color:rgba(255,77,109,.4);color:var(--err)}
     #toast.ok-t{border-color:rgba(63,207,119,.4);color:var(--ok)}
+
+    /* ── LAYOUT CUSTOMIZER ── */
+    #view-layout{padding:0}
+    .lay-section{border-bottom:1px solid var(--border2)}
+    .lay-sec-hdr{
+      display:flex;align-items:center;gap:8px;padding:14px 24px;
+      font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;
+      color:var(--muted);cursor:pointer;user-select:none;transition:color .12s;
+    }
+    .lay-sec-hdr:hover{color:var(--text2)}
+    .lay-section.open>.lay-sec-hdr{color:var(--accent)}
+    .lay-sec-hdr .sec-chev{transition:transform .18s;flex-shrink:0}
+    .lay-section.open>.lay-sec-hdr .sec-chev{transform:rotate(90deg)}
+    .lay-sec-body{display:none;padding:4px 24px 20px}
+    .lay-section.open>.lay-sec-body{display:block}
+    .lay-group{margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--border2)}
+    .lay-group:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
+    .lay-group-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:10px}
+    .lay-typo-fields{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start}
+    .lay-num-field{display:flex;flex-direction:column;gap:5px;min-width:100px}
+    .lay-num-field>label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+    .lay-num-wrap{display:flex;align-items:stretch}
+    .lay-num{
+      width:68px;padding:7px 8px;background:var(--bg3);border:1px solid var(--border2);
+      color:var(--text);font-family:'Manrope',sans-serif;font-size:13px;font-weight:600;
+      outline:none;transition:border-color .15s;-moz-appearance:textfield;
+    }
+    .lay-num::-webkit-outer-spin-button,.lay-num::-webkit-inner-spin-button{-webkit-appearance:none}
+    .lay-num:focus{border-color:var(--accent30)}
+    .lay-unit{
+      font-size:10px;font-weight:700;color:var(--muted);padding:0 8px;
+      background:var(--bg4);border:1px solid var(--border2);border-left:none;
+      display:flex;align-items:center;white-space:nowrap;
+    }
+    .lay-sel-field{display:flex;flex-direction:column;gap:5px;min-width:110px}
+    .lay-sel-field>label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+    .lay-sel{
+      padding:7px 8px;background:var(--bg3);border:1px solid var(--border2);
+      color:var(--text);font-family:'Manrope',sans-serif;font-size:12px;font-weight:600;
+      outline:none;cursor:pointer;
+    }
+    .lay-sel:focus{border-color:var(--accent30)}
+    .lay-sel option{background:var(--bg2)}
+    .lay-color-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:12px}
+    .lay-color-field{display:flex;flex-direction:column;gap:5px}
+    .lay-color-field>label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+    .lay-cpick-row{display:flex;align-items:center;gap:6px}
+    .lay-cpick-row input[type="color"]{
+      width:34px;height:33px;border:1px solid var(--border2);
+      background:var(--bg3);padding:2px;cursor:pointer;flex-shrink:0;
+    }
+    .lay-hex{
+      flex:1;padding:7px 9px;background:var(--bg3);border:1px solid var(--border2);
+      color:var(--text);font-family:monospace;font-size:12px;
+      outline:none;transition:border-color .15s;
+    }
+    .lay-hex:focus{border-color:var(--accent30)}
+    .lay-font-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:8px;margin-bottom:12px}
+    .lay-font-card{
+      background:var(--bg2);border:2px solid var(--border);padding:12px 14px;
+      cursor:pointer;transition:border-color .12s,background .12s;
+    }
+    .lay-font-card:hover{border-color:var(--accent30);background:var(--bg3)}
+    .lay-font-card.active{border-color:var(--accent);background:var(--accent10)}
+    .lay-font-name{font-size:15px;font-weight:700;color:var(--text);margin-bottom:2px}
+    .lay-font-sample{font-size:12px;color:var(--muted);margin-bottom:3px}
+    .lay-font-pangram{font-size:11px;color:var(--text2)}
+    .lay-h-row{margin-bottom:6px}
+    .lay-h-hdr{
+      display:flex;align-items:center;gap:8px;padding:7px 12px;
+      background:var(--bg3);border:1px solid var(--border2);
+      cursor:pointer;font-size:12px;font-weight:700;color:var(--muted);
+      user-select:none;transition:color .12s;
+    }
+    .lay-h-hdr:hover{color:var(--text2)}
+    .lay-h-row.open>.lay-h-hdr{color:var(--accent);border-color:var(--accent30)}
+    .lay-h-hdr .h-chev{font-size:14px!important;transition:transform .15s;margin-left:auto}
+    .lay-h-row.open>.lay-h-hdr .h-chev{transform:rotate(90deg)}
+    .lay-h-body{display:none;padding:10px 12px;background:var(--bg2);border:1px solid var(--border2);border-top:none}
+    .lay-h-row.open>.lay-h-body{display:flex;flex-wrap:wrap;gap:8px}
+    .lay-preset{
+      display:flex;align-items:center;gap:8px;padding:7px 12px;
+      background:var(--bg2);border:1px solid var(--border2);cursor:pointer;
+      transition:border-color .12s;
+    }
+    .lay-preset:hover{border-color:var(--accent30)}
+    .lay-preset-dots{display:flex;gap:4px}
+    .lay-preset-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+    .lay-preset-name{font-size:11px;font-weight:700;color:var(--text2)}
   </style>
 </head>
 <body>
@@ -622,67 +711,156 @@
     </div>
 
     <!-- LAYOUT VIEW -->
-    <div class="view hidden" id="view-layout" style="padding:24px;overflow-y:auto;max-height:calc(100vh - 52px)">
+    <div class="view hidden" id="view-layout" style="overflow-y:auto;max-height:calc(100vh - 52px)">
 
-      <!-- Czcionka -->
-      <div style="margin-bottom:28px">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
-          <span class="material-symbols-outlined" style="color:var(--accent)">text_fields</span>
-          <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">Czcionka globalna</span>
+      <!-- ── TYPOGRAFIA ── -->
+      <div class="lay-section open">
+        <div class="lay-sec-hdr">
+          <span class="material-symbols-outlined" style="font-size:16px">text_fields</span>Typografia
+          <span class="material-symbols-outlined sec-chev" style="margin-left:auto;font-size:18px!important">chevron_right</span>
         </div>
-        <div style="background:rgba(64,77,255,0.06);border:1px solid var(--accent30);padding:10px 14px;margin-bottom:16px;font-size:12px;color:var(--text2)">
-          <strong style="color:var(--accent)">Jak to działa:</strong> Wybrana czcionka jest ładowana lokalnie (bez Google Fonts CDN) i stosowana globalnie na całej stronie po następnym deploymencie.
+        <div class="lay-sec-body">
+
+          <!-- Body -->
+          <div class="lay-group">
+            <div class="lay-group-label">Tekst bazowy (body)</div>
+            <div class="lay-font-row" id="body-font-row"></div>
+            <div class="lay-typo-fields">
+              <div class="lay-num-field"><label>Rozmiar</label><div class="lay-num-wrap"><input type="number" id="bodySize" class="lay-num" min="12" max="24" step="1"><span class="lay-unit">px</span></div></div>
+              <div class="lay-sel-field"><label>Grubość</label><select id="bodyWeight" class="lay-sel"></select></div>
+              <div class="lay-num-field"><label>Interlinia</label><div class="lay-num-wrap"><input type="number" id="bodyLineHeight" class="lay-num" min="1" max="2.5" step="0.05"></div></div>
+              <div class="lay-num-field"><label>Odstęp liter</label><div class="lay-num-wrap"><input type="number" id="bodyLetterSpacing" class="lay-num" min="-0.05" max="0.2" step="0.005"><span class="lay-unit">em</span></div></div>
+            </div>
+          </div>
+
+          <!-- Headings -->
+          <div class="lay-group">
+            <div class="lay-group-label">Nagłówki (H1–H6)</div>
+            <div style="margin-bottom:10px">
+              <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:6px">Czcionka nagłówków</div>
+              <div class="lay-font-row" id="heading-font-row"></div>
+            </div>
+            <div id="heading-rows"></div>
+          </div>
+
+          <!-- Blockquote -->
+          <div class="lay-group">
+            <div class="lay-group-label">Cytat (blockquote)</div>
+            <div class="lay-typo-fields">
+              <div class="lay-num-field"><label>Rozmiar</label><div class="lay-num-wrap"><input type="number" id="quoteSize" class="lay-num" min="12" max="32" step="1"><span class="lay-unit">px</span></div></div>
+              <div class="lay-sel-field"><label>Grubość</label><select id="quoteWeight" class="lay-sel"></select></div>
+              <div class="lay-sel-field"><label>Styl</label><select id="quoteStyle" class="lay-sel"><option value="normal">Normal</option><option value="italic">Italic</option></select></div>
+              <div class="lay-num-field"><label>Interlinia</label><div class="lay-num-wrap"><input type="number" id="quoteLineHeight" class="lay-num" min="1" max="2.5" step="0.05"></div></div>
+            </div>
+          </div>
+
+          <!-- Button text -->
+          <div class="lay-group">
+            <div class="lay-group-label">Przyciski (tekst)</div>
+            <div class="lay-typo-fields">
+              <div class="lay-num-field"><label>Rozmiar</label><div class="lay-num-wrap"><input type="number" id="btnSize" class="lay-num" min="10" max="20" step="1"><span class="lay-unit">px</span></div></div>
+              <div class="lay-sel-field"><label>Grubość</label><select id="btnWeight" class="lay-sel"></select></div>
+              <div class="lay-num-field"><label>Odstęp liter</label><div class="lay-num-wrap"><input type="number" id="btnLetterSpacing" class="lay-num" min="0" max="0.2" step="0.01"><span class="lay-unit">em</span></div></div>
+              <div class="lay-num-field"><label>Zaokrąglenie</label><div class="lay-num-wrap"><input type="number" id="btnRadius" class="lay-num" min="0" max="32" step="1"><span class="lay-unit">px</span></div></div>
+            </div>
+          </div>
+
         </div>
-        <div id="font-picker" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px"></div>
       </div>
 
-      <div style="height:1px;background:var(--border);margin-bottom:28px"></div>
+      <!-- ── KOLORY ── -->
+      <div class="lay-section">
+        <div class="lay-sec-hdr">
+          <span class="material-symbols-outlined" style="font-size:16px">palette</span>Kolory
+          <span class="material-symbols-outlined sec-chev" style="margin-left:auto;font-size:18px!important">chevron_right</span>
+        </div>
+        <div class="lay-sec-body">
 
-      <!-- Kolor akcentu -->
-      <div style="margin-bottom:28px">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
-          <span class="material-symbols-outlined" style="color:var(--accent)">palette</span>
-          <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">Kolor akcentu</span>
-        </div>
-        <div style="margin-bottom:14px">
-          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:8px">Predefiniowane kolory</div>
-          <div id="accent-swatches" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px"></div>
-        </div>
-        <div class="form-grid g2" style="margin-bottom:16px">
-          <div class="field">
-            <label class="field-label" for="lay-accent">Kolor akcentu (hex)</label>
-            <div style="display:flex;gap:8px;align-items:center">
-              <input type="color" id="lay-accent-picker" style="width:40px;height:38px;border:1px solid var(--border);background:var(--bg3);cursor:pointer;padding:2px" />
-              <input class="inp" id="lay-accent" placeholder="#404dff" style="flex:1" />
-            </div>
-            <p style="font-size:11px;color:var(--muted);margin-top:4px">Kolor przycisków, linków, podświetleń i ikon</p>
+          <!-- Preset palettes -->
+          <div class="lay-group">
+            <div class="lay-group-label">Gotowe palety akcentu</div>
+            <div id="lay-presets" style="display:flex;flex-wrap:wrap;gap:8px"></div>
           </div>
-          <div class="field">
-            <label class="field-label" for="lay-accent-dark">Kolor akcentu — jasny (hover/dark)</label>
-            <div style="display:flex;gap:8px;align-items:center">
-              <input type="color" id="lay-accent-dark-picker" style="width:40px;height:38px;border:1px solid var(--border);background:var(--bg3);cursor:pointer;padding:2px" />
-              <input class="inp" id="lay-accent-dark" placeholder="#6b76ff" style="flex:1" />
+
+          <!-- Akcent -->
+          <div class="lay-group">
+            <div class="lay-group-label">Akcent</div>
+            <div class="lay-color-grid">
+              <div class="lay-color-field"><label>Główny</label><div class="lay-cpick-row"><input type="color" id="cp-colorAccent"><input class="lay-hex" id="colorAccent"></div></div>
+              <div class="lay-color-field"><label>Hover / aktywny</label><div class="lay-cpick-row"><input type="color" id="cp-colorAccentHover"><input class="lay-hex" id="colorAccentHover"></div></div>
+              <div class="lay-color-field"><label>Jasny (dark mode)</label><div class="lay-cpick-row"><input type="color" id="cp-colorAccentLight"><input class="lay-hex" id="colorAccentLight"></div></div>
             </div>
-            <p style="font-size:11px;color:var(--muted);margin-top:4px">Odcień dla jasnych powierzchni / hover stanów</p>
           </div>
+
+          <!-- Text -->
+          <div class="lay-group">
+            <div class="lay-group-label">Tekst</div>
+            <div class="lay-color-grid">
+              <div class="lay-color-field"><label>Tekst bazowy</label><div class="lay-cpick-row"><input type="color" id="cp-colorText"><input class="lay-hex" id="colorText"></div></div>
+              <div class="lay-color-field"><label>Nagłówki</label><div class="lay-cpick-row"><input type="color" id="cp-colorHeadings"><input class="lay-hex" id="colorHeadings"></div></div>
+              <div class="lay-color-field"><label>Wyciszony (muted)</label><div class="lay-cpick-row"><input type="color" id="cp-colorTextMuted"><input class="lay-hex" id="colorTextMuted"></div></div>
+            </div>
+          </div>
+
+          <!-- Backgrounds -->
+          <div class="lay-group">
+            <div class="lay-group-label">Tła</div>
+            <div class="lay-color-grid">
+              <div class="lay-color-field"><label>Strona (body)</label><div class="lay-cpick-row"><input type="color" id="cp-colorBg"><input class="lay-hex" id="colorBg"></div></div>
+              <div class="lay-color-field"><label>Karty / sekcje</label><div class="lay-cpick-row"><input type="color" id="cp-colorSurface"><input class="lay-hex" id="colorSurface"></div></div>
+              <div class="lay-color-field"><label>Podwyższone</label><div class="lay-cpick-row"><input type="color" id="cp-colorSurfaceHigh"><input class="lay-hex" id="colorSurfaceHigh"></div></div>
+            </div>
+          </div>
+
+          <!-- Buttons -->
+          <div class="lay-group">
+            <div class="lay-group-label">Przyciski</div>
+            <div class="lay-color-grid">
+              <div class="lay-color-field"><label>Tło przycisku</label><div class="lay-cpick-row"><input type="color" id="cp-colorBtnBg"><input class="lay-hex" id="colorBtnBg"></div></div>
+              <div class="lay-color-field"><label>Tekst przycisku</label><div class="lay-cpick-row"><input type="color" id="cp-colorBtnText"><input class="lay-hex" id="colorBtnText"></div></div>
+              <div class="lay-color-field"><label>Tło hover</label><div class="lay-cpick-row"><input type="color" id="cp-colorBtnHoverBg"><input class="lay-hex" id="colorBtnHoverBg"></div></div>
+              <div class="lay-color-field"><label>Tekst hover</label><div class="lay-cpick-row"><input type="color" id="cp-colorBtnHoverText"><input class="lay-hex" id="colorBtnHoverText"></div></div>
+            </div>
+          </div>
+
+          <!-- Links -->
+          <div class="lay-group">
+            <div class="lay-group-label">Linki</div>
+            <div class="lay-color-grid" style="max-width:360px">
+              <div class="lay-color-field"><label>Kolor linku</label><div class="lay-cpick-row"><input type="color" id="cp-colorLink"><input class="lay-hex" id="colorLink"></div></div>
+              <div class="lay-color-field"><label>Hover linku</label><div class="lay-cpick-row"><input type="color" id="cp-colorLinkHover"><input class="lay-hex" id="colorLinkHover"></div></div>
+            </div>
+          </div>
+
         </div>
-        <!-- Live preview -->
-        <div id="accent-preview" style="background:var(--bg2);border:1px solid var(--border);padding:16px 20px;margin-bottom:16px">
-          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:12px">Podgląd akcentu</div>
-          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-            <button id="prev-btn-accent" style="display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border:none;cursor:pointer;font-size:13px;font-weight:700">
-              <span class="material-symbols-outlined" style="font-size:16px">rocket_launch</span>Opublikuj
-            </button>
-            <span id="prev-link-accent" style="font-size:13px;cursor:pointer;text-decoration:underline">Link z akcentem</span>
-            <span id="prev-border-accent" style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:2px 8px;border-width:1px;border-style:solid">badge</span>
+      </div>
+
+      <!-- ── LAYOUT ── -->
+      <div class="lay-section">
+        <div class="lay-sec-hdr">
+          <span class="material-symbols-outlined" style="font-size:16px">dashboard</span>Layout
+          <span class="material-symbols-outlined sec-chev" style="margin-left:auto;font-size:18px!important">chevron_right</span>
+        </div>
+        <div class="lay-sec-body">
+          <div class="lay-group">
+            <div class="lay-typo-fields">
+              <div class="lay-num-field" style="min-width:180px">
+                <label>Max. szerokość kontenera</label>
+                <div class="lay-num-wrap"><input type="number" id="containerWidth" class="lay-num" style="width:80px" min="800" max="1920" step="10"><span class="lay-unit">px</span></div>
+                <p style="font-size:10px;color:var(--muted);margin-top:4px">Domyślnie: 1280px</p>
+              </div>
+              <div class="lay-num-field" style="min-width:180px">
+                <label>Zaokrąglenie rogów (globalne)</label>
+                <div class="lay-num-wrap"><input type="number" id="globalRadius" class="lay-num" style="width:60px" min="0" max="32" step="1"><span class="lay-unit">px</span></div>
+                <p style="font-size:10px;color:var(--muted);margin-top:4px">0 = ostre rogi, 8 = zaokrąglone</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div style="height:1px;background:var(--border);margin-bottom:28px"></div>
-
-      <!-- Save button -->
-      <div style="display:flex;align-items:center;gap:12px">
+      <!-- Save -->
+      <div style="padding:20px 24px;border-top:1px solid var(--border2);display:flex;align-items:center;gap:12px;margin-top:8px">
         <button class="btn btn-primary" id="save-layout-btn" style="min-width:220px">
           <span class="material-symbols-outlined" style="font-size:15px">rocket_launch</span>
           <span id="save-layout-label">Zapisz layout → GitHub</span>
@@ -1739,74 +1917,175 @@ async function switchToImages(){
 /* ══ LAYOUT ══ */
 var layoutSha = null
 
-var FONTS = [
-  { id:'Manrope',           label:'Manrope',           sample:'Aa — Ąą Ęę Óó' },
-  { id:'Inter',             label:'Inter',             sample:'Aa — Ąą Ęę Óó' },
-  { id:'Plus Jakarta Sans', label:'Plus Jakarta Sans',  sample:'Aa — Ąą Ęę Óó' },
-  { id:'Poppins',           label:'Poppins',           sample:'Aa — Ąą Ęę Óó' },
+var LAY_FONTS = [
+  { id:'Manrope',           label:'Manrope',           sample:'Aa — Ąą Ęę Óó Śś Źź Żż' },
+  { id:'Inter',             label:'Inter',             sample:'Aa — Ąą Ęę Óó Śś Źź Żż' },
+  { id:'Plus Jakarta Sans', label:'Plus Jakarta Sans', sample:'Aa — Ąą Ęę Óó Śś Źź Żż' },
+  { id:'Poppins',           label:'Poppins',           sample:'Aa — Ąą Ęę Óó Śś Źź Żż' },
 ]
 
-var ACCENT_PRESETS = [
-  { label:'Indygo',   color:'#404dff', dark:'#6b76ff' },
-  { label:'Zielony',  color:'#00c853', dark:'#1de982' },
-  { label:'Fiolet',   color:'#7c3aed', dark:'#a78bfa' },
-  { label:'Różowy',   color:'#e91e8c', dark:'#f472b6' },
-  { label:'Cyjan',    color:'#00bcd4', dark:'#67e8f9' },
-  { label:'Pomarańcz',color:'#ff6d00', dark:'#fb923c' },
-  { label:'Czerwony', color:'#ef4444', dark:'#f87171' },
-  { label:'Biały',    color:'#e2e8f0', dark:'#f8fafc' },
+var LAY_WEIGHTS = [
+  {v:'300',l:'300 — Light'},
+  {v:'400',l:'400 — Regular'},
+  {v:'500',l:'500 — Medium'},
+  {v:'600',l:'600 — SemiBold'},
+  {v:'700',l:'700 — Bold'},
+  {v:'800',l:'800 — ExtraBold'},
 ]
 
-var currentFont = 'Manrope'
-var currentAccent = '#404dff'
-var currentAccentDark = '#6b76ff'
+var LAY_COLOR_FIELDS = [
+  'colorAccent','colorAccentHover','colorAccentLight',
+  'colorText','colorHeadings','colorTextMuted',
+  'colorBg','colorSurface','colorSurfaceHigh',
+  'colorBtnBg','colorBtnText','colorBtnHoverBg','colorBtnHoverText',
+  'colorLink','colorLinkHover',
+]
 
-function buildFontPicker(){
-  var el=qs('#font-picker'); el.innerHTML=''
-  FONTS.forEach(function(f){
+var LAY_PRESETS = [
+  { name:'Indygo',    dots:['#404dff','#5562ff','#6b76ff'],
+    fields:{colorAccent:'#404dff',colorAccentHover:'#5562ff',colorAccentLight:'#6b76ff',
+            colorBtnBg:'#404dff',colorBtnHoverBg:'#5562ff',colorLink:'#404dff',colorLinkHover:'#6b76ff'} },
+  { name:'Fiolet',    dots:['#7c3aed','#9d5fee','#c4b5fd'],
+    fields:{colorAccent:'#7c3aed',colorAccentHover:'#9d5fee',colorAccentLight:'#c4b5fd',
+            colorBtnBg:'#7c3aed',colorBtnHoverBg:'#9d5fee',colorLink:'#7c3aed',colorLinkHover:'#c4b5fd'} },
+  { name:'Zielony',   dots:['#00c853','#00e666','#1de982'],
+    fields:{colorAccent:'#00c853',colorAccentHover:'#00e666',colorAccentLight:'#1de982',
+            colorBtnBg:'#00c853',colorBtnHoverBg:'#00e666',colorLink:'#00c853',colorLinkHover:'#1de982'} },
+  { name:'Cyjan',     dots:['#00bcd4','#26c6da','#67e8f9'],
+    fields:{colorAccent:'#00bcd4',colorAccentHover:'#26c6da',colorAccentLight:'#67e8f9',
+            colorBtnBg:'#00bcd4',colorBtnHoverBg:'#26c6da',colorLink:'#00bcd4',colorLinkHover:'#67e8f9'} },
+  { name:'Różowy',    dots:['#e91e8c','#f72b99','#f472b6'],
+    fields:{colorAccent:'#e91e8c',colorAccentHover:'#f72b99',colorAccentLight:'#f472b6',
+            colorBtnBg:'#e91e8c',colorBtnHoverBg:'#f72b99',colorLink:'#e91e8c',colorLinkHover:'#f472b6'} },
+  { name:'Pomarańcz', dots:['#ff6d00','#ff8c00','#fb923c'],
+    fields:{colorAccent:'#ff6d00',colorAccentHover:'#ff8c00',colorAccentLight:'#fb923c',
+            colorBtnBg:'#ff6d00',colorBtnHoverBg:'#ff8c00',colorLink:'#ff6d00',colorLinkHover:'#fb923c'} },
+  { name:'Czerwony',  dots:['#ef4444','#f87171','#fca5a5'],
+    fields:{colorAccent:'#ef4444',colorAccentHover:'#f87171',colorAccentLight:'#fca5a5',
+            colorBtnBg:'#ef4444',colorBtnHoverBg:'#f87171',colorLink:'#ef4444',colorLinkHover:'#fca5a5'} },
+  { name:'Biały',     dots:['#e2e8f0','#f1f5f9','#f8fafc'],
+    fields:{colorAccent:'#e2e8f0',colorAccentHover:'#f1f5f9',colorAccentLight:'#f8fafc',
+            colorBtnBg:'#e2e8f0',colorBtnHoverBg:'#f1f5f9',colorLink:'#cbd5e1',colorLinkHover:'#e2e8f0'} },
+]
+
+var currentBodyFont   = 'Manrope'
+var currentHeadFont   = 'Manrope'
+
+/* ─ build font cards ─ */
+function buildFontCards(containerId, getActive, setActive){
+  var el=qs('#'+containerId); if(!el) return
+  el.innerHTML=''
+  LAY_FONTS.forEach(function(f){
     var card=document.createElement('div')
-    card.id='fp-'+f.id.replace(/\s+/g,'-')
-    card.style.cssText='background:var(--bg2);border:2px solid var(--border);padding:14px 16px;cursor:pointer;transition:all .12s;display:flex;flex-direction:column;gap:4px'
+    card.className='lay-font-card'+(getActive()===f.id?' active':'')
     card.innerHTML=
-      '<div style="font-size:16px;font-family:\''+f.id+'\',sans-serif;font-weight:700;color:var(--text)">'+f.label+'</div>'+
-      '<div style="font-size:13px;font-family:\''+f.id+'\',sans-serif;color:var(--muted)">'+f.sample+'</div>'+
-      '<div style="font-size:11px;font-family:\''+f.id+'\',sans-serif;color:var(--text2);margin-top:2px">Szybkie brązowe lisy i leniwi psy</div>'
+      '<div class="lay-font-name" style="font-family:\''+f.id+'\',sans-serif">'+f.label+'</div>'+
+      '<div class="lay-font-sample" style="font-family:\''+f.id+'\',sans-serif">'+f.sample+'</div>'+
+      '<div class="lay-font-pangram" style="font-family:\''+f.id+'\',sans-serif">Szybki brązowy lis skoczył przez płot</div>'
     card.addEventListener('click',function(){
-      currentFont=f.id
-      qsa('[id^="fp-"]').forEach(function(c){c.style.borderColor='var(--border)'})
-      card.style.borderColor='var(--accent)'
+      setActive(f.id)
+      qsa('#'+containerId+' .lay-font-card').forEach(function(c){c.classList.remove('active')})
+      card.classList.add('active')
     })
     el.appendChild(card)
   })
 }
 
-function buildAccentSwatches(){
-  var el=qs('#accent-swatches'); el.innerHTML=''
-  ACCENT_PRESETS.forEach(function(p){
-    var swatch=document.createElement('div')
-    swatch.title=p.label
-    swatch.style.cssText='width:32px;height:32px;background:'+p.color+';cursor:pointer;border:2px solid transparent;border-radius:50%;transition:transform .12s,border-color .12s'
-    swatch.addEventListener('mouseenter',function(){this.style.transform='scale(1.15)'})
-    swatch.addEventListener('mouseleave',function(){this.style.transform=''})
-    swatch.addEventListener('click',function(){
-      currentAccent=p.color; currentAccentDark=p.dark
-      qs('#lay-accent').value=p.color
-      qs('#lay-accent-dark').value=p.dark
-      qs('#lay-accent-picker').value=p.color
-      qs('#lay-accent-dark-picker').value=p.dark
-      updateAccentPreview()
-    })
-    el.appendChild(swatch)
+/* ─ fill weight selects ─ */
+function fillWeightSelect(el, activeVal){
+  if(!el) return
+  el.innerHTML=''
+  LAY_WEIGHTS.forEach(function(w){
+    var o=document.createElement('option')
+    o.value=w.v; o.textContent=w.l
+    if(w.v===String(activeVal)) o.selected=true
+    el.appendChild(o)
   })
 }
 
-function updateAccentPreview(){
-  var c=currentAccent
-  qs('#prev-btn-accent').style.cssText='display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border:none;cursor:pointer;font-size:13px;font-weight:700;background:'+c+';color:#fff;font-family:Manrope,sans-serif'
-  qs('#prev-link-accent').style.color=c
-  qs('#prev-border-accent').style.cssText='font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:2px 8px;border:1px solid '+c+';color:'+c
+/* ─ build H1–H6 rows ─ */
+function buildHeadingRows(data){
+  var el=qs('#heading-rows'); if(!el) return
+  el.innerHTML=''
+  var hs=[1,2,3,4,5,6]
+  hs.forEach(function(n){
+    var h='h'+n
+    var row=document.createElement('div')
+    row.className='lay-h-row'
+    row.innerHTML=
+      '<div class="lay-h-hdr">'+
+        '<span class="material-symbols-outlined" style="font-size:14px">title</span>'+
+        'H'+n+' — '+data[h+'Size']+'px / '+data[h+'Weight']+''+
+        '<span class="material-symbols-outlined h-chev">chevron_right</span>'+
+      '</div>'+
+      '<div class="lay-h-body">'+
+        '<div class="lay-num-field"><label>Rozmiar</label><div class="lay-num-wrap"><input type="number" id="'+h+'Size" class="lay-num" min="12" max="120" step="1" value="'+data[h+'Size']+'"><span class="lay-unit">px</span></div></div>'+
+        '<div class="lay-sel-field"><label>Grubość</label><select id="'+h+'Weight" class="lay-sel"></select></div>'+
+        '<div class="lay-num-field"><label>Interlinia</label><div class="lay-num-wrap"><input type="number" id="'+h+'LineHeight" class="lay-num" min="0.9" max="2.5" step="0.05" value="'+data[h+'LineHeight']+'"></div></div>'+
+        '<div class="lay-num-field"><label>Odstęp liter</label><div class="lay-num-wrap"><input type="number" id="'+h+'LetterSpacing" class="lay-num" min="-0.05" max="0.1" step="0.005" value="'+data[h+'LetterSpacing']+'"><span class="lay-unit">em</span></div></div>'+
+      '</div>'
+    row.querySelector('.lay-h-hdr').addEventListener('click',function(){
+      row.classList.toggle('open')
+    })
+    el.appendChild(row)
+    fillWeightSelect(qs('#'+h+'Weight'),data[h+'Weight'])
+    // update header on size change
+    ;['#'+h+'Size','#'+h+'Weight','#'+h+'LineHeight'].forEach(function(sel){
+      var inp=qs(sel); if(!inp) return
+      inp.addEventListener('input',function(){
+        var sz=qs('#'+h+'Size').value, wt=qs('#'+h+'Weight').value
+        row.querySelector('.lay-h-hdr').childNodes[1].textContent=
+          ' H'+n+' — '+sz+'px / '+wt
+      })
+    })
+  })
 }
 
+/* ─ build preset palettes ─ */
+function buildColorPresets(){
+  var el=qs('#lay-presets'); if(!el) return
+  el.innerHTML=''
+  LAY_PRESETS.forEach(function(p){
+    var btn=document.createElement('div')
+    btn.className='lay-preset'
+    btn.innerHTML='<div class="lay-preset-dots">'+
+      p.dots.map(function(d){return '<div class="lay-preset-dot" style="background:'+d+'"></div>'}).join('')+
+      '</div><span class="lay-preset-name">'+p.name+'</span>'
+    btn.addEventListener('click',function(){
+      Object.keys(p.fields).forEach(function(fid){
+        var hex=qs('#'+fid), picker=qs('#cp-'+fid)
+        if(hex){ hex.value=p.fields[fid] }
+        if(picker){ try{ picker.value=p.fields[fid] }catch(e){} }
+      })
+    })
+    el.appendChild(btn)
+  })
+}
+
+/* ─ wire all color pickers ─ */
+function wireColorPickers(){
+  LAY_COLOR_FIELDS.forEach(function(fid){
+    var picker=qs('#cp-'+fid), hex=qs('#'+fid)
+    if(!picker||!hex) return
+    picker.addEventListener('input',function(){ hex.value=this.value })
+    hex.addEventListener('input',function(){
+      var v=this.value.trim()
+      if(/^#[0-9a-fA-F]{6}$/.test(v)){ try{ picker.value=v }catch(e){} }
+    })
+  })
+}
+
+/* ─ accordion sections ─ */
+document.addEventListener('DOMContentLoaded',function(){
+  qsa('.lay-sec-hdr').forEach(function(hdr){
+    hdr.addEventListener('click',function(){
+      hdr.closest('.lay-section').classList.toggle('open')
+    })
+  })
+  wireColorPickers()
+})
+
+/* ─ switch to layout view ─ */
 async function switchToLayout(){
   currentView='layout'
   setActiveNav('layout')
@@ -1814,53 +2093,99 @@ async function switchToLayout(){
   show(qs('#view-layout'))
   qs('#toolbar-title').textContent='Layout globalny'
 
-  buildFontPicker()
-  buildAccentSwatches()
+  buildColorPresets()
+  buildFontCards('body-font-row',   function(){ return currentBodyFont }, function(v){ currentBodyFont=v })
+  buildFontCards('heading-font-row',function(){ return currentHeadFont }, function(v){ currentHeadFont=v })
+
+  // Fill weight selects (non-heading)
+  ;['bodyWeight','quoteWeight','btnWeight'].forEach(function(id){
+    var el=qs('#'+id); if(el) fillWeightSelect(el,'400')
+  })
 
   try{
     var lf=await ghGet('src/data/layout.json')
     layoutSha=lf.sha
-    var data=JSON.parse(lf.content)
-    currentFont=data.font||'Manrope'
-    currentAccent=data.accentColor||'#404dff'
-    currentAccentDark=data.accentColorDark||'#6b76ff'
-    qs('#lay-accent').value=currentAccent
-    qs('#lay-accent-dark').value=currentAccentDark
-    qs('#lay-accent-picker').value=currentAccent
-    qs('#lay-accent-dark-picker').value=currentAccentDark
-    // highlight active font
-    var cardId='fp-'+currentFont.replace(/\s+/g,'-')
-    var activeCard=qs('#'+cardId)
-    if(activeCard) activeCard.style.borderColor='var(--accent)'
-    updateAccentPreview()
+    var d=JSON.parse(lf.content)
+
+    // body font
+    currentBodyFont=d.bodyFont||'Manrope'
+    currentHeadFont=d.headingFont||'Manrope'
+    buildFontCards('body-font-row',   function(){ return currentBodyFont }, function(v){ currentBodyFont=v })
+    buildFontCards('heading-font-row',function(){ return currentHeadFont }, function(v){ currentHeadFont=v })
+
+    // body typo numbers
+    ;['bodySize','bodyLineHeight','bodyLetterSpacing'].forEach(function(id){
+      var el=qs('#'+id); if(el&&d[id]!==undefined) el.value=d[id]
+    })
+    fillWeightSelect(qs('#bodyWeight'), d.bodyWeight||'400')
+
+    // heading rows
+    buildHeadingRows(d)
+
+    // quote / btn
+    ;['quoteSize','quoteLineHeight','btnSize','btnLetterSpacing','btnRadius'].forEach(function(id){
+      var el=qs('#'+id); if(el&&d[id]!==undefined) el.value=d[id]
+    })
+    fillWeightSelect(qs('#quoteWeight'), d.quoteWeight||'400')
+    fillWeightSelect(qs('#btnWeight'),   d.btnWeight||'700')
+    if(qs('#quoteStyle')&&d.quoteStyle) qs('#quoteStyle').value=d.quoteStyle
+
+    // colors
+    LAY_COLOR_FIELDS.forEach(function(fid){
+      var hex=qs('#'+fid), picker=qs('#cp-'+fid)
+      var val=d[fid]||''
+      if(hex) hex.value=val
+      if(picker&&/^#[0-9a-fA-F]{6}$/.test(val)){ try{ picker.value=val }catch(e){} }
+    })
+
+    // layout
+    ;['containerWidth','globalRadius'].forEach(function(id){
+      var el=qs('#'+id); if(el&&d[id]!==undefined) el.value=d[id]
+    })
+
   } catch(e){ toast('Błąd ładowania layout.json: '+e.message,'err') }
 }
 
-// Color pickers sync
-document.addEventListener('DOMContentLoaded',function(){
-  function syncColor(pickerId, inputId, isSetter){
-    var picker=qs('#'+pickerId), input=qs('#'+inputId)
-    if(!picker||!input) return
-    picker.addEventListener('input',function(){
-      input.value=this.value
-      if(isSetter==='accent'){ currentAccent=this.value } else { currentAccentDark=this.value }
-      updateAccentPreview()
+/* ─ collect all layout values ─ */
+function collectLayoutData(){
+  var d={}
+  // fonts
+  d.bodyFont=currentBodyFont
+  d.headingFont=currentHeadFont
+  // body typo
+  ;['bodySize','bodyWeight','bodyLineHeight','bodyLetterSpacing'].forEach(function(id){
+    var el=qs('#'+id); if(el) d[id]=el.value
+  })
+  // h1-h6
+  ;[1,2,3,4,5,6].forEach(function(n){
+    var h='h'+n
+    ;[h+'Size',h+'Weight',h+'LineHeight',h+'LetterSpacing'].forEach(function(id){
+      var el=qs('#'+id); if(el) d[id]=el.value
     })
-    input.addEventListener('input',function(){
-      var v=this.value.trim()
-      if(/^#[0-9a-fA-F]{6}$/.test(v)){ picker.value=v }
-      if(isSetter==='accent'){ currentAccent=v } else { currentAccentDark=v }
-      updateAccentPreview()
-    })
-  }
-  syncColor('lay-accent-picker','lay-accent','accent')
-  syncColor('lay-accent-dark-picker','lay-accent-dark','dark')
-})
+  })
+  // quote
+  ;['quoteSize','quoteWeight','quoteStyle','quoteLineHeight'].forEach(function(id){
+    var el=qs('#'+id); if(el) d[id]=el.value
+  })
+  // btn
+  ;['btnSize','btnWeight','btnLetterSpacing','btnRadius'].forEach(function(id){
+    var el=qs('#'+id); if(el) d[id]=el.value
+  })
+  // colors
+  LAY_COLOR_FIELDS.forEach(function(fid){
+    var el=qs('#'+fid); if(el) d[fid]=el.value
+  })
+  // layout
+  ;['containerWidth','globalRadius'].forEach(function(id){
+    var el=qs('#'+id); if(el) d[id]=el.value
+  })
+  return d
+}
 
 qs('#save-layout-btn').addEventListener('click', async function(){
   var btn=this, lbl=qs('#save-layout-label'), status=qs('#layout-status')
   btn.disabled=true; lbl.textContent='Zapisuję…'; status.textContent=''
-  var data={ font:currentFont, accentColor:currentAccent, accentColorDark:currentAccentDark }
+  var data=collectLayoutData()
   try{
     var res=await ghPut('src/data/layout.json',JSON.stringify(data,null,2)+'\n',layoutSha,'update: layout.json')
     if(!res.ok) throw new Error(await res.text())
