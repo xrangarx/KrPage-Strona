@@ -1,4 +1,6 @@
 {
   "indexable": false,
-  "noindexPaths": []
+  "noindexPaths": [
+    "/blog"
+  ]
 }
