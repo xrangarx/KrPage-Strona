@@ -20,6 +20,6 @@ export const SITE = {
   defaultOgImage: '/images/og-default.jpg',
   author: 'Krzysztof — KrPage',
   // false = noindex,follow (tryb dev); true = index,follow (produkcja)
-  indexable: false,
+  indexable: true,
 
 }

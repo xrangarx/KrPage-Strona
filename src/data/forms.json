@@ -1,0 +1,15 @@
+{
+  "provider": "formsubmit",
+  "recipientEmail": "kontakt@krpage.pl",
+  "formsubmitCode": "",
+  "web3formsKey": "",
+  "customEndpoint": "",
+  "subject": "Nowa wiadomość z formularza kontaktowego",
+  "buttonLabel": "Wyślij wiadomość",
+  "sendingLabel": "Wysyłam…",
+  "successTitle": "Dziękuję za wiadomość!",
+  "successMessage": "Odezwę się do Ciebie w ciągu 24 godzin roboczych. Sprawdź proszę skrzynkę — odpowiedź może trafić do folderu Oferty lub Spam.",
+  "errorMessage": "Nie udało się wysłać wiadomości. Spróbuj ponownie za chwilę lub napisz bezpośrednio na adres e-mail podany obok.",
+  "consentEnabled": true,
+  "consentText": "Wyrażam zgodę na przetwarzanie moich danych w celu odpowiedzi na zapytanie."
+}

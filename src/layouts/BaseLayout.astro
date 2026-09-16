@@ -3,6 +3,7 @@ import SEO from '../components/SEO.astro'
 import Schema from '../components/Schema.astro'
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
+import BackToTop from '../components/BackToTop.astro'
 import '../styles/global.css'
 import { SITE } from '../data/site'
 import tracking from '../data/tracking.json'
@@ -76,7 +77,6 @@ const cssVars = {
   colorBg:           L.colorBg           || '#06070f',
   colorSurface:      L.colorSurface      || '#0d0e1c',
   colorSurfaceHigh:  L.colorSurfaceHigh  || '#161729',
-  colorBorder:       L.colorBorder       || 'rgba(64,77,255,0.14)',
   colorBtnBg:        L.colorBtnBg        || '#404dff',
   colorBtnText:      L.colorBtnText      || '#ffffff',
   colorBtnHoverBg:   L.colorBtnHoverBg   || '#5562ff',
@@ -196,5 +196,6 @@ const {
       <slot />
     </main>
     <Footer />
+    <BackToTop />
   </body>
 </html>

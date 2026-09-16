@@ -444,6 +444,32 @@
     #toast.err{border-color:rgba(255,77,109,.4);color:var(--err)}
     #toast.ok-t{border-color:rgba(63,207,119,.4);color:var(--ok)}
 
+    /* ── DEPLOY WATCHER ── */
+    #deploy-box{
+      position:fixed;bottom:20px;right:20px;z-index:9998;width:330px;
+      background:var(--bg2);border:1px solid var(--accent30);
+      box-shadow:0 8px 32px rgba(0,0,0,.45);padding:14px 16px;display:none;
+    }
+    #deploy-box.show{display:block}
+    #deploy-box.done{border-color:rgba(63,207,119,.45)}
+    #deploy-box.fail{border-color:rgba(255,77,109,.45)}
+    .dp-head{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+    .dp-ico{font-size:17px;color:var(--accent)}
+    #deploy-box.done .dp-ico{color:var(--ok)}
+    #deploy-box.fail .dp-ico{color:var(--err)}
+    #dp-title{font-size:12px;font-weight:700;color:var(--text);flex:1}
+    #dp-close{background:none;border:0;color:var(--muted);cursor:pointer;padding:2px;line-height:0}
+    #dp-close:hover{color:var(--text)}
+    .dp-bar{height:3px;background:var(--bg4);overflow:hidden}
+    .dp-fill{height:100%;width:0;background:var(--accent);transition:width .6s ease}
+    #deploy-box.done .dp-fill{background:var(--ok)}
+    #deploy-box.fail .dp-fill{background:var(--err)}
+    .dp-meta{display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-size:11px;color:var(--muted)}
+    .dp-time{font-family:monospace;font-variant-numeric:tabular-nums}
+    .dp-actions{display:none;gap:8px;margin-top:12px}
+    #deploy-box.done .dp-actions{display:flex}
+    .dp-spin{animation:spin 1s linear infinite}
+
     /* ── LAYOUT CUSTOMIZER ── */
     #view-layout{padding:0}
     .lay-section{border-bottom:1px solid var(--border2)}
@@ -918,6 +944,95 @@
 
       <div style="height:1px;background:var(--border);margin-bottom:28px"></div>
 
+      <!-- Formularz kontaktowy -->
+      <div style="margin-bottom:28px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
+          <span class="material-symbols-outlined" style="color:var(--accent)">forward_to_inbox</span>
+          <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">Formularz kontaktowy</span>
+        </div>
+        <div style="background:rgba(64,77,255,0.06);border:1px solid var(--accent30);padding:10px 14px;margin-bottom:14px;font-size:12px;color:var(--text2)">
+          <strong style="color:var(--accent)">FormSubmit</strong> nie wymaga zakładania konta — wpisz e-mail i zapisz.
+          Przy <strong>pierwszej</strong> wysyłce dostaniesz link aktywacyjny na ten adres (trzeba kliknąć raz).
+          Chcesz ukryć e-mail w kodzie strony? Wejdź na <a href="https://formsubmit.co" target="_blank" style="color:var(--accent)">formsubmit.co</a>,
+          wygeneruj alias i wklej go w pole <em>Kod aliasu</em>.
+        </div>
+
+        <div class="form-grid g2" style="margin-bottom:16px">
+          <div class="field">
+            <label class="field-label" for="frm-provider">Dostawca</label>
+            <select class="sel" id="frm-provider">
+              <option value="formsubmit">FormSubmit (bez konta — zalecane)</option>
+              <option value="web3forms">Web3Forms (wymaga access key)</option>
+              <option value="custom">Własny endpoint (Formspree, backend)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="field-label" for="frm-email">Adres e-mail odbiorcy<span class="req">*</span></label>
+            <input class="inp" id="frm-email" type="email" placeholder="kontakt@twojadomena.pl" autocomplete="off" />
+            <p style="font-size:11px;color:var(--muted);margin-top:4px">Tutaj trafią wiadomości z formularza.</p>
+          </div>
+          <div class="field" data-frm-only="formsubmit">
+            <label class="field-label" for="frm-code">Kod aliasu FormSubmit <span style="color:var(--muted);font-weight:400">(opcjonalnie)</span></label>
+            <input class="inp" id="frm-code" placeholder="np. a1b2c3d4e5" autocomplete="off" />
+            <p style="font-size:11px;color:var(--muted);margin-top:4px">Ukrywa e-mail w źródle strony. Gdy puste — używany jest adres powyżej.</p>
+          </div>
+          <div class="field" data-frm-only="web3forms">
+            <label class="field-label" for="frm-w3key">Web3Forms access key</label>
+            <input class="inp" id="frm-w3key" placeholder="xxxxxxxx-xxxx-xxxx" autocomplete="off" />
+          </div>
+          <div class="field" data-frm-only="custom" style="grid-column:1/-1">
+            <label class="field-label" for="frm-endpoint">Własny endpoint (URL)</label>
+            <input class="inp" id="frm-endpoint" placeholder="https://formspree.io/f/xxxxxxx" autocomplete="off" />
+          </div>
+          <div class="field" style="grid-column:1/-1">
+            <label class="field-label" for="frm-subject">Temat wiadomości e-mail</label>
+            <input class="inp" id="frm-subject" placeholder="Nowa wiadomość z formularza" autocomplete="off" />
+          </div>
+        </div>
+
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:10px">Podziękowanie po wysłaniu</div>
+        <div class="form-grid g2" style="margin-bottom:16px">
+          <div class="field" style="grid-column:1/-1">
+            <label class="field-label" for="frm-ok-title">Nagłówek</label>
+            <input class="inp" id="frm-ok-title" placeholder="Dziękuję za wiadomość!" autocomplete="off" />
+          </div>
+          <div class="field" style="grid-column:1/-1">
+            <label class="field-label" for="frm-ok-msg">Treść podziękowania</label>
+            <textarea class="ta" id="frm-ok-msg" rows="3" placeholder="Odezwę się w ciągu 24 godzin roboczych."></textarea>
+          </div>
+          <div class="field" style="grid-column:1/-1">
+            <label class="field-label" for="frm-err-msg">Komunikat błędu wysyłki</label>
+            <input class="inp" id="frm-err-msg" placeholder="Nie udało się wysłać wiadomości…" autocomplete="off" />
+          </div>
+          <div class="field">
+            <label class="field-label" for="frm-btn">Napis na przycisku</label>
+            <input class="inp" id="frm-btn" placeholder="Wyślij wiadomość" autocomplete="off" />
+          </div>
+          <div class="field">
+            <label class="field-label" for="frm-sending">Napis podczas wysyłki</label>
+            <input class="inp" id="frm-sending" placeholder="Wysyłam…" autocomplete="off" />
+          </div>
+          <div class="field" style="grid-column:1/-1">
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:var(--text2)">
+              <input type="checkbox" id="frm-consent-on" style="width:15px;height:15px;accent-color:var(--accent)" />
+              Pokaż checkbox zgody RODO (wymagany do wysłania)
+            </label>
+          </div>
+          <div class="field" style="grid-column:1/-1">
+            <label class="field-label" for="frm-consent-txt">Treść zgody</label>
+            <input class="inp" id="frm-consent-txt" placeholder="Wyrażam zgodę na przetwarzanie moich danych…" autocomplete="off" />
+          </div>
+        </div>
+
+        <button class="btn btn-primary btn-sm" id="save-forms-btn" style="min-width:230px">
+          <span class="material-symbols-outlined" style="font-size:15px">rocket_launch</span>
+          <span id="save-forms-label">Zapisz formularz → GitHub</span>
+        </button>
+        <span id="forms-status" style="font-size:12px;color:var(--muted);margin-left:12px"></span>
+      </div>
+
+      <div style="height:1px;background:var(--border);margin-bottom:28px"></div>
+
       <!-- Robots.txt editor -->
       <div style="margin-bottom:28px">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
@@ -1063,6 +1178,32 @@
 
 <div id="toast"></div>
 
+<!-- ── WATCHER DEPLOYMENTU: postęp builda + czyszczenie cache ── -->
+<div id="deploy-box">
+  <div class="dp-head">
+    <span class="material-symbols-outlined dp-ico" id="dp-icon">cloud_upload</span>
+    <span id="dp-title">Publikowanie zmian…</span>
+    <button id="dp-close" title="Ukryj" aria-label="Ukryj panel publikacji">
+      <span class="material-symbols-outlined" style="font-size:15px">close</span>
+    </button>
+  </div>
+  <div class="dp-bar"><div class="dp-fill" id="dp-fill"></div></div>
+  <div class="dp-meta">
+    <span id="dp-status">Czekam na start builda…</span>
+    <span id="dp-time" class="dp-time">0:00</span>
+  </div>
+  <div class="dp-actions" id="dp-actions">
+    <button class="btn btn-primary btn-sm" id="dp-open" style="flex:1;font-size:11px;padding:7px 10px">
+      <span class="material-symbols-outlined" style="font-size:14px">open_in_new</span>
+      Otwórz stronę (świeża wersja)
+    </button>
+    <button class="btn btn-ghost btn-sm" id="dp-clear" style="font-size:11px;padding:7px 10px" title="Czyści cache przeglądarki dla tej domeny">
+      <span class="material-symbols-outlined" style="font-size:14px">mop</span>
+      Wyczyść cache
+    </button>
+  </div>
+</div>
+
 <script is:inline>
 /* ══════════════════════════════════════════════════════════════════════
    ██████╗ ██████╗ ███╗   ██╗███████╗██╗ ██████╗
@@ -1197,6 +1338,22 @@ var editingFile    = null   // {path, sha} | null = nowy
 var pickerCallback = null   // fn(url)
 var currentImgFolder = 'images/blog'
 var pickerFolder     = 'images/blog'
+
+/* ── Escapowanie HTML ──
+   Panel trzyma token GitHuba w localStorage, więc każdy XSS tutaj
+   oznacza kradzież dostępu do repozytorium. Wszystkie dane pochodzące
+   z plików repo (frontmatter, nazwy plików) przepuszczamy przez esc(). */
+function esc(v){
+  return String(v == null ? '' : v)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;').replace(/'/g,'&#39;')
+}
+/* URL-e do atrybutów src/href — blokuje javascript:, data:text/html itp. */
+function safeUrl(v){
+  var s = String(v == null ? '' : v).trim()
+  if(/^(https?:|\/|\.\/|\.\.\/)/i.test(s)) return esc(s)
+  return ''
+}
 
 /* ── UI shortcuts ── */
 function qs(s){ return document.querySelector(s) }
@@ -1335,8 +1492,13 @@ qs('#login-btn').addEventListener('click', async function(){
     var r=await fetch('https://api.github.com/repos/'+CONFIG.owner+'/'+CONFIG.repo,{headers:{Authorization:'token '+pat}})
     if(!r.ok) throw new Error('Nieprawidłowy token lub brak dostępu do repozytorium')
     token=pat
-    if(qs('#remember-tok').checked) localStorage.setItem('cms_pat',pat)
-    else sessionStorage.setItem('cms_pat',pat)
+    if(qs('#remember-tok').checked){
+      // Token wygasa po 7 dniach — ogranicza okno kradzieży przy XSS/wspólnym komputerze
+      localStorage.setItem('cms_pat',pat)
+      localStorage.setItem('cms_pat_exp', String(Date.now() + 7*24*60*60*1000))
+    } else {
+      sessionStorage.setItem('cms_pat',pat)
+    }
     showApp()
   } catch(e){
     toast('❌ '+e.message,'err')
@@ -1348,14 +1510,22 @@ qs('#pat-inp').addEventListener('keydown',function(e){if(e.key==='Enter') qs('#l
 qs('#logout-btn').addEventListener('click',function(){
   token=''
   localStorage.removeItem('cms_pat')
+  localStorage.removeItem('cms_pat_exp')
   sessionStorage.removeItem('cms_pat')
   hide(qs('#app'))
   show(qs('#login-screen'))
 })
 
 ;(function(){
-  var saved=localStorage.getItem('cms_pat')||sessionStorage.getItem('cms_pat')
-  if(saved){token=saved; qs('#login-screen').style.display='none'; showApp()}
+  var stored = localStorage.getItem('cms_pat')
+  var exp    = Number(localStorage.getItem('cms_pat_exp') || 0)
+  if(stored && exp && Date.now() > exp){
+    localStorage.removeItem('cms_pat')
+    localStorage.removeItem('cms_pat_exp')
+    stored = null
+  }
+  var saved = stored || sessionStorage.getItem('cms_pat')
+  if(saved){ token=saved; qs('#login-screen').style.display='none'; showApp() }
 })()
 
 function showApp(){
@@ -1450,13 +1620,13 @@ async function loadList(col){
       var meta=fm.date||''
       var sub=fm.readTime||fm.result||''
       card.innerHTML=
-        '<div class="doc-thumb"><img src="'+imgSrc+'" alt="" onerror="this.src=\'https://placehold.co/56x40/111224/404dff?text=IMG\'"/></div>'+
+        '<div class="doc-thumb"><img src="'+safeUrl(imgSrc)+'" alt="" onerror="this.src=\'https://placehold.co/56x40/111224/404dff?text=IMG\'"/></div>'+
         '<div class="doc-info">'+
-          '<div class="doc-title">'+(fm.title||post.name)+'</div>'+
+          '<div class="doc-title">'+esc(fm.title||post.name)+'</div>'+
           '<div class="doc-meta">'+
-            (badge?'<span class="badge">'+badge+'</span>':'')+
-            (meta?'<span class="meta-date">'+meta+'</span>':'')+
-            (sub?'<span class="meta-date">'+sub+'</span>':'')+
+            (badge?'<span class="badge">'+esc(badge)+'</span>':'')+
+            (meta?'<span class="meta-date">'+esc(meta)+'</span>':'')+
+            (sub?'<span class="meta-date">'+esc(sub)+'</span>':'')+
           '</div>'+
         '</div>'+
         '<button class="doc-del-btn" title="Usuń wpis" tabindex="-1">'+
@@ -1486,7 +1656,7 @@ async function loadList(col){
     })
   }catch(e){
     hide(load)
-    grid.innerHTML='<div class="list-empty" style="color:var(--err)">Błąd: '+e.message+'</div>'
+    grid.innerHTML='<div class="list-empty" style="color:var(--err)">Błąd: '+esc(e.message)+'</div>'
   }
 }
 
@@ -2191,7 +2361,7 @@ qs('#save-layout-btn').addEventListener('click', async function(){
     layoutSha=current.sha
     var j=await ghPut('src/data/layout.json',JSON.stringify(data,null,2)+'\n',layoutSha,'update: layout.json')
     layoutSha=j.content.sha
-    toast('✓ layout.json zapisany — rebuild w toku','ok')
+    toast('✓ layout.json zapisany','ok'); startDeployWatch()
     status.textContent='Zapisano ✓'
   } catch(e){ toast('❌ '+e.message,'err'); status.textContent='Błąd!' }
   btn.disabled=false; lbl.textContent='Zapisz layout → GitHub'
@@ -2200,6 +2370,15 @@ qs('#save-layout-btn').addEventListener('click', async function(){
 /* ══ SETTINGS ══ */
 var trackingSha = null
 var robotsSha   = null
+var formsSha    = null
+
+/* Pokazuje tylko pola właściwe dla wybranego dostawcy formularza */
+function syncFormProviderFields(){
+  var p = qs('#frm-provider').value
+  qsa('[data-frm-only]').forEach(function(el){
+    el.style.display = (el.getAttribute('data-frm-only') === p) ? '' : 'none'
+  })
+}
 
 async function switchToSettings(){
   currentView='settings'
@@ -2219,6 +2398,27 @@ async function switchToSettings(){
     qs('#set-ga').value     = data.ga      || ''
     qs('#set-clarity').value= data.clarity || ''
   } catch(e){ toast('Błąd ładowania tracking.json: '+e.message,'err') }
+
+  // Load forms.json
+  try{
+    var fr=await ghGet('src/data/forms.json')
+    formsSha=fr.sha
+    var fd=JSON.parse(fr.content)
+    qs('#frm-provider').value    = fd.provider        || 'formsubmit'
+    qs('#frm-email').value       = fd.recipientEmail  || ''
+    qs('#frm-code').value        = fd.formsubmitCode  || ''
+    qs('#frm-w3key').value       = fd.web3formsKey    || ''
+    qs('#frm-endpoint').value    = fd.customEndpoint  || ''
+    qs('#frm-subject').value     = fd.subject         || ''
+    qs('#frm-ok-title').value    = fd.successTitle    || ''
+    qs('#frm-ok-msg').value      = fd.successMessage  || ''
+    qs('#frm-err-msg').value     = fd.errorMessage    || ''
+    qs('#frm-btn').value         = fd.buttonLabel     || ''
+    qs('#frm-sending').value     = fd.sendingLabel    || ''
+    qs('#frm-consent-on').checked= fd.consentEnabled !== false
+    qs('#frm-consent-txt').value = fd.consentText     || ''
+    syncFormProviderFields()
+  } catch(e){ toast('Błąd ładowania forms.json: '+e.message,'err') }
 
   // Load robots.txt
   try{
@@ -2242,10 +2442,10 @@ qs('#save-tracking-btn').addEventListener('click', async function(){
     clarity: qs('#set-clarity').value.trim(),
   }
   try{
-    var res=await ghPut('src/data/tracking.json',JSON.stringify(data,null,2)+'\n',trackingSha,'update: tracking.json')
-    if(!res.ok) throw new Error(await res.text())
-    var j=await res.json(); trackingSha=j.content.sha
-    toast('✓ tracking.json zapisany — rebuild w toku','ok')
+    var cur=await ghGet('src/data/tracking.json'); trackingSha=cur.sha
+    var j=await ghPut('src/data/tracking.json',JSON.stringify(data,null,2)+'\n',trackingSha,'update: tracking.json')
+    trackingSha=j.content.sha
+    toast('✓ tracking.json zapisany','ok'); startDeployWatch()
     status.textContent='Zapisano ✓'
   } catch(e){ toast('❌ '+e.message,'err'); status.textContent='Błąd!' }
   btn.disabled=false; lbl.textContent='Zapisz kody → GitHub'
@@ -2256,13 +2456,163 @@ qs('#save-robots-btn').addEventListener('click', async function(){
   btn.disabled=true; lbl.textContent='Zapisuję…'; status.textContent=''
   try{
     var content=qs('#robots-editor').value
-    var res=await ghPut('public/robots.txt',content,robotsSha,'update: robots.txt')
-    if(!res.ok) throw new Error(await res.text())
-    var j=await res.json(); robotsSha=j.content.sha
-    toast('✓ robots.txt zapisany — rebuild w toku','ok')
+    var cur=await ghGet('public/robots.txt'); robotsSha=cur.sha
+    var j=await ghPut('public/robots.txt',content,robotsSha,'update: robots.txt')
+    robotsSha=j.content.sha
+    toast('✓ robots.txt zapisany','ok'); startDeployWatch()
     status.textContent='Zapisano ✓'
   } catch(e){ toast('❌ '+e.message,'err'); status.textContent='Błąd!' }
   btn.disabled=false; lbl.textContent='Zapisz robots.txt → GitHub'
+})
+
+/* ══════════════════════════════════════════════════════════════════
+   DEPLOY WATCHER — pokazuje postęp builda GitHub Actions po zapisie
+   i daje link do świeżej wersji strony (z pominięciem cache).
+══════════════════════════════════════════════════════════════════ */
+var dpTick = null, dpPoll = null, dpStart = 0
+
+function dpFmt(ms){
+  var s = Math.floor(ms/1000)
+  return Math.floor(s/60) + ':' + String(s%60).padStart(2,'0')
+}
+
+async function ghLatestRun(){
+  try{
+    var r = await fetch(
+      'https://api.github.com/repos/'+CONFIG.owner+'/'+CONFIG.repo+
+      '/actions/runs?branch='+CONFIG.branch+'&per_page=1',
+      { headers: ghH() }
+    )
+    if(!r.ok) return null
+    var d = await r.json()
+    return (d.workflow_runs && d.workflow_runs[0]) || null
+  } catch(e){ return null }
+}
+
+function dpStop(){ clearInterval(dpTick); clearInterval(dpPoll); dpTick=null; dpPoll=null }
+
+function dpFinish(ok, msg){
+  dpStop()
+  var box = qs('#deploy-box')
+  box.className = 'show ' + (ok ? 'done' : 'fail')
+  qs('#dp-icon').classList.remove('dp-spin')
+  qs('#dp-icon').textContent = ok ? 'check_circle' : 'error'
+  qs('#dp-title').textContent = ok ? 'Opublikowano' : 'Build nie powiódł się'
+  qs('#dp-status').textContent = msg
+  qs('#dp-fill').style.width = '100%'
+}
+
+function startDeployWatch(){
+  var box = qs('#deploy-box')
+  dpStop()
+  dpStart = Date.now()
+  box.className = 'show'
+  qs('#dp-icon').textContent = 'cloud_upload'
+  qs('#dp-icon').classList.add('dp-spin')
+  qs('#dp-title').textContent = 'Publikowanie zmian…'
+  qs('#dp-status').textContent = 'Czekam na start builda…'
+  qs('#dp-time').textContent = '0:00'
+  qs('#dp-fill').style.width = '6%'
+
+  dpTick = setInterval(function(){
+    qs('#dp-time').textContent = dpFmt(Date.now() - dpStart)
+  }, 1000)
+
+  // Buildy trwają zwykle 60–120 s. Limit bezpieczeństwa: 6 minut.
+  dpPoll = setInterval(async function(){
+    var elapsed = Date.now() - dpStart
+    if(elapsed > 360000){ dpFinish(false, 'Przekroczono czas oczekiwania — sprawdź zakładkę Actions na GitHubie'); return }
+
+    var run = await ghLatestRun()
+
+    // Brak dostępu do Actions API (token bez uprawnienia "Actions: read")
+    // — degradujemy do zwykłego licznika szacunkowego.
+    if(!run){
+      qs('#dp-fill').style.width = Math.min(95, 6 + (elapsed/110000)*89) + '%'
+      qs('#dp-status').textContent = 'Build w toku (brak podglądu Actions)'
+      if(elapsed > 120000) dpFinish(true, 'Powinno być gotowe — odśwież stronę')
+      return
+    }
+
+    var created = new Date(run.created_at).getTime()
+    var isOurs  = created > dpStart - 120000
+
+    if(!isOurs){
+      qs('#dp-status').textContent = 'Czekam na start builda…'
+      qs('#dp-fill').style.width = '10%'
+      return
+    }
+
+    if(run.status === 'queued'){
+      qs('#dp-status').textContent = 'W kolejce…'
+      qs('#dp-fill').style.width = '25%'
+    } else if(run.status === 'in_progress'){
+      qs('#dp-status').textContent = 'Budowanie i wdrażanie…'
+      qs('#dp-fill').style.width = Math.min(92, 40 + (elapsed/120000)*52) + '%'
+    } else if(run.status === 'completed'){
+      if(run.conclusion === 'success') dpFinish(true, 'Nowa wersja jest online')
+      else dpFinish(false, 'Build zakończony: ' + (run.conclusion || 'błąd'))
+    }
+  }, 5000)
+}
+
+qs('#dp-close').addEventListener('click', function(){
+  dpStop()
+  qs('#deploy-box').className = ''
+})
+
+qs('#dp-open').addEventListener('click', function(){
+  // ?_cb=<timestamp> omija cache HTTP dla tego wejścia
+  window.open(CONFIG.siteUrl + '/?_cb=' + Date.now(), '_blank', 'noopener')
+})
+
+qs('#dp-clear').addEventListener('click', async function(){
+  var btn = this
+  btn.disabled = true
+  try{
+    if(window.caches){
+      var keys = await caches.keys()
+      await Promise.all(keys.map(function(k){ return caches.delete(k) }))
+    }
+    if(navigator.serviceWorker){
+      var regs = await navigator.serviceWorker.getRegistrations()
+      await Promise.all(regs.map(function(r){ return r.unregister() }))
+    }
+    toast('✓ Cache wyczyszczony — użyj Ctrl+Shift+R na stronie','ok')
+  } catch(e){ toast('❌ '+e.message,'err') }
+  btn.disabled = false
+})
+
+qs('#frm-provider').addEventListener('change', syncFormProviderFields)
+
+qs('#save-forms-btn').addEventListener('click', async function(){
+  var btn=this, lbl=qs('#save-forms-label'), status=qs('#forms-status')
+  var email=qs('#frm-email').value.trim()
+  if(!email){ toast('❌ Podaj adres e-mail odbiorcy','err'); return }
+  btn.disabled=true; lbl.textContent='Zapisuję…'; status.textContent=''
+  var data={
+    provider:       qs('#frm-provider').value,
+    recipientEmail: email,
+    formsubmitCode: qs('#frm-code').value.trim(),
+    web3formsKey:   qs('#frm-w3key').value.trim(),
+    customEndpoint: qs('#frm-endpoint').value.trim(),
+    subject:        qs('#frm-subject').value.trim()    || 'Nowa wiadomość z formularza kontaktowego',
+    buttonLabel:    qs('#frm-btn').value.trim()        || 'Wyślij wiadomość',
+    sendingLabel:   qs('#frm-sending').value.trim()    || 'Wysyłam…',
+    successTitle:   qs('#frm-ok-title').value.trim()   || 'Dziękuję za wiadomość!',
+    successMessage: qs('#frm-ok-msg').value.trim()     || 'Odezwę się do Ciebie w ciągu 24 godzin roboczych.',
+    errorMessage:   qs('#frm-err-msg').value.trim()    || 'Nie udało się wysłać wiadomości. Spróbuj ponownie.',
+    consentEnabled: qs('#frm-consent-on').checked,
+    consentText:    qs('#frm-consent-txt').value.trim(),
+  }
+  try{
+    var cur=await ghGet('src/data/forms.json'); formsSha=cur.sha
+    var j=await ghPut('src/data/forms.json',JSON.stringify(data,null,2)+'\n',formsSha,'update: forms.json')
+    formsSha=j.content.sha
+    toast('✓ Ustawienia formularza zapisane','ok'); startDeployWatch()
+    status.textContent='Zapisano ✓'
+  } catch(e){ toast('❌ '+e.message,'err'); status.textContent='Błąd!' }
+  btn.disabled=false; lbl.textContent='Zapisz formularz → GitHub'
 })
 
 qsa('.img-subtab').forEach(function(btn){
@@ -2312,7 +2662,7 @@ async function handleFiles(files){
     var file=files[i]
     if(file.size>5*1024*1024){toast('❌ '+file.name+': max 5 MB','err');continue}
     var item=document.createElement('div'); item.className='log-item'
-    item.innerHTML='<span class="material-symbols-outlined spin" style="font-size:15px">progress_activity</span><span>'+file.name+'</span><span style="color:var(--muted)">Konwertowanie…</span>'
+    item.innerHTML='<span class="material-symbols-outlined spin" style="font-size:15px">progress_activity</span><span>'+esc(file.name)+'</span><span style="color:var(--muted)">Konwertowanie…</span>'
     log.appendChild(item)
     try{
       var blob=file, ext=file.name.replace(/.*\./,'').toLowerCase()
@@ -2354,11 +2704,11 @@ async function loadImages(){
       var url='/'+f.path.replace('public/','')
       var card=document.createElement('div'); card.className='img-card'
       card.innerHTML=
-        '<img src="'+url+'" alt="'+(altTexts[f.name]||f.name)+'" loading="lazy" style="cursor:zoom-in" onerror="this.src=\'https://placehold.co/152x100/111224/404dff?text=IMG\'"/>'+
+        '<img src="'+safeUrl(url)+'" alt="'+esc(altTexts[f.name]||f.name)+'" loading="lazy" style="cursor:zoom-in" onerror="this.src=\'https://placehold.co/152x100/111224/404dff?text=IMG\'"/>'+
         '<div class="img-info">'+
-          '<div class="img-name">'+f.name+'</div>'+
+          '<div class="img-name">'+esc(f.name)+'</div>'+
           '<div class="img-actions">'+
-            '<button class="img-btn copy" data-url="'+url+'">'+
+            '<button class="img-btn copy" data-url="'+safeUrl(url)+'">'+
               '<span class="material-symbols-outlined" style="font-size:11px">content_copy</span>URL'+
             '</button>'+
             '<button class="img-btn" title="Edytuj">'+
@@ -2378,7 +2728,7 @@ async function loadImages(){
       grid.appendChild(card)
     })
   }catch(e){
-    grid.innerHTML='<p style="color:var(--err);font-size:13px">Błąd: '+e.message+'</p>'
+    grid.innerHTML='<p style="color:var(--err);font-size:13px">Błąd: '+esc(e.message)+'</p>'
   }
 }
 
@@ -2489,8 +2839,8 @@ async function loadPickerImages(){
     imgs.slice().reverse().forEach(function(f){
       var url='/'+f.path.replace('public/','')
       var card=document.createElement('div'); card.className='picker-card'
-      card.innerHTML='<img src="'+url+'" alt="'+f.name+'" loading="lazy" onerror="this.src=\'https://placehold.co/130x85/111224/404dff?text=IMG\'"/>'+
-        '<div class="picker-card-name">'+f.name+'</div>'
+      card.innerHTML='<img src="'+safeUrl(url)+'" alt="'+esc(f.name)+'" loading="lazy" onerror="this.src=\'https://placehold.co/130x85/111224/404dff?text=IMG\'"/>'+
+        '<div class="picker-card-name">'+esc(f.name)+'</div>'
       card.addEventListener('click',function(){
         if(pickerCallback) pickerCallback(url)
         qs('#picker-modal').classList.remove('open')
@@ -2498,7 +2848,7 @@ async function loadPickerImages(){
       body.appendChild(card)
     })
   }catch(e){
-    body.innerHTML='<p style="color:var(--err);font-size:13px;grid-column:1/-1">Błąd: '+e.message+'</p>'
+    body.innerHTML='<p style="color:var(--err);font-size:13px;grid-column:1/-1">Błąd: '+esc(e.message)+'</p>'
   }
 }
 </script>

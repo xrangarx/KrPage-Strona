@@ -1,0 +1,77 @@
+---
+interface Props {
+  /** Po ilu pikselach przewinięcia przycisk ma się pojawić */
+  threshold?: number
+  /** Etykieta dla czytników ekranu */
+  label?: string
+}
+
+const { threshold = 400, label = 'Wróć na górę strony' } = Astro.props
+---
+
+<button
+  id="back-to-top"
+  type="button"
+  aria-label={label}
+  data-threshold={threshold}
+  class="fixed bottom-6 right-6 z-40 w-11 h-11 flex items-center justify-center
+         bg-neon text-on-primary shadow-neon-sm
+         opacity-0 invisible translate-y-3
+         transition-all duration-300 ease-out
+         hover:brightness-110 active:scale-95
+         focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+>
+  <span aria-hidden="true" class="material-symbols-outlined text-xl leading-none">arrow_upward</span>
+</button>
+
+<style>
+  #back-to-top {
+    border-radius: var(--globalRadius, 2px);
+  }
+  #back-to-top.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #back-to-top { transition: none; }
+  }
+</style>
+
+<script>
+  const btn = document.getElementById('back-to-top')
+
+  if (btn) {
+    const threshold = Number(btn.dataset.threshold) || 400
+
+    // Różne konteksty (zwykła strona, iframe, osadzony podgląd) przewijają
+    // inny element — bierzemy największą z dostępnych wartości.
+    const scrollTop = () => Math.max(
+      window.scrollY || 0,
+      document.documentElement.scrollTop || 0,
+      document.body.scrollTop || 0,
+    )
+
+    let ticking = false
+    const update = () => {
+      btn.classList.toggle('is-visible', scrollTop() > threshold)
+      ticking = false
+    }
+    const onScroll = () => {
+      if (!ticking) { window.requestAnimationFrame(update); ticking = true }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true })
+    document.addEventListener('scroll', onScroll, { passive: true, capture: true })
+
+    btn.addEventListener('click', () => {
+      const behavior: ScrollBehavior =
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
+      const target = document.scrollingElement || document.documentElement
+      if (target && typeof target.scrollTo === 'function') target.scrollTo({ top: 0, behavior })
+      else window.scrollTo({ top: 0, behavior })
+    })
+
+    update()
+  }
+</script>
