@@ -2189,9 +2189,8 @@ qs('#save-layout-btn').addEventListener('click', async function(){
   try{
     var current=await ghGet('src/data/layout.json')
     layoutSha=current.sha
-    var res=await ghPut('src/data/layout.json',JSON.stringify(data,null,2)+'\n',layoutSha,'update: layout.json')
-    if(!res.ok) throw new Error(await res.text())
-    var j=await res.json(); layoutSha=j.content.sha
+    var j=await ghPut('src/data/layout.json',JSON.stringify(data,null,2)+'\n',layoutSha,'update: layout.json')
+    layoutSha=j.content.sha
     toast('✓ layout.json zapisany — rebuild w toku','ok')
     status.textContent='Zapisano ✓'
   } catch(e){ toast('❌ '+e.message,'err'); status.textContent='Błąd!' }
