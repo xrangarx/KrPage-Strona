@@ -73,8 +73,19 @@ const {
     {tracking.gsc  && <meta name="google-site-verification" content={tracking.gsc} />}
     {tracking.bing && <meta name="msvalidate.01" content={tracking.bing} />}
 
-    <!-- Google Analytics 4 -->
-    {tracking.ga && (
+    <!-- Google Tag Manager (priorytet — GA4 i inne tagi konfiguruj w GTM) -->
+    {tracking.gtm && (
+      <script define:vars={{ gtmId: tracking.gtm }}>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer',gtmId);
+      </script>
+    )}
+
+    <!-- Google Analytics 4 (bezpośredni — tylko gdy brak GTM) -->
+    {!tracking.gtm && tracking.ga && (
       <>
         <script async src={`https://www.googletagmanager.com/gtag/js?id=${tracking.ga}`}></script>
         <script define:vars={{ gaId: tracking.ga }}>
@@ -86,8 +97,8 @@ const {
       </>
     )}
 
-    <!-- Microsoft Clarity -->
-    {tracking.clarity && (
+    <!-- Microsoft Clarity (bezpośredni — tylko gdy brak GTM) -->
+    {!tracking.gtm && tracking.clarity && (
       <script define:vars={{ clarityId: tracking.clarity }}>
         (function(c,l,a,r,i,t,y){
           c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -102,6 +113,12 @@ const {
   </head>
 
   <body class="font-sans text-on-surface min-h-dvh flex flex-col">
+    {tracking.gtm && (
+      <noscript>
+        <iframe src={`https://www.googletagmanager.com/ns.html?id=${tracking.gtm}`}
+          height="0" width="0" style="display:none;visibility:hidden"></iframe>
+      </noscript>
+    )}
     <Header />
     <main class="flex-1 pt-20">
       <slot />
