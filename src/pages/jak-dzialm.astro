@@ -71,7 +71,7 @@ const JakDziaContent = null
                 class="w-full h-52 sm:h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 loading="lazy"
               />
-              <div class="absolute top-3 left-3 bg-[#06070f]/90 border border-neon/30 px-3 py-1.5 backdrop-blur-sm">
+              <div class="absolute top-3 left-3 bg-background/90 border border-neon/30 px-3 py-1.5 backdrop-blur-sm">
                 <p class="text-neon font-black text-headline-md leading-none">{c.data.result}</p>
                 <p class="text-label-sm text-on-surface-variant uppercase leading-tight">{c.data.resultLabel}</p>
               </div>
@@ -81,10 +81,10 @@ const JakDziaContent = null
                 <div class="flex items-center flex-wrap gap-2 mb-sm">
                   <span class:list={[
                     'text-label-sm uppercase tracking-widest border px-2 py-0.5 font-bold',
-                    c.data.type === 'SEO'
-                      ? 'text-neon border-neon/30 bg-neon/5'
-                      : 'text-[#5DADE2] border-[#5DADE2]/30 bg-[#5DADE2]/5',
-                  ]}>
+                    c.data.type === 'SEO' ? 'text-neon border-neon/30 bg-neon/5' : '',
+                  ]}
+                  style={c.data.type !== 'SEO' ? 'color:rgb(var(--tw-accent-light));border-color:rgb(var(--tw-accent-light)/.3);background:rgb(var(--tw-accent-light)/.05)' : ''}
+                  >
                     {c.data.type === 'SEO' ? 'Pozycjonowanie' : 'Strona www'}
                   </span>
                   <span class="text-label-sm text-on-surface-variant border border-outline-variant px-2 py-0.5 uppercase">

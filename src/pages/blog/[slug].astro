@@ -76,7 +76,7 @@ const breadcrumbJson = JSON.stringify({
   <!-- Hero image -->
   <div class="w-full h-56 md:h-80 overflow-hidden relative">
     <img src={post.data.image} alt={post.data.title} class="w-full h-full object-cover" />
-    <div class="absolute inset-0 bg-gradient-to-t from-[#06070f] via-[#06070f]/40 to-transparent"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"></div>
   </div>
 
   <!-- Main layout -->
@@ -323,8 +323,8 @@ const breadcrumbJson = JSON.stringify({
       function setActive(slug) {
         tocLinks.forEach(function(link) {
           var isActive = link.getAttribute('data-toc-link') === slug
-          link.style.color              = isActive ? '#404dff' : ''
-          link.style.borderLeftColor    = isActive ? '#404dff' : ''
+          link.style.color              = isActive ? 'rgb(var(--tw-accent))' : ''
+          link.style.borderLeftColor    = isActive ? 'rgb(var(--tw-accent))' : ''
           link.style.fontWeight         = isActive ? '700'     : ''
         })
       }

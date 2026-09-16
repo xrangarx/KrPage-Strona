@@ -158,7 +158,7 @@ const costs = [
       </div>
 
       <!-- JAMstack -->
-      <div class="bento-card p-lg border-neon/20" style="background:rgba(64,77,255,0.04)">
+      <div class="bento-card p-lg border-neon/20" style="background:rgb(var(--tw-accent) / 0.04)">
         <div class="flex items-center gap-3 mb-md">
           <span class="material-symbols-outlined text-neon" style="font-size:20px">verified</span>
           <h3 class="text-label-lg text-neon uppercase tracking-wider">JAMstack — nowoczesne podejście</h3>
@@ -228,7 +228,7 @@ const costs = [
             <div class="absolute left-[19px] top-[48px] bottom-0 w-px bg-neon/15"></div>
           )}
           {/* number */}
-          <div class="w-10 h-10 border border-neon/30 bg-neon/8 flex items-center justify-center flex-shrink-0 z-10" style="background:rgba(64,77,255,0.08)">
+          <div class="w-10 h-10 border border-neon/30 flex items-center justify-center flex-shrink-0 z-10" style="background:rgb(var(--tw-accent) / 0.08)">
             <span class="text-neon font-bold" style="font-size:13px;font-family:monospace">{step.n}</span>
           </div>
           {/* content */}
@@ -275,7 +275,7 @@ const costs = [
       <div class="border border-surface-container-high" style="overflow-x:auto">
         <table style="width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums">
           <thead>
-            <tr style="border-bottom:1px solid rgba(64,77,255,0.14)">
+            <tr style="border-bottom:1px solid rgb(var(--tw-accent) / 0.14)">
               <th class="text-label-sm text-on-surface-variant uppercase tracking-wider" style="text-align:left;padding:10px 20px;font-size:10px">Składnik</th>
               <th class="text-label-sm text-on-surface-variant uppercase tracking-wider" style="text-align:left;padding:10px 20px;font-size:10px">Koszt</th>
               <th class="text-label-sm text-on-surface-variant uppercase tracking-wider" style="text-align:left;padding:10px 20px;font-size:10px">Uwagi</th>
@@ -283,7 +283,7 @@ const costs = [
           </thead>
           <tbody>
             {costs.map((row, i) => (
-              <tr style={`border-bottom:1px solid rgba(64,77,255,0.08);${i===costs.length-1?'border-bottom:none':''}`}>
+              <tr style={`border-bottom:1px solid rgb(var(--tw-accent) / 0.08);${i===costs.length-1?'border-bottom:none':''}`}>
                 <td class="text-body-sm text-on-surface font-medium" style="padding:11px 20px">{row.item}</td>
                 <td style="padding:11px 20px">
                   <span class={row.cost === '0 zł' ? 'text-neon' : 'text-on-surface'}
@@ -296,7 +296,7 @@ const costs = [
             ))}
           </tbody>
           <tfoot>
-            <tr style="border-top:1px solid rgba(64,77,255,0.2)">
+            <tr style="border-top:1px solid rgb(var(--tw-accent) / 0.2)">
               <td class="text-on-surface font-bold" style="padding:14px 20px">Łącznie / rok</td>
               <td style="padding:14px 20px">
                 <span class="text-on-surface font-bold" style="font-family:monospace;font-size:14px">~50–80 zł</span>
@@ -308,7 +308,7 @@ const costs = [
       </div>
 
       <!-- CTA -->
-      <div class="bento-card p-lg mt-6 border-neon/25" style="background:rgba(64,77,255,0.04)">
+      <div class="bento-card p-lg mt-6 border-neon/25" style="background:rgb(var(--tw-accent) / 0.04)">
         <h3 class="text-title-md text-on-surface font-bold mb-3" style="text-wrap:balance">
           Zainteresowany taką stroną dla siebie lub klienta?
         </h3>

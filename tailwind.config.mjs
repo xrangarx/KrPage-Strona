@@ -71,9 +71,9 @@ export default {
         margin: '32px',
       },
       boxShadow: {
-        'neon-sm': '0 0 8px rgba(64, 77, 255, 0.3)',
-        'neon':    '0 0 20px rgba(64, 77, 255, 0.4)',
-        'neon-lg': '0 0 40px rgba(64, 77, 255, 0.2)',
+        'neon-sm': '0 0 8px rgb(var(--tw-accent) / 0.3)',
+        'neon':    '0 0 20px rgb(var(--tw-accent) / 0.4)',
+        'neon-lg': '0 0 40px rgb(var(--tw-accent) / 0.2)',
       },
     },
   },
