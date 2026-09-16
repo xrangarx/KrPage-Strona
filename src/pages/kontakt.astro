@@ -31,7 +31,7 @@ const KontaktContent = null
           <a href={`mailto:${SITE.email}`}
              class="flex items-center gap-md group">
             <div class="w-12 h-12 bento-card flex items-center justify-center group-hover:border-neon/40 transition-all">
-              <span class="material-symbols-outlined text-neon">mail</span>
+              <span aria-hidden="true" class="material-symbols-outlined text-neon">mail</span>
             </div>
             <div>
               <p class="text-label-sm text-on-surface-variant uppercase">Email</p>
@@ -41,7 +41,7 @@ const KontaktContent = null
           <a href={`tel:${SITE.phone.replace(/\s/g,'')}`}
              class="flex items-center gap-md group">
             <div class="w-12 h-12 bento-card flex items-center justify-center group-hover:border-neon/40 transition-all">
-              <span class="material-symbols-outlined text-neon">phone</span>
+              <span aria-hidden="true" class="material-symbols-outlined text-neon">phone</span>
             </div>
             <div>
               <p class="text-label-sm text-on-surface-variant uppercase">Telefon</p>
@@ -50,7 +50,7 @@ const KontaktContent = null
           </a>
           <div class="flex items-center gap-md">
             <div class="w-12 h-12 bento-card flex items-center justify-center">
-              <span class="material-symbols-outlined text-neon">location_on</span>
+              <span aria-hidden="true" class="material-symbols-outlined text-neon">location_on</span>
             </div>
             <div>
               <p class="text-label-sm text-on-surface-variant uppercase">Lokalizacja</p>
@@ -63,12 +63,12 @@ const KontaktContent = null
         <div class="flex gap-md">
           <a href={SITE.social.linkedin} target="_blank" rel="noopener noreferrer"
              class="flex items-center gap-2 border border-outline-variant px-md py-sm text-label-sm text-on-surface-variant hover:border-neon/40 hover:text-neon transition-all uppercase tracking-widest">
-            <span class="material-symbols-outlined text-base">link</span>
+            <span aria-hidden="true" class="material-symbols-outlined text-base">link</span>
             LinkedIn
           </a>
           <a href={SITE.social.facebook} target="_blank" rel="noopener noreferrer"
              class="flex items-center gap-2 border border-outline-variant px-md py-sm text-label-sm text-on-surface-variant hover:border-neon/40 hover:text-neon transition-all uppercase tracking-widest">
-            <span class="material-symbols-outlined text-base">group</span>
+            <span aria-hidden="true" class="material-symbols-outlined text-base">group</span>
             Facebook
           </a>
         </div>
@@ -164,7 +164,7 @@ const KontaktContent = null
             type="submit"
             class="w-full flex items-center justify-center gap-2 bg-neon text-on-primary font-bold text-label-md uppercase tracking-widest py-md hover:brightness-110 active:scale-95 transition-all shadow-neon-sm"
           >
-            <span class="material-symbols-outlined text-sm">send</span>
+            <span aria-hidden="true" class="material-symbols-outlined text-sm">send</span>
             Wyślij wiadomość
           </button>
 

@@ -43,7 +43,7 @@ const platforms = [
         <div class="flex flex-wrap gap-md">
           <a href="/kontakt"
              class="inline-flex items-center gap-2 bg-neon text-on-primary font-bold text-label-md uppercase tracking-widest px-lg py-md hover:brightness-110 active:scale-95 transition-all shadow-neon-sm">
-            <span class="material-symbols-outlined text-sm">calendar_month</span>
+            <span aria-hidden="true" class="material-symbols-outlined text-sm">calendar_month</span>
             Umów konsultację
           </a>
           <a href="/uslugi/audyt-seo"
@@ -84,7 +84,7 @@ const platforms = [
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
         {items.map(item => (
           <div class="bento-card p-lg group hover:border-neon/40 transition-all">
-            <span class="material-symbols-outlined text-neon text-3xl mb-md">{item.icon}</span>
+            <span aria-hidden="true" class="material-symbols-outlined text-neon text-3xl mb-md">{item.icon}</span>
             <h3 class="text-headline-md text-on-surface mb-sm">{item.title}</h3>
             <p class="text-body-md text-on-surface-variant">{item.desc}</p>
           </div>
@@ -100,7 +100,7 @@ const platforms = [
     <div class="grid grid-cols-2 md:grid-cols-4 gap-gutter mb-xl">
       {platforms.map(platform => (
         <div class="bento-card p-lg text-center hover:border-neon/40 transition-all">
-          <span class="material-symbols-outlined text-neon text-3xl mb-sm">storefront</span>
+          <span aria-hidden="true" class="material-symbols-outlined text-neon text-3xl mb-sm">storefront</span>
           <p class="text-label-md text-on-surface uppercase tracking-widest">{platform}</p>
         </div>
       ))}
@@ -117,7 +117,7 @@ const platforms = [
         </h2>
         <a href="/kontakt"
            class="inline-flex items-center gap-2 bg-neon text-on-primary font-bold text-label-md uppercase tracking-widest px-xl py-md hover:brightness-110 active:scale-95 transition-all shadow-neon mt-md">
-          <span class="material-symbols-outlined text-sm">troubleshoot</span>
+          <span aria-hidden="true" class="material-symbols-outlined text-sm">troubleshoot</span>
           Zamów bezpłatny audyt sklepu
         </a>
       </div>

@@ -43,7 +43,7 @@ const stack = [
         <div class="flex flex-wrap gap-md">
           <a href="/kontakt"
              class="inline-flex items-center gap-2 bg-neon text-on-primary font-bold text-label-md uppercase tracking-widest px-lg py-md hover:brightness-110 active:scale-95 transition-all shadow-neon-sm">
-            <span class="material-symbols-outlined text-sm">calendar_month</span>
+            <span aria-hidden="true" class="material-symbols-outlined text-sm">calendar_month</span>
             Omówmy projekt
           </a>
         </div>
@@ -69,7 +69,7 @@ const stack = [
           ))}
         </div>
         <div class="mt-md pt-md border-t border-outline-variant/30 flex items-center gap-2">
-          <span class="material-symbols-outlined text-neon text-sm">verified</span>
+          <span aria-hidden="true" class="material-symbols-outlined text-neon text-sm">verified</span>
           <span class="text-label-sm text-on-surface-variant">Lighthouse Score: <strong class="text-neon">98 / 100</strong></span>
         </div>
       </div>
@@ -87,7 +87,7 @@ const stack = [
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
         {items.map(item => (
           <div class="bento-card p-lg group hover:border-neon/40 transition-all">
-            <span class="material-symbols-outlined text-neon text-3xl mb-md">{item.icon}</span>
+            <span aria-hidden="true" class="material-symbols-outlined text-neon text-3xl mb-md">{item.icon}</span>
             <h3 class="text-headline-md text-on-surface mb-sm">{item.title}</h3>
             <p class="text-body-md text-on-surface-variant">{item.desc}</p>
           </div>
@@ -103,7 +103,7 @@ const stack = [
     <div class="grid grid-cols-2 md:grid-cols-4 gap-gutter mb-xl">
       {stack.map(t => (
         <div class="bento-card p-lg flex flex-col items-center text-center hover:border-neon/40 transition-all">
-          <span class="material-symbols-outlined text-neon text-3xl mb-sm">{t.icon}</span>
+          <span aria-hidden="true" class="material-symbols-outlined text-neon text-3xl mb-sm">{t.icon}</span>
           <p class="text-label-md text-on-surface uppercase tracking-widest">{t.label}</p>
         </div>
       ))}
@@ -120,7 +120,7 @@ const stack = [
         </h2>
         <a href="/kontakt"
            class="inline-flex items-center gap-2 bg-neon text-on-primary font-bold text-label-md uppercase tracking-widest px-xl py-md hover:brightness-110 active:scale-95 transition-all shadow-neon mt-md">
-          <span class="material-symbols-outlined text-sm">calendar_month</span>
+          <span aria-hidden="true" class="material-symbols-outlined text-sm">calendar_month</span>
           Omówmy Twój projekt
         </a>
       </div>

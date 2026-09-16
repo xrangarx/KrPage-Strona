@@ -41,7 +41,7 @@ const problems = [
           <a href="#zakres"
              class="inline-flex items-center gap-2 border border-neon/30 text-neon font-bold text-label-md uppercase tracking-widest px-lg py-md hover:bg-neon/5 transition-all">
             Zobacz zakres
-            <span class="material-symbols-outlined text-sm">arrow_downward</span>
+            <span aria-hidden="true" class="material-symbols-outlined text-sm">arrow_downward</span>
           </a>
         </div>
       </div>
@@ -51,7 +51,7 @@ const problems = [
         <div class="bento-card p-lg relative">
           <div class="flex justify-between items-center mb-lg">
             <span class="text-label-md text-neon uppercase tracking-widest">Live Signal: Scan in Progress</span>
-            <span class="material-symbols-outlined text-neon animate-spin text-sm">refresh</span>
+            <span aria-hidden="true" class="material-symbols-outlined text-neon animate-spin text-sm">refresh</span>
           </div>
           <div class="h-1.5 bg-surface-container-highest overflow-hidden mb-lg">
             <div class="h-full bg-neon w-3/4 shadow-neon-sm"></div>
@@ -96,7 +96,7 @@ const problems = [
       <div class="md:col-span-8 bento-card p-lg relative overflow-hidden">
         <div class="relative z-10 flex flex-col md:flex-row gap-lg">
           <div class="md:w-1/2">
-            <span class="material-symbols-outlined text-neon text-4xl mb-md">settings_ethernet</span>
+            <span aria-hidden="true" class="material-symbols-outlined text-neon text-4xl mb-md">settings_ethernet</span>
             <h3 class="text-headline-md text-on-surface mb-sm">{d.block_tech_title ?? 'Technical Analysis'}</h3>
             <p class="text-body-md text-on-surface-variant mb-md">
               {d.block_tech_desc ?? 'Dogłębna weryfikacja kodu, architektury serwera i parametrów Core Web Vitals. Eliminujemy błędy indeksowania, których nie widzi Twoja konkurencja.'}
@@ -123,7 +123,7 @@ const problems = [
 
       <div class="md:col-span-4 bento-card p-lg flex flex-col justify-between group hover:border-neon/40 transition-all">
         <div>
-          <span class="material-symbols-outlined text-neon text-4xl mb-md">key</span>
+          <span aria-hidden="true" class="material-symbols-outlined text-neon text-4xl mb-md">key</span>
           <h3 class="text-headline-md text-on-surface mb-sm">{d.block_keyword_title ?? 'Keyword Research'}</h3>
         </div>
         <p class="text-body-md text-on-surface-variant">
@@ -133,7 +133,7 @@ const problems = [
 
       <div class="md:col-span-5 bento-card p-lg flex flex-col justify-between group hover:border-neon/40 transition-all">
         <div>
-          <span class="material-symbols-outlined text-neon text-4xl mb-md">psychology_alt</span>
+          <span aria-hidden="true" class="material-symbols-outlined text-neon text-4xl mb-md">psychology_alt</span>
           <h3 class="text-headline-md text-on-surface mb-sm">{d.block_ux_title ?? 'UX / SEO Hybrid'}</h3>
         </div>
         <p class="text-body-md text-on-surface-variant">
@@ -143,7 +143,7 @@ const problems = [
 
       <div class="md:col-span-7 bento-card p-lg relative overflow-hidden">
         <div class="absolute right-0 bottom-0 text-neon/5">
-          <span class="material-symbols-outlined" style="font-size:180px">monitoring</span>
+          <span aria-hidden="true" class="material-symbols-outlined" style="font-size:180px">monitoring</span>
         </div>
         <div class="relative z-10">
           <h3 class="text-headline-md text-on-surface mb-sm">{d.block_intel_title ?? 'Competitive Intel'}</h3>
@@ -174,7 +174,7 @@ const problems = [
         <div class="space-y-md">
           {problems.map(p => (
             <div class="flex gap-md p-md bg-surface border-l-4 border-neon">
-              <span class="material-symbols-outlined text-neon">{p.icon}</span>
+              <span aria-hidden="true" class="material-symbols-outlined text-neon">{p.icon}</span>
               <div>
                 <h4 class="text-on-surface text-headline-md mb-1">{p.title}</h4>
                 <p class="text-on-surface-variant text-body-md">{p.desc}</p>
@@ -200,7 +200,7 @@ const problems = [
           </p>
           <a href="/kontakt"
              class="flex items-center justify-center gap-2 w-full bg-neon text-on-primary font-bold text-label-md uppercase tracking-widest py-md hover:brightness-110 transition-all active:scale-95 shadow-neon-sm">
-            <span class="material-symbols-outlined text-sm">troubleshoot</span>
+            <span aria-hidden="true" class="material-symbols-outlined text-sm">troubleshoot</span>
             Rozpocznij analizę
           </a>
           <p class="text-label-sm text-center text-on-surface-variant/50 uppercase">Pierwsza analiza jest bezpłatna</p>

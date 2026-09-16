@@ -91,7 +91,7 @@ const serviceGroups = [
                 <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-neon to-transparent"></div>
               )}
               <div class="absolute top-0 right-0 p-4 text-neon/10 group-hover:text-neon/20 transition-colors">
-                <span class="material-symbols-outlined text-6xl">{s.icon}</span>
+                <span aria-hidden="true" class="material-symbols-outlined text-6xl">{s.icon}</span>
               </div>
               <div class="relative z-10 flex flex-col flex-1">
                 <h2 class="text-headline-md text-on-surface mb-sm">{s.title}</h2>
@@ -104,7 +104,7 @@ const serviceGroups = [
                 <a href={s.href}
                    class="inline-flex items-center gap-2 text-neon text-label-md uppercase tracking-widest group-hover:gap-4 transition-all self-start">
                   Szczegóły
-                  <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                  <span aria-hidden="true" class="material-symbols-outlined text-sm">arrow_forward</span>
                 </a>
               </div>
             </div>
@@ -130,7 +130,7 @@ const serviceGroups = [
             <div class:list={['bento-card p-lg border-t-2', i === 0 ? 'border-neon' : 'border-outline-variant']}>
               <div class="flex items-start justify-between mb-md">
                 <span class="text-headline-lg font-black text-neon/30">{step.n}</span>
-                <span class="material-symbols-outlined text-neon">{step.icon}</span>
+                <span aria-hidden="true" class="material-symbols-outlined text-neon">{step.icon}</span>
               </div>
               <h3 class="text-headline-md text-on-surface mb-sm">{step.title}</h3>
               <p class="text-body-md text-on-surface-variant">{step.desc}</p>
@@ -157,7 +157,7 @@ const serviceGroups = [
         </p>
         <a href="/kontakt"
            class="inline-flex items-center gap-2 bg-neon text-on-primary font-bold text-label-md uppercase tracking-widest px-xl py-md hover:brightness-110 active:scale-95 transition-all shadow-neon">
-          <span class="material-symbols-outlined text-sm">troubleshoot</span>
+          <span aria-hidden="true" class="material-symbols-outlined text-sm">troubleshoot</span>
           Zamów bezpłatny audyt
         </a>
       </div>

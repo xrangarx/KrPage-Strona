@@ -47,7 +47,7 @@ const latestPosts = allPosts
                    px-lg py-md
                    hover:brightness-125 hover:shadow-neon active:scale-95 transition-all shadow-neon-sm"
           >
-            <span class="material-symbols-outlined text-sm">troubleshoot</span>
+            <span aria-hidden="true" class="material-symbols-outlined text-sm">troubleshoot</span>
             Zamów bezpłatny audyt
           </a>
           <a
@@ -58,7 +58,7 @@ const latestPosts = allPosts
                    hover:bg-neon/10 hover:border-neon/60 transition-all"
           >
             Zobacz usługi
-            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            <span aria-hidden="true" class="material-symbols-outlined text-sm">arrow_forward</span>
           </a>
         </div>
       </div>
@@ -124,7 +124,7 @@ const latestPosts = allPosts
       ].map(stat => (
         <div class="bento-card p-lg flex flex-col justify-between group hover:border-neon/40 transition-all">
           <div class="flex justify-between items-start mb-lg">
-            <span class="material-symbols-outlined text-neon">{stat.icon}</span>
+            <span aria-hidden="true" class="material-symbols-outlined text-neon">{stat.icon}</span>
             <div class="flex items-end gap-px h-5">
               <div class="w-1 bg-neon/20 h-1/3"></div>
               <div class="w-1 bg-neon/40 h-1/2"></div>
@@ -179,7 +179,7 @@ const latestPosts = allPosts
       ].map(s => (
         <div class="bento-card p-lg relative overflow-hidden group flex flex-col hover:border-neon/40 hover:shadow-[0_0_24px_rgb(var(--tw-accent)_/_0.08)] transition-all duration-300">
           <div class="absolute top-0 right-0 p-4 text-neon/10 group-hover:text-neon/25 transition-colors">
-            <span class="material-symbols-outlined text-6xl">{s.icon}</span>
+            <span aria-hidden="true" class="material-symbols-outlined text-6xl">{s.icon}</span>
           </div>
           <div class="relative z-10 flex flex-col flex-1">
             <h3 class="text-headline-md text-on-surface mb-sm">{s.title}</h3>
@@ -195,7 +195,7 @@ const latestPosts = allPosts
                class="inline-flex items-center gap-2 text-neon text-label-md uppercase tracking-widest
                       border-b border-neon/30 pb-0.5 hover:border-neon hover:gap-4 transition-all self-start">
               Dowiedz się więcej
-              <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              <span aria-hidden="true" class="material-symbols-outlined text-sm">arrow_forward</span>
             </a>
           </div>
         </div>
@@ -238,7 +238,7 @@ const latestPosts = allPosts
             ].map(item => (
               <div class="flex gap-md">
                 <div class="w-10 h-10 shrink-0 bg-neon/10 border border-neon/20 flex items-center justify-center">
-                  <span class="material-symbols-outlined text-neon text-base">{item.icon}</span>
+                  <span aria-hidden="true" class="material-symbols-outlined text-neon text-base">{item.icon}</span>
                 </div>
                 <div>
                   <h4 class="text-label-md uppercase text-neon mb-1">{item.title}</h4>
@@ -324,7 +324,7 @@ const latestPosts = allPosts
       <a href="/blog"
          class="hidden sm:inline-flex items-center gap-2 border border-neon/30 text-neon text-label-sm uppercase tracking-widest px-md py-sm hover:bg-neon/10 hover:border-neon/60 transition-all">
         Wszystkie wpisy
-        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+        <span aria-hidden="true" class="material-symbols-outlined text-sm">arrow_forward</span>
       </a>
     </div>
 
@@ -352,7 +352,7 @@ const latestPosts = allPosts
               <a href={`/blog/${post.id}`}
                  class="inline-flex items-center gap-1 text-neon text-label-sm uppercase tracking-widest hover:gap-3 transition-all">
                 Czytaj
-                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                <span aria-hidden="true" class="material-symbols-outlined text-sm">arrow_forward</span>
               </a>
             </div>
           </div>
@@ -364,7 +364,7 @@ const latestPosts = allPosts
       <a href="/blog"
          class="inline-flex items-center gap-2 border border-neon/30 text-neon text-label-sm uppercase tracking-widest px-md py-sm hover:bg-neon/10 transition-all">
         Wszystkie wpisy
-        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+        <span aria-hidden="true" class="material-symbols-outlined text-sm">arrow_forward</span>
       </a>
     </div>
   </section>
@@ -394,7 +394,7 @@ const latestPosts = allPosts
                    bg-neon text-on-primary font-bold text-label-md uppercase tracking-widest
                    px-xl py-md hover:brightness-125 hover:shadow-neon active:scale-95 transition-all shadow-neon-sm"
           >
-            <span class="material-symbols-outlined text-sm">calendar_month</span>
+            <span aria-hidden="true" class="material-symbols-outlined text-sm">calendar_month</span>
             Umów bezpłatny audyt
           </a>
           <a

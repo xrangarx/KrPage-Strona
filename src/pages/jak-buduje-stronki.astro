@@ -138,7 +138,7 @@ const costs = [
       <!-- WordPress -->
       <div class="bento-card p-lg border-surface-container-high">
         <div class="flex items-center gap-3 mb-md">
-          <span class="material-symbols-outlined text-on-surface-variant" style="font-size:20px">dangerous</span>
+          <span aria-hidden="true" class="material-symbols-outlined text-on-surface-variant" style="font-size:20px">dangerous</span>
           <h3 class="text-label-lg text-on-surface-variant uppercase tracking-wider">WordPress — stare podejście</h3>
         </div>
         <ul class="space-y-3">
@@ -150,7 +150,7 @@ const costs = [
             'Strona zainfekowana na subdomenie testowej = infekcja całej domeny',
           ].map(item => (
             <li class="flex gap-3 text-body-sm text-on-surface-variant">
-              <span class="material-symbols-outlined flex-shrink-0" style="font-size:16px;color:rgba(255,77,109,0.7);margin-top:2px">close</span>
+              <span aria-hidden="true" class="material-symbols-outlined flex-shrink-0" style="font-size:16px;color:rgba(255,77,109,0.7);margin-top:2px">close</span>
               {item}
             </li>
           ))}
@@ -160,7 +160,7 @@ const costs = [
       <!-- JAMstack -->
       <div class="bento-card p-lg border-neon/20" style="background:rgb(var(--tw-accent) / 0.04)">
         <div class="flex items-center gap-3 mb-md">
-          <span class="material-symbols-outlined text-neon" style="font-size:20px">verified</span>
+          <span aria-hidden="true" class="material-symbols-outlined text-neon" style="font-size:20px">verified</span>
           <h3 class="text-label-lg text-neon uppercase tracking-wider">JAMstack — nowoczesne podejście</h3>
         </div>
         <ul class="space-y-3">
@@ -172,7 +172,7 @@ const costs = [
             'Każda zmiana to commit w Git — pełna historia, łatwy rollback',
           ].map(item => (
             <li class="flex gap-3 text-body-sm text-on-surface-variant">
-              <span class="material-symbols-outlined flex-shrink-0 text-neon" style="font-size:16px;margin-top:2px">check</span>
+              <span aria-hidden="true" class="material-symbols-outlined flex-shrink-0 text-neon" style="font-size:16px;margin-top:2px">check</span>
               {item}
             </li>
           ))}
@@ -193,7 +193,7 @@ const costs = [
         <div class="bento-card p-lg hover:border-neon/30 transition-colors">
           <div class="flex items-center gap-3 mb-md">
             <div class="w-9 h-9 bg-neon/10 border border-neon/30 flex items-center justify-center flex-shrink-0">
-              <span class="material-symbols-outlined text-neon" style="font-size:18px">{tool.icon}</span>
+              <span aria-hidden="true" class="material-symbols-outlined text-neon" style="font-size:18px">{tool.icon}</span>
             </div>
             <div>
               <p class="text-label-sm text-on-surface-variant uppercase tracking-wider">{tool.role}</p>
@@ -253,7 +253,7 @@ const costs = [
       {benefits.map(b => (
         <div class="bento-card p-lg hover:border-neon/30 transition-colors">
           <div class="flex items-start gap-3">
-            <span class="material-symbols-outlined text-neon flex-shrink-0" style="font-size:20px;margin-top:1px">{b.icon}</span>
+            <span aria-hidden="true" class="material-symbols-outlined text-neon flex-shrink-0" style="font-size:20px;margin-top:1px">{b.icon}</span>
             <div>
               <h3 class="text-title-sm text-on-surface font-bold mb-2">{b.title}</h3>
               <p class="text-body-sm text-on-surface-variant">{b.desc}</p>
@@ -316,7 +316,7 @@ const costs = [
           Odzywam się w ciągu 24 godzin. Bezpłatna konsultacja wstępna, analiza potrzeb i wycena projektu.
         </p>
         <a href="/kontakt" class="btn-neon inline-flex items-center gap-2">
-          <span class="material-symbols-outlined" style="font-size:16px">send</span>
+          <span aria-hidden="true" class="material-symbols-outlined" style="font-size:16px">send</span>
           Napisz do mnie
         </a>
       </div>

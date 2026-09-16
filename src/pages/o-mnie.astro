@@ -90,7 +90,7 @@ const tools = [
         ].map((s, i) => (
           <div class="bento-card p-md relative overflow-hidden hover:border-neon/40 transition-all">
             <div class="absolute top-2 right-2 text-neon/15">
-              <span class="material-symbols-outlined text-3xl">{s.icon}</span>
+              <span aria-hidden="true" class="material-symbols-outlined text-3xl">{s.icon}</span>
             </div>
             <p class="text-headline-lg text-neon mb-0">
               <span class="stat-counter" data-target={s.target} data-suffix={s.suffix}>0</span>{s.suffix}
@@ -174,7 +174,7 @@ const tools = [
               'w-12 h-12 mb-md flex items-center justify-center border transition-all',
               i === 0 ? 'bg-neon/10 border-neon/40' : 'bg-surface-container-highest border-white/5',
             ]}>
-              <span class="material-symbols-outlined text-neon">{tool.icon}</span>
+              <span aria-hidden="true" class="material-symbols-outlined text-neon">{tool.icon}</span>
             </div>
             <h3 class="text-headline-md text-on-surface mb-sm">{tool.name}</h3>
             <p class="text-label-sm text-on-surface-variant leading-relaxed">{tool.desc}</p>
@@ -235,7 +235,7 @@ const tools = [
                        px-2 py-1 hover:bg-neon/10 hover:border-neon transition-all"
                 data-job={i}
               >
-                <span class="material-symbols-outlined text-[10px]">open_in_new</span>
+                <span aria-hidden="true" class="material-symbols-outlined text-[10px]">open_in_new</span>
                 Szczegóły
               </button>
             </div>
@@ -279,7 +279,7 @@ const tools = [
                      px-3 py-1.5 hover:bg-neon/10 hover:border-neon transition-all"
               data-job={i}
             >
-              <span class="material-symbols-outlined text-sm">open_in_new</span>
+              <span aria-hidden="true" class="material-symbols-outlined text-sm">open_in_new</span>
               Szczegóły
             </button>
           </div>
@@ -317,7 +317,7 @@ const tools = [
                  text-on-surface-variant hover:border-neon/40 hover:text-neon transition-all shrink-0"
           aria-label="Zamknij"
         >
-          <span class="material-symbols-outlined text-base">close</span>
+          <span aria-hidden="true" class="material-symbols-outlined text-base">close</span>
         </button>
       </div>
       <div class="h-px bg-gradient-to-r from-neon via-neon/40 to-transparent"></div>
@@ -336,7 +336,7 @@ const tools = [
           id="modal-cta"
           class="inline-flex items-center gap-2 bg-neon text-on-primary font-bold text-label-sm uppercase tracking-widest px-md py-sm hover:brightness-125 transition-all shadow-neon-sm"
         >
-          <span class="material-symbols-outlined text-sm">calendar_month</span>
+          <span aria-hidden="true" class="material-symbols-outlined text-sm">calendar_month</span>
           Umów konsultację
         </a>
       </div>
@@ -348,7 +348,7 @@ const tools = [
     <div class="grid md:grid-cols-2 gap-lg items-center">
       <div class="order-2 md:order-1">
         <div class="bento-card p-xl border-l-4 border-neon">
-          <span class="material-symbols-outlined text-neon text-4xl mb-md">radar</span>
+          <span aria-hidden="true" class="material-symbols-outlined text-neon text-4xl mb-md">radar</span>
           <h2 class="text-headline-xl text-on-surface mb-md">
             Misja:<br /><span class="text-neon">Precyzja Danych.</span>
           </h2>
@@ -362,7 +362,7 @@ const tools = [
               'Transparentność każdego działania',
             ].map(item => (
               <div class="flex items-center gap-md">
-                <span class="material-symbols-outlined text-neon text-sm">check_circle</span>
+                <span aria-hidden="true" class="material-symbols-outlined text-neon text-sm">check_circle</span>
                 <span class="text-label-md uppercase tracking-wider">{item}</span>
               </div>
             ))}
@@ -380,7 +380,7 @@ const tools = [
           <div class:list={['bento-card flex flex-col items-center justify-center hover:border-neon/40 transition-all', item.h]}>
             {item.value
               ? <p class="text-headline-lg text-neon">{item.value}</p>
-              : <span class="material-symbols-outlined text-neon text-4xl mb-2">{item.icon}</span>
+              : <span aria-hidden="true" class="material-symbols-outlined text-neon text-4xl mb-2">{item.icon}</span>
             }
             <p class="text-label-sm uppercase tracking-widest text-on-surface-variant">{item.label}</p>
           </div>
@@ -404,7 +404,7 @@ const tools = [
         <div class="flex flex-col sm:flex-row gap-md justify-center">
           <a href="/kontakt"
              class="inline-flex items-center justify-center gap-2 bg-neon text-on-primary font-bold text-label-md uppercase tracking-widest px-xl py-md hover:brightness-125 hover:shadow-neon active:scale-95 transition-all shadow-neon-sm">
-            <span class="material-symbols-outlined text-sm">calendar_month</span>
+            <span aria-hidden="true" class="material-symbols-outlined text-sm">calendar_month</span>
             Zacznij projekt
           </a>
           <a href="/uslugi"

@@ -45,7 +45,7 @@ const isUslugiActive = pathname === '/uslugi' || pathname.startsWith('/uslugi/')
 
     <!-- Logo -->
     <a href="/" class="flex items-center gap-2 group" aria-label={SITE.name}>
-      <span class="material-symbols-outlined text-neon text-xl leading-none">terminal</span>
+      <span aria-hidden="true" class="material-symbols-outlined text-neon text-xl leading-none">terminal</span>
       <span class="text-xl font-black tracking-tighter text-neon font-sans">
         KrPage
       </span>
@@ -81,7 +81,7 @@ const isUslugiActive = pathname === '/uslugi' || pathname.startsWith('/uslugi/')
           >
             Usługi
           </a>
-          <span class="material-symbols-outlined text-base leading-none transition-transform duration-200 group-hover/uslugi:rotate-180 text-on-surface-variant cursor-default select-none ml-0.5">
+          <span aria-hidden="true" class="material-symbols-outlined text-base leading-none transition-transform duration-200 group-hover/uslugi:rotate-180 text-on-surface-variant cursor-default select-none ml-0.5">
             expand_more
           </span>
         </div>
@@ -113,7 +113,7 @@ const isUslugiActive = pathname === '/uslugi' || pathname.startsWith('/uslugi/')
                           : 'text-on-surface-variant hover:text-neon hover:bg-neon/5',
                       ]}
                     >
-                      <span class="material-symbols-outlined text-sm text-neon/60 shrink-0">{link.icon}</span>
+                      <span aria-hidden="true" class="material-symbols-outlined text-sm text-neon/60 shrink-0">{link.icon}</span>
                       {link.label}
                     </a>
                   )
@@ -149,7 +149,7 @@ const isUslugiActive = pathname === '/uslugi' || pathname.startsWith('/uslugi/')
                hover:brightness-110 active:scale-95 transition-all duration-200
                shadow-neon-sm"
       >
-        <span class="material-symbols-outlined text-sm leading-none">troubleshoot</span>
+        <span aria-hidden="true" class="material-symbols-outlined text-sm leading-none">troubleshoot</span>
         Bezpłatny audyt
       </a>
 
@@ -161,7 +161,7 @@ const isUslugiActive = pathname === '/uslugi' || pathname.startsWith('/uslugi/')
         aria-expanded="false"
         aria-controls="mobile-menu"
       >
-        <span class="material-symbols-outlined text-2xl">menu</span>
+        <span aria-hidden="true" class="material-symbols-outlined text-2xl">menu</span>
       </button>
     </div>
 
@@ -243,7 +243,7 @@ const isUslugiActive = pathname === '/uslugi' || pathname.startsWith('/uslugi/')
                     isActive ? 'text-neon' : 'text-on-surface-variant hover:text-neon',
                   ]}
                 >
-                  <span class="material-symbols-outlined text-sm text-neon/50">{link.icon}</span>
+                  <span aria-hidden="true" class="material-symbols-outlined text-sm text-neon/50">{link.icon}</span>
                   {link.label}
                 </a>
               )
