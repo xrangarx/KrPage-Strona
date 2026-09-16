@@ -188,22 +188,12 @@
   }
 
   .btn-neon {
-    background-color: var(--colorBtnBg, #404dff);
-    color: var(--colorBtnText, #fff);
-    border-radius: var(--btnRadius, 0px);
-    font-size: var(--btnSize, 13px);
-    font-weight: var(--btnWeight, 700);
-    letter-spacing: var(--btnLetterSpacing, 0.04em);
     padding: 10px 24px;
     display: inline-flex;
     align-items: center;
     gap: 8px;
     text-transform: uppercase;
     transition: background-color 0.15s ease, color 0.15s ease;
-  }
-  .btn-neon:hover {
-    background-color: var(--colorBtnHoverBg, #5562ff);
-    color: var(--colorBtnHoverText, #fff);
   }
 }
 
@@ -253,7 +243,10 @@
 :root a:hover { color: var(--colorLinkHover, #6b76ff); }
 
 :root .site-btn,
-:root [class*="btn-primary"] {
+:root [class*="btn-primary"],
+:root .btn-neon,
+:root a.bg-neon,
+:root button.bg-neon {
   background-color: var(--colorBtnBg, #404dff);
   color: var(--colorBtnText, #fff);
   border-radius: var(--btnRadius, 0px);
@@ -262,7 +255,10 @@
   letter-spacing: var(--btnLetterSpacing, 0.04em);
 }
 :root .site-btn:hover,
-:root [class*="btn-primary"]:hover:not(:disabled) {
+:root [class*="btn-primary"]:hover:not(:disabled),
+:root .btn-neon:hover,
+:root a.bg-neon:hover,
+:root button.bg-neon:hover {
   background-color: var(--colorBtnHoverBg, #5562ff);
   color: var(--colorBtnHoverText, #fff);
 }
