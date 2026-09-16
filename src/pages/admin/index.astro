@@ -8,10 +8,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
   <title>Panel CMS</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/marked@9.1.6/marked.min.js"></script>
+  <script src="/js/marked.min.js" is:inline></script>
+  <style>
+    @font-face { font-family:'Manrope'; font-style:normal; font-weight:300 800; font-display:swap; src:url('/fonts/manrope-latin-ext.woff2') format('woff2'); unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+    @font-face { font-family:'Manrope'; font-style:normal; font-weight:300 800; font-display:swap; src:url('/fonts/manrope-latin.woff2') format('woff2'); unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+    @font-face { font-family:'Material Symbols Outlined'; font-style:normal; font-weight:100 700; font-display:block; src:url('/fonts/material-symbols-outlined.woff2') format('woff2'); }
+  </style>
   <style is:global>
     /* ── RESET ── */
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -494,6 +496,9 @@
       </button>
       <div class="sidebar-sep"></div>
       <div class="sidebar-section">Konfiguracja</div>
+      <button class="nav-item" data-view="layout">
+        <span class="material-symbols-outlined" style="font-size:16px">palette</span>Layout globalny
+      </button>
       <button class="nav-item" data-view="settings">
         <span class="material-symbols-outlined" style="font-size:16px">settings</span>Ustawienia
       </button>
@@ -613,6 +618,76 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- LAYOUT VIEW -->
+    <div class="view hidden" id="view-layout" style="padding:24px;overflow-y:auto;max-height:calc(100vh - 52px)">
+
+      <!-- Czcionka -->
+      <div style="margin-bottom:28px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
+          <span class="material-symbols-outlined" style="color:var(--accent)">text_fields</span>
+          <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">Czcionka globalna</span>
+        </div>
+        <div style="background:rgba(64,77,255,0.06);border:1px solid var(--accent30);padding:10px 14px;margin-bottom:16px;font-size:12px;color:var(--text2)">
+          <strong style="color:var(--accent)">Jak to działa:</strong> Wybrana czcionka jest ładowana lokalnie (bez Google Fonts CDN) i stosowana globalnie na całej stronie po następnym deploymencie.
+        </div>
+        <div id="font-picker" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px"></div>
+      </div>
+
+      <div style="height:1px;background:var(--border);margin-bottom:28px"></div>
+
+      <!-- Kolor akcentu -->
+      <div style="margin-bottom:28px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
+          <span class="material-symbols-outlined" style="color:var(--accent)">palette</span>
+          <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">Kolor akcentu</span>
+        </div>
+        <div style="margin-bottom:14px">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:8px">Predefiniowane kolory</div>
+          <div id="accent-swatches" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px"></div>
+        </div>
+        <div class="form-grid g2" style="margin-bottom:16px">
+          <div class="field">
+            <label class="field-label" for="lay-accent">Kolor akcentu (hex)</label>
+            <div style="display:flex;gap:8px;align-items:center">
+              <input type="color" id="lay-accent-picker" style="width:40px;height:38px;border:1px solid var(--border);background:var(--bg3);cursor:pointer;padding:2px" />
+              <input class="inp" id="lay-accent" placeholder="#404dff" style="flex:1" />
+            </div>
+            <p style="font-size:11px;color:var(--muted);margin-top:4px">Kolor przycisków, linków, podświetleń i ikon</p>
+          </div>
+          <div class="field">
+            <label class="field-label" for="lay-accent-dark">Kolor akcentu — jasny (hover/dark)</label>
+            <div style="display:flex;gap:8px;align-items:center">
+              <input type="color" id="lay-accent-dark-picker" style="width:40px;height:38px;border:1px solid var(--border);background:var(--bg3);cursor:pointer;padding:2px" />
+              <input class="inp" id="lay-accent-dark" placeholder="#6b76ff" style="flex:1" />
+            </div>
+            <p style="font-size:11px;color:var(--muted);margin-top:4px">Odcień dla jasnych powierzchni / hover stanów</p>
+          </div>
+        </div>
+        <!-- Live preview -->
+        <div id="accent-preview" style="background:var(--bg2);border:1px solid var(--border);padding:16px 20px;margin-bottom:16px">
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:12px">Podgląd akcentu</div>
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+            <button id="prev-btn-accent" style="display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border:none;cursor:pointer;font-size:13px;font-weight:700">
+              <span class="material-symbols-outlined" style="font-size:16px">rocket_launch</span>Opublikuj
+            </button>
+            <span id="prev-link-accent" style="font-size:13px;cursor:pointer;text-decoration:underline">Link z akcentem</span>
+            <span id="prev-border-accent" style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:2px 8px;border-width:1px;border-style:solid">badge</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="height:1px;background:var(--border);margin-bottom:28px"></div>
+
+      <!-- Save button -->
+      <div style="display:flex;align-items:center;gap:12px">
+        <button class="btn btn-primary" id="save-layout-btn" style="min-width:220px">
+          <span class="material-symbols-outlined" style="font-size:15px">rocket_launch</span>
+          <span id="save-layout-label">Zapisz layout → GitHub</span>
+        </button>
+        <span id="layout-status" style="font-size:12px;color:var(--muted)"></span>
       </div>
     </div>
 
@@ -1129,6 +1204,8 @@ function buildSidebarNav(){
   })
   // images nav
   qs('[data-view="images"]').addEventListener('click',switchToImages)
+  // layout nav
+  qs('[data-view="layout"]').addEventListener('click',switchToLayout)
   // settings nav
   qs('[data-view="settings"]').addEventListener('click',switchToSettings)
 }
@@ -1142,6 +1219,7 @@ function hideAllViews(){
   hide(qs('#view-editor'))
   hide(qs('#view-images'))
   hide(qs('#view-settings'))
+  hide(qs('#view-layout'))
   hide(qs('#back-btn'))
   hide(qs('#save-btn'))
   hide(qs('#new-btn'))
@@ -1657,6 +1735,141 @@ async function switchToImages(){
   await loadAltTexts()
   loadImages()
 }
+
+/* ══ LAYOUT ══ */
+var layoutSha = null
+
+var FONTS = [
+  { id:'Manrope',           label:'Manrope',           sample:'Aa — Ąą Ęę Óó' },
+  { id:'Inter',             label:'Inter',             sample:'Aa — Ąą Ęę Óó' },
+  { id:'Plus Jakarta Sans', label:'Plus Jakarta Sans',  sample:'Aa — Ąą Ęę Óó' },
+  { id:'Poppins',           label:'Poppins',           sample:'Aa — Ąą Ęę Óó' },
+]
+
+var ACCENT_PRESETS = [
+  { label:'Indygo',   color:'#404dff', dark:'#6b76ff' },
+  { label:'Zielony',  color:'#00c853', dark:'#1de982' },
+  { label:'Fiolet',   color:'#7c3aed', dark:'#a78bfa' },
+  { label:'Różowy',   color:'#e91e8c', dark:'#f472b6' },
+  { label:'Cyjan',    color:'#00bcd4', dark:'#67e8f9' },
+  { label:'Pomarańcz',color:'#ff6d00', dark:'#fb923c' },
+  { label:'Czerwony', color:'#ef4444', dark:'#f87171' },
+  { label:'Biały',    color:'#e2e8f0', dark:'#f8fafc' },
+]
+
+var currentFont = 'Manrope'
+var currentAccent = '#404dff'
+var currentAccentDark = '#6b76ff'
+
+function buildFontPicker(){
+  var el=qs('#font-picker'); el.innerHTML=''
+  FONTS.forEach(function(f){
+    var card=document.createElement('div')
+    card.id='fp-'+f.id.replace(/\s+/g,'-')
+    card.style.cssText='background:var(--bg2);border:2px solid var(--border);padding:14px 16px;cursor:pointer;transition:all .12s;display:flex;flex-direction:column;gap:4px'
+    card.innerHTML=
+      '<div style="font-size:16px;font-family:\''+f.id+'\',sans-serif;font-weight:700;color:var(--text)">'+f.label+'</div>'+
+      '<div style="font-size:13px;font-family:\''+f.id+'\',sans-serif;color:var(--muted)">'+f.sample+'</div>'+
+      '<div style="font-size:11px;font-family:\''+f.id+'\',sans-serif;color:var(--text2);margin-top:2px">Szybkie brązowe lisy i leniwi psy</div>'
+    card.addEventListener('click',function(){
+      currentFont=f.id
+      qsa('[id^="fp-"]').forEach(function(c){c.style.borderColor='var(--border)'})
+      card.style.borderColor='var(--accent)'
+    })
+    el.appendChild(card)
+  })
+}
+
+function buildAccentSwatches(){
+  var el=qs('#accent-swatches'); el.innerHTML=''
+  ACCENT_PRESETS.forEach(function(p){
+    var swatch=document.createElement('div')
+    swatch.title=p.label
+    swatch.style.cssText='width:32px;height:32px;background:'+p.color+';cursor:pointer;border:2px solid transparent;border-radius:50%;transition:transform .12s,border-color .12s'
+    swatch.addEventListener('mouseenter',function(){this.style.transform='scale(1.15)'})
+    swatch.addEventListener('mouseleave',function(){this.style.transform=''})
+    swatch.addEventListener('click',function(){
+      currentAccent=p.color; currentAccentDark=p.dark
+      qs('#lay-accent').value=p.color
+      qs('#lay-accent-dark').value=p.dark
+      qs('#lay-accent-picker').value=p.color
+      qs('#lay-accent-dark-picker').value=p.dark
+      updateAccentPreview()
+    })
+    el.appendChild(swatch)
+  })
+}
+
+function updateAccentPreview(){
+  var c=currentAccent
+  qs('#prev-btn-accent').style.cssText='display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border:none;cursor:pointer;font-size:13px;font-weight:700;background:'+c+';color:#fff;font-family:Manrope,sans-serif'
+  qs('#prev-link-accent').style.color=c
+  qs('#prev-border-accent').style.cssText='font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:2px 8px;border:1px solid '+c+';color:'+c
+}
+
+async function switchToLayout(){
+  currentView='layout'
+  setActiveNav('layout')
+  hideAllViews()
+  show(qs('#view-layout'))
+  qs('#toolbar-title').textContent='Layout globalny'
+
+  buildFontPicker()
+  buildAccentSwatches()
+
+  try{
+    var lf=await ghGet('src/data/layout.json')
+    layoutSha=lf.sha
+    var data=JSON.parse(lf.content)
+    currentFont=data.font||'Manrope'
+    currentAccent=data.accentColor||'#404dff'
+    currentAccentDark=data.accentColorDark||'#6b76ff'
+    qs('#lay-accent').value=currentAccent
+    qs('#lay-accent-dark').value=currentAccentDark
+    qs('#lay-accent-picker').value=currentAccent
+    qs('#lay-accent-dark-picker').value=currentAccentDark
+    // highlight active font
+    var cardId='fp-'+currentFont.replace(/\s+/g,'-')
+    var activeCard=qs('#'+cardId)
+    if(activeCard) activeCard.style.borderColor='var(--accent)'
+    updateAccentPreview()
+  } catch(e){ toast('Błąd ładowania layout.json: '+e.message,'err') }
+}
+
+// Color pickers sync
+document.addEventListener('DOMContentLoaded',function(){
+  function syncColor(pickerId, inputId, isSetter){
+    var picker=qs('#'+pickerId), input=qs('#'+inputId)
+    if(!picker||!input) return
+    picker.addEventListener('input',function(){
+      input.value=this.value
+      if(isSetter==='accent'){ currentAccent=this.value } else { currentAccentDark=this.value }
+      updateAccentPreview()
+    })
+    input.addEventListener('input',function(){
+      var v=this.value.trim()
+      if(/^#[0-9a-fA-F]{6}$/.test(v)){ picker.value=v }
+      if(isSetter==='accent'){ currentAccent=v } else { currentAccentDark=v }
+      updateAccentPreview()
+    })
+  }
+  syncColor('lay-accent-picker','lay-accent','accent')
+  syncColor('lay-accent-dark-picker','lay-accent-dark','dark')
+})
+
+qs('#save-layout-btn').addEventListener('click', async function(){
+  var btn=this, lbl=qs('#save-layout-label'), status=qs('#layout-status')
+  btn.disabled=true; lbl.textContent='Zapisuję…'; status.textContent=''
+  var data={ font:currentFont, accentColor:currentAccent, accentColorDark:currentAccentDark }
+  try{
+    var res=await ghPut('src/data/layout.json',JSON.stringify(data,null,2)+'\n',layoutSha,'update: layout.json')
+    if(!res.ok) throw new Error(await res.text())
+    var j=await res.json(); layoutSha=j.content.sha
+    toast('✓ layout.json zapisany — rebuild w toku','ok')
+    status.textContent='Zapisano ✓'
+  } catch(e){ toast('❌ '+e.message,'err'); status.textContent='Błąd!' }
+  btn.disabled=false; lbl.textContent='Zapisz layout → GitHub'
+})
 
 /* ══ SETTINGS ══ */
 var trackingSha = null
