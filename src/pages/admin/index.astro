@@ -633,8 +633,22 @@
       <button class="nav-item" data-view="layout">
         <span class="material-symbols-outlined" style="font-size:16px">palette</span>Layout globalny
       </button>
-      <button class="nav-item" data-view="settings">
-        <span class="material-symbols-outlined" style="font-size:16px">settings</span>Ustawienia
+      <button class="nav-item" data-view="forms">
+        <span class="material-symbols-outlined" style="font-size:16px">forward_to_inbox</span>Formularz kontaktowy
+      </button>
+      <div class="sidebar-sep"></div>
+      <div class="sidebar-section">SEO</div>
+      <button class="nav-item" data-view="seo">
+        <span class="material-symbols-outlined" style="font-size:16px">visibility</span>Indeksacja
+      </button>
+      <button class="nav-item" data-view="sitemap">
+        <span class="material-symbols-outlined" style="font-size:16px">account_tree</span>Sitemapa
+      </button>
+      <button class="nav-item" data-view="robots">
+        <span class="material-symbols-outlined" style="font-size:16px">robot_2</span>robots.txt
+      </button>
+      <button class="nav-item" data-view="tracking">
+        <span class="material-symbols-outlined" style="font-size:16px">travel_explore</span>Śledzenie i weryfikacja
       </button>
     </div>
     <div class="sidebar-foot">
@@ -915,15 +929,10 @@
     </div>
 
     <!-- SETTINGS VIEW -->
-    <div class="view hidden" id="view-settings" style="padding:24px;overflow-y:auto;max-height:calc(100vh - 52px)">
-
+    <!-- INDEKSACJA -->
+    <div class="view hidden" id="view-seo" style="padding:24px;overflow-y:auto;max-height:calc(100vh - 52px)">
       <!-- Indeksowanie -->
       <div style="margin-bottom:28px">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
-          <span class="material-symbols-outlined" style="color:var(--accent)">visibility</span>
-          <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">Indeksowanie w Google</span>
-        </div>
-
         <!-- Główny przełącznik -->
         <div id="idx-master-box" style="border:1px solid var(--border);padding:14px 16px;margin-bottom:14px">
           <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer">
@@ -969,15 +978,12 @@
           <span id="seo-status" style="font-size:12px;color:var(--muted)"></span>
         </div>
       </div>
+    </div>
 
-      <div style="height:1px;background:var(--border);margin-bottom:28px"></div>
-
+    <!-- ŚLEDZENIE I WERYFIKACJA -->
+    <div class="view hidden" id="view-tracking" style="padding:24px;overflow-y:auto;max-height:calc(100vh - 52px)">
       <!-- Tracking & Verification -->
       <div style="margin-bottom:28px">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
-          <span class="material-symbols-outlined" style="color:var(--accent)">travel_explore</span>
-          <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">Śledzenie &amp; Weryfikacja</span>
-        </div>
         <div style="background:rgba(64,77,255,0.06);border:1px solid var(--accent30);padding:10px 14px;margin-bottom:14px;font-size:12px;color:var(--text2)">
           <strong style="color:var(--accent)">Rekomendacja:</strong> Użyj GTM jako głównego kontenera — GA4, Clarity i inne tagi konfiguruj w GTM bez zmian kodu.
           Jeśli GTM wypełniony, bezpośrednie GA4 i Clarity są <strong>pomijane</strong>.
@@ -1015,15 +1021,12 @@
         </button>
         <span id="tracking-status" style="font-size:12px;color:var(--muted);margin-left:12px"></span>
       </div>
+    </div>
 
-      <div style="height:1px;background:var(--border);margin-bottom:28px"></div>
-
+    <!-- FORMULARZ KONTAKTOWY -->
+    <div class="view hidden" id="view-forms" style="padding:24px;overflow-y:auto;max-height:calc(100vh - 52px)">
       <!-- Formularz kontaktowy -->
       <div style="margin-bottom:28px">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
-          <span class="material-symbols-outlined" style="color:var(--accent)">forward_to_inbox</span>
-          <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">Formularz kontaktowy</span>
-        </div>
         <div style="background:rgba(64,77,255,0.06);border:1px solid var(--accent30);padding:10px 14px;margin-bottom:14px;font-size:12px;color:var(--text2)">
           <strong style="color:var(--accent)">FormSubmit</strong> nie wymaga zakładania konta — wpisz e-mail i zapisz.
           Przy <strong>pierwszej</strong> wysyłce dostaniesz link aktywacyjny na ten adres (trzeba kliknąć raz).
@@ -1104,17 +1107,19 @@
         </button>
         <span id="forms-status" style="font-size:12px;color:var(--muted);margin-left:12px"></span>
       </div>
+    </div>
 
-      <div style="height:1px;background:var(--border);margin-bottom:28px"></div>
-
+    <!-- ROBOTS.TXT -->
+    <div class="view hidden" id="view-robots" style="padding:24px;overflow-y:auto;max-height:calc(100vh - 52px)">
       <!-- Robots.txt editor -->
       <div style="margin-bottom:28px">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
-          <div style="display:flex;align-items:center;gap:8px">
-            <span class="material-symbols-outlined" style="color:var(--accent)">robot_2</span>
-            <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">robots.txt</span>
-          </div>
-          <a href="/robots.txt" target="_blank" class="btn btn-ghost btn-sm" style="font-size:11px;padding:5px 10px">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px">
+          <p style="font-size:12px;color:var(--muted)">
+            Sterujesz tym, co roboty wyszukiwarek mogą odwiedzać. Nie zastępuje
+            ustawień z zakładki <strong>Indeksacja</strong> — strona zablokowana tutaj
+            nie zostanie w ogóle odczytana.
+          </p>
+          <a href="/robots.txt" target="_blank" class="btn btn-ghost btn-sm" style="font-size:11px;padding:5px 10px;flex-shrink:0">
             <span class="material-symbols-outlined" style="font-size:13px">open_in_new</span>Otwórz
           </a>
         </div>
@@ -1129,15 +1134,12 @@
           <span id="robots-status" style="font-size:12px;color:var(--muted)"></span>
         </div>
       </div>
+    </div>
 
-      <div style="height:1px;background:var(--border);margin-bottom:28px"></div>
-
+    <!-- SITEMAPA -->
+    <div class="view hidden" id="view-sitemap" style="padding:24px;overflow-y:auto;max-height:calc(100vh - 52px)">
       <!-- Sitemap info -->
       <div>
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
-          <span class="material-symbols-outlined" style="color:var(--accent)">account_tree</span>
-          <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">Sitemap XML</span>
-        </div>
         <div style="background:var(--bg2);border:1px solid var(--border);padding:16px 20px;margin-bottom:14px">
           <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
             <div>
@@ -1163,7 +1165,6 @@
           <code style="font-size:12px;color:var(--accent)">Sitemap: https://krpage.pl/sitemap.xml</code>
         </div>
       </div>
-
     </div>
 
     <!-- IMAGES VIEW -->
@@ -1624,12 +1625,13 @@ function buildSidebarNav(){
     btn.addEventListener('click',function(){switchToList(col)})
     nav.appendChild(btn)
   })
-  // images nav
-  qs('[data-view="images"]').addEventListener('click',switchToImages)
-  // layout nav
-  qs('[data-view="layout"]').addEventListener('click',switchToLayout)
-  // settings nav
-  qs('[data-view="settings"]').addEventListener('click',switchToSettings)
+  qs('[data-view="images"]')  .addEventListener('click',switchToImages)
+  qs('[data-view="layout"]')  .addEventListener('click',switchToLayout)
+  qs('[data-view="forms"]')   .addEventListener('click',switchToForms)
+  qs('[data-view="seo"]')     .addEventListener('click',switchToSeo)
+  qs('[data-view="sitemap"]') .addEventListener('click',switchToSitemap)
+  qs('[data-view="robots"]')  .addEventListener('click',switchToRobots)
+  qs('[data-view="tracking"]').addEventListener('click',switchToTracking)
 }
 function setActiveNav(id){
   qsa('.nav-item').forEach(function(b){ b.classList.toggle('active', b.dataset.colId===id||b.dataset.view===id) })
@@ -1640,8 +1642,12 @@ function hideAllViews(){
   hide(qs('#view-list'))
   hide(qs('#view-editor'))
   hide(qs('#view-images'))
-  hide(qs('#view-settings'))
   hide(qs('#view-layout'))
+  hide(qs('#view-seo'))
+  hide(qs('#view-tracking'))
+  hide(qs('#view-forms'))
+  hide(qs('#view-robots'))
+  hide(qs('#view-sitemap'))
   hide(qs('#back-btn'))
   hide(qs('#save-btn'))
   hide(qs('#new-btn'))
@@ -2535,26 +2541,20 @@ function syncFormProviderFields(){
   })
 }
 
-async function switchToSettings(){
-  currentView='settings'
-  setActiveNav('settings')
+/* ══ WIDOKI KONFIGURACJI ══
+   Każda sekcja to osobny widok i ładuje wyłącznie swój plik — wejście
+   w „robots.txt" nie odpytuje już GitHuba o cztery inne pliki. */
+
+function openConfigView(id, title){
+  currentView=id
+  setActiveNav(id)
   hideAllViews()
-  show(qs('#view-settings'))
-  qs('#toolbar-title').textContent='Ustawienia'
+  show(qs('#view-'+id))
+  qs('#toolbar-title').textContent=title
+}
 
-  // Load tracking.json
-  try{
-    var tr=await ghGet('src/data/tracking.json')
-    trackingSha=tr.sha
-    var data=JSON.parse(tr.content)
-    qs('#set-gtm').value    = data.gtm     || ''
-    qs('#set-gsc').value    = data.gsc     || ''
-    qs('#set-bing').value   = data.bing    || ''
-    qs('#set-ga').value     = data.ga      || ''
-    qs('#set-clarity').value= data.clarity || ''
-  } catch(e){ toast('Błąd ładowania tracking.json: '+e.message,'err') }
-
-  // Load seo.json + odkryj podstrony
+async function switchToSeo(){
+  openConfigView('seo','Indeksacja')
   try{
     var sf=await ghGet('src/data/seo.json')
     seoSha=sf.sha
@@ -2574,8 +2574,24 @@ async function switchToSettings(){
   } catch(e){
     qs('#idx-pages').innerHTML='<p style="padding:14px 16px;font-size:12px;color:var(--err)">Nie udało się wczytać listy podstron: '+esc(e.message)+'</p>'
   }
+}
 
-  // Load forms.json
+async function switchToTracking(){
+  openConfigView('tracking','Śledzenie i weryfikacja')
+  try{
+    var tr=await ghGet('src/data/tracking.json')
+    trackingSha=tr.sha
+    var data=JSON.parse(tr.content)
+    qs('#set-gtm').value    = data.gtm     || ''
+    qs('#set-gsc').value    = data.gsc     || ''
+    qs('#set-bing').value   = data.bing    || ''
+    qs('#set-ga').value     = data.ga      || ''
+    qs('#set-clarity').value= data.clarity || ''
+  } catch(e){ toast('Błąd ładowania tracking.json: '+e.message,'err') }
+}
+
+async function switchToForms(){
+  openConfigView('forms','Formularz kontaktowy')
   try{
     var fr=await ghGet('src/data/forms.json')
     formsSha=fr.sha
@@ -2595,15 +2611,19 @@ async function switchToSettings(){
     qs('#frm-consent-txt').value = fd.consentText     || ''
     syncFormProviderFields()
   } catch(e){ toast('Błąd ładowania forms.json: '+e.message,'err') }
+}
 
-  // Load robots.txt
+async function switchToRobots(){
+  openConfigView('robots','robots.txt')
   try{
     var rb=await ghGet('public/robots.txt')
     robotsSha=rb.sha
     qs('#robots-editor').value=rb.content
   } catch(e){ toast('Błąd ładowania robots.txt: '+e.message,'err') }
+}
 
-  // Sitemap link = siteUrl/sitemap.xml
+function switchToSitemap(){
+  openConfigView('sitemap','Sitemapa')
   qs('#sitemap-link').href = CONFIG.siteUrl+'/sitemap.xml'
 }
 
