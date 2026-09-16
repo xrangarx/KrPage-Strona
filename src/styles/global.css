@@ -191,10 +191,10 @@
   display: flex;
 }
 
-/* ── LAYOUT CUSTOMIZER (CSS vars injected by BaseLayout from layout.json) ─── */
-/* Unlayered = wins over @layer base (Tailwind) without !important             */
+/* ── LAYOUT CUSTOMIZER ─────────────────────────────────────────────────────── */
+/* :root prefix lifts specificity to (0,1,1) — beats any single Tailwind class */
 
-body {
+:root body {
   font-family: var(--bodyFont, 'Manrope'), system-ui, sans-serif;
   font-size: var(--bodySize, 16px);
   font-weight: var(--bodyWeight, 400);
@@ -204,29 +204,29 @@ body {
   background-color: var(--colorBg, #06070f);
 }
 
-h1, h2, h3, h4, h5, h6 {
+:root h1, :root h2, :root h3, :root h4, :root h5, :root h6 {
   font-family: var(--headingFont, 'Manrope'), system-ui, sans-serif;
   color: var(--colorHeadings, #fff);
 }
-h1 { font-size: var(--h1Size, 64px); font-weight: var(--h1Weight, 800); line-height: var(--h1LineHeight, 1.05); letter-spacing: var(--h1LetterSpacing, -0.02em); }
-h2 { font-size: var(--h2Size, 48px); font-weight: var(--h2Weight, 800); line-height: var(--h2LineHeight, 1.1);  letter-spacing: var(--h2LetterSpacing, -0.02em); }
-h3 { font-size: var(--h3Size, 32px); font-weight: var(--h3Weight, 700); line-height: var(--h3LineHeight, 1.2);  letter-spacing: var(--h3LetterSpacing, -0.01em); }
-h4 { font-size: var(--h4Size, 24px); font-weight: var(--h4Weight, 600); line-height: var(--h4LineHeight, 1.3);  letter-spacing: var(--h4LetterSpacing, 0em); }
-h5 { font-size: var(--h5Size, 20px); font-weight: var(--h5Weight, 600); line-height: var(--h5LineHeight, 1.4);  letter-spacing: var(--h5LetterSpacing, 0em); }
-h6 { font-size: var(--h6Size, 18px); font-weight: var(--h6Weight, 600); line-height: var(--h6LineHeight, 1.4);  letter-spacing: var(--h6LetterSpacing, 0em); }
+:root h1 { font-size: var(--h1Size, 64px); font-weight: var(--h1Weight, 800); line-height: var(--h1LineHeight, 1.05); letter-spacing: var(--h1LetterSpacing, -0.02em); }
+:root h2 { font-size: var(--h2Size, 48px); font-weight: var(--h2Weight, 800); line-height: var(--h2LineHeight, 1.1);  letter-spacing: var(--h2LetterSpacing, -0.02em); }
+:root h3 { font-size: var(--h3Size, 32px); font-weight: var(--h3Weight, 700); line-height: var(--h3LineHeight, 1.2);  letter-spacing: var(--h3LetterSpacing, -0.01em); }
+:root h4 { font-size: var(--h4Size, 24px); font-weight: var(--h4Weight, 600); line-height: var(--h4LineHeight, 1.3);  letter-spacing: var(--h4LetterSpacing, 0em); }
+:root h5 { font-size: var(--h5Size, 20px); font-weight: var(--h5Weight, 600); line-height: var(--h5LineHeight, 1.4);  letter-spacing: var(--h5LetterSpacing, 0em); }
+:root h6 { font-size: var(--h6Size, 18px); font-weight: var(--h6Weight, 600); line-height: var(--h6LineHeight, 1.4);  letter-spacing: var(--h6LetterSpacing, 0em); }
 
-blockquote {
+:root blockquote {
   font-size: var(--quoteSize, 18px);
   font-weight: var(--quoteWeight, 400);
   font-style: var(--quoteStyle, italic);
   line-height: var(--quoteLineHeight, 1.6);
 }
 
-a { color: var(--colorLink, #404dff); }
-a:hover { color: var(--colorLinkHover, #6b76ff); }
+:root a { color: var(--colorLink, #404dff); }
+:root a:hover { color: var(--colorLinkHover, #6b76ff); }
 
-.site-btn,
-[class*="btn-primary"] {
+:root .site-btn,
+:root [class*="btn-primary"] {
   background-color: var(--colorBtnBg, #404dff);
   color: var(--colorBtnText, #fff);
   border-radius: var(--btnRadius, 0px);
@@ -234,8 +234,8 @@ a:hover { color: var(--colorLinkHover, #6b76ff); }
   font-weight: var(--btnWeight, 700);
   letter-spacing: var(--btnLetterSpacing, 0.04em);
 }
-.site-btn:hover,
-[class*="btn-primary"]:hover:not(:disabled) {
+:root .site-btn:hover,
+:root [class*="btn-primary"]:hover:not(:disabled) {
   background-color: var(--colorBtnHoverBg, #5562ff);
   color: var(--colorBtnHoverText, #fff);
 }
