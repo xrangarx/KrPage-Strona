@@ -7,7 +7,21 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Cyber Blue palette
+        // ── Dynamic (CSS variables from layout.json via BaseLayout) ──
+        'neon':                     'rgb(var(--tw-accent) / <alpha-value>)',
+        'on-surface':               'rgb(var(--tw-text) / <alpha-value>)',
+        'on-background':            'rgb(var(--tw-text) / <alpha-value>)',
+        'background':               'rgb(var(--tw-bg) / <alpha-value>)',
+        'surface':                  'rgb(var(--tw-surface) / <alpha-value>)',
+        'surface-dim':              'rgb(var(--tw-surface) / <alpha-value>)',
+        'surface-container-lowest': 'rgb(var(--tw-bg) / <alpha-value>)',
+        'surface-container-low':    'rgb(var(--tw-surface) / <alpha-value>)',
+        'surface-container':        'rgb(var(--tw-surface-high) / <alpha-value>)',
+        'surface-container-high':   'rgb(var(--tw-surface-high) / <alpha-value>)',
+        'surface-container-highest':'rgb(var(--tw-surface-high) / <alpha-value>)',
+        'on-surface-variant':       'rgb(var(--tw-text-muted) / <alpha-value>)',
+        'outline':                  'rgb(var(--tw-text-muted) / <alpha-value>)',
+        // ── Static ──
         'primary':                  '#eeeeff',
         'on-primary':               '#0010a0',
         'primary-container':        '#404dff',
@@ -20,22 +34,9 @@ export default {
         'on-tertiary':              '#1a0048',
         'tertiary-container':       '#6b4fcc',
         'on-tertiary-container':    '#e8e0ff',
-        'surface':                  '#0d0e1c',
-        'surface-dim':              '#0d0e1c',
         'surface-bright':           '#323356',
-        'surface-container-lowest': '#08091a',
-        'surface-container-low':    '#111224',
-        'surface-container':        '#161729',
-        'surface-container-high':   '#20213a',
-        'surface-container-highest':'#2a2b45',
-        'on-surface':               '#e2e1ff',
-        'on-surface-variant':       '#c4c3e0',
-        'outline':                  '#7f7f9c',
         'outline-variant':          '#40426a',
         'surface-tint':             '#6b74ff',
-        'background':               '#0d0e1c',
-        'on-background':            '#e2e1ff',
-        'neon':                     '#404dff',
       },
       fontFamily: {
         sans: ['Manrope', 'sans-serif'],

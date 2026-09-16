@@ -9,7 +9,25 @@ import tracking from '../data/tracking.json'
 import layout from '../data/layout.json'
 
 const L = layout as Record<string, string>
+
+function hexToRgb(hex: string): string {
+  const c = hex.replace('#', '').trim()
+  if (c.length !== 6) return '64 77 255'
+  const r = parseInt(c.slice(0, 2), 16)
+  const g = parseInt(c.slice(2, 4), 16)
+  const b = parseInt(c.slice(4, 6), 16)
+  if (isNaN(r) || isNaN(g) || isNaN(b)) return '64 77 255'
+  return `${r} ${g} ${b}`
+}
+
 const cssVars = {
+  // ── Tailwind RGB channels (for bg-neon, text-neon, etc. with opacity variants) ──
+  'tw-accent':       hexToRgb(L.colorAccent      || '#404dff'),
+  'tw-text':         hexToRgb(L.colorText         || '#e2e1ff'),
+  'tw-text-muted':   hexToRgb(L.colorTextMuted    || '#7f7f9c'),
+  'tw-bg':           hexToRgb(L.colorBg           || '#06070f'),
+  'tw-surface':      hexToRgb(L.colorSurface      || '#0d0e1c'),
+  'tw-surface-high': hexToRgb(L.colorSurfaceHigh  || '#161729'),
   bodyFont:          L.bodyFont          || 'Manrope',
   bodySize:          (L.bodySize         || '16')    + 'px',
   bodyWeight:        L.bodyWeight        || '400',

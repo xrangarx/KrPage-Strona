@@ -110,6 +110,13 @@
 @layer base {
   :root {
     color-scheme: dark;
+    /* Tailwind RGB channels — overridden at build time by BaseLayout define:vars */
+    --tw-accent:       64 77 255;
+    --tw-text:         226 225 255;
+    --tw-text-muted:   127 127 156;
+    --tw-bg:           6 7 15;
+    --tw-surface:      13 14 28;
+    --tw-surface-high: 22 23 41;
   }
 
   html {
