@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
+import InlineEditor from '../components/InlineEditor.astro'
+import content from '../data/pages/o-mnie.json'
 
 const OmnieContent = null
 
@@ -71,13 +73,13 @@ const tools = [
 
     <!-- Left: copy + stats -->
     <div class="md:col-span-7 z-10">
-      <div class="section-label mb-md">Senior SEO & MarTech Specialist</div>
+      <div class="section-label mb-md" data-cms="heroEyebrow">{content.heroEyebrow}</div>
       <h1 class="text-headline-xl text-on-surface mb-md">
-        Krzysztof<br />
-        <span class="text-neon">Parfieniuk</span>
+        <span data-cms="heroTitle">{content.heroTitle}</span><br />
+        <span class="text-neon" data-cms="heroTitleAccent">{content.heroTitleAccent}</span>
       </h1>
-      <p class="text-body-lg text-on-surface-variant mb-lg max-w-2xl">
-        Specjalista SEO i MarTech z ponad 6-letnim doświadczeniem w agencjach i freelance B2B. Łączę precyzję danych z automatyzacją procesów — audyty, strategie, link building i własne narzędzia SEO budowane w n8n i Claude Code.
+      <p class="text-body-lg text-on-surface-variant mb-lg max-w-2xl" data-cms="heroSubtitle">
+        {content.heroSubtitle}
       </p>
 
       <!-- Animated stats -->
@@ -123,7 +125,7 @@ const tools = [
                     bg-background border border-neon/30 px-3 py-1.5
                     flex items-center gap-2 shadow-neon-sm">
           <span class="w-2 h-2 rounded-full bg-neon animate-pulse shrink-0"></span>
-          <span class="text-label-sm text-neon uppercase tracking-widest leading-snug">Dostępny dla nowych projektów</span>
+          <span class="text-label-sm text-neon uppercase tracking-widest leading-snug" data-cms="heroBadge">{content.heroBadge}</span>
         </div>
       </div>
     </div>
@@ -152,10 +154,10 @@ const tools = [
     <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
       <div class="flex flex-col md:flex-row justify-between items-end mb-lg gap-md">
         <div>
-          <div class="section-label mb-sm">Digital Command Center</div>
-          <h2 class="text-headline-lg text-on-surface">Narzędzia które<br /><span class="text-neon">dają przewagę</span></h2>
-          <p class="text-body-md text-on-surface-variant max-w-xl mt-sm">
-            Wykorzystuję najnowocześniejszy stack technologiczny do mapowania drogi na szczyt wyników Google.
+          <div class="section-label mb-sm" data-cms="toolsEyebrow">{content.toolsEyebrow}</div>
+          <h2 class="text-headline-lg text-on-surface"><span data-cms="toolsTitleLine1">{content.toolsTitleLine1}</span><br /><span class="text-neon" data-cms="toolsTitleAccent">{content.toolsTitleAccent}</span></h2>
+          <p class="text-body-md text-on-surface-variant max-w-xl mt-sm" data-cms="toolsSubtitle">
+            {content.toolsSubtitle}
           </p>
         </div>
         <span class="text-label-sm border border-neon/20 px-3 py-1 text-neon uppercase tracking-widest whitespace-nowrap">v2.4 Enterprise</span>
@@ -415,6 +417,8 @@ const tools = [
       </div>
     </div>
   </section>
+
+  <InlineEditor contentPath="src/data/pages/o-mnie.json" />
 
 </BaseLayout>
 

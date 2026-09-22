@@ -1,0 +1,359 @@
+---
+/* ─────────────────────────────────────────────────────────────────────
+   INLINE EDITOR — edycja treści wprost na żywej stronie.
+
+   Jak działa:
+   • Publiczny gość nie widzi nic — nakładka włącza się tylko, gdy w
+     przeglądarce jest zapisany token CMS (ten sam co w /admin) albo w URL
+     jest ?edit.
+   • Edytowalne są WYŁĄCZNIE elementy z atrybutem data-cms="pole".
+     Moduły, layout i struktura pozostają nietykalne.
+   • Zapis: pole → GitHub API (contentPath) → commit → rebuild (~1-2 min).
+
+   Wymaga: <element data-cms="klucz"> w tej samej podstronie oraz pliku
+   JSON pod contentPath, w którym te klucze istnieją.
+───────────────────────────────────────────────────────────────────── */
+import cms from '../data/cms.json'
+
+interface Props {
+  /** Ścieżka do pliku JSON z treścią tej podstrony (względem repo) */
+  contentPath: string
+}
+
+const { contentPath } = Astro.props
+---
+
+<div
+  id="ie-root"
+  data-content-path={contentPath}
+  data-owner={cms.owner}
+  data-repo={cms.repo}
+  data-branch={cms.branch}
+  hidden
+>
+  <!-- Pływający przycisk wejścia w tryb edycji -->
+  <button id="ie-enter" type="button">
+    <span aria-hidden="true" class="material-symbols-outlined">edit</span>
+    Edytuj treść
+  </button>
+
+  <!-- Pasek narzędzi trybu edycji -->
+  <div id="ie-bar" hidden>
+    <span id="ie-bar-icon" aria-hidden="true" class="material-symbols-outlined">edit_note</span>
+    <span id="ie-status">Kliknij tekst, aby go zmienić</span>
+    <span id="ie-dirty"></span>
+    <button id="ie-save" type="button" disabled>
+      <span aria-hidden="true" class="material-symbols-outlined">rocket_launch</span>
+      Zapisz
+    </button>
+    <button id="ie-cancel" type="button">Anuluj</button>
+  </div>
+
+  <!-- Prośba o token (gdy brak zapisanego) -->
+  <div id="ie-login" hidden>
+    <div id="ie-login-card">
+      <p id="ie-login-title">Zaloguj się, aby edytować</p>
+      <p id="ie-login-sub">Wklej swój token GitHub (ten sam co w panelu&nbsp;/admin).</p>
+      <input id="ie-token" type="password" placeholder="github_pat_… / ghp_…" autocomplete="off" />
+      <label id="ie-remember-row">
+        <input type="checkbox" id="ie-remember" checked /> Zapamiętaj w tej przeglądarce
+      </label>
+      <div id="ie-login-actions">
+        <button id="ie-login-cancel" type="button">Anuluj</button>
+        <button id="ie-login-ok" type="button">Zaloguj</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="ie-toast" hidden></div>
+</div>
+
+<style>
+  /* [hidden] musi wygrać z jawnym display poniżej (ID > atrybut) */
+  #ie-root[hidden], #ie-root [hidden] { display: none !important; }
+
+  #ie-root { position: fixed; inset: auto; z-index: 9990; }
+
+  /* Przycisk wejścia */
+  #ie-enter {
+    position: fixed; bottom: 24px; left: 24px; z-index: 9991;
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgb(var(--tw-accent)); color: #fff;
+    border: none; border-radius: var(--globalRadius, 2px);
+    padding: 11px 18px; font-size: 13px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .04em; cursor: pointer;
+    box-shadow: 0 6px 24px rgb(var(--tw-accent) / .35);
+    transition: filter .15s, transform .1s;
+  }
+  #ie-enter:hover { filter: brightness(1.1); }
+  #ie-enter:active { transform: scale(.96); }
+  #ie-enter .material-symbols-outlined { font-size: 18px; }
+
+  /* Pasek narzędzi */
+  #ie-bar {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+    z-index: 9992; display: flex; align-items: center; gap: 12px;
+    background: #0d0e1c; color: #e2e1ff;
+    border: 1px solid rgb(var(--tw-accent) / .35);
+    border-radius: var(--globalRadius, 2px);
+    padding: 10px 12px 10px 16px; font-size: 13px;
+    box-shadow: 0 8px 32px rgba(0,0,0,.5); max-width: calc(100vw - 32px);
+  }
+  #ie-bar-icon { color: rgb(var(--tw-accent)); font-size: 18px; }
+  #ie-status { color: #c4c3e0; }
+  #ie-dirty { color: rgb(var(--tw-accent)); font-weight: 700; font-variant-numeric: tabular-nums; }
+  #ie-bar button {
+    display: inline-flex; align-items: center; gap: 6px;
+    border-radius: var(--globalRadius, 2px); padding: 7px 12px;
+    font-size: 12px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .04em; cursor: pointer; border: 1px solid transparent;
+  }
+  #ie-bar button .material-symbols-outlined { font-size: 15px; }
+  #ie-save { background: rgb(var(--tw-accent)); color: #fff; }
+  #ie-save:hover:not(:disabled) { filter: brightness(1.1); }
+  #ie-save:disabled { opacity: .45; cursor: not-allowed; }
+  #ie-cancel { background: transparent; color: #7f7f9c; border-color: rgba(127,127,156,.3); }
+  #ie-cancel:hover { color: #e2e1ff; border-color: rgba(127,127,156,.6); }
+
+  /* Podświetlenie edytowalnych regionów */
+  [data-cms].ie-on {
+    outline: 1px dashed rgb(var(--tw-accent) / .5);
+    outline-offset: 3px; border-radius: 2px;
+    cursor: text; transition: outline-color .15s, background .15s;
+  }
+  [data-cms].ie-on:hover { outline-color: rgb(var(--tw-accent)); background: rgb(var(--tw-accent) / .05); }
+  [data-cms].ie-focus { outline: 2px solid rgb(var(--tw-accent)); background: rgb(var(--tw-accent) / .07); }
+  [data-cms].ie-dirty-field { outline-style: solid; outline-color: rgb(var(--tw-accent) / .7); }
+
+  /* Login */
+  #ie-login {
+    position: fixed; inset: 0; z-index: 9995;
+    background: rgba(6,7,15,.75); backdrop-filter: blur(4px);
+    display: flex; align-items: center; justify-content: center; padding: 20px;
+  }
+  #ie-login-card {
+    width: 100%; max-width: 380px; background: #0d0e1c;
+    border: 1px solid rgb(var(--tw-accent) / .3); padding: 24px;
+    border-radius: var(--globalRadius, 2px);
+  }
+  #ie-login-title { font-size: 16px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+  #ie-login-sub { font-size: 12px; color: #7f7f9c; margin-bottom: 14px; line-height: 1.5; }
+  #ie-token {
+    width: 100%; background: #161729; border: 1px solid rgb(var(--tw-accent) / .2);
+    color: #e2e1ff; padding: 10px 12px; font-size: 13px; outline: none;
+    border-radius: var(--globalRadius, 2px);
+  }
+  #ie-token:focus { border-color: rgb(var(--tw-accent) / .5); }
+  #ie-remember-row { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #c4c3e0; margin: 12px 0; cursor: pointer; }
+  #ie-remember-row input { accent-color: rgb(var(--tw-accent)); }
+  #ie-login-actions { display: flex; gap: 8px; justify-content: flex-end; }
+  #ie-login-actions button {
+    border-radius: var(--globalRadius, 2px); padding: 9px 16px;
+    font-size: 12px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .04em; cursor: pointer;
+  }
+  #ie-login-cancel { background: transparent; color: #7f7f9c; border: 1px solid rgba(127,127,156,.3); }
+  #ie-login-ok { background: rgb(var(--tw-accent)); color: #fff; border: none; }
+
+  /* Toast */
+  #ie-toast {
+    position: fixed; bottom: 88px; left: 50%; transform: translateX(-50%);
+    z-index: 9996; background: #161729; color: #e2e1ff;
+    border: 1px solid rgb(var(--tw-accent) / .4);
+    padding: 10px 16px; font-size: 13px; font-weight: 600;
+    border-radius: var(--globalRadius, 2px); box-shadow: 0 8px 32px rgba(0,0,0,.5);
+    max-width: calc(100vw - 32px); text-align: center;
+  }
+  #ie-toast.ok  { border-color: rgba(63,207,119,.5); color: #7ee2a8; }
+  #ie-toast.err { border-color: rgba(255,77,109,.5); color: #ff8fa3; }
+
+  @media (max-width: 600px) {
+    #ie-bar { flex-wrap: wrap; justify-content: center; }
+    #ie-status { width: 100%; text-align: center; }
+  }
+</style>
+
+<script>
+  const root = document.getElementById('ie-root')
+  if (root) {
+    const OWNER  = root.dataset.owner!
+    const REPO   = root.dataset.repo!
+    const BRANCH = root.dataset.branch!
+    const PATH   = root.dataset.contentPath!
+    const TOKEN_KEY = 'cms_pat'   // ten sam klucz co panel /admin
+
+    const $ = (id: string) => document.getElementById(id)!
+    const fields = Array.from(document.querySelectorAll<HTMLElement>('[data-cms]'))
+    const original: Record<string, string> = {}
+    fields.forEach(el => { original[el.dataset.cms!] = el.innerText })
+
+    let editing = false
+    let fileSha: string | null = null
+
+    /* ── widoczność przycisku „Edytuj treść" ──
+       tylko dla osoby z tokenem albo z ?edit w URL; publiczny gość nic nie widzi */
+    const hasToken = () => !!(localStorage.getItem(TOKEN_KEY) || sessionStorage.getItem(TOKEN_KEY))
+    const wantsEdit = new URLSearchParams(location.search).has('edit')
+    if (hasToken() || wantsEdit) {
+      root.hidden = false
+    }
+
+    /* ── helpers ── */
+    function toast(msg: string, kind?: 'ok' | 'err') {
+      const t = $('ie-toast'); t.textContent = msg
+      t.className = kind || ''; t.hidden = false
+      clearTimeout((t as any)._t)
+      ;(t as any)._t = setTimeout(() => { t.hidden = true }, 4000)
+    }
+    function getToken() { return localStorage.getItem(TOKEN_KEY) || sessionStorage.getItem(TOKEN_KEY) }
+    function b64encode(str: string) {
+      const bytes = new TextEncoder().encode(str); let bin = ''
+      bytes.forEach(b => { bin += String.fromCharCode(b) }); return btoa(bin)
+    }
+    function b64decode(b64: string) {
+      const bin = atob(b64.replace(/\s/g, '')); const bytes = new Uint8Array(bin.length)
+      for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i)
+      return new TextDecoder().decode(bytes)
+    }
+    const ghUrl = () => `https://api.github.com/repos/${OWNER}/${REPO}/contents/${PATH}`
+    const ghHeaders = () => ({ Authorization: 'token ' + getToken(), Accept: 'application/vnd.github+json' })
+
+    function dirtyFields() {
+      return fields.filter(el => el.innerText.trim() !== original[el.dataset.cms!].trim())
+    }
+    function refreshDirty() {
+      const d = dirtyFields()
+      fields.forEach(el => el.classList.toggle('ie-dirty-field', d.includes(el)))
+      $('ie-dirty').textContent = d.length ? `${d.length} zmian` : ''
+      ;($('ie-save') as HTMLButtonElement).disabled = d.length === 0
+    }
+
+    /* ── tryb edycji ── */
+    function enterEdit() {
+      editing = true
+      $('ie-enter').hidden = true
+      $('ie-bar').hidden = false
+      fields.forEach(el => {
+        el.classList.add('ie-on')
+        el.setAttribute('contenteditable', 'plaintext-only')
+        el.addEventListener('focus', onFocus)
+        el.addEventListener('blur', onBlur)
+        el.addEventListener('input', refreshDirty)
+        el.addEventListener('keydown', onKey)
+      })
+      refreshDirty()
+    }
+    function exitEdit(restore: boolean) {
+      if (restore) fields.forEach(el => { el.innerText = original[el.dataset.cms!] })
+      editing = false
+      $('ie-bar').hidden = true
+      $('ie-enter').hidden = false
+      fields.forEach(el => {
+        el.classList.remove('ie-on', 'ie-focus', 'ie-dirty-field')
+        el.removeAttribute('contenteditable')
+        el.removeEventListener('focus', onFocus)
+        el.removeEventListener('blur', onBlur)
+        el.removeEventListener('input', refreshDirty)
+        el.removeEventListener('keydown', onKey)
+      })
+    }
+    function onFocus(e: Event) { (e.target as HTMLElement).classList.add('ie-focus') }
+    function onBlur(e: Event) { (e.target as HTMLElement).classList.remove('ie-focus') }
+    function onKey(e: KeyboardEvent) {
+      // pola jednoliniowe — Enter kończy edycję zamiast wstawiać nową linię
+      if (e.key === 'Enter') { e.preventDefault(); (e.target as HTMLElement).blur() }
+      if (e.key === 'Escape') { (e.target as HTMLElement).blur() }
+    }
+
+    /* ── zapis ── */
+    async function save() {
+      const changed = dirtyFields()
+      if (!changed.length) return
+      if (!getToken()) { showLogin(); return }
+
+      const btn = $('ie-save') as HTMLButtonElement
+      btn.disabled = true
+      $('ie-status').textContent = 'Zapisuję…'
+
+      try {
+        // 1. pobierz aktualny plik (świeży sha + reszta pól)
+        const getRes = await fetch(ghUrl(), { headers: ghHeaders() })
+        if (getRes.status === 401) { badToken(); return }
+        if (!getRes.ok) throw new Error('Nie mogę odczytać pliku (' + getRes.status + ')')
+        const meta = await getRes.json()
+        fileSha = meta.sha
+        const data = JSON.parse(b64decode(meta.content))
+
+        // 2. wstaw zmienione pola (jednoliniowe — bez znaków nowej linii)
+        changed.forEach(el => {
+          data[el.dataset.cms!] = el.innerText.replace(/\s*\n\s*/g, ' ').trim()
+        })
+
+        // 3. zapis z powrotem
+        const putRes = await fetch(ghUrl(), {
+          method: 'PUT',
+          headers: { ...ghHeaders(), 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            message: 'edycja treści: ' + PATH.split('/').pop(),
+            content: b64encode(JSON.stringify(data, null, 2) + '\n'),
+            sha: fileSha,
+            branch: BRANCH,
+          }),
+        })
+        if (!putRes.ok) {
+          const err = await putRes.json().catch(() => ({}))
+          throw new Error(err.message || 'HTTP ' + putRes.status)
+        }
+
+        // sukces — nowe wartości stają się bazą
+        changed.forEach(el => { original[el.dataset.cms!] = el.innerText })
+        refreshDirty()
+        $('ie-status').textContent = 'Kliknij tekst, aby go zmienić'
+        toast('✓ Zapisano — nowa wersja online za ~1–2 min (rebuild)', 'ok')
+        exitEdit(false)
+      } catch (e: any) {
+        $('ie-status').textContent = 'Kliknij tekst, aby go zmienić'
+        toast('❌ ' + e.message, 'err')
+        btn.disabled = false
+      }
+    }
+    function badToken() {
+      localStorage.removeItem(TOKEN_KEY); sessionStorage.removeItem(TOKEN_KEY)
+      $('ie-status').textContent = 'Kliknij tekst, aby go zmienić'
+      toast('Token nieprawidłowy lub wygasł — zaloguj się ponownie', 'err')
+      showLogin()
+    }
+
+    /* ── login ── */
+    function showLogin() { $('ie-login').hidden = false; ($('ie-token') as HTMLInputElement).focus() }
+    function hideLogin() { $('ie-login').hidden = true }
+    $('ie-login-ok').addEventListener('click', () => {
+      const val = ($('ie-token') as HTMLInputElement).value.trim()
+      if (!val) return
+      const remember = ($('ie-remember') as HTMLInputElement).checked
+      if (remember) localStorage.setItem(TOKEN_KEY, val)
+      else sessionStorage.setItem(TOKEN_KEY, val)
+      hideLogin()
+      if (!editing) enterEdit()
+      else save()
+    })
+    $('ie-login-cancel').addEventListener('click', hideLogin)
+    $('ie-token').addEventListener('keydown', e => { if ((e as KeyboardEvent).key === 'Enter') $('ie-login-ok').click() })
+
+    /* ── wejścia ── */
+    $('ie-enter').addEventListener('click', () => {
+      if (!getToken()) { showLogin(); return }
+      enterEdit()
+    })
+    $('ie-save').addEventListener('click', save)
+    $('ie-cancel').addEventListener('click', () => {
+      const d = dirtyFields()
+      if (d.length && !confirm('Porzucić ' + d.length + ' niezapisanych zmian?')) return
+      exitEdit(true)
+    })
+
+    // ?edit w URL → od razu spróbuj wejść w tryb edycji
+    if (wantsEdit && getToken()) enterEdit()
+  }
+</script>
