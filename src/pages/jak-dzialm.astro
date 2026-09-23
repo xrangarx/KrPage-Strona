@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
+import InlineEditor from '../components/InlineEditor.astro'
+import content from '../data/pages/jak-dzialm.json'
 import { getCollection } from 'astro:content'
 
 const allCases = await getCollection('realizacje')
@@ -18,12 +20,12 @@ const JakDziaContent = null
   <section class="max-w-7xl mx-auto px-6 md:px-12 pt-16 pb-lg relative">
     <div class="absolute -top-20 right-0 w-96 h-96 bg-neon/5 blur-[100px] rounded-full pointer-events-none"></div>
     <div class="relative z-10 mb-xl">
-      <div class="section-label mb-sm">Realizacje i wyniki</div>
+      <div class="section-label mb-sm" data-cms="heroEyebrow">{content.heroEyebrow}</div>
       <h1 class="text-headline-xl text-on-surface mb-md">
-        Jak <span class="text-neon">działam</span>
+        <span data-cms="heroTitleL1">{content.heroTitleL1}</span> <span class="text-neon" data-cms="heroTitleAccent">{content.heroTitleAccent}</span>
       </h1>
-      <p class="text-body-lg text-on-surface-variant max-w-2xl">
-        Konkretne projekty, konkretne liczby. Poniżej znajdziesz case studies z pozycjonowania SEO oraz realizacji stron internetowych — bez upiększeń, z prawdziwymi wynikami.
+      <p class="text-body-lg text-on-surface-variant max-w-2xl" data-cms="heroLead">
+        {content.heroLead}
       </p>
     </div>
 
@@ -126,25 +128,27 @@ const JakDziaContent = null
         <div class="w-[600px] h-[300px] bg-neon/5 blur-[100px] rounded-full"></div>
       </div>
       <div class="relative z-10">
-        <div class="section-label mx-auto mb-md">Twoja kolej</div>
+        <div class="section-label mx-auto mb-md" data-cms="ctaEyebrow">{content.ctaEyebrow}</div>
         <h2 class="text-headline-lg text-on-surface mb-md">
-          Chcesz podobnych wyników?<br />
-          <span class="text-neon">Zacznij od bezpłatnej analizy.</span>
+          <span data-cms="ctaTitleL1">{content.ctaTitleL1}</span><br />
+          <span class="text-neon" data-cms="ctaTitleAccent">{content.ctaTitleAccent}</span>
         </h2>
         <div class="flex flex-col sm:flex-row justify-center gap-md">
           <a href="/kontakt"
              class="inline-flex items-center justify-center gap-2 bg-neon text-on-primary font-bold text-label-md uppercase tracking-widest px-xl py-md hover:brightness-125 hover:shadow-neon active:scale-95 transition-all shadow-neon-sm">
             <span aria-hidden="true" class="material-symbols-outlined text-sm">calendar_month</span>
-            Umów konsultację
+            <span data-cms="ctaBtnPrimary">{content.ctaBtnPrimary}</span>
           </a>
           <a href="/uslugi"
              class="inline-flex items-center justify-center gap-2 border border-neon/30 text-neon font-bold text-label-md uppercase tracking-widest px-xl py-md hover:bg-neon/10 hover:border-neon/60 transition-all">
-            Zobacz usługi
+            <span data-cms="ctaBtnSecondary">{content.ctaBtnSecondary}</span>
           </a>
         </div>
       </div>
     </div>
   </section>
+
+  <InlineEditor contentPath="src/data/pages/jak-dzialm.json" />
 
 </BaseLayout>
 

@@ -1,0 +1,94 @@
+{
+  "heroEyebrow": "Transparentny proces",
+  "heroTitleL1": "Jak buduję",
+  "heroTitleAccent": "strony klientom",
+  "heroLead": "Nowoczesny JAMstack zamiast WordPress — szybciej, bezpieczniej, taniej. Klient dostaje stronę którą może samodzielnie edytować przez przeglądarkę. Ty dostajesz projekt bez kosztów utrzymania.",
+  "pillars": [
+    { "n": "~60s", "label": "czas deployu" },
+    { "n": "0 zł", "label": "hosting miesięcznie" },
+    { "n": "100%", "label": "statyczny HTML" }
+  ],
+
+  "wpEyebrow": "Filozofia",
+  "wpTitle": "Dlaczego nie WordPress?",
+  "wpCardTitle": "WordPress — stare podejście",
+  "wpCons": [
+    "PHP + MySQL = wektor ataku. Każdy plugin może mieć lukę",
+    "Aktualizacje pluginów psują działanie strony",
+    "Hosting PHP kosztuje ~50–150 zł/mies.",
+    "Wolniejszy czas ładowania bez agresywnego cache'u",
+    "Strona zainfekowana na subdomenie testowej = infekcja całej domeny"
+  ],
+  "jamCardTitle": "JAMstack — nowoczesne podejście",
+  "jamPros": [
+    "Statyczny HTML — brak PHP, brak bazy danych, zero wektorów ataku",
+    "Żadnych pluginów do aktualizowania, żadnych broken updates",
+    "GitHub Pages: hosting bezpłatny z 100 GB bandwidth",
+    "Core Web Vitals w zieleni — szybkość jest wbudowana w architekturę",
+    "Każda zmiana to commit w Git — pełna historia, łatwy rollback"
+  ],
+
+  "stackEyebrow": "Narzędzia",
+  "stackTitle": "Stack technologiczny",
+  "stack": [
+    {
+      "icon": "bolt",
+      "name": "Astro",
+      "role": "Framework",
+      "desc": "Generuje czysty HTML bez zbędnego JavaScript. Najwyższe wyniki Core Web Vitals out of the box. Żadnych pluginów do aktualizowania.",
+      "tags": ["Statyczny HTML", "MIT", "Open Source"]
+    },
+    {
+      "icon": "code_blocks",
+      "name": "GitHub Pages",
+      "role": "Hosting",
+      "desc": "Strona to zwykły plik tekstowy w repozytorium GitHub. Automatyczny deploy po każdym zapisie — 100% uptime, bezpłatny.",
+      "tags": ["Free tier", "CI/CD", "Auto-deploy"]
+    },
+    {
+      "icon": "terminal",
+      "name": "Panel CMS",
+      "role": "Zarządzanie treścią",
+      "desc": "Własny panel admina pod /admin/. Klient loguje się tokenem, edytuje wpisy i dodaje zdjęcia. Dane lądują wprost w GitHubie.",
+      "tags": ["GitHub API", "Bez serwera", "Po polsku"]
+    }
+  ],
+
+  "workflowEyebrow": "Workflow",
+  "workflowTitle": "Od projektu do live — 4 kroki",
+  "steps": [
+    { "n": "01", "title": "Projektuję stronę", "desc": "Buduję strukturę, design i treści na lokalnym środowisku deweloperskim. Żadnych ograniczeń szablonu — strona wygląda dokładnie tak, jak zaprojektowałem.", "detail": "Astro + Tailwind CSS + własny design system" },
+    { "n": "02", "title": "Wdrożenie na GitHub Pages", "desc": "Jeden push do repozytorium — GitHub Actions automatycznie buduje i publikuje stronę. Certyfikat SSL Let's Encrypt gratis.", "detail": "git push → live w ~60 sekund" },
+    { "n": "03", "title": "Klient przejmuje panel", "desc": "Wysyłam klientowi link do panelu /admin/ i token dostępu. Loguje się raz, przeglądarka zapamiętuje. Edytuje wpisy jak w edytorze tekstu.", "detail": "strona.pl/admin/ — brak konfiguracji po stronie klienta" },
+    { "n": "04", "title": "Zapis = automatyczny deploy", "desc": "Klient klika „Opublikuj\" → wpis trafia jako plik Markdown do GitHuba → GitHub Actions buduje stronę → zmiana widoczna na żywo.", "detail": "Bez Twojej interwencji — klient jest samodzielny" }
+  ],
+
+  "benefitsEyebrow": "Korzyści",
+  "benefitsTitle": "Co dostaje klient",
+  "benefits": [
+    { "icon": "speed", "title": "Szybkość", "desc": "Core Web Vitals: zielone we wszystkich kategoriach. Strony Astro ładują się szybciej niż 95% WordPressów." },
+    { "icon": "shield", "title": "Bezpieczeństwo", "desc": "Zero PHP, zero bazy danych, zero panelu wp-admin. Nie ma co zaatakować — statyczny HTML to plik tekstowy." },
+    { "icon": "edit_note", "title": "Samodzielna edycja", "desc": "Klient edytuje wpisy blogowe, realizacje i zdjęcia przez przeglądarkę. Bez treningu, bez wsparcia technicznego." },
+    { "icon": "trending_up", "title": "SEO-ready", "desc": "Czysta semantyka HTML, natywna obsługa meta tagów i Schema.org, szybkie ładowanie — Google to lubi." },
+    { "icon": "savings", "title": "Niski koszt", "desc": "Jedyny koszt stały to domena (~50–80 zł/rok). Hosting, CMS, pipeline CI/CD — wszystko bezpłatne." },
+    { "icon": "update", "title": "Brak utrzymania", "desc": "Nie ma co aktualizować. Żadnych pluginów z lukami, żadnych patchów bezpieczeństwa, zero zepsutych aktualizacji." }
+  ],
+
+  "costsEyebrow": "Transparentność",
+  "costsTitle": "Koszty per projekt klienta",
+  "costs": [
+    { "item": "Astro (framework)", "cost": "0 zł", "note": "MIT, open source" },
+    { "item": "GitHub Pages (hosting)", "cost": "0 zł", "note": "Free tier, 100 GB bandwidth/mies." },
+    { "item": "Panel CMS (/admin/)", "cost": "0 zł", "note": "Własny, działa na GitHub Pages" },
+    { "item": "GitHub Actions (CI/CD)", "cost": "0 zł", "note": "2000 min/mies. w free tier" },
+    { "item": "SSL (HTTPS)", "cost": "0 zł", "note": "Let's Encrypt automatycznie" },
+    { "item": "Domena klienta", "cost": "~50–80 zł/rok", "note": "Jedyny realny koszt" }
+  ],
+  "costsTotalLabel": "Łącznie / rok",
+  "costsTotalValue": "~50–80 zł",
+  "costsTotalNote": "Sama domena. Reszta gratis.",
+
+  "ctaTitle": "Zainteresowany taką stroną dla siebie lub klienta?",
+  "ctaBody": "Odzywam się w ciągu 24 godzin. Bezpłatna konsultacja wstępna, analiza potrzeb i wycena projektu.",
+  "ctaBtn": "Napisz do mnie"
+}
