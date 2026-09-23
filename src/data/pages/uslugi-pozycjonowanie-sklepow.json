@@ -1,0 +1,38 @@
+{
+  "heroEyebrow": "E-commerce SEO",
+  "heroTitleL1": "Organic traffic",
+  "heroTitleAccent": "który sprzedaje",
+  "heroDesc": "Specjalizuję się w SEO dla sklepów internetowych — od architektury kategorii, przez karty produktów, po link building w e-commerce. Ruch, który przynosi przychód.",
+  "heroBtnPrimary": "Umów konsultację",
+  "heroBtnSecondary": "Najpierw audyt",
+
+  "resultsLabel": "Wyniki e-commerce",
+  "results": [
+    { "value": "+318%", "label": "Wzrost ruchu organicznego", "sub": "sklep elektronika, 6 mies." },
+    { "value": "x4.2", "label": "Wzrost przychodu z SEO", "sub": "sklep mody, 8 mies." },
+    { "value": "+890", "label": "Nowych fraz w TOP 10", "sub": "sklep RTV/AGD, 5 mies." },
+    { "value": "-62%", "label": "Spadek CPC z PPC", "sub": "dzięki wzrostowi organic" }
+  ],
+
+  "zakresEyebrow": "Zakres działań",
+  "zakresTitleL1": "SEO dla sklepu",
+  "zakresTitleAccent": "od fundamentów po skalowanie",
+  "zakresDesc": "Kompleksowe SEO dla e-commerce — technika, treść i linki w jednej spójnej strategii wzrostu organicznego.",
+  "items": [
+    { "icon": "category", "title": "Optymalizacja Kategorii", "desc": "Struktura kategorii pod frazy transakcyjne. Faceted navigation bez duplikatów. Interlinking między poziomami." },
+    { "icon": "inventory_2", "title": "Karty Produktów", "desc": "Unikalne opisy produktów z NLP, schema markup Product/Review, optymalizacja tytułów i meta." },
+    { "icon": "storefront", "title": "Schema Markup", "desc": "Implementacja danych strukturalnych: Product, Breadcrumb, FAQPage — rich snippets w wynikach Google." },
+    { "icon": "speed", "title": "Core Web Vitals", "desc": "Optymalizacja LCP, CLS i INP dla platform e-commerce. Lazy loading, kompresja obrazów, cache." },
+    { "icon": "shopping_cart", "title": "Google Merchant Center", "desc": "Integracja i optymalizacja feedu produktowego dla Shopping — lepsza widoczność w zakupach Google." },
+    { "icon": "link", "title": "Link Building E-comm", "desc": "Backlinki z branżowych portali, recenzji i mediów. Budowa autorytetu w niszy produktowej." }
+  ],
+
+  "platformsEyebrow": "Platformy",
+  "platformsTitleL1": "Pracuję z każdą",
+  "platformsTitleAccent": "platformą e-commerce",
+  "platforms": ["WooCommerce", "PrestaShop", "Shopify", "Magento"],
+
+  "ctaTitleL1": "Chcesz więcej sprzedaży",
+  "ctaTitleAccent": "z ruchu organicznego?",
+  "ctaBtn": "Zamów bezpłatny audyt sklepu"
+}

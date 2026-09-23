@@ -1,0 +1,33 @@
+{
+  "heroEyebrow": "Konsultacje SEO",
+  "heroTitleL1": "Bezpośredni kontakt",
+  "heroTitleAccent": "ze specjalistą",
+  "heroDesc": "Bez agencyjnego pośrednictwa — rozmawiasz bezpośrednio ze mną. Konsultacje SEO dla firm, e-commerce i agencji: od jednorazowej sesji strategicznej po regularne wsparcie.",
+  "heroBtn": "Zarezerwuj termin",
+
+  "formatsLabel": "Formaty konsultacji",
+  "formats": [
+    { "label": "Sesja strategiczna", "time": "60–90 min", "desc": "Przegląd sytuacji, diagnoza problemów, plan priorytetów" },
+    { "label": "Przegląd projektu", "time": "45–60 min", "desc": "Ocena aktualnych działań SEO + rekomendacje zmian" },
+    { "label": "Szkolenie SEO", "time": "2–4 godz.", "desc": "Dla zespołów in-house i właścicieli firm" },
+    { "label": "Wsparcie stałe", "time": "Miesięcznie", "desc": "Regularne konsultacje + monitoring wyników" }
+  ],
+
+  "zakresEyebrow": "Co omawiamy",
+  "zakresTitleL1": "Tematy",
+  "zakresTitleAccent": "konsultacji SEO",
+  "zakresDesc": "Każda konsultacja jest dostosowana do Twojej sytuacji — omawiamy dokładnie to, czego potrzebujesz.",
+  "items": [
+    { "icon": "troubleshoot", "title": "Audyt i diagnoza", "desc": "Przegląd kondycji technicznej domeny, analiza błędów indeksowania i ocena potencjału wzrostu." },
+    { "icon": "hub", "title": "Strategia keyword", "desc": "Dobór fraz, mapowanie na podstrony, analiza intencji wyszukiwania i priorytetyzacja działań." },
+    { "icon": "link", "title": "Profil linków", "desc": "Ocena aktualnego profilu backlinków, plan budowy autorytetu i identyfikacja toksycznych linków." },
+    { "icon": "article", "title": "Strategia treści", "desc": "Planowanie silosów tematycznych, content gap analysis i mapowanie treści pod topical authority." },
+    { "icon": "groups", "title": "Szkolenie in-house", "desc": "Edukacja zespołu marketingowego lub redakcyjnego z podstaw i zaawansowanego SEO." },
+    { "icon": "analytics", "title": "Analityka i KPI", "desc": "Konfiguracja GA4, Search Console i dashboardów raportujących. Mierzenie tego, co naprawdę ważne." }
+  ],
+
+  "ctaTitleL1": "Masz pytania o SEO?",
+  "ctaTitleAccent": "Porozmawiajmy.",
+  "ctaDesc": "Pierwsza, krótka rozmowa wstępna jest bezpłatna. Powiedz mi o swoim projekcie — ocenię, czy i jak mogę pomóc.",
+  "ctaBtn": "Zarezerwuj bezpłatną rozmowę"
+}

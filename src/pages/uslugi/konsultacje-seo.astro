@@ -1,21 +1,14 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
+import InlineEditor from '../../components/InlineEditor.astro'
+import content from '../../data/pages/uslugi-konsultacje-seo.json'
 
-const d: Record<string, string> = {}
-
-const items = [
-  { icon: 'troubleshoot', title: d.item1_title ?? 'Audyt i diagnoza',   desc: d.item1_desc ?? 'Przegląd kondycji technicznej domeny, analiza błędów indeksowania i ocena potencjału wzrostu.' },
-  { icon: 'hub',          title: d.item2_title ?? 'Strategia keyword',  desc: d.item2_desc ?? 'Dobór fraz, mapowanie na podstrony, analiza intencji wyszukiwania i priorytetyzacja działań.' },
-  { icon: 'link',         title: d.item3_title ?? 'Profil linków',      desc: d.item3_desc ?? 'Ocena aktualnego profilu backlinków, plan budowy autorytetu i identyfikacja toksycznych linków.' },
-  { icon: 'article',      title: d.item4_title ?? 'Strategia treści',   desc: d.item4_desc ?? 'Planowanie silosów tematycznych, content gap analysis i mapowanie treści pod topical authority.' },
-  { icon: 'groups',       title: d.item5_title ?? 'Szkolenie in-house', desc: d.item5_desc ?? 'Edukacja zespołu marketingowego lub redakcyjnego z podstaw i zaawansowanego SEO.' },
-  { icon: 'analytics',    title: d.item6_title ?? 'Analityka i KPI',    desc: d.item6_desc ?? 'Konfiguracja GA4, Search Console i dashboardów raportujących. Mierzenie tego, co naprawdę ważne.' },
-]
+const { formats, items } = content
 ---
 
 <BaseLayout
-  title={d.title ?? 'Konsultacje SEO — Doradztwo i Strategia | KrPage'}
-  description={d.description ?? 'Indywidualne konsultacje SEO dla firm i agencji. Przegląd strategii, analiza konkurencji, plan działania. Bezpośredni kontakt z doświadczonym specjalistą SEO.'}
+  title="Konsultacje SEO — Doradztwo i Strategia | KrPage"
+  description="Indywidualne konsultacje SEO dla firm i agencji. Przegląd strategii, analiza konkurencji, plan działania. Bezpośredni kontakt z doświadczonym specjalistą SEO."
   schemaType="service"
   schemaProps={{ serviceName: 'Konsultacje SEO' }}
 >
@@ -25,39 +18,34 @@ const items = [
     <div class="absolute -top-32 left-1/2 w-[500px] h-[500px] bg-neon/5 blur-[120px] rounded-full pointer-events-none"></div>
     <div class="grid lg:grid-cols-2 gap-lg items-center">
       <div class="space-y-6 z-10">
-        <div class="section-label">Konsultacje SEO</div>
+        <div class="section-label" data-cms="heroEyebrow">{content.heroEyebrow}</div>
         <h1 class="text-headline-xl text-on-surface">
-          Bezpośredni kontakt<br />
-          <span class="text-neon">ze specjalistą</span>
+          <span data-cms="heroTitleL1">{content.heroTitleL1}</span><br />
+          <span class="text-neon" data-cms="heroTitleAccent">{content.heroTitleAccent}</span>
         </h1>
-        <p class="text-body-lg text-on-surface-variant max-w-xl">
-          {d.hero_desc ?? 'Bez agencyjnego pośrednictwa — rozmawiasz bezpośrednio ze mną. Konsultacje SEO dla firm, e-commerce i agencji: od jednorazowej sesji strategicznej po regularne wsparcie.'}
+        <p class="text-body-lg text-on-surface-variant max-w-xl" data-cms="heroDesc">
+          {content.heroDesc}
         </p>
         <div class="flex flex-wrap gap-md">
           <a href="/kontakt"
              class="inline-flex items-center gap-2 bg-neon text-on-primary font-bold text-label-md uppercase tracking-widest px-lg py-md hover:brightness-110 active:scale-95 transition-all shadow-neon-sm">
             <span aria-hidden="true" class="material-symbols-outlined text-sm">calendar_month</span>
-            Zarezerwuj termin
+            <span data-cms="heroBtn">{content.heroBtn}</span>
           </a>
         </div>
       </div>
 
       <div class="bento-card p-lg">
-        <div class="text-label-sm text-neon uppercase tracking-widest mb-md">Formaty konsultacji</div>
+        <div class="text-label-sm text-neon uppercase tracking-widest mb-md" data-cms="formatsLabel">{content.formatsLabel}</div>
         <div class="space-y-3">
-          {[
-            { label: 'Sesja strategiczna', time: '60–90 min',  desc: 'Przegląd sytuacji, diagnoza problemów, plan priorytetów' },
-            { label: 'Przegląd projektu',  time: '45–60 min',  desc: 'Ocena aktualnych działań SEO + rekomendacje zmian'       },
-            { label: 'Szkolenie SEO',      time: '2–4 godz.', desc: 'Dla zespołów in-house i właścicieli firm'                },
-            { label: 'Wsparcie stałe',     time: 'Miesięcznie', desc: 'Regularne konsultacje + monitoring wyników'             },
-          ].map(f => (
+          {formats.map((f, i) => (
             <div class="flex items-start gap-3 py-3 border-b border-outline-variant/30 last:border-0">
               <span aria-hidden="true" class="material-symbols-outlined text-neon text-sm mt-0.5 shrink-0">check_circle</span>
               <div>
-                <p class="text-label-md text-on-surface uppercase tracking-wide">{f.label}
-                  <span class="text-neon/60 font-mono ml-2 text-[10px]">{f.time}</span>
+                <p class="text-label-md text-on-surface uppercase tracking-wide"><span data-cms={`formats.${i}.label`}>{f.label}</span>
+                  <span class="text-neon/60 font-mono ml-2 text-[10px]" data-cms={`formats.${i}.time`}>{f.time}</span>
                 </p>
-                <p class="text-body-md text-on-surface-variant text-sm">{f.desc}</p>
+                <p class="text-body-md text-on-surface-variant text-sm" data-cms={`formats.${i}.desc`}>{f.desc}</p>
               </div>
             </div>
           ))}
@@ -69,17 +57,17 @@ const items = [
   <!-- ZAKRES -->
   <section class="bg-surface-container-low border-y border-white/5 py-xl">
     <div class="max-w-7xl mx-auto px-6 md:px-12">
-      <div class="section-label mb-sm">Co omawiamy</div>
-      <h2 class="text-headline-lg text-on-surface mb-lg">Tematy <span class="text-neon">konsultacji SEO</span></h2>
-      <p class="text-body-md text-on-surface-variant max-w-2xl mb-lg">
-        {d.zakres_desc ?? 'Każda konsultacja jest dostosowana do Twojej sytuacji — omawiamy dokładnie to, czego potrzebujesz.'}
+      <div class="section-label mb-sm" data-cms="zakresEyebrow">{content.zakresEyebrow}</div>
+      <h2 class="text-headline-lg text-on-surface mb-lg"><span data-cms="zakresTitleL1">{content.zakresTitleL1}</span> <span class="text-neon" data-cms="zakresTitleAccent">{content.zakresTitleAccent}</span></h2>
+      <p class="text-body-md text-on-surface-variant max-w-2xl mb-lg" data-cms="zakresDesc">
+        {content.zakresDesc}
       </p>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
-        {items.map(item => (
+        {items.map((item, i) => (
           <div class="bento-card p-lg group hover:border-neon/40 transition-all">
             <span aria-hidden="true" class="material-symbols-outlined text-neon text-3xl mb-md">{item.icon}</span>
-            <h3 class="text-headline-md text-on-surface mb-sm">{item.title}</h3>
-            <p class="text-body-md text-on-surface-variant">{item.desc}</p>
+            <h3 class="text-headline-md text-on-surface mb-sm" data-cms={`items.${i}.title`}>{item.title}</h3>
+            <p class="text-body-md text-on-surface-variant" data-cms={`items.${i}.desc`}>{item.desc}</p>
           </div>
         ))}
       </div>
@@ -94,19 +82,21 @@ const items = [
       </div>
       <div class="relative z-10">
         <h2 class="text-headline-lg text-on-surface mb-md">
-          {d.cta_title ?? 'Masz pytania o SEO?'}<br />
-          <span class="text-neon">Porozmawiajmy.</span>
+          <span data-cms="ctaTitleL1">{content.ctaTitleL1}</span><br />
+          <span class="text-neon" data-cms="ctaTitleAccent">{content.ctaTitleAccent}</span>
         </h2>
-        <p class="text-body-md text-on-surface-variant max-w-xl mx-auto mb-lg">
-          {d.cta_desc ?? 'Pierwsza, krótka rozmowa wstępna jest bezpłatna. Powiedz mi o swoim projekcie — ocenię, czy i jak mogę pomóc.'}
+        <p class="text-body-md text-on-surface-variant max-w-xl mx-auto mb-lg" data-cms="ctaDesc">
+          {content.ctaDesc}
         </p>
         <a href="/kontakt"
            class="inline-flex items-center gap-2 bg-neon text-on-primary font-bold text-label-md uppercase tracking-widest px-xl py-md hover:brightness-110 active:scale-95 transition-all shadow-neon mt-md">
           <span aria-hidden="true" class="material-symbols-outlined text-sm">calendar_month</span>
-          Zarezerwuj bezpłatną rozmowę
+          <span data-cms="ctaBtn">{content.ctaBtn}</span>
         </a>
       </div>
     </div>
   </section>
+
+  <InlineEditor contentPath="src/data/pages/uslugi-konsultacje-seo.json" />
 
 </BaseLayout>

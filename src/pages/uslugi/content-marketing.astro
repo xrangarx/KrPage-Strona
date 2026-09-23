@@ -1,34 +1,14 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
+import InlineEditor from '../../components/InlineEditor.astro'
+import content from '../../data/pages/uslugi-content-marketing.json'
 
-const d: Record<string, string> = {}
-
-const types = [
-  { icon: 'article',       title: d.type1_title ?? 'Artykuły Blogowe',  desc: d.type1_desc ?? 'Długie formy zoptymalizowane pod frazy informacyjne i topical authority.' },
-  { icon: 'web',           title: d.type2_title ?? 'Teksty na Strony',  desc: d.type2_desc ?? 'Landing pages i strony usługowe pisane pod konwersję i intencję transakcyjną.' },
-  { icon: 'description',   title: d.type3_title ?? 'Opisy Produktów',   desc: d.type3_desc ?? 'Unikalne opisy e-commerce z semantyką i słowami kluczowymi long-tail.' },
-  { icon: 'edit_document', title: d.type4_title ?? 'Treści Pillar',     desc: d.type4_desc ?? 'Strony filarowe budujące topical authority dla całych silosów tematycznych.' },
-]
-
-const steps = [
-  { n: '01', title: d.step1_title ?? 'Keyword Research',      desc: d.step1_desc ?? 'Mapowanie intencji użytkowników i identyfikacja fraz o najwyższym potencjale konwersji.' },
-  { n: '02', title: d.step2_title ?? 'Topical Map',           desc: d.step2_desc ?? 'Projektowanie silosów tematycznych — które tematy, w jakiej kolejności, z jakimi linkami.' },
-  { n: '03', title: d.step3_title ?? 'Brief + NLP Outline',   desc: d.step3_desc ?? 'Szczegółowy brief z frazami LSI, pytaniami użytkowników i wymaganą strukturą semantyczną.' },
-  { n: '04', title: d.step4_title ?? 'Tworzenie i wdrożenie', desc: d.step4_desc ?? 'Pisanie, optymalizacja on-page, CTA i interlinking zgodnie z architekturą silosów.' },
-  { n: '05', title: d.step5_title ?? 'Monitoring wyników',    desc: d.step5_desc ?? 'Śledzenie pozycji, ruchu i czasu na stronie — iterujemy na podstawie danych.' },
-]
-
-const stats = [
-  { value: d.stat1_value ?? '3x',   label: d.stat1_label ?? 'Więcej ruchu organicznego vs. treści bez strategii' },
-  { value: d.stat2_value ?? '68%',  label: d.stat2_label ?? 'Artykułów rankuje w TOP10 w ciągu 6 miesięcy' },
-  { value: d.stat3_value ?? '2.4x', label: d.stat3_label ?? 'Wyższy czas na stronie po optymalizacji NLP' },
-  { value: d.stat4_value ?? '0%',   label: d.stat4_label ?? 'Duplicate content w dostarczanych materiałach' },
-]
+const { types, steps, stats } = content
 ---
 
 <BaseLayout
-  title={d.title ?? 'Content Marketing SEO — Treści które Pozycjonują'}
-  description={d.description ?? 'SEO content marketing: strategia treści oparta o topical authority, silosy tematyczne i optymalizację NLP. Tworzymy treści, które rankują i konwertują.'}
+  title="Content Marketing SEO — Treści które Pozycjonują"
+  description="SEO content marketing: strategia treści oparta o topical authority, silosy tematyczne i optymalizację NLP. Tworzymy treści, które rankują i konwertują."
   schemaType="service"
   schemaProps={{ serviceName: 'Content Marketing SEO' }}
 >
@@ -37,21 +17,21 @@ const stats = [
   <section class="max-w-7xl mx-auto px-6 md:px-12 pt-16 pb-xl relative overflow-hidden">
     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-64 bg-neon/4 blur-[120px] pointer-events-none"></div>
     <div class="text-center relative z-10 mb-xl">
-      <div class="section-label mx-auto mb-md">Inżynieria treści</div>
+      <div class="section-label mx-auto mb-md" data-cms="heroEyebrow">{content.heroEyebrow}</div>
       <h1 class="text-headline-xl text-on-surface mb-md">
-        Treści które<br /><span class="text-neon">rankują i konwertują</span>
+        <span data-cms="heroTitleL1">{content.heroTitleL1}</span><br /><span class="text-neon" data-cms="heroTitleAccent">{content.heroTitleAccent}</span>
       </h1>
-      <p class="text-body-lg text-on-surface-variant max-w-2xl mx-auto">
-        {d.hero_desc ?? 'Nie piszemy artykułów dla samego pisania. Każdy tekst to precyzyjnie zaprojektowany asset SEO — z mapą fraz, strukturą NLP i celem konwersyjnym.'}
+      <p class="text-body-lg text-on-surface-variant max-w-2xl mx-auto" data-cms="heroDesc">
+        {content.heroDesc}
       </p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
-      {types.map(type => (
+      {types.map((type, i) => (
         <div class="bento-card p-lg group hover:border-neon/40 transition-all">
           <span aria-hidden="true" class="material-symbols-outlined text-neon text-3xl mb-md">{type.icon}</span>
-          <h3 class="text-headline-md text-on-surface mb-sm">{type.title}</h3>
-          <p class="text-body-md text-on-surface-variant">{type.desc}</p>
+          <h3 class="text-headline-md text-on-surface mb-sm" data-cms={`types.${i}.title`}>{type.title}</h3>
+          <p class="text-body-md text-on-surface-variant" data-cms={`types.${i}.desc`}>{type.desc}</p>
         </div>
       ))}
     </div>
@@ -62,17 +42,17 @@ const stats = [
     <div class="max-w-7xl mx-auto px-6 md:px-12">
       <div class="grid lg:grid-cols-2 gap-xl items-center">
         <div>
-          <div class="section-label mb-sm">Proces tworzenia</div>
+          <div class="section-label mb-sm" data-cms="processEyebrow">{content.processEyebrow}</div>
           <h2 class="text-headline-lg text-on-surface mb-lg">
-            Content oparty<br /><span class="text-neon">o dane, nie intuicję</span>
+            <span data-cms="processTitleL1">{content.processTitleL1}</span><br /><span class="text-neon" data-cms="processTitleAccent">{content.processTitleAccent}</span>
           </h2>
           <div class="space-y-md">
             {steps.map((step, i) => (
               <div class:list={['flex gap-md p-md border-l-2', i === 0 ? 'border-neon bg-neon/5' : 'border-outline-variant']}>
                 <span class:list={['text-headline-md font-black opacity-40 shrink-0', i === 0 ? 'text-neon' : 'text-on-surface-variant']}>{step.n}</span>
                 <div>
-                  <p class="text-label-md uppercase tracking-wider text-on-surface font-bold mb-1">{step.title}</p>
-                  <p class="text-body-md text-on-surface-variant">{step.desc}</p>
+                  <p class="text-label-md uppercase tracking-wider text-on-surface font-bold mb-1" data-cms={`steps.${i}.title`}>{step.title}</p>
+                  <p class="text-body-md text-on-surface-variant" data-cms={`steps.${i}.desc`}>{step.desc}</p>
                 </div>
               </div>
             ))}
@@ -80,10 +60,10 @@ const stats = [
         </div>
 
         <div class="grid grid-cols-2 gap-sm">
-          {stats.map(s => (
+          {stats.map((s, i) => (
             <div class="bento-card p-lg flex flex-col justify-between">
-              <p class="text-headline-lg text-neon font-black">{s.value}</p>
-              <p class="text-label-sm text-on-surface-variant uppercase leading-relaxed mt-sm">{s.label}</p>
+              <p class="text-headline-lg text-neon font-black" data-cms={`stats.${i}.value`}>{s.value}</p>
+              <p class="text-label-sm text-on-surface-variant uppercase leading-relaxed mt-sm" data-cms={`stats.${i}.label`}>{s.label}</p>
             </div>
           ))}
         </div>
@@ -98,26 +78,28 @@ const stats = [
         <div class="w-[500px] h-48 bg-neon/5 blur-[100px] rounded-full"></div>
       </div>
       <div class="relative z-10">
-        <div class="section-label mx-auto mb-md">Zacznij tworzyć</div>
+        <div class="section-label mx-auto mb-md" data-cms="ctaEyebrow">{content.ctaEyebrow}</div>
         <h2 class="text-headline-lg text-on-surface mb-md">
-          {d.cta_title ?? 'Chcesz treści które'}<br /><span class="text-neon">naprawdę rankują?</span>
+          <span data-cms="ctaTitleL1">{content.ctaTitleL1}</span><br /><span class="text-neon" data-cms="ctaTitleAccent">{content.ctaTitleAccent}</span>
         </h2>
-        <p class="text-body-lg text-on-surface-variant max-w-xl mx-auto mb-lg">
-          {d.cta_desc ?? 'Omówmy strategię contentową dla Twojej domeny. Pokażę Ci jak budować autorytet tematyczny krok po kroku.'}
+        <p class="text-body-lg text-on-surface-variant max-w-xl mx-auto mb-lg" data-cms="ctaDesc">
+          {content.ctaDesc}
         </p>
         <div class="flex flex-col sm:flex-row gap-md justify-center">
           <a href="/kontakt"
              class="inline-flex items-center justify-center gap-2 bg-neon text-on-primary font-bold text-label-md uppercase tracking-widest px-xl py-md hover:brightness-110 active:scale-95 transition-all shadow-neon">
             <span aria-hidden="true" class="material-symbols-outlined text-sm">calendar_month</span>
-            Umów konsultację
+            <span data-cms="ctaBtnPrimary">{content.ctaBtnPrimary}</span>
           </a>
           <a href="/uslugi/audyt-seo"
              class="inline-flex items-center justify-center gap-2 border border-neon/30 text-neon font-bold text-label-md uppercase tracking-widest px-xl py-md hover:bg-neon/5 transition-all">
-            Zacznij od audytu
+            <span data-cms="ctaBtnSecondary">{content.ctaBtnSecondary}</span>
           </a>
         </div>
       </div>
     </div>
   </section>
+
+  <InlineEditor contentPath="src/data/pages/uslugi-content-marketing.json" />
 
 </BaseLayout>

@@ -1,0 +1,43 @@
+{
+  "heroEyebrow": "Strategia organiczna",
+  "heroTitleL1": "Pozycjonowanie",
+  "heroTitleAccent": "które zostaje",
+  "heroDesc": "Budujemy długofalową widoczność opartą o autorytet tematyczny, a nie chwilowe sztuczki. Wyniki, które rosną miesiąc po miesiącu.",
+  "heroBtnPrimary": "Umów konsultację",
+  "heroBtnSecondary": "Najpierw audyt",
+
+  "rankingLabel": "Ranking Progress — Live",
+  "rankings": [
+    { "phrase": "audyt seo białystok", "pos": 1, "change": "+12" },
+    { "phrase": "pozycjonowanie sklep", "pos": 2, "change": "+8" },
+    { "phrase": "seo techniczne firma", "pos": 3, "change": "+15" },
+    { "phrase": "content marketing seo", "pos": 5, "change": "+6" },
+    { "phrase": "agencja seo podlaskie", "pos": 7, "change": "+21" }
+  ],
+
+  "zakresEyebrow": "Zakres działań",
+  "zakresTitleL1": "Co wchodzi w skład",
+  "zakresTitleAccent": "pozycjonowania",
+  "zakresDesc": "Kompleksowa strategia SEO dopasowana do Twojej domeny i branży — od fundamentów technicznych po budowę autorytetu.",
+  "items": [
+    { "icon": "map", "title": "Keyword Mapping", "desc": "Mapowanie fraz kluczowych na strony docelowe. Każda podstrona atakuje konkretne zapytania z określoną intencją." },
+    { "icon": "hub", "title": "Linkowanie Wewnętrzne", "desc": "Architektura silosów tematycznych — przepływ autorytetu tam, gdzie ma generować wyniki." },
+    { "icon": "link", "title": "Link Building", "desc": "Pozyskiwanie wartościowych backlinków z domenami o wysokim autorytecie. Zero farm i PBN." },
+    { "icon": "psychology", "title": "Topical Authority", "desc": "Budowa pozycji eksperta w niszy przez systematyczne pokrywanie tematów i pytań użytkowników." },
+    { "icon": "manage_search", "title": "Monitoring Pozycji", "desc": "Codzienny tracking fraz z alertami dla istotnych zmian. Reagujemy zanim Google Cię wyprzedzi." },
+    { "icon": "bar_chart_4_bars", "title": "Miesięczne Raporty", "desc": "Przejrzyste raporty z danymi, które mają znaczenie dla Twojego biznesu — nie dla naszego ego." }
+  ],
+
+  "wynikiEyebrow": "Rezultaty",
+  "wynikiTitleL1": "Przykładowe",
+  "wynikiTitleAccent": "wyniki",
+  "cases": [
+    { "cat": "E-commerce", "result": "+318% ruchu", "period": "6 miesięcy", "desc": "Sklep z elektroniką. Przebudowa architektury kategorii + content + link building." },
+    { "cat": "Usługi B2B", "result": "Top 3 / 47 fraz", "period": "4 miesiące", "desc": "Firma consultingowa. Topical authority w wąskiej niszy B2B." },
+    { "cat": "Local SEO", "result": "+520% w Maps", "period": "3 miesiące", "desc": "Sieć gabinetów medycznych. GMB + lokalne silosy treści." }
+  ],
+
+  "ctaTitleL1": "Twoja strona może być następna.",
+  "ctaTitleAccent": "Zacznij od bezpłatnej analizy.",
+  "ctaBtn": "Umów bezpłatną konsultację"
+}

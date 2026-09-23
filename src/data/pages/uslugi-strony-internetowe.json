@@ -1,0 +1,43 @@
+{
+  "heroEyebrow": "Strony internetowe",
+  "heroTitleL1": "Strona zbudowana",
+  "heroTitleAccent": "pod ranking od dnia 1",
+  "heroDesc": "Projektuję i buduję strony internetowe z SEO wbudowanym od fundamentów — nie dorzucanym po fakcie. Szybkie, techniczne perfekcyjne i gotowe do pozycjonowania.",
+  "heroBtn": "Omówmy projekt",
+
+  "cwvLabel": "Core Web Vitals — przykład",
+  "cwv": [
+    { "metric": "LCP (Largest Contentful Paint)", "value": "0.8s", "pct": 68 },
+    { "metric": "INP (Interaction to Next Paint)", "value": "48ms", "pct": 76 },
+    { "metric": "CLS (Cumulative Layout Shift)", "value": "0.02", "pct": 80 }
+  ],
+  "lighthouseLabel": "Lighthouse Score:",
+  "lighthouseValue": "98 / 100",
+
+  "zakresEyebrow": "Jak buduję",
+  "zakresTitleL1": "Co otrzymujesz",
+  "zakresTitleAccent": "w każdym projekcie",
+  "zakresDesc": "Każda strona to kompletny produkt — dopracowany technicznie, przygotowany na SEO i gotowy do skalowania.",
+  "items": [
+    { "icon": "speed", "title": "Błyskawiczne Ładowanie", "desc": "Astro + statyczny output = Core Web Vitals w normie od dnia 1. LCP poniżej 1s to standard, nie wyjątek." },
+    { "icon": "search", "title": "SEO od Fundamentów", "desc": "Semantyczny HTML, schema markup, hreflang, sitemap, robots.txt — techniczna baza pod pozycjonowanie." },
+    { "icon": "devices", "title": "Responsywny Design", "desc": "Perfekcyjne wyświetlanie na każdym urządzeniu. Mobile-first z dbałością o UX i konwersje." },
+    { "icon": "lock", "title": "Bezpieczeństwo (HTTPS)", "desc": "SSL, Content Security Policy, ochrona przed typowymi atakami. Strona bezpieczna dla użytkowników." },
+    { "icon": "analytics", "title": "Analityka od Początku", "desc": "Integracja GA4, Search Console i opcjonalnie Hotjar. Wiesz kto odwiedza Twoją stronę od dnia premiery." },
+    { "icon": "edit_note", "title": "Łatwa Edycja Treści", "desc": "Opcjonalne CMS (Netlify CMS, Keystatic). Zmieniasz treści samodzielnie bez dotykania kodu." }
+  ],
+
+  "techEyebrow": "Technologie",
+  "techTitleL1": "Nowoczesny",
+  "techTitleAccent": "stos technologiczny",
+  "stack": [
+    { "icon": "rocket_launch", "label": "Astro" },
+    { "icon": "palette", "label": "Tailwind CSS" },
+    { "icon": "cloud", "label": "Netlify / Vercel" },
+    { "icon": "edit_note", "label": "Headless CMS" }
+  ],
+
+  "ctaTitleL1": "Potrzebujesz strony,",
+  "ctaTitleAccent": "która rankuje i konwertuje?",
+  "ctaBtn": "Omówmy Twój projekt"
+}

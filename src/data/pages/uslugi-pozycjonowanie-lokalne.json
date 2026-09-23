@@ -1,0 +1,44 @@
+{
+  "heroEyebrow": "Local SEO",
+  "heroTitleL1": "Dominuj w wynikach",
+  "heroTitleAccent": "lokalnych Google",
+  "heroDesc": "Pomagam firmom usługowym i lokalnym biznesom zdobywać klientów z Google Maps i lokalnych wyników wyszukiwania. Twój biznes na pierwszym miejscu w okolicy.",
+  "heroBtnPrimary": "Umów konsultację",
+  "heroBtnSecondary": "Najpierw audyt",
+
+  "visLabel": "Widoczność lokalna",
+  "rankings": [
+    { "query": "mechanik białystok", "pos": 1, "maps": true },
+    { "query": "dentysta warszawa centrum", "pos": 1, "maps": true },
+    { "query": "prawnik gdańsk", "pos": 2, "maps": true },
+    { "query": "fryzjer kraków", "pos": 1, "maps": true },
+    { "query": "restauracja włoska poznań", "pos": 3, "maps": true }
+  ],
+
+  "zakresEyebrow": "Zakres działań",
+  "zakresTitleL1": "Jak buduję",
+  "zakresTitleAccent": "widoczność lokalną",
+  "zakresDesc": "Kompleksowe działania Local SEO — od optymalizacji profilu GMB po budowę lokalnego autorytetu domenowego.",
+  "items": [
+    { "icon": "location_on", "title": "Google Moja Firma", "desc": "Pełna optymalizacja profilu GMB: kategorie, opisy, zdjęcia, godziny, atrybuty. Strategia postów i Q&A." },
+    { "icon": "format_list_bulleted", "title": "Lokalne Cytowania (NAP)", "desc": "Budowa spójnych wpisów w katalogach: nazwa, adres, telefon. Korekta niespójności, które blokują pozycje." },
+    { "icon": "star", "title": "Strategia Opinii", "desc": "Procesy pozyskiwania recenzji Google, odpowiedzi na opinie i zarządzanie reputacją online." },
+    { "icon": "article", "title": "Lokalny Content", "desc": "Treści optymalizowane pod frazy \"[usługa] + [miasto]\". Podstrony lokalne dla wielu oddziałów." },
+    { "icon": "link", "title": "Lokalny Link Building", "desc": "Backlinki z lokalnych portali, sponsoringów i organizacji. Wzmacniają sygnały geograficzne w Google." },
+    { "icon": "manage_search", "title": "Monitoring Lokalny", "desc": "Śledzenie pozycji w Google Maps i wynikach lokalnych z podziałem na konkretne miasto i dzielnicę." }
+  ],
+
+  "branzeEyebrow": "Branże",
+  "branzeTitleL1": "Pracuję z lokalnymi",
+  "branzeTitleAccent": "firmami usługowymi",
+  "branze": [
+    { "icon": "medical_services", "label": "Medycyna i zdrowie" },
+    { "icon": "gavel", "label": "Prawo i finanse" },
+    { "icon": "build", "label": "Usługi techniczne" },
+    { "icon": "restaurant", "label": "Gastronomia i handel" }
+  ],
+
+  "ctaTitleL1": "Chcesz być #1 w Google",
+  "ctaTitleAccent": "w swojej okolicy?",
+  "ctaBtn": "Zamów bezpłatną analizę lokalną"
+}

@@ -1,0 +1,38 @@
+{
+  "heroEyebrow": "Inżynieria treści",
+  "heroTitleL1": "Treści które",
+  "heroTitleAccent": "rankują i konwertują",
+  "heroDesc": "Nie piszemy artykułów dla samego pisania. Każdy tekst to precyzyjnie zaprojektowany asset SEO — z mapą fraz, strukturą NLP i celem konwersyjnym.",
+
+  "types": [
+    { "icon": "article", "title": "Artykuły Blogowe", "desc": "Długie formy zoptymalizowane pod frazy informacyjne i topical authority." },
+    { "icon": "web", "title": "Teksty na Strony", "desc": "Landing pages i strony usługowe pisane pod konwersję i intencję transakcyjną." },
+    { "icon": "description", "title": "Opisy Produktów", "desc": "Unikalne opisy e-commerce z semantyką i słowami kluczowymi long-tail." },
+    { "icon": "edit_document", "title": "Treści Pillar", "desc": "Strony filarowe budujące topical authority dla całych silosów tematycznych." }
+  ],
+
+  "processEyebrow": "Proces tworzenia",
+  "processTitleL1": "Content oparty",
+  "processTitleAccent": "o dane, nie intuicję",
+  "steps": [
+    { "n": "01", "title": "Keyword Research", "desc": "Mapowanie intencji użytkowników i identyfikacja fraz o najwyższym potencjale konwersji." },
+    { "n": "02", "title": "Topical Map", "desc": "Projektowanie silosów tematycznych — które tematy, w jakiej kolejności, z jakimi linkami." },
+    { "n": "03", "title": "Brief + NLP Outline", "desc": "Szczegółowy brief z frazami LSI, pytaniami użytkowników i wymaganą strukturą semantyczną." },
+    { "n": "04", "title": "Tworzenie i wdrożenie", "desc": "Pisanie, optymalizacja on-page, CTA i interlinking zgodnie z architekturą silosów." },
+    { "n": "05", "title": "Monitoring wyników", "desc": "Śledzenie pozycji, ruchu i czasu na stronie — iterujemy na podstawie danych." }
+  ],
+
+  "stats": [
+    { "value": "3x", "label": "Więcej ruchu organicznego vs. treści bez strategii" },
+    { "value": "68%", "label": "Artykułów rankuje w TOP10 w ciągu 6 miesięcy" },
+    { "value": "2.4x", "label": "Wyższy czas na stronie po optymalizacji NLP" },
+    { "value": "0%", "label": "Duplicate content w dostarczanych materiałach" }
+  ],
+
+  "ctaEyebrow": "Zacznij tworzyć",
+  "ctaTitleL1": "Chcesz treści które",
+  "ctaTitleAccent": "naprawdę rankują?",
+  "ctaDesc": "Omówmy strategię contentową dla Twojej domeny. Pokażę Ci jak budować autorytet tematyczny krok po kroku.",
+  "ctaBtnPrimary": "Umów konsultację",
+  "ctaBtnSecondary": "Zacznij od audytu"
+}
