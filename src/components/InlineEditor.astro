@@ -207,6 +207,20 @@ const { contentPath } = Astro.props
       ;(t as any)._t = setTimeout(() => { t.hidden = true }, 4000)
     }
     function getToken() { return localStorage.getItem(TOKEN_KEY) || sessionStorage.getItem(TOKEN_KEY) }
+
+    /* Ścieżki z kropkami i indeksami: "hero.title", "cards.0.label".
+       Pozwala edytować teksty także w listach/kartach, nie tylko pola płaskie. */
+    function setByPath(obj: any, path: string, value: string) {
+      const parts = path.split('.')
+      let cur = obj
+      for (let i = 0; i < parts.length - 1; i++) {
+        const k = parts[i]
+        if (cur[k] == null) cur[k] = /^\d+$/.test(parts[i + 1]) ? [] : {}
+        cur = cur[k]
+      }
+      cur[parts[parts.length - 1]] = value
+    }
+
     function b64encode(str: string) {
       const bytes = new TextEncoder().encode(str); let bin = ''
       bytes.forEach(b => { bin += String.fromCharCode(b) }); return btoa(bin)
@@ -287,7 +301,7 @@ const { contentPath } = Astro.props
 
         // 2. wstaw zmienione pola (jednoliniowe — bez znaków nowej linii)
         changed.forEach(el => {
-          data[el.dataset.cms!] = el.innerText.replace(/\s*\n\s*/g, ' ').trim()
+          setByPath(data, el.dataset.cms!, el.innerText.replace(/\s*\n\s*/g, ' ').trim())
         })
 
         // 3. zapis z powrotem

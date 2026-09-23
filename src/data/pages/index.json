@@ -1,0 +1,83 @@
+{
+  "heroEyebrow": "System Online: Optymalizacja Aktywna",
+  "heroTitleL1": "Architektura",
+  "heroTitleAccent": "Precyzyjnego wzrostu",
+  "heroTitleL3": "w Google",
+  "heroLead": "Przekształcam dane w dominację rynkową. Projektuję zaawansowane ekosystemy widoczności, które skalują Twój biznes w organicznych wynikach wyszukiwania — bez skrótów, z mierzalnymi rezultatami.",
+  "heroBtnPrimary": "Zamów bezpłatny audyt",
+  "heroBtnSecondary": "Zobacz usługi",
+  "heroBadge": "Dostępny dla nowych projektów",
+
+  "introTitleL1": "Freelancer SEO",
+  "introTitleL2": "Krzysztof Parfieniuk",
+  "introBody": "Pomagam firmom oraz sklepom internetowym przekształcać ruch z wyszukiwarki Google w przewidywalne źródło przychodów. Jako niezależny freelancer SEO, łączę zaawansowaną analitykę techniczną z precyzyjną strategią content marketingową oraz automatyzacją procesów. Działam bez pośredników – wybierając współpracę ze mną, zyskujesz bezpośredni kontakt ze specjalistą, pełną transparentność oraz działania dopasowane do specyfiki Twojego biznesu.",
+
+  "stats": [
+    { "icon": "monitoring",    "value": "+248%", "label": "Średni wzrost widoczności" },
+    { "icon": "query_stats",   "value": "1.2M+", "label": "Zindeksowanych fraz" },
+    { "icon": "speed",         "value": "0.4s",  "label": "Średni LCP po audycie" },
+    { "icon": "rocket_launch", "value": "x5.2",  "label": "Wzrost ROI z organica" }
+  ],
+
+  "servicesEyebrow": "Protokoły operacyjne",
+  "servicesTitleL1": "Jak zwiększam",
+  "servicesTitleAccent": "Twoją widoczność",
+  "services": [
+    {
+      "icon": "troubleshoot",
+      "title": "Audyt Techniczny SEO",
+      "desc": "Pełna analiza kodu, struktury i Core Web Vitals przy użyciu autorskich skryptów diagnostycznych. Dostajesz raport z konkretnymi priorytetami napraw.",
+      "tags": ["Core Web Vitals", "Crawl Analysis", "Indeksowanie"],
+      "href": "/uslugi/audyt-seo"
+    },
+    {
+      "icon": "hub",
+      "title": "Strategia Pozycjonowania",
+      "desc": "Budowa długofalowych planów penetracji rynku opartych o analizę luk w widoczności konkurencji i mapowanie fraz kluczowych.",
+      "tags": ["Keyword Mapping", "Link Building", "Topical Authority"],
+      "href": "/uslugi/pozycjonowanie"
+    },
+    {
+      "icon": "article",
+      "title": "Content Marketing SEO",
+      "desc": "Tworzenie treści optymalizowanych pod NLP i silosy tematyczne, które budują autorytet domeny i konwertują ruch organiczny.",
+      "tags": ["NLP Optimization", "Silo Topics", "SEO Copywriting"],
+      "href": "/uslugi/content-marketing"
+    }
+  ],
+
+  "whyEyebrow": "Dlaczego KrPage?",
+  "whyTitleL1": "Technologia i",
+  "whyTitleAccent": "przejrzyste wyniki",
+  "whyItems": [
+    { "icon": "precision_manufacturing", "title": "Technologiczna przewaga", "desc": "Korzystam z autorskich narzędzi do data-miningu i crawlingu, których nie znajdziesz w standardowych pakietach SaaS." },
+    { "icon": "security", "title": "Strategia White-Hat", "desc": "Bezpieczne, trwałe wzrosty oparte na zrozumieniu algorytmów Google — bez szybkich sztuczek, które cofną Cię na starcie." },
+    { "icon": "analytics", "title": "Raporty, które rozumiesz", "desc": "Miesięczne raporty zawierające tylko dane, które mają znaczenie dla Twojego biznesu — bez zbędnego szumu." }
+  ],
+  "processSteps": [
+    { "n": "01", "title": "Analiza",       "desc": "Ekstrakcja danych z GA4, Search Console i autorskiego crawlera. Budujemy pełny obraz kondycji domeny." },
+    { "n": "02", "title": "Optymalizacja", "desc": "Implementacja poprawek technicznych, on-page i content — od krytycznych po quick-wins." },
+    { "n": "03", "title": "Skalowanie",    "desc": "Zarządzanie velocity linków, rozbudowa treści i monitoring rankingów w czasie rzeczywistym." }
+  ],
+
+  "casesEyebrow": "Rezultaty",
+  "casesTitleL1": "Projekty i",
+  "casesTitleAccent": "wyniki",
+  "cases": [
+    { "category": "E-commerce", "prefix": "+", "num": 318, "suffix": "% ruchu", "period": "6 miesięcy", "desc": "Sklep z elektroniką. Audyt techniczny + przebudowa architektury kategorii + linkbuilding." },
+    { "category": "Usługi B2B", "prefix": "Top 3 na ", "num": 47, "suffix": " fraz", "period": "4 miesiące", "desc": "Firma consultingowa. Strategia treści oparta o topical authority w wąskiej niszy." },
+    { "category": "Local SEO", "prefix": "+", "num": 520, "suffix": "% w Google Maps", "period": "3 miesiące", "desc": "Sieć gabinetów medycznych. Optymalizacja GMB + lokalne silosy contentowe." }
+  ],
+
+  "blogEyebrow": "Baza wiedzy",
+  "blogTitleL1": "Ostatnie wpisy",
+  "blogTitleAccent": "na blogu",
+
+  "ctaEyebrow": "Darmowa konsultacja",
+  "ctaTitleL1": "Gotowy na",
+  "ctaTitleAccent": "nowy poziom",
+  "ctaTitleL3": "widoczności?",
+  "ctaBody": "Pierwsza analiza potencjału Twojej domeny jest bezpłatna. Umów się, a pokażę Ci konkretnie, gdzie tracisz ruch i jak to naprawić.",
+  "ctaBtnPrimary": "Umów bezpłatny audyt",
+  "ctaBtnSecondary": "Czytaj blog SEO"
+}

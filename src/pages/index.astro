@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
+import InlineEditor from '../components/InlineEditor.astro'
+import content from '../data/pages/index.json'
 import { getCollection } from 'astro:content'
 
 const allPosts   = await getCollection('blog')
@@ -26,17 +28,17 @@ const latestPosts = allPosts
       <div class="lg:col-span-7 z-10">
         <div class="section-label mb-md">
           <span class="w-2 h-2 rounded-full bg-neon animate-pulse"></span>
-          System Online: Optymalizacja Aktywna
+          <span data-cms="heroEyebrow">{content.heroEyebrow}</span>
         </div>
 
         <p class="text-headline-xl text-on-surface mb-md">
-          Architektura<br />
-          <span class="text-neon">Precyzyjnego wzrostu</span><br />
-          w Google
+          <span data-cms="heroTitleL1">{content.heroTitleL1}</span><br />
+          <span class="text-neon" data-cms="heroTitleAccent">{content.heroTitleAccent}</span><br />
+          <span data-cms="heroTitleL3">{content.heroTitleL3}</span>
         </p>
 
-        <p class="text-body-lg text-on-surface-variant max-w-xl mb-lg">
-          Przekształcam dane w dominację rynkową. Projektuję zaawansowane ekosystemy widoczności, które skalują Twój biznes w organicznych wynikach wyszukiwania — bez skrótów, z mierzalnymi rezultatami.
+        <p class="text-body-lg text-on-surface-variant max-w-xl mb-lg" data-cms="heroLead">
+          {content.heroLead}
         </p>
 
         <div class="flex flex-wrap gap-md">
@@ -48,7 +50,7 @@ const latestPosts = allPosts
                    hover:brightness-125 hover:shadow-neon active:scale-95 transition-all shadow-neon-sm"
           >
             <span aria-hidden="true" class="material-symbols-outlined text-sm">troubleshoot</span>
-            Zamów bezpłatny audyt
+            <span data-cms="heroBtnPrimary">{content.heroBtnPrimary}</span>
           </a>
           <a
             href="/uslugi"
@@ -57,7 +59,7 @@ const latestPosts = allPosts
                    px-lg py-md
                    hover:bg-neon/10 hover:border-neon/60 transition-all"
           >
-            Zobacz usługi
+            <span data-cms="heroBtnSecondary">{content.heroBtnSecondary}</span>
             <span aria-hidden="true" class="material-symbols-outlined text-sm">arrow_forward</span>
           </a>
         </div>
@@ -88,7 +90,7 @@ const latestPosts = allPosts
                       bg-background border border-neon/30 px-3 py-1.5
                       flex items-center gap-2 shadow-neon-sm">
             <span class="w-2 h-2 rounded-full bg-neon animate-pulse shrink-0"></span>
-            <span class="text-label-sm text-neon uppercase tracking-widest leading-snug">Dostępny dla nowych projektów</span>
+            <span class="text-label-sm text-neon uppercase tracking-widest leading-snug" data-cms="heroBadge">{content.heroBadge}</span>
           </div>
         </div>
       </div>
@@ -102,11 +104,11 @@ const latestPosts = allPosts
   <section class="max-w-7xl mx-auto px-6 md:px-12 mb-xl">
     <div class="bento-card px-lg py-lg md:px-xl md:py-lg border-l-4 border-neon/50">
       <h1 class="text-headline-lg text-on-surface mb-md">
-        <span class="block">Freelancer SEO</span>
-        <span class="block text-neon">Krzysztof Parfieniuk</span>
+        <span class="block" data-cms="introTitleL1">{content.introTitleL1}</span>
+        <span class="block text-neon" data-cms="introTitleL2">{content.introTitleL2}</span>
       </h1>
-      <p class="text-body-lg text-on-surface-variant max-w-4xl leading-relaxed">
-        Pomagam firmom oraz sklepom internetowym przekształcać ruch z wyszukiwarki Google w przewidywalne źródło przychodów. Jako niezależny freelancer SEO, łączę zaawansowaną analitykę techniczną z precyzyjną strategią content marketingową oraz automatyzacją procesów. Działam bez pośredników – wybierając współpracę ze mną, zyskujesz bezpośredni kontakt ze specjalistą, pełną transparentność oraz działania dopasowane do specyfiki Twojego biznesu.
+      <p class="text-body-lg text-on-surface-variant max-w-4xl leading-relaxed" data-cms="introBody">
+        {content.introBody}
       </p>
     </div>
   </section>
@@ -116,12 +118,7 @@ const latestPosts = allPosts
   ═══════════════════════════════════════════ -->
   <section class="max-w-7xl mx-auto px-6 md:px-12 mb-xl">
     <div class="grid grid-cols-2 md:grid-cols-4 gap-md">
-      {[
-        { icon: 'monitoring',    value: '+248%',  label: 'Średni wzrost widoczności' },
-        { icon: 'query_stats',   value: '1.2M+',  label: 'Zindeksowanych fraz'       },
-        { icon: 'speed',         value: '0.4s',   label: 'Średni LCP po audycie'     },
-        { icon: 'rocket_launch', value: 'x5.2',   label: 'Wzrost ROI z organica'     },
-      ].map(stat => (
+      {content.stats.map((stat, i) => (
         <div class="bento-card p-md md:p-lg flex flex-col justify-between group hover:border-neon/40 transition-all">
           <div class="flex justify-between items-start mb-md md:mb-lg">
             <span aria-hidden="true" class="material-symbols-outlined text-neon">{stat.icon}</span>
@@ -133,8 +130,8 @@ const latestPosts = allPosts
             </div>
           </div>
           <div>
-            <p class="text-headline-lg text-neon mb-xs">{stat.value}</p>
-            <p class="text-label-md text-on-surface-variant uppercase tracking-widest">{stat.label}</p>
+            <p class="text-headline-lg text-neon mb-xs" data-cms={`stats.${i}.value`}>{stat.value}</p>
+            <p class="text-label-md text-on-surface-variant uppercase tracking-widest" data-cms={`stats.${i}.label`}>{stat.label}</p>
           </div>
         </div>
       ))}
@@ -146,44 +143,22 @@ const latestPosts = allPosts
   ═══════════════════════════════════════════ -->
   <section class="max-w-7xl mx-auto px-6 md:px-12 mb-xl">
     <div class="mb-lg">
-      <div class="section-label mb-sm">Protokoły operacyjne</div>
+      <div class="section-label mb-sm" data-cms="servicesEyebrow">{content.servicesEyebrow}</div>
       <h2 class="text-headline-lg text-on-surface">
-        Jak zwiększam<br />
-        <span class="text-neon">Twoją widoczność</span>
+        <span data-cms="servicesTitleL1">{content.servicesTitleL1}</span><br />
+        <span class="text-neon" data-cms="servicesTitleAccent">{content.servicesTitleAccent}</span>
       </h2>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
-      {[
-        {
-          icon:    'troubleshoot',
-          title:   'Audyt Techniczny SEO',
-          desc:    'Pełna analiza kodu, struktury i Core Web Vitals przy użyciu autorskich skryptów diagnostycznych. Dostajesz raport z konkretnymi priorytetami napraw.',
-          tags:    ['Core Web Vitals', 'Crawl Analysis', 'Indeksowanie'],
-          href:    '/uslugi/audyt-seo',
-        },
-        {
-          icon:    'hub',
-          title:   'Strategia Pozycjonowania',
-          desc:    'Budowa długofalowych planów penetracji rynku opartych o analizę luk w widoczności konkurencji i mapowanie fraz kluczowych.',
-          tags:    ['Keyword Mapping', 'Link Building', 'Topical Authority'],
-          href:    '/uslugi/pozycjonowanie',
-        },
-        {
-          icon:    'article',
-          title:   'Content Marketing SEO',
-          desc:    'Tworzenie treści optymalizowanych pod NLP i silosy tematyczne, które budują autorytet domeny i konwertują ruch organiczny.',
-          tags:    ['NLP Optimization', 'Silo Topics', 'SEO Copywriting'],
-          href:    '/uslugi/content-marketing',
-        },
-      ].map(s => (
+      {content.services.map((s, i) => (
         <div class="bento-card p-lg relative overflow-hidden group flex flex-col hover:border-neon/40 hover:shadow-[0_0_24px_rgb(var(--tw-accent)_/_0.08)] transition-all duration-300">
           <div class="absolute top-0 right-0 p-4 text-neon/10 group-hover:text-neon/25 transition-colors">
             <span aria-hidden="true" class="material-symbols-outlined text-6xl">{s.icon}</span>
           </div>
           <div class="relative z-10 flex flex-col flex-1">
-            <h3 class="text-headline-md text-on-surface mb-sm">{s.title}</h3>
-            <p class="text-body-md text-on-surface-variant mb-md flex-1">{s.desc}</p>
+            <h3 class="text-headline-md text-on-surface mb-sm" data-cms={`services.${i}.title`}>{s.title}</h3>
+            <p class="text-body-md text-on-surface-variant mb-md flex-1" data-cms={`services.${i}.desc`}>{s.desc}</p>
             <div class="flex flex-wrap gap-2 mb-md">
               {s.tags.map(tag => (
                 <span class="px-2 py-0.5 bg-surface-container-highest border border-outline-variant text-label-sm text-on-surface-variant uppercase">
@@ -212,37 +187,21 @@ const latestPosts = allPosts
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-lg items-center relative z-10">
         <div>
-          <div class="section-label mb-md">Dlaczego KrPage?</div>
+          <div class="section-label mb-md" data-cms="whyEyebrow">{content.whyEyebrow}</div>
           <h2 class="text-headline-lg text-on-surface mb-lg">
-            Technologia i<br />
-            <span class="text-neon">przejrzyste wyniki</span>
+            <span data-cms="whyTitleL1">{content.whyTitleL1}</span><br />
+            <span class="text-neon" data-cms="whyTitleAccent">{content.whyTitleAccent}</span>
           </h2>
 
           <div class="space-y-md">
-            {[
-              {
-                icon:  'precision_manufacturing',
-                title: 'Technologiczna przewaga',
-                desc:  'Korzystam z autorskich narzędzi do data-miningu i crawlingu, których nie znajdziesz w standardowych pakietach SaaS.',
-              },
-              {
-                icon:  'security',
-                title: 'Strategia White-Hat',
-                desc:  'Bezpieczne, trwałe wzrosty oparte na zrozumieniu algorytmów Google — bez szybkich sztuczek, które cofną Cię na starcie.',
-              },
-              {
-                icon:  'analytics',
-                title: 'Raporty, które rozumiesz',
-                desc:  'Miesięczne raporty zawierające tylko dane, które mają znaczenie dla Twojego biznesu — bez zbędnego szumu.',
-              },
-            ].map(item => (
+            {content.whyItems.map((item, i) => (
               <div class="flex gap-md">
                 <div class="w-10 h-10 shrink-0 bg-neon/10 border border-neon/20 flex items-center justify-center">
                   <span aria-hidden="true" class="material-symbols-outlined text-neon text-base">{item.icon}</span>
                 </div>
                 <div>
-                  <h4 class="text-label-md uppercase text-neon mb-1">{item.title}</h4>
-                  <p class="text-body-md text-on-surface-variant">{item.desc}</p>
+                  <h4 class="text-label-md uppercase text-neon mb-1" data-cms={`whyItems.${i}.title`}>{item.title}</h4>
+                  <p class="text-body-md text-on-surface-variant" data-cms={`whyItems.${i}.desc`}>{item.desc}</p>
                 </div>
               </div>
             ))}
@@ -251,11 +210,7 @@ const latestPosts = allPosts
 
         <!-- Animated process steps -->
         <div id="process-steps" class="space-y-4">
-          {[
-            { n: '01', title: 'Analiza',       desc: 'Ekstrakcja danych z GA4, Search Console i autorskiego crawlera. Budujemy pełny obraz kondycji domeny.' },
-            { n: '02', title: 'Optymalizacja', desc: 'Implementacja poprawek technicznych, on-page i content — od krytycznych po quick-wins.' },
-            { n: '03', title: 'Skalowanie',    desc: 'Zarządzanie velocity linków, rozbudowa treści i monitoring rankingów w czasie rzeczywistym.' },
-          ].map((step, i) => (
+          {content.processSteps.map((step, i) => (
             <div
               data-step={i}
               class:list={[
@@ -270,8 +225,8 @@ const latestPosts = allPosts
                 i === 0 ? 'text-neon' : 'text-on-surface-variant',
               ]}>{step.n}</span>
               <div>
-                <p class="text-label-md uppercase tracking-wider text-on-surface font-bold mb-1">{step.title}</p>
-                <p class="text-label-sm text-on-surface-variant">{step.desc}</p>
+                <p class="text-label-md uppercase tracking-wider text-on-surface font-bold mb-1" data-cms={`processSteps.${i}.title`}>{step.title}</p>
+                <p class="text-label-sm text-on-surface-variant" data-cms={`processSteps.${i}.desc`}>{step.desc}</p>
               </div>
             </div>
           ))}
@@ -285,26 +240,22 @@ const latestPosts = allPosts
   ═══════════════════════════════════════════ -->
   <section class="max-w-7xl mx-auto px-6 md:px-12 mb-xl">
     <div class="mb-lg">
-      <div class="section-label mb-sm">Rezultaty</div>
+      <div class="section-label mb-sm" data-cms="casesEyebrow">{content.casesEyebrow}</div>
       <h2 class="text-headline-lg text-on-surface">
-        Projekty i <span class="text-neon">wyniki</span>
+        <span data-cms="casesTitleL1">{content.casesTitleL1}</span> <span class="text-neon" data-cms="casesTitleAccent">{content.casesTitleAccent}</span>
       </h2>
     </div>
 
     <div id="case-studies" class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
-      {[
-        { category: 'E-commerce',  prefix: '+', num: 318, suffix: '% ruchu',         period: '6 miesięcy',  desc: 'Sklep z elektroniką. Audyt techniczny + przebudowa architektury kategorii + linkbuilding.' },
-        { category: 'Usługi B2B',  prefix: 'Top 3 na ', num: 47, suffix: ' fraz',    period: '4 miesiące',  desc: 'Firma consultingowa. Strategia treści oparta o topical authority w wąskiej niszy.' },
-        { category: 'Local SEO',   prefix: '+', num: 520, suffix: '% w Google Maps', period: '3 miesiące',  desc: 'Sieć gabinetów medycznych. Optymalizacja GMB + lokalne silosy contentowe.' },
-      ].map((cs, i) => (
+      {content.cases.map((cs, i) => (
         <div class="bento-card p-lg flex flex-col gap-sm hover:border-neon/40 hover:shadow-[0_0_24px_rgb(var(--tw-accent)_/_0.08)] transition-all duration-300 group">
-          <span class="text-label-sm uppercase tracking-widest text-neon/60 font-mono">{cs.category}</span>
+          <span class="text-label-sm uppercase tracking-widest text-neon/60 font-mono" data-cms={`cases.${i}.category`}>{cs.category}</span>
           <p class="text-headline-md text-neon font-black">
-            {cs.prefix}<span class="counter" data-target={cs.num} data-index={i}>0</span>{cs.suffix}
+            <span data-cms={`cases.${i}.prefix`}>{cs.prefix}</span><span class="counter" data-target={cs.num} data-index={i}>0</span><span data-cms={`cases.${i}.suffix`}>{cs.suffix}</span>
           </p>
-          <p class="text-label-sm text-on-surface-variant uppercase">{cs.period}</p>
+          <p class="text-label-sm text-on-surface-variant uppercase" data-cms={`cases.${i}.period`}>{cs.period}</p>
           <div class="w-full h-px bg-neon/10 my-xs"></div>
-          <p class="text-body-md text-on-surface-variant flex-1">{cs.desc}</p>
+          <p class="text-body-md text-on-surface-variant flex-1" data-cms={`cases.${i}.desc`}>{cs.desc}</p>
         </div>
       ))}
     </div>
@@ -316,9 +267,9 @@ const latestPosts = allPosts
   <section class="max-w-7xl mx-auto px-6 md:px-12 mb-xl">
     <div class="flex items-end justify-between mb-lg">
       <div>
-        <div class="section-label mb-sm">Baza wiedzy</div>
+        <div class="section-label mb-sm" data-cms="blogEyebrow">{content.blogEyebrow}</div>
         <h2 class="text-headline-lg text-on-surface">
-          Ostatnie wpisy <span class="text-neon">na blogu</span>
+          <span data-cms="blogTitleL1">{content.blogTitleL1}</span> <span class="text-neon" data-cms="blogTitleAccent">{content.blogTitleAccent}</span>
         </h2>
       </div>
       <a href="/blog"
@@ -379,13 +330,13 @@ const latestPosts = allPosts
       </div>
 
       <div class="relative z-10">
-        <div class="section-label mx-auto mb-md">Darmowa konsultacja</div>
+        <div class="section-label mx-auto mb-md" data-cms="ctaEyebrow">{content.ctaEyebrow}</div>
         <h2 class="text-headline-xl text-on-surface mb-md">
-          Gotowy na <span class="text-neon">nowy poziom</span><br />
-          widoczności?
+          <span data-cms="ctaTitleL1">{content.ctaTitleL1}</span> <span class="text-neon" data-cms="ctaTitleAccent">{content.ctaTitleAccent}</span><br />
+          <span data-cms="ctaTitleL3">{content.ctaTitleL3}</span>
         </h2>
-        <p class="text-body-lg text-on-surface-variant max-w-xl mx-auto mb-lg">
-          Pierwsza analiza potencjału Twojej domeny jest bezpłatna. Umów się, a pokażę Ci konkretnie, gdzie tracisz ruch i jak to naprawić.
+        <p class="text-body-lg text-on-surface-variant max-w-xl mx-auto mb-lg" data-cms="ctaBody">
+          {content.ctaBody}
         </p>
         <div class="flex flex-col sm:flex-row justify-center gap-md">
           <a
@@ -395,7 +346,7 @@ const latestPosts = allPosts
                    px-xl py-md hover:brightness-125 hover:shadow-neon active:scale-95 transition-all shadow-neon-sm"
           >
             <span aria-hidden="true" class="material-symbols-outlined text-sm">calendar_month</span>
-            Umów bezpłatny audyt
+            <span data-cms="ctaBtnPrimary">{content.ctaBtnPrimary}</span>
           </a>
           <a
             href="/blog"
@@ -403,12 +354,14 @@ const latestPosts = allPosts
                    border border-neon/30 text-neon font-bold text-label-md uppercase tracking-widest
                    px-xl py-md hover:bg-neon/10 hover:border-neon/60 transition-all"
           >
-            Czytaj blog SEO
+            <span data-cms="ctaBtnSecondary">{content.ctaBtnSecondary}</span>
           </a>
         </div>
       </div>
     </div>
   </section>
+
+  <InlineEditor contentPath="src/data/pages/index.json" />
 
 </BaseLayout>
 
