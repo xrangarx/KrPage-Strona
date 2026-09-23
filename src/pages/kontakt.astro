@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
 import ContactForm from '../components/ContactForm.astro'
+import InlineEditor from '../components/InlineEditor.astro'
+import content from '../data/pages/kontakt.json'
 import { SITE } from '../data/site'
 
 const KontaktContent = null
@@ -19,12 +21,12 @@ const KontaktContent = null
 
       <!-- Left: info -->
       <div class="relative z-10">
-        <div class="section-label mb-md">Inicjuj kontakt</div>
+        <div class="section-label mb-md" data-cms="heroEyebrow">{content.heroEyebrow}</div>
         <h1 class="text-headline-xl text-on-surface mb-md">
-          Zacznijmy<br /><span class="text-neon">Twój projekt</span>
+          <span data-cms="heroTitleL1">{content.heroTitleL1}</span><br /><span class="text-neon" data-cms="heroTitleAccent">{content.heroTitleAccent}</span>
         </h1>
-        <p class="text-body-lg text-on-surface-variant mb-xl max-w-lg">
-          Pierwsza analiza domeny jest bezpłatna. Powiedz mi o swojej stronie, a pokażę Ci konkretnie, gdzie tracisz ruch i jak to naprawić.
+        <p class="text-body-lg text-on-surface-variant mb-xl max-w-lg" data-cms="heroLead">
+          {content.heroLead}
         </p>
 
         <!-- Contact details -->
@@ -35,7 +37,7 @@ const KontaktContent = null
               <span aria-hidden="true" class="material-symbols-outlined text-neon">mail</span>
             </div>
             <div>
-              <p class="text-label-sm text-on-surface-variant uppercase">Email</p>
+              <p class="text-label-sm text-on-surface-variant uppercase" data-cms="emailLabel">{content.emailLabel}</p>
               <p class="text-body-md text-on-surface group-hover:text-neon transition-colors">{SITE.email}</p>
             </div>
           </a>
@@ -45,7 +47,7 @@ const KontaktContent = null
               <span aria-hidden="true" class="material-symbols-outlined text-neon">phone</span>
             </div>
             <div>
-              <p class="text-label-sm text-on-surface-variant uppercase">Telefon</p>
+              <p class="text-label-sm text-on-surface-variant uppercase" data-cms="phoneLabel">{content.phoneLabel}</p>
               <p class="text-body-md text-on-surface group-hover:text-neon transition-colors">{SITE.phone}</p>
             </div>
           </a>
@@ -54,7 +56,7 @@ const KontaktContent = null
               <span aria-hidden="true" class="material-symbols-outlined text-neon">location_on</span>
             </div>
             <div>
-              <p class="text-label-sm text-on-surface-variant uppercase">Lokalizacja</p>
+              <p class="text-label-sm text-on-surface-variant uppercase" data-cms="locationLabel">{content.locationLabel}</p>
               <p class="text-body-md text-on-surface">{SITE.address.city}, {SITE.address.country}</p>
             </div>
           </div>
@@ -77,7 +79,7 @@ const KontaktContent = null
         <!-- Response time badge -->
         <div class="mt-xl flex items-center gap-2 text-label-sm text-on-surface-variant">
           <span class="w-2 h-2 rounded-full bg-neon animate-pulse"></span>
-          Średni czas odpowiedzi: <span class="text-neon font-bold">&lt; 24h</span>
+          <span data-cms="responseText">{content.responseText}</span> <span class="text-neon font-bold" data-cms="responseValue">{content.responseValue}</span>
         </div>
 
         {KontaktContent && (
@@ -100,5 +102,7 @@ const KontaktContent = null
 
     </div>
   </section>
+
+  <InlineEditor contentPath="src/data/pages/kontakt.json" />
 
 </BaseLayout>

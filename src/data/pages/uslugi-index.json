@@ -1,0 +1,39 @@
+{
+  "heroEyebrow": "Protokoły operacyjne",
+  "heroTitleL1": "Usługi",
+  "heroTitleAccent": "SEO",
+  "heroDesc": "Precyzyjne metodologie zaprojektowane, żeby dominować w konkurencyjnych wynikach wyszukiwania — bez skrótów, z mierzalnymi rezultatami.",
+
+  "serviceGroups": [
+    {
+      "heading": "Pozycjonowanie",
+      "services": [
+        { "icon": "hub", "title": "Pozycjonowanie Stron", "desc": "Długofalowa strategia widoczności dla stron firmowych — mapowanie fraz, topical authority i link building.", "tags": ["Keyword Mapping", "Link Building", "Topical Authority"], "href": "/uslugi/pozycjonowanie-stron" },
+        { "icon": "storefront", "title": "Pozycjonowanie Sklepów", "desc": "E-commerce SEO: optymalizacja kategorii, kart produktów, schema markup i feed Merchant Center.", "tags": ["E-commerce SEO", "Schema Markup", "Merchant Center"], "href": "/uslugi/pozycjonowanie-sklepow" },
+        { "icon": "location_on", "title": "Pozycjonowanie Lokalne", "desc": "Local SEO i Google Maps: profil GMB, cytowania NAP, lokalny content i sygnały geograficzne.", "tags": ["Google Maps", "GMB", "Local Citations"], "href": "/uslugi/pozycjonowanie-lokalne" }
+      ]
+    },
+    {
+      "heading": "Pozostałe usługi",
+      "services": [
+        { "icon": "troubleshoot", "title": "Audyt Techniczny SEO", "desc": "Pełna analiza kodu, architektury i Core Web Vitals. Raport z priorytetami i konkretnym planem działania.", "tags": ["Core Web Vitals", "Crawl Analysis", "Indeksowanie"], "href": "/uslugi/audyt-seo", "highlight": true },
+        { "icon": "forum", "title": "Konsultacje SEO", "desc": "Indywidualne sesje doradcze: przegląd strategii, analiza konkurencji, plan działania. Bez agencyjnych pośredników.", "tags": ["Strategia SEO", "Doradztwo", "Szkolenia"], "href": "/uslugi/konsultacje-seo" },
+        { "icon": "web", "title": "Strony Internetowe", "desc": "Tworzenie stron z SEO wbudowanym od podstaw. Astro + Tailwind: Lighthouse 98+, LCP < 1s, semantyczny HTML.", "tags": ["Astro", "Core Web Vitals", "Lighthouse 98+"], "href": "/uslugi/strony-internetowe" }
+      ]
+    }
+  ],
+
+  "procesEyebrow": "Jak pracuję",
+  "procesTitle": "Protokół realizacji",
+  "steps": [
+    { "n": "01", "icon": "search", "title": "Diagnoza", "desc": "Audyt wstępny domeny, analiza konkurencji i identyfikacja priorytetów." },
+    { "n": "02", "icon": "architecture", "title": "Strategia", "desc": "Budowa planu działania z KPI, harmonogramem i oczekiwanymi wynikami." },
+    { "n": "03", "icon": "build", "title": "Implementacja", "desc": "Wdrożenie poprawek technicznych, treści i linkowania wewnętrznego." },
+    { "n": "04", "icon": "analytics", "title": "Monitoring", "desc": "Miesięczne raporty, śledzenie pozycji i ciągła optymalizacja." }
+  ],
+
+  "ctaTitleL1": "Nie wiesz od czego zacząć?",
+  "ctaTitleAccent": "Zacznij od bezpłatnego audytu.",
+  "ctaDesc": "Pierwsza analiza domeny jest bezpłatna. Pokażę Ci konkretnie, gdzie tracisz ruch i jak to naprawić.",
+  "ctaBtn": "Zamów bezpłatny audyt"
+}

@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
+import InlineEditor from '../../components/InlineEditor.astro'
+import content from '../../data/pages/blog-index.json'
 import { getCollection } from 'astro:content'
 
 const allPosts = await getCollection('blog')
@@ -16,12 +18,12 @@ const categories = ['Wszystkie', 'Tech SEO', 'Strategia', 'Content', 'Link Build
   <section class="max-w-7xl mx-auto px-6 md:px-12 pt-16 pb-lg relative overflow-hidden">
     <div class="absolute -top-20 left-0 w-96 h-96 bg-neon/5 blur-[100px] rounded-full pointer-events-none"></div>
     <div class="relative z-10 mb-xl">
-      <div class="section-label mb-sm">Baza wiedzy</div>
+      <div class="section-label mb-sm" data-cms="heroEyebrow">{content.heroEyebrow}</div>
       <h1 class="text-headline-xl text-on-surface mb-md">
-        Blog <span class="text-neon">SEO</span>
+        <span data-cms="heroTitleL1">{content.heroTitleL1}</span> <span class="text-neon" data-cms="heroTitleAccent">{content.heroTitleAccent}</span>
       </h1>
-      <p class="text-body-lg text-on-surface-variant max-w-2xl">
-        Praktyczna wiedza o pozycjonowaniu, technicznym SEO i strategii contentowej — oparta o dane z realnych projektów.
+      <p class="text-body-lg text-on-surface-variant max-w-2xl" data-cms="heroLead">
+        {content.heroLead}
       </p>
     </div>
 
@@ -118,6 +120,8 @@ const categories = ['Wszystkie', 'Tech SEO', 'Strategia', 'Content', 'Link Build
       </div>
     </div>
   </section>
+
+  <InlineEditor contentPath="src/data/pages/blog-index.json" />
 
 </BaseLayout>
 

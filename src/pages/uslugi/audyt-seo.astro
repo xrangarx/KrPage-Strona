@@ -1,21 +1,14 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
+import InlineEditor from '../../components/InlineEditor.astro'
+import content from '../../data/pages/uslugi-audyt-seo.json'
 
-const d: Record<string, string> = {}
-
-const techItems   = (d.block_tech_items  ?? 'JS Rendering Check, Server Response Latency, XML Sitemap Integrity, Robots.txt Audit').split(',').map(s => s.trim())
-const intelTags   = (d.block_intel_tags  ?? 'Backlink Profile, Gap Analysis, Authority Score, Content Gaps').split(',').map(s => s.trim())
-
-const problems = [
-  { icon: 'trending_down', title: d.problem1_title ?? 'Spadki Ruchu',             desc: d.problem1_desc ?? 'Identyfikacja przyczyn (kary algorytmiczne, kanibalizacja, zmiany Core Update) i plan naprawczy w 48h.' },
-  { icon: 'search_off',    title: d.problem2_title ?? 'Problemy z Indeksacją',     desc: d.problem2_desc ?? 'Analiza Crawl Budget i usuwanie blokad technicznych w robots.txt, .htaccess i sitemapie.' },
-  { icon: 'link_off',      title: d.problem3_title ?? 'Toksyczny profil linkowy',  desc: d.problem3_desc ?? 'Identyfikacja szkodliwych backlinków i przygotowanie disavow file dla Google.' },
-]
+const { scanMetrics, techItems, intelTags, problems } = content
 ---
 
 <BaseLayout
-  title={d.title ?? 'Audyt SEO — Kompleksowa Analiza Techniczna Strony'}
-  description={d.description ?? 'Profesjonalny audyt SEO: analiza techniczna, Core Web Vitals, indeksowanie, profil linkowy i keyword research.'}
+  title="Audyt SEO — Kompleksowa Analiza Techniczna Strony"
+  description="Profesjonalny audyt SEO: analiza techniczna, Core Web Vitals, indeksowanie, profil linkowy i keyword research."
   schemaType="service"
   schemaProps={{ serviceName: 'Audyt Techniczny SEO' }}
 >
@@ -25,22 +18,22 @@ const problems = [
     <div class="absolute inset-0 bg-gradient-to-b from-surface/80 via-transparent to-surface/80 z-0"></div>
     <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-12 py-24 grid lg:grid-cols-2 gap-12 items-center w-full">
       <div class="space-y-6">
-        <div class="section-label">Digital Command Center</div>
+        <div class="section-label" data-cms="heroEyebrow">{content.heroEyebrow}</div>
         <h1 class="text-headline-xl text-on-surface">
-          Audyt SEO —<br />
-          <span class="text-neon">Diagnoza twojej domeny</span>
+          <span data-cms="heroTitleL1">{content.heroTitleL1}</span><br />
+          <span class="text-neon" data-cms="heroTitleAccent">{content.heroTitleAccent}</span>
         </h1>
-        <p class="text-body-lg text-on-surface-variant max-w-xl">
-          {d.hero_desc ?? 'Kompleksowa analiza techniczna i strategiczna Twojego ekosystemu cyfrowego. Inżynieria wzrostu oparta na twardych danych i precyzji wykonania.'}
+        <p class="text-body-lg text-on-surface-variant max-w-xl" data-cms="heroDesc">
+          {content.heroDesc}
         </p>
         <div class="flex flex-wrap gap-4">
           <a href="/kontakt"
              class="inline-flex items-center gap-2 bg-neon text-on-primary font-bold text-label-md uppercase tracking-widest px-lg py-md hover:brightness-110 active:scale-95 transition-all shadow-neon-sm">
-            Zamawiam audyt
+            <span data-cms="heroBtnPrimary">{content.heroBtnPrimary}</span>
           </a>
           <a href="#zakres"
              class="inline-flex items-center gap-2 border border-neon/30 text-neon font-bold text-label-md uppercase tracking-widest px-lg py-md hover:bg-neon/5 transition-all">
-            Zobacz zakres
+            <span data-cms="heroBtnSecondary">{content.heroBtnSecondary}</span>
             <span aria-hidden="true" class="material-symbols-outlined text-sm">arrow_downward</span>
           </a>
         </div>
@@ -50,21 +43,17 @@ const problems = [
       <div class="hidden lg:block">
         <div class="bento-card p-lg relative">
           <div class="flex justify-between items-center mb-lg">
-            <span class="text-label-md text-neon uppercase tracking-widest">Live Signal: Scan in Progress</span>
+            <span class="text-label-md text-neon uppercase tracking-widest" data-cms="scanLabel">{content.scanLabel}</span>
             <span aria-hidden="true" class="material-symbols-outlined text-neon animate-spin text-sm">refresh</span>
           </div>
           <div class="h-1.5 bg-surface-container-highest overflow-hidden mb-lg">
             <div class="h-full bg-neon w-3/4 shadow-neon-sm"></div>
           </div>
           <div class="grid grid-cols-3 gap-4 mb-lg">
-            {[
-              { val: '98',   label: 'Core Web' },
-              { val: '12k',  label: 'Keywords' },
-              { val: '0',    label: 'Errors'   },
-            ].map(m => (
+            {scanMetrics.map((m, i) => (
               <div class="bg-surface-container p-4 text-center border border-outline-variant">
-                <p class="text-headline-md text-neon">{m.val}</p>
-                <p class="text-label-sm text-on-surface-variant uppercase">{m.label}</p>
+                <p class="text-headline-md text-neon" data-cms={`scanMetrics.${i}.val`}>{m.val}</p>
+                <p class="text-label-sm text-on-surface-variant uppercase" data-cms={`scanMetrics.${i}.label`}>{m.label}</p>
               </div>
             ))}
           </div>
@@ -82,12 +71,12 @@ const problems = [
   <!-- ZAKRES AUDYTU -->
   <section id="zakres" class="max-w-7xl mx-auto px-6 md:px-12 py-xl">
     <div class="mb-lg">
-      <div class="section-label mb-sm">Metodologia</div>
+      <div class="section-label mb-sm" data-cms="zakresEyebrow">{content.zakresEyebrow}</div>
       <h2 class="text-headline-lg text-on-surface">
-        Deep Dive Audit<br /><span class="text-neon">Architecture</span>
+        <span data-cms="zakresTitleL1">{content.zakresTitleL1}</span><br /><span class="text-neon" data-cms="zakresTitleAccent">{content.zakresTitleAccent}</span>
       </h2>
-      <p class="text-body-md text-on-surface-variant max-w-2xl mt-sm">
-        {d.zakres_desc ?? 'Trójwarstwowa metodologia analizy, która identyfikuje wąskie gardła i odblokowuje potencjał rankingowy.'}
+      <p class="text-body-md text-on-surface-variant max-w-2xl mt-sm" data-cms="zakresDesc">
+        {content.zakresDesc}
       </p>
     </div>
 
@@ -97,14 +86,14 @@ const problems = [
         <div class="relative z-10 flex flex-col md:flex-row gap-lg">
           <div class="md:w-1/2">
             <span aria-hidden="true" class="material-symbols-outlined text-neon text-4xl mb-md">settings_ethernet</span>
-            <h3 class="text-headline-md text-on-surface mb-sm">{d.block_tech_title ?? 'Technical Analysis'}</h3>
-            <p class="text-body-md text-on-surface-variant mb-md">
-              {d.block_tech_desc ?? 'Dogłębna weryfikacja kodu, architektury serwera i parametrów Core Web Vitals. Eliminujemy błędy indeksowania, których nie widzi Twoja konkurencja.'}
+            <h3 class="text-headline-md text-on-surface mb-sm" data-cms="blockTechTitle">{content.blockTechTitle}</h3>
+            <p class="text-body-md text-on-surface-variant mb-md" data-cms="blockTechDesc">
+              {content.blockTechDesc}
             </p>
             <ul class="space-y-2 text-label-sm text-on-surface uppercase tracking-wider">
-              {techItems.map(i => (
+              {techItems.map((item, i) => (
                 <li class="flex items-center gap-2">
-                  <span class="w-1.5 h-1.5 bg-neon flex-shrink-0"></span>{i}
+                  <span class="w-1.5 h-1.5 bg-neon flex-shrink-0"></span><span data-cms={`techItems.${i}`}>{item}</span>
                 </li>
               ))}
             </ul>
@@ -124,20 +113,20 @@ const problems = [
       <div class="md:col-span-4 bento-card p-lg flex flex-col justify-between group hover:border-neon/40 transition-all">
         <div>
           <span aria-hidden="true" class="material-symbols-outlined text-neon text-4xl mb-md">key</span>
-          <h3 class="text-headline-md text-on-surface mb-sm">{d.block_keyword_title ?? 'Keyword Research'}</h3>
+          <h3 class="text-headline-md text-on-surface mb-sm" data-cms="blockKeywordTitle">{content.blockKeywordTitle}</h3>
         </div>
-        <p class="text-body-md text-on-surface-variant">
-          {d.block_keyword_desc ?? 'Mapowanie intencji użytkowników na precyzyjne zapytania. Wykraczamy poza volumen, szukając nisz o najwyższej konwersji.'}
+        <p class="text-body-md text-on-surface-variant" data-cms="blockKeywordDesc">
+          {content.blockKeywordDesc}
         </p>
       </div>
 
       <div class="md:col-span-5 bento-card p-lg flex flex-col justify-between group hover:border-neon/40 transition-all">
         <div>
           <span aria-hidden="true" class="material-symbols-outlined text-neon text-4xl mb-md">psychology_alt</span>
-          <h3 class="text-headline-md text-on-surface mb-sm">{d.block_ux_title ?? 'UX / SEO Hybrid'}</h3>
+          <h3 class="text-headline-md text-on-surface mb-sm" data-cms="blockUxTitle">{content.blockUxTitle}</h3>
         </div>
-        <p class="text-body-md text-on-surface-variant">
-          {d.block_ux_desc ?? 'Google ocenia satysfakcję użytkownika. Optymalizujemy ścieżkę dotarcia, by roboty widziały zaangażowanie, a ludzie wartość.'}
+        <p class="text-body-md text-on-surface-variant" data-cms="blockUxDesc">
+          {content.blockUxDesc}
         </p>
       </div>
 
@@ -146,13 +135,13 @@ const problems = [
           <span aria-hidden="true" class="material-symbols-outlined" style="font-size:180px">monitoring</span>
         </div>
         <div class="relative z-10">
-          <h3 class="text-headline-md text-on-surface mb-sm">{d.block_intel_title ?? 'Competitive Intel'}</h3>
-          <p class="text-body-md text-on-surface-variant mb-md max-w-md">
-            {d.block_intel_desc ?? 'Reverse-engineering strategii liderów rynku. Sprawdzamy co działa u nich i dlaczego Tobie uciekają punkty rankingowe.'}
+          <h3 class="text-headline-md text-on-surface mb-sm" data-cms="blockIntelTitle">{content.blockIntelTitle}</h3>
+          <p class="text-body-md text-on-surface-variant mb-md max-w-md" data-cms="blockIntelDesc">
+            {content.blockIntelDesc}
           </p>
           <div class="flex flex-wrap gap-2">
-            {intelTags.map(tag => (
-              <span class="px-3 py-1 bg-surface-container text-label-sm text-on-surface-variant uppercase border border-outline-variant">{tag}</span>
+            {intelTags.map((tag, i) => (
+              <span class="px-3 py-1 bg-surface-container text-label-sm text-on-surface-variant uppercase border border-outline-variant" data-cms={`intelTags.${i}`}>{tag}</span>
             ))}
           </div>
         </div>
@@ -164,20 +153,20 @@ const problems = [
   <section class="bg-surface-container-low border-y border-white/5 py-xl">
     <div class="max-w-7xl mx-auto px-6 md:px-12 grid lg:grid-cols-2 gap-lg items-center">
       <div>
-        <div class="section-label mb-sm">Rozwiązywanie</div>
+        <div class="section-label mb-sm" data-cms="problemsEyebrow">{content.problemsEyebrow}</div>
         <h2 class="text-headline-lg text-on-surface mb-md">
-          Problemów <span class="text-neon">krytycznych</span>
+          <span data-cms="problemsTitleL1">{content.problemsTitleL1}</span> <span class="text-neon" data-cms="problemsTitleAccent">{content.problemsTitleAccent}</span>
         </h2>
-        <p class="text-body-lg text-on-surface-variant mb-lg">
-          {d.problems_intro ?? 'Audyt KrPage to skalpel w rękach chirurga danych — precyzyjnie diagnozujemy i naprawiamy.'}
+        <p class="text-body-lg text-on-surface-variant mb-lg" data-cms="problemsIntro">
+          {content.problemsIntro}
         </p>
         <div class="space-y-md">
-          {problems.map(p => (
+          {problems.map((p, i) => (
             <div class="flex gap-md p-md bg-surface border-l-4 border-neon">
               <span aria-hidden="true" class="material-symbols-outlined text-neon">{p.icon}</span>
               <div>
-                <h4 class="text-on-surface text-headline-md mb-1">{p.title}</h4>
-                <p class="text-on-surface-variant text-body-md">{p.desc}</p>
+                <h4 class="text-on-surface text-headline-md mb-1" data-cms={`problems.${i}.title`}>{p.title}</h4>
+                <p class="text-on-surface-variant text-body-md" data-cms={`problems.${i}.desc`}>{p.desc}</p>
               </div>
             </div>
           ))}
@@ -187,26 +176,28 @@ const problems = [
       <!-- Contact form teaser -->
       <div class="bento-card p-lg relative">
         <div class="absolute -top-3 -right-3 bg-neon text-on-primary px-3 py-1 text-label-sm font-bold">BEZPŁATNY</div>
-        <h3 class="text-headline-md text-on-surface mb-lg">Zdiagnozuj swoją domenę</h3>
+        <h3 class="text-headline-md text-on-surface mb-lg" data-cms="formTitle">{content.formTitle}</h3>
         <div class="space-y-md">
           <div>
-            <label class="block text-label-sm text-on-surface-variant uppercase mb-2">URL Strony</label>
-            <div class="w-full bg-surface-container border border-outline-variant p-md text-on-surface-variant text-body-md">
-              https://twojadomena.pl
+            <label class="block text-label-sm text-on-surface-variant uppercase mb-2" data-cms="formUrlLabel">{content.formUrlLabel}</label>
+            <div class="w-full bg-surface-container border border-outline-variant p-md text-on-surface-variant text-body-md" data-cms="formUrlPlaceholder">
+              {content.formUrlPlaceholder}
             </div>
           </div>
-          <p class="text-body-md text-on-surface-variant">
-            Wypełnij formularz kontaktowy — odezwę się w ciągu 24h z wstępną analizą Twojej domeny.
+          <p class="text-body-md text-on-surface-variant" data-cms="formDesc">
+            {content.formDesc}
           </p>
           <a href="/kontakt"
              class="flex items-center justify-center gap-2 w-full bg-neon text-on-primary font-bold text-label-md uppercase tracking-widest py-md hover:brightness-110 transition-all active:scale-95 shadow-neon-sm">
             <span aria-hidden="true" class="material-symbols-outlined text-sm">troubleshoot</span>
-            Rozpocznij analizę
+            <span data-cms="formBtn">{content.formBtn}</span>
           </a>
-          <p class="text-label-sm text-center text-on-surface-variant/50 uppercase">Pierwsza analiza jest bezpłatna</p>
+          <p class="text-label-sm text-center text-on-surface-variant/50 uppercase" data-cms="formNote">{content.formNote}</p>
         </div>
       </div>
     </div>
   </section>
+
+  <InlineEditor contentPath="src/data/pages/uslugi-audyt-seo.json" />
 
 </BaseLayout>

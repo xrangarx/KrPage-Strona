@@ -1,0 +1,51 @@
+{
+  "heroEyebrow": "Digital Command Center",
+  "heroTitleL1": "Audyt SEO —",
+  "heroTitleAccent": "Diagnoza twojej domeny",
+  "heroDesc": "Kompleksowa analiza techniczna i strategiczna Twojego ekosystemu cyfrowego. Inżynieria wzrostu oparta na twardych danych i precyzji wykonania.",
+  "heroBtnPrimary": "Zamawiam audyt",
+  "heroBtnSecondary": "Zobacz zakres",
+
+  "scanLabel": "Live Signal: Scan in Progress",
+  "scanMetrics": [
+    { "val": "98", "label": "Core Web" },
+    { "val": "12k", "label": "Keywords" },
+    { "val": "0", "label": "Errors" }
+  ],
+
+  "zakresEyebrow": "Metodologia",
+  "zakresTitleL1": "Deep Dive Audit",
+  "zakresTitleAccent": "Architecture",
+  "zakresDesc": "Trójwarstwowa metodologia analizy, która identyfikuje wąskie gardła i odblokowuje potencjał rankingowy.",
+
+  "blockTechTitle": "Technical Analysis",
+  "blockTechDesc": "Dogłębna weryfikacja kodu, architektury serwera i parametrów Core Web Vitals. Eliminujemy błędy indeksowania, których nie widzi Twoja konkurencja.",
+  "techItems": ["JS Rendering Check", "Server Response Latency", "XML Sitemap Integrity", "Robots.txt Audit"],
+
+  "blockKeywordTitle": "Keyword Research",
+  "blockKeywordDesc": "Mapowanie intencji użytkowników na precyzyjne zapytania. Wykraczamy poza volumen, szukając nisz o najwyższej konwersji.",
+
+  "blockUxTitle": "UX / SEO Hybrid",
+  "blockUxDesc": "Google ocenia satysfakcję użytkownika. Optymalizujemy ścieżkę dotarcia, by roboty widziały zaangażowanie, a ludzie wartość.",
+
+  "blockIntelTitle": "Competitive Intel",
+  "blockIntelDesc": "Reverse-engineering strategii liderów rynku. Sprawdzamy co działa u nich i dlaczego Tobie uciekają punkty rankingowe.",
+  "intelTags": ["Backlink Profile", "Gap Analysis", "Authority Score", "Content Gaps"],
+
+  "problemsEyebrow": "Rozwiązywanie",
+  "problemsTitleL1": "Problemów",
+  "problemsTitleAccent": "krytycznych",
+  "problemsIntro": "Audyt KrPage to skalpel w rękach chirurga danych — precyzyjnie diagnozujemy i naprawiamy.",
+  "problems": [
+    { "icon": "trending_down", "title": "Spadki Ruchu", "desc": "Identyfikacja przyczyn (kary algorytmiczne, kanibalizacja, zmiany Core Update) i plan naprawczy w 48h." },
+    { "icon": "search_off", "title": "Problemy z Indeksacją", "desc": "Analiza Crawl Budget i usuwanie blokad technicznych w robots.txt, .htaccess i sitemapie." },
+    { "icon": "link_off", "title": "Toksyczny profil linkowy", "desc": "Identyfikacja szkodliwych backlinków i przygotowanie disavow file dla Google." }
+  ],
+
+  "formTitle": "Zdiagnozuj swoją domenę",
+  "formUrlLabel": "URL Strony",
+  "formUrlPlaceholder": "https://twojadomena.pl",
+  "formDesc": "Wypełnij formularz kontaktowy — odezwę się w ciągu 24h z wstępną analizą Twojej domeny.",
+  "formBtn": "Rozpocznij analizę",
+  "formNote": "Pierwsza analiza jest bezpłatna"
+}

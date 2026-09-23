@@ -1,61 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
+import InlineEditor from '../../components/InlineEditor.astro'
+import content from '../../data/pages/uslugi-index.json'
 
-const serviceGroups = [
-  {
-    heading: 'Pozycjonowanie',
-    services: [
-      {
-        icon: 'hub',
-        title: 'Pozycjonowanie Stron',
-        desc: 'Długofalowa strategia widoczności dla stron firmowych — mapowanie fraz, topical authority i link building.',
-        tags: ['Keyword Mapping', 'Link Building', 'Topical Authority'],
-        href: '/uslugi/pozycjonowanie-stron',
-      },
-      {
-        icon: 'storefront',
-        title: 'Pozycjonowanie Sklepów',
-        desc: 'E-commerce SEO: optymalizacja kategorii, kart produktów, schema markup i feed Merchant Center.',
-        tags: ['E-commerce SEO', 'Schema Markup', 'Merchant Center'],
-        href: '/uslugi/pozycjonowanie-sklepow',
-      },
-      {
-        icon: 'location_on',
-        title: 'Pozycjonowanie Lokalne',
-        desc: 'Local SEO i Google Maps: profil GMB, cytowania NAP, lokalny content i sygnały geograficzne.',
-        tags: ['Google Maps', 'GMB', 'Local Citations'],
-        href: '/uslugi/pozycjonowanie-lokalne',
-      },
-    ],
-  },
-  {
-    heading: 'Pozostałe usługi',
-    services: [
-      {
-        icon: 'troubleshoot',
-        title: 'Audyt Techniczny SEO',
-        desc: 'Pełna analiza kodu, architektury i Core Web Vitals. Raport z priorytetami i konkretnym planem działania.',
-        tags: ['Core Web Vitals', 'Crawl Analysis', 'Indeksowanie'],
-        href: '/uslugi/audyt-seo',
-        highlight: true,
-      },
-      {
-        icon: 'forum',
-        title: 'Konsultacje SEO',
-        desc: 'Indywidualne sesje doradcze: przegląd strategii, analiza konkurencji, plan działania. Bez agencyjnych pośredników.',
-        tags: ['Strategia SEO', 'Doradztwo', 'Szkolenia'],
-        href: '/uslugi/konsultacje-seo',
-      },
-      {
-        icon: 'web',
-        title: 'Strony Internetowe',
-        desc: 'Tworzenie stron z SEO wbudowanym od podstaw. Astro + Tailwind: Lighthouse 98+, LCP < 1s, semantyczny HTML.',
-        tags: ['Astro', 'Core Web Vitals', 'Lighthouse 98+'],
-        href: '/uslugi/strony-internetowe',
-      },
-    ],
-  },
-]
+const { serviceGroups, steps } = content
 ---
 
 <BaseLayout
@@ -68,24 +16,24 @@ const serviceGroups = [
   <section class="max-w-7xl mx-auto px-6 md:px-12 pt-16 pb-xl relative overflow-hidden">
     <div class="absolute -top-20 left-1/2 -translate-x-1/2 w-[600px] h-64 bg-neon/5 blur-[100px] rounded-full pointer-events-none"></div>
     <div class="text-center relative z-10 mb-xl">
-      <div class="section-label mx-auto mb-md">Protokoły operacyjne</div>
+      <div class="section-label mx-auto mb-md" data-cms="heroEyebrow">{content.heroEyebrow}</div>
       <h1 class="text-headline-xl text-on-surface mb-md">
-        Usługi <span class="text-neon">SEO</span>
+        <span data-cms="heroTitleL1">{content.heroTitleL1}</span> <span class="text-neon" data-cms="heroTitleAccent">{content.heroTitleAccent}</span>
       </h1>
-      <p class="text-body-lg text-on-surface-variant max-w-2xl mx-auto">
-        Precyzyjne metodologie zaprojektowane, żeby dominować w konkurencyjnych wynikach wyszukiwania — bez skrótów, z mierzalnymi rezultatami.
+      <p class="text-body-lg text-on-surface-variant max-w-2xl mx-auto" data-cms="heroDesc">
+        {content.heroDesc}
       </p>
     </div>
 
     <!-- Services grouped grid -->
-    {serviceGroups.map(group => (
+    {serviceGroups.map((group, gi) => (
       <div class="mb-xl last:mb-0">
         <div class="flex items-center gap-4 mb-lg">
-          <div class="section-label">{group.heading}</div>
+          <div class="section-label" data-cms={`serviceGroups.${gi}.heading`}>{group.heading}</div>
           <div class="flex-1 h-px bg-neon/10"></div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
-          {group.services.map(s => (
+          {group.services.map((s, si) => (
             <div class:list={['bento-card p-lg flex flex-col relative overflow-hidden group', s.highlight && 'border-neon/30']}>
               {s.highlight && (
                 <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-neon to-transparent"></div>
@@ -94,8 +42,8 @@ const serviceGroups = [
                 <span aria-hidden="true" class="material-symbols-outlined text-6xl">{s.icon}</span>
               </div>
               <div class="relative z-10 flex flex-col flex-1">
-                <h2 class="text-headline-md text-on-surface mb-sm">{s.title}</h2>
-                <p class="text-body-md text-on-surface-variant mb-md flex-1">{s.desc}</p>
+                <h2 class="text-headline-md text-on-surface mb-sm" data-cms={`serviceGroups.${gi}.services.${si}.title`}>{s.title}</h2>
+                <p class="text-body-md text-on-surface-variant mb-md flex-1" data-cms={`serviceGroups.${gi}.services.${si}.desc`}>{s.desc}</p>
                 <div class="flex flex-wrap gap-2 mb-md">
                   {s.tags.map(tag => (
                     <span class="px-2 py-0.5 bg-surface-container-highest border border-outline-variant text-label-sm text-on-surface-variant uppercase">{tag}</span>
@@ -117,23 +65,18 @@ const serviceGroups = [
   <!-- PROCES -->
   <section class="bg-surface-container-low border-y border-white/5 py-xl">
     <div class="max-w-7xl mx-auto px-6 md:px-12">
-      <div class="section-label mb-sm">Jak pracuję</div>
-      <h2 class="text-headline-lg text-on-surface mb-lg">Protokół realizacji</h2>
+      <div class="section-label mb-sm" data-cms="procesEyebrow">{content.procesEyebrow}</div>
+      <h2 class="text-headline-lg text-on-surface mb-lg" data-cms="procesTitle">{content.procesTitle}</h2>
       <div class="grid grid-cols-1 md:grid-cols-4 gap-gutter">
-        {[
-          { n: '01', icon: 'search', title: 'Diagnoza',        desc: 'Audyt wstępny domeny, analiza konkurencji i identyfikacja priorytetów.' },
-          { n: '02', icon: 'architecture', title: 'Strategia', desc: 'Budowa planu działania z KPI, harmonogramem i oczekiwanymi wynikami.' },
-          { n: '03', icon: 'build', title: 'Implementacja',    desc: 'Wdrożenie poprawek technicznych, treści i linkowania wewnętrznego.' },
-          { n: '04', icon: 'analytics', title: 'Monitoring',   desc: 'Miesięczne raporty, śledzenie pozycji i ciągła optymalizacja.' },
-        ].map((step, i) => (
+        {steps.map((step, i) => (
           <div class="relative">
             <div class:list={['bento-card p-lg border-t-2', i === 0 ? 'border-neon' : 'border-outline-variant']}>
               <div class="flex items-start justify-between mb-md">
                 <span class="text-headline-lg font-black text-neon/30">{step.n}</span>
                 <span aria-hidden="true" class="material-symbols-outlined text-neon">{step.icon}</span>
               </div>
-              <h3 class="text-headline-md text-on-surface mb-sm">{step.title}</h3>
-              <p class="text-body-md text-on-surface-variant">{step.desc}</p>
+              <h3 class="text-headline-md text-on-surface mb-sm" data-cms={`steps.${i}.title`}>{step.title}</h3>
+              <p class="text-body-md text-on-surface-variant" data-cms={`steps.${i}.desc`}>{step.desc}</p>
             </div>
           </div>
         ))}
@@ -149,19 +92,21 @@ const serviceGroups = [
       </div>
       <div class="relative z-10">
         <h2 class="text-headline-lg text-on-surface mb-md">
-          Nie wiesz od czego zacząć?<br />
-          <span class="text-neon">Zacznij od bezpłatnego audytu.</span>
+          <span data-cms="ctaTitleL1">{content.ctaTitleL1}</span><br />
+          <span class="text-neon" data-cms="ctaTitleAccent">{content.ctaTitleAccent}</span>
         </h2>
-        <p class="text-body-lg text-on-surface-variant max-w-xl mx-auto mb-lg">
-          Pierwsza analiza domeny jest bezpłatna. Pokażę Ci konkretnie, gdzie tracisz ruch i jak to naprawić.
+        <p class="text-body-lg text-on-surface-variant max-w-xl mx-auto mb-lg" data-cms="ctaDesc">
+          {content.ctaDesc}
         </p>
         <a href="/kontakt"
            class="inline-flex items-center gap-2 bg-neon text-on-primary font-bold text-label-md uppercase tracking-widest px-xl py-md hover:brightness-110 active:scale-95 transition-all shadow-neon">
           <span aria-hidden="true" class="material-symbols-outlined text-sm">troubleshoot</span>
-          Zamów bezpłatny audyt
+          <span data-cms="ctaBtn">{content.ctaBtn}</span>
         </a>
       </div>
     </div>
   </section>
+
+  <InlineEditor contentPath="src/data/pages/uslugi-index.json" />
 
 </BaseLayout>
